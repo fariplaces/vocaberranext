@@ -1,4 +1,4 @@
-import { logout } from "@/store/slices/authSlice";
+import { logoutUser } from "@/store/slices/authSlice";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -6,7 +6,7 @@ const UserInfo = ({ sidebarOpen }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const handleLogout = () => {
-    dispatch(logout());
+    dispatch(logoutUser());
   };
   return (
     <>

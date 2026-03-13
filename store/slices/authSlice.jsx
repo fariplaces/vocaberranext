@@ -93,6 +93,39 @@ export const loginUser = createAsyncThunk(
   }
 );
 
+// Async thunk for register
+export const registerUser = createAsyncThunk(
+  "auth/registerUser",
+  async ({ userName, email, password }, thunkAPI) => {
+    try {
+      const res = await axios.post(
+        "/api/register",
+        { userName, email, password },
+        { withCredentials: true } // allow cookies if your API sets session
+      );
+
+      return res.data.user;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(
+        err.response?.data?.message || err.message
+      );
+    }
+  }
+);
+
+// Async thunk for Me
+export const checkAuth = createAsyncThunk(
+  "auth/checkAuth",
+  async (_, thunkAPI) => {
+    try {
+      const res = await axios.get("/api/me", { withCredentials: true });
+      return res.data.user;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(null);
+    }
+  }
+);
+
 // Async thunk for logout
 export const logoutUser = createAsyncThunk(
   "auth/logoutUser",
@@ -131,10 +164,24 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = action.payload;
+        state.user = action.payload.userName;
         state.isLoggedIn = true;
       })
       .addCase(loginUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      // register
+      .addCase(registerUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(registerUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload;
+        state.isLoggedIn = true;
+      })
+      .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
@@ -142,6 +189,11 @@ const authSlice = createSlice({
       .addCase(logoutUser.fulfilled, (state) => {
         state.user = null;
         state.isLoggedIn = false;
+      })
+      // Me
+      .addCase(checkAuth.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.isLoggedIn = !!action.payload;
       });
   },
 });

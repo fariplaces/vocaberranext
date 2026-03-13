@@ -6,14 +6,16 @@ import SideBar from "@/components/sidebar/SideBar";
 import TabBar from "@/components/sidebar/TabBar";
 import RightSideBar from "@/components/sidebar/RightSideBar";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
+import { checkAuth } from "@/store/slices/authSlice";
 
 const PageLayout = ({ children }) => {
+  const dispatch = useDispatch();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [notificationOpen, setNotificationOpen] = useState(false);
   const router = useRouter();
-  const { user, token, loading, error } = useSelector((state) => state.auth);
+  const { user, isLoggedIn, loading } = useSelector((state) => state.auth);
 
   const handleNotifictionToggle = () => {
     setNotificationOpen(!notificationOpen);
@@ -23,11 +25,15 @@ const PageLayout = ({ children }) => {
   };
 
   useEffect(() => {
+    dispatch(checkAuth());
+  }, []);
+
+  useEffect(() => {
     // Only redirect when not loading
-    if (!loading && (!user || !token)) {
-      router.push("/auth");
+    if (!loading && (!user || !isLoggedIn)) {
+      router.push("/auth/login");
     }
-  }, [user, token, loading, router]);
+  }, [user, loading, router]);
 
   // Optional: prevent flicker while checking auth
   if (loading) {

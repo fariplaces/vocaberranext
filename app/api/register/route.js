@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 export async function POST(req) {
    try {
       const body = await req.json();
-      const { name, email, password } = body;
+      const { userName, email, password } = body;
 
       const existingUser = await prisma.user.findUnique({
          where: { email },
@@ -21,7 +21,7 @@ export async function POST(req) {
 
       const user = await prisma.user.create({
          data: {
-            name,
+            name: userName,
             email,
             password: hashedPassword,
          },

@@ -133,3 +133,5 @@ const wordMeaningSlice = createSlice({
 });
 
 export const { resetMeaningsState } = wordMeaningSlice.actions;
+export default wordMeaningSlice.reducer;
+

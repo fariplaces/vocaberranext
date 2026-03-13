@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("admin@gmail.com");
+  const [password, setPassword] = useState("12345678");
   const [errors, setErrors] = useState({});
 
   const router = useRouter();
@@ -70,9 +70,8 @@ export default function LoginPage() {
             <label className="block text-sm text-gray-300">Email</label>
             <input
               type="text"
-              className={`w-full p-3 mt-1 rounded-xl bg-gray-800 border ${
-                errors.email ? "border-red-500" : "border-gray-600"
-              } text-white focus:outline-none focus:ring-2 focus:ring-blue-500`}
+              className={`w-full p-3 mt-1 rounded-xl bg-gray-800 border ${errors.email ? "border-red-500" : "border-gray-600"
+                } text-white focus:outline-none focus:ring-2 focus:ring-blue-500`}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="example@mail.com"
@@ -87,9 +86,8 @@ export default function LoginPage() {
             <label className="block text-sm text-gray-300">Password</label>
             <input
               type="password"
-              className={`w-full p-3 mt-1 rounded-xl bg-gray-800 border ${
-                errors.password ? "border-red-500" : "border-gray-600"
-              } text-white focus:outline-none focus:ring-2 focus:ring-blue-500`}
+              className={`w-full p-3 mt-1 rounded-xl bg-gray-800 border ${errors.password ? "border-red-500" : "border-gray-600"
+                } text-white focus:outline-none focus:ring-2 focus:ring-blue-500`}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"

@@ -13,7 +13,7 @@ export function middleware(req) {
    );
 
    if (!sessionId && (isProtected || isAdmin)) {
-      return NextResponse.redirect("/login");
+      return NextResponse.redirect("/auth/login");
    }
 
    if (sessionId && (routes.public || []).includes(pathname)) {
