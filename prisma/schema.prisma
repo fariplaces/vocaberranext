@@ -6,19 +6,81 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Session {
-  id        String   @id
-  userId    Int
-  user      User     @relation(fields: [userId], references: [id])
-  expiresAt DateTime
-  createdAt DateTime @default(now())
-}
-
+// User table
 model User {
-  id        Int       @id @default(autoincrement())
+  id        String     @id @default(uuid())
   name      String
-  email     String    @unique
+  email     String     @unique
   password  String
   sessions  Session[]
-  createdAt DateTime  @default(now())
+  typings   Typing[]
+  createdAt DateTime   @default(now())
+}
+
+// Session table
+model Session {
+  id        String     @id @default(uuid())
+  userId    String
+  user      User       @relation(fields: [userId], references: [id])
+  expiresAt DateTime
+  createdAt DateTime   @default(now())
+
+  @@index([userId])
+}
+
+// Typing table (records per user)
+model Typing {
+  id          String     @id @default(uuid())
+  userId      String
+  exerciseId  String
+  durationId  String
+  accuracy    Float
+  gross       Int
+  net         Int
+  createdAt   DateTime   @default(now())
+
+  user        User       @relation(fields: [userId], references: [id])
+  exercise    Exercise   @relation(fields: [exerciseId], references: [id])
+  duration    Duration   @relation(fields: [durationId], references: [id])
+
+  @@index([userId])
+  @@index([exerciseId])
+}
+
+// Exercise table
+model Exercise {
+  id          String        @id @default(uuid())
+  title       String
+  exerciseNo  Int
+  typeId      String
+  lessonId    String
+
+  type        ExerciseType  @relation(fields: [typeId], references: [id])
+  lesson      Lesson        @relation(fields: [lessonId], references: [id])
+
+  typings     Typing[]
+}
+
+// ExerciseType table
+model ExerciseType {
+  id        String     @id @default(uuid())
+  type      String
+
+  exercises Exercise[]
+}
+
+// Lesson table
+model Lesson {
+  id        String     @id @default(uuid())
+  lesson    String
+
+  exercises Exercise[]
+}
+
+// Duration table
+model Duration {
+  id        String     @id @default(uuid())
+  duration  Int
+
+  typings   Typing[]
 }

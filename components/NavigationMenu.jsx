@@ -17,6 +17,7 @@ import Link from "next/link";
 const NavigationMenu = ({ sidebarOpen }) => {
   const [expandedMenus, setExpandedMenus] = useState({
     Employees: true,
+    Typing: true,
     Transactions: false,
     Loans: false,
     Payrolls: false,
@@ -55,6 +56,22 @@ const NavigationMenu = ({ sidebarOpen }) => {
         },
       ],
     },
+    {
+      name: "Tying",
+      icon: Users,
+      hasSubmenu: true,
+      subItems: [
+        {
+          item: "Exercises",
+          href: "/typing/exercises",
+        },
+        {
+          item: "Tests",
+          href: "/typing/tests",
+        },
+      ],
+    },
+
     // {
     //   name: "Transactions",
     //   icon: HandCoins,
@@ -175,9 +192,8 @@ const NavigationMenu = ({ sidebarOpen }) => {
       {sidebarItems.map((item) => (
         <div key={item.name}>
           <div
-            className={`flex items-center justify-between px-4 py-2 hover:bg-gray-700 cursor-pointer ${
-              item.name === "Employees" ? "bg-gray-700" : ""
-            }`}
+            className={`flex items-center justify-between px-4 py-2 hover:bg-gray-700 cursor-pointer ${item.name === "Employees" ? "bg-gray-700" : ""
+              }`}
             onClick={() => item.hasSubmenu && toggleMenu(item.name)}
           >
             <div className="flex items-center space-x-3">
@@ -196,10 +212,10 @@ const NavigationMenu = ({ sidebarOpen }) => {
           {/* Submenu */}
           {sidebarOpen && item.hasSubmenu && expandedMenus[item.name] && (
             <div className="ml-8 space-y-1">
-              {item.subItems.map((subItem) => (
+              {item.subItems.map((subItem, i) => (
                 <Link
                   href={subItem.href}
-                  key={subItem}
+                  key={i}
                   className="flex py-1 px-4 text-sm text-gray-300 hover:text-white cursor-pointer"
                 >
                   {subItem.item}

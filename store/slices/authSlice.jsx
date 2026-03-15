@@ -164,7 +164,7 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = action.payload.userName;
+        state.user = action.payload;
         state.isLoggedIn = true;
       })
       .addCase(loginUser.rejected, (state, action) => {
@@ -191,8 +191,12 @@ const authSlice = createSlice({
         state.isLoggedIn = false;
       })
       // Me
+      .addCase(checkAuth.pending, (state) => {
+        state.loading = true;
+      })
       .addCase(checkAuth.fulfilled, (state, action) => {
         state.user = action.payload;
+        state.loading = false;
         state.isLoggedIn = !!action.payload;
       });
   },
