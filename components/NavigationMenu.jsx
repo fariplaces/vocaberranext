@@ -63,6 +63,10 @@ const NavigationMenu = ({ sidebarOpen }) => {
       hasSubmenu: true,
       subItems: [
         {
+          item: "Stats",
+          href: "/typing/typingDashboard",
+        },
+        {
           item: "Exercises",
           href: "/typing/exercise/course",
         },
