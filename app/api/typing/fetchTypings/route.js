@@ -24,8 +24,13 @@ export async function GET(req) {
           select: { name: true },
         },
       },
+      // Order by the 'order' field inside the lesson relation
       orderBy: {
-        createdAt: "desc", // Newest first
+        exercise: {
+          lesson: {
+            order: "asc", // or 'desc'
+          },
+        },
       },
     });
 

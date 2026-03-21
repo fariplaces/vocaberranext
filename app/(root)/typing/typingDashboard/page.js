@@ -22,7 +22,7 @@ const TypingDashboard = () => {
   useEffect(() => {
     dispatch(fetchTypings());
   }, []);
-
+  // Exercise Chart Data
   const groupedLessons = typingData.reduce((acc, item) => {
     const lessonName = item.exercise.lesson.lesson;
 
@@ -46,6 +46,7 @@ const TypingDashboard = () => {
     a.localeCompare(b, undefined, { numeric: true })
   );
 
+  // Test Chart Data
   const groupedTestsByDuration = typingData.reduce((acc, item) => {
     // 1. Only process if the lesson is "TEST"
     if (item.exercise.lesson.lesson.toUpperCase() !== "TEST") return acc;
