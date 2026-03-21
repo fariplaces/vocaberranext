@@ -1,3 +1,7 @@
+// npx prisma generate
+// npx prisma migrate dev --name init
+// npx prisma studio
+
 datasource db {
   provider = "sqlite"
 }
@@ -51,7 +55,7 @@ model Typing {
 model Exercise {
   id          String        @id @default(uuid())
   title       String
-  exerciseNo  Int
+  exerciseNo  String      @unique
   typeId      String
   lessonId    String
 
@@ -64,7 +68,7 @@ model Exercise {
 // ExerciseType table
 model ExerciseType {
   id        String     @id @default(uuid())
-  type      String
+  type      String      @unique
 
   exercises Exercise[]
 }
@@ -72,7 +76,7 @@ model ExerciseType {
 // Lesson table
 model Lesson {
   id        String     @id @default(uuid())
-  lesson    String
+  lesson    String      @unique
 
   exercises Exercise[]
 }
@@ -80,7 +84,7 @@ model Lesson {
 // Duration table
 model Duration {
   id        String     @id @default(uuid())
-  duration  Int
+  duration  String      @unique
 
   typings   Typing[]
 }

@@ -11,6 +11,7 @@ import {
   UserMinus,
   Home,
   HandCoins,
+  WholeWord
 } from "lucide-react";
 import Link from "next/link";
 
@@ -58,7 +59,7 @@ const NavigationMenu = ({ sidebarOpen }) => {
     },
     {
       name: "Tying",
-      icon: Users,
+      icon: WholeWord,
       hasSubmenu: true,
       subItems: [
         {

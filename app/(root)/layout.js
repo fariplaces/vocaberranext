@@ -22,15 +22,15 @@ const PageLayout = ({ children }) => {
     <AuthCheck>
       <div className="flex max-screen bg-black text-white">
         <SideBar sidebarOpen={sidebarOpen} />
-        <div className="flex-1 flex flex-col">
+        <div className="flex-1 min-h-screen flex flex-col">
           <TopBar
             handleNotifictionToggle={handleNotifictionToggle}
             handleSidebarToggle={handleSidebarToggle}
           />
-          <TabBar
+          {/* <TabBar
             notificationOpen={notificationOpen}
             setNotificationOpen={setNotificationOpen}
-          />
+          /> */}
           <main className="flex-1 p-6 border border-gray-700 rounded-2xl m-2">
             {children}
           </main>

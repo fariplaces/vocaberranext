@@ -1,3 +1,4 @@
+// Normal Store Configuration
 // import { configureStore } from "@reduxjs/toolkit";
 // import authReducer from "./slices/authSlice";
 
@@ -9,6 +10,7 @@
 
 // export default store;
 
+// Persisted store Configuration
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import {
   persistStore,
@@ -25,19 +27,22 @@ import storage from "redux-persist/lib/storage"; // defaults to localStorage in 
 import authReducer from "./slices/authSlice";
 import wordReducer from "./slices/wordSlice";
 import wordMeaningReducer from "./slices/wordMeaningSlice";
+import typingReducer from "./slices/typingSlice";
 
 // combine reducers (if more slices later)
 const rootReducer = combineReducers({
   auth: authReducer,
   words: wordReducer,
   wordMeanings: wordMeaningReducer,
+  typing: typingReducer
+
 });
 
 // persist config
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["auth"], // only persist auth slice
+  whitelist: ["auth"], 
 };
 
 // wrap reducer

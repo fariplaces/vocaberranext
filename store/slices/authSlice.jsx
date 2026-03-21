@@ -69,7 +69,6 @@
 // export const { logout, setCredentials } = authSlice.actions;
 // export default authSlice.reducer;
 
-
 // store/authSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
@@ -131,7 +130,11 @@ export const logoutUser = createAsyncThunk(
   "auth/logoutUser",
   async (_, thunkAPI) => {
     try {
-      const res = await axios.post("/api/logout", {}, { withCredentials: true });
+      const res = await axios.post(
+        "/api/logout",
+        {},
+        { withCredentials: true }
+      );
       return res.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(
@@ -145,7 +148,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState: {
     user: null,
-    loading: false,
+    loading: true,
     error: null,
     isLoggedIn: false,
   },

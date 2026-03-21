@@ -12,7 +12,7 @@ const SideBar = ({ sidebarOpen }) => {
     >
       <UserProfile sidebarOpen={sidebarOpen} />
       <NavigationMenu sidebarOpen={sidebarOpen} />
-      <UserInfo sidebarOpen={sidebarOpen} />
+      {/* <UserInfo sidebarOpen={sidebarOpen} /> */}
     </div>
   );
 };
