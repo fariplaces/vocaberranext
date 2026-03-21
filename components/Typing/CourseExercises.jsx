@@ -11,9 +11,17 @@ import {
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-function CourseExercises({ handleEditClick, handleDelClick }) {
+function CourseExercises({ route, handleEditClick, handleDelClick }) {
   const { typingData } = useSelector((state) => state.typing);
   const dispatch = useDispatch();
+
+  const filteredTypingData = typingData.filter((item) =>
+    route === "course"
+      ? item.exercise.lesson.lesson !== "TEST"
+      : route === "test"
+      ? item.exercise.lesson.lesson === "TEST"
+      : true
+  );
 
   useEffect(() => {
     dispatch(fetchTypings());
@@ -50,7 +58,7 @@ function CourseExercises({ handleEditClick, handleDelClick }) {
           </thead>
           <tbody>
             {/* Idioms Row */}
-            {typingData.map((item, i) => (
+            {filteredTypingData.map((item, i) => (
               <tr key={item.id}>
                 <td className="border border-gray-700 px-4 py-2 text-sm text-white">
                   {i + 1}
@@ -74,7 +82,7 @@ function CourseExercises({ handleEditClick, handleDelClick }) {
                   <Edit2 onClick={() => handleEditClick(item)} />
                   <Trash2
                     className="text-red-600"
-                    onClick={(item) => handleDelClick(item)}
+                    onClick={() => handleDelClick(item)}
                   />
                 </td>
               </tr>

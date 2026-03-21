@@ -11,7 +11,7 @@ import {
   UserMinus,
   Home,
   HandCoins,
-  WholeWord
+  WholeWord,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -64,11 +64,11 @@ const NavigationMenu = ({ sidebarOpen }) => {
       subItems: [
         {
           item: "Exercises",
-          href: "/typing/exercises",
+          href: "/typing/exercise/course",
         },
         {
           item: "Tests",
-          href: "/typing/tests",
+          href: "/typing/exercise/test",
         },
       ],
     },
@@ -193,8 +193,9 @@ const NavigationMenu = ({ sidebarOpen }) => {
       {sidebarItems.map((item) => (
         <div key={item.name}>
           <div
-            className={`flex items-center justify-between px-4 py-2 hover:bg-gray-700 cursor-pointer ${item.name === "Employees" ? "bg-gray-700" : ""
-              }`}
+            className={`flex items-center justify-between px-4 py-2 hover:bg-gray-700 cursor-pointer ${
+              item.name === "Employees" ? "bg-gray-700" : ""
+            }`}
             onClick={() => item.hasSubmenu && toggleMenu(item.name)}
           >
             <div className="flex items-center space-x-3">

@@ -11,45 +11,56 @@ const initialFormState = {
   net: "",
 };
 
-const ExercisePopup = ({ isOpen, setIsOpen, editData = null, setEditData }) => {
+const ExercisePopup = ({
+  route,
+  isOpen,
+  setIsOpen,
+  editData = null,
+  setEditData,
+}) => {
+  const getInitialState = () => {
+    const state = { ...initialFormState };
+    if (route === "course") {
+      const defaultDuration = durationsData.find((d) => d.duration === "5M");
+      state.durationId = defaultDuration
+        ? defaultDuration.id
+        : "ed238f81-d08b-4315-912b-a7df01aa7f46";
+    }
+    return state;
+  };
   const { user } = useSelector((state) => state.auth);
-  const lessonsData = useSelector((state) => state.typing.lessons);
+  const lessonsToFilter = useSelector((state) => state.typing.lessons);
   const durationsData = useSelector((state) => state.typing.durations);
   const dispatch = useDispatch();
-  const [formData, setFormData] = useState(initialFormState);
+  const [formData, setFormData] = useState(() => getInitialState());
+
+  const lessonsData = lessonsToFilter.filter((item) =>
+    route === "course"
+      ? item.lesson !== "TEST"
+      : route === "test"
+      ? item.lesson === "TEST"
+      : true
+  );
+
   const resetPopup = () => {
-    setFormData(initialFormState);
+    setFormData(getInitialState());
     if (setEditData) setEditData(null);
     setIsOpen(false);
   };
 
-  // Sync form when editData is passed
   useEffect(() => {
-    if (editData) {
-      setFormData({
-        exerciseId: editData.exerciseId || "",
-        durationId: editData.durationId || "",
-        accuracy: String(editData.accuracy || ""),
-        gross: String(editData.gross || ""),
-        net: String(editData.net || ""),
-      });
-    } else {
-      // Reset if adding new
-      setFormData(initialFormState);
+    if (isOpen) {
+      setFormData(editData ? { ...editData } : getInitialState());
     }
-  }, [editData, isOpen]);
+  }, [isOpen, route, editData, durationsData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     setFormData((prev) => {
       const newState = { ...prev, [name]: value };
-
-      // Optional: Real-time console warning
       if (name === "net" && parseInt(value) > parseInt(prev.gross)) {
         console.warn("Net exceeds Gross!");
       }
-
       return newState;
     });
   };
@@ -80,13 +91,10 @@ const ExercisePopup = ({ isOpen, setIsOpen, editData = null, setEditData }) => {
     };
 
     if (editData?.id) {
-      // Dispatch UPDATE action (you'll need to create this in your slice)
       dispatch(updateTyping({ id: editData.id, ...payload }));
     } else {
-      // Dispatch CREATE action
       dispatch(createTyping(payload));
     }
-
     setIsOpen(false);
     resetPopup();
   };
@@ -106,7 +114,15 @@ const ExercisePopup = ({ isOpen, setIsOpen, editData = null, setEditData }) => {
               onClick={(e) => e.stopPropagation()}
             >
               <h2 className="text-xl font-semibold mb-4">
-                {editData ? "Edit Exercise" : "Add an Exercise"}
+                {route === "course"
+                  ? editData
+                    ? "Edit Exercise"
+                    : "Add a New Exercise"
+                  : route === "test"
+                  ? editData
+                    ? "Edit Test"
+                    : "Add a New Test"
+                  : ""}
               </h2>
 
               {/* Type Input */}
@@ -142,12 +158,21 @@ const ExercisePopup = ({ isOpen, setIsOpen, editData = null, setEditData }) => {
               </div>
               {/* Type Input */}
               <div className="mb-4">
-                <label className="block text-sm mb-1">Duration</label>
+                <label
+                  className={`block ${
+                    route === "course" ? "text-gray-600" : "text-white"
+                  } text-sm mb-1`}
+                >
+                  Duration
+                </label>
                 <select
+                  disabled={route === "course"}
                   name="durationId"
                   value={formData.durationId}
                   onChange={handleChange}
-                  className="w-full  px-3 py-2 bg-transparent border border-gray-600 rounded-md focus:outline-none focus:border-blue-500"
+                  className={`w-full ${
+                    route === "course" ? "text-gray-600" : "text-white"
+                  } px-3 py-2 bg-transparent border border-gray-600 rounded-md focus:outline-none focus:border-blue-500`}
                 >
                   <option className="bg-black" value="">
                     Select Duration
@@ -190,7 +215,7 @@ const ExercisePopup = ({ isOpen, setIsOpen, editData = null, setEditData }) => {
               <div className="mb-4">
                 <label className="block text-sm mb-1">Net (WPM)</label>
                 <input
-                  type="text" // Change to number for better mobile UX
+                  type="text"
                   name="net"
                   value={formData.net}
                   onChange={handleChange}
@@ -223,12 +248,6 @@ const ExercisePopup = ({ isOpen, setIsOpen, editData = null, setEditData }) => {
                 >
                   <span>{editData ? "Update" : "Save"}</span>
                 </button>
-                {/* <button
-                  onClick={handleSave}
-                  className="px-4 py-2 bg-green-600 rounded-lg hover:bg-green-700"
-                >
-                  Save
-                </button> */}
               </div>
             </div>
           </div>

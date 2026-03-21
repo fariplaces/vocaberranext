@@ -6,7 +6,6 @@ const UserProfile = ({ sidebarOpen }) => {
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-  console.log(user);
   function getInitials(name) {
     const words = name.trim().split(/\s+/); // split by spaces
 

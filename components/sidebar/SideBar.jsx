@@ -1,7 +1,6 @@
 import React from "react";
 import UserProfile from "../UserProfile";
 import NavigationMenu from "../NavigationMenu";
-import UserInfo from "../UserInfo";
 
 const SideBar = ({ sidebarOpen }) => {
   return (
@@ -12,7 +11,6 @@ const SideBar = ({ sidebarOpen }) => {
     >
       <UserProfile sidebarOpen={sidebarOpen} />
       <NavigationMenu sidebarOpen={sidebarOpen} />
-      {/* <UserInfo sidebarOpen={sidebarOpen} /> */}
     </div>
   );
 };

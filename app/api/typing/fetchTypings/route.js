@@ -15,14 +15,14 @@ export async function GET(req) {
       where,
       include: {
         exercise: {
-          select: { title: true, exerciseNo: true }
+          select: { title: true, exerciseNo: true, lesson: true },
         },
         duration: {
-          select: { duration: true }
+          select: { duration: true },
         },
         user: {
-          select: { name: true }
-        }
+          select: { name: true },
+        },
       },
       orderBy: {
         createdAt: "desc", // Newest first

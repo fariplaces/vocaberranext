@@ -95,9 +95,9 @@ export const updateTyping = createAsyncThunk(
 // Delete a Typing
 export const deleteTyping = createAsyncThunk(
   "typing/deleteTyping",
-  async (payload, thunkAPI) => {
+  async (id, thunkAPI) => {
     try {
-      const res = await axios.delete(`/api/typing/deleteTyping`, payload);
+      const res = await axios.delete(`/api/typing/deleteTyping/${id}`);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
@@ -205,7 +205,7 @@ const typingSlice = createSlice({
       })
       .addCase(createTyping.fulfilled, (state, action) => {
         state.loading = false;
-        state.typingData = action.payload;
+        state.typingData = [action.payload, ...state.typingData];
       })
       .addCase(createTyping.rejected, (state, action) => {
         state.loading = false;

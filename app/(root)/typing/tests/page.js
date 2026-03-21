@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
-const TypingTests = () => {
-   return (
-      <div>
-         Typing Tests
-      </div>
-   )
-}
+const TypingExercises = () => {
+  return <TypingTextPage />;
+};
 
-export default TypingTests
+export default TypingExercises;

@@ -12,7 +12,7 @@ import {
 } from "@/store/slices/typingSlice";
 import DeletePopup from "@/components/DeletePopup";
 
-const TypingExercises = () => {
+const TypingExercisePage = ({ route }) => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isDelPopupOpen, setIsDelPopupOpen] = useState(false);
@@ -31,13 +31,9 @@ const TypingExercises = () => {
   const handleDelClick = (item) => {
     setItemToDelete(item);
     setIsDelPopupOpen(true);
-    console.log(item);
-    console.log(itemToDelete);
   };
 
   const handleDelete = async () => {
-    console.log("clc");
-    console.log(itemToDelete);
     if (itemToDelete?.id) {
       // Wait for the dispatch to finish
       dispatch(deleteTyping(itemToDelete.id));
@@ -56,16 +52,18 @@ const TypingExercises = () => {
   return (
     <>
       <ContentTitle
-        title="Typing Exercises"
-        btnTitle="Add Exercise"
+        title={route === "course" ? "Typing Exercises" : "Typing Tests"}
+        btnTitle={route === "course" ? "Add Exercise" : "Add Test"}
         Icon={Plus}
         handleMethod={handleAddClick}
       />
       <CourseExercises
         handleEditClick={handleEditClick}
         handleDelClick={handleDelClick}
+        route={route}
       />
       <ExercisePopup
+        route={route}
         isOpen={isPopupOpen}
         setIsOpen={setIsPopupOpen}
         editData={selectedItem}
@@ -82,4 +80,4 @@ const TypingExercises = () => {
   );
 };
 
-export default TypingExercises;
+export default TypingExercisePage;

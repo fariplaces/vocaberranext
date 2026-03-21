@@ -23,7 +23,9 @@ export async function PATCH(req) {
         net: parseInt(net),
       },
       include: {
-        exercise: true,
+        exercise: {
+          select: { title: true, exerciseNo: true, lesson: true },
+        },
         duration: true,
       },
     });

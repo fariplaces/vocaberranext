@@ -27,9 +27,11 @@ export async function POST(req) {
       },
       // Include relations if you want to return the full object to the frontend
       include: {
-        exercise: true,
+        exercise: {
+          select: { title: true, exerciseNo: true, lesson: true },
+        },
         duration: true,
-      }
+      },
     });
 
     return NextResponse.json(newTyping, { status: 201 });
