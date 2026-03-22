@@ -30,7 +30,7 @@ const AuthCheck = ({ children }) => {
   }
 
   // Only show children if logged in (or if on the login page)
-  if (!isLoggedIn && pathname !== "/auth/login") {
+  if (!isLoggedIn && pathName !== "/auth/login") {
     return null;
   }
 

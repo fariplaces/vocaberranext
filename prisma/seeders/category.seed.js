@@ -41,15 +41,15 @@ export async function seedCategory(prisma) {
     { title: "ShadowAndGradient", order: 7, skill: "CSS" },
 
     // JavaScript Categories
-    { title: "Basics", order: 1, skill: "JavaScript" },
+    { title: "Basics JS", order: 1, skill: "JavaScript" },
     { title: "Alerts", order: 2, skill: "JavaScript" },
     { title: "Console", order: 3, skill: "JavaScript" },
     { title: "Variables", order: 4, skill: "JavaScript" },
     { title: "Data Types", order: 5, skill: "JavaScript" },
     { title: "Operators", order: 6, skill: "JavaScript" },
     { title: "ControlStructures", order: 7, skill: "JavaScript" },
-    { title: "Functions", order: 8, skill: "JavaScript" },
-    { title: "Loops", order: 9, skill: "JavaScript" },
+    { title: "Functions JS", order: 8, skill: "JavaScript" },
+    { title: "Loops JS", order: 9, skill: "JavaScript" },
     { title: "Date Methods", order: 10, skill: "JavaScript" },
     { title: "Events", order: 11, skill: "JavaScript" },
     { title: "DOM", order: 12, skill: "JavaScript" },

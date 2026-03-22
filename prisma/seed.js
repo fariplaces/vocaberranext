@@ -6,6 +6,7 @@ import { seedExercise } from "./seeders/exercise.seed.js";
 import { prisma } from "../lib/prisma.js";
 import { seedSkill } from "./seeders/skill.seed.js";
 import { seedCategory } from "./seeders/category.seed.js";
+import { seedTopic } from "./seeders/topic.seed.js";
 
 async function main() {
   console.log("🌱 Seeding started...");
@@ -18,7 +19,9 @@ async function main() {
 
   // --- Dependent after ---
   // await seedExercise(prisma);
-  await seedCategory(prisma);
+  // await seedCategory(prisma);
+  // await seedTopic(prisma);
+
 
   console.log("🎉 All seeding completed!");
 }
