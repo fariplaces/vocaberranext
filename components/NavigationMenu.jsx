@@ -12,6 +12,7 @@ import {
   Home,
   HandCoins,
   WholeWord,
+  ChartNoAxesColumn,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -41,7 +42,7 @@ const NavigationMenu = ({ sidebarOpen, data }) => {
   const staticItems = [
     {
       name: "DASHBOARD",
-      icon: WholeWord,
+      icon: ChartNoAxesColumn,
       hasSubmenu: true,
       subItems: [
         {

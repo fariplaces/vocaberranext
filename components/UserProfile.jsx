@@ -1,4 +1,4 @@
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, LogOut } from "lucide-react";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -60,6 +60,7 @@ const UserProfile = ({ sidebarOpen }) => {
               }}
             >
               <span>Logout</span>
+              <LogOut />
             </button>
           </div>
         </div>

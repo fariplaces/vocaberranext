@@ -68,6 +68,7 @@ const SkillRIII = ({ route }) => {
 
                      <td className="border border-gray-700 px-4 py-2 text-sm text-white">
                         <div className="flex justify-evenly">
+                           <input type='checkbox' />
                            {/* {item.net} */}<Edit2 />
                            {/* {item.net} */}<Edit2 />
                         </div>
