@@ -23,12 +23,6 @@ const PageLayout = ({ children }) => {
   const handleNotifictionToggle = () => {
     setNotificationOpen(!notificationOpen);
   };
-  const handleSidebarToggle = () => {
-    dispatch(toggleSidebar()); // Global state update
-  };
-  // const handleSidebarToggle = () => {
-  //   setSidebarOpen(!sidebarOpen);
-  // };
   return (
     <AuthCheck>
       <div className="flex max-screen bg-black text-white">
@@ -36,7 +30,6 @@ const PageLayout = ({ children }) => {
         <div className="flex-1 min-h-screen flex flex-col">
           <TopBar
             handleNotifictionToggle={handleNotifictionToggle}
-            handleSidebarToggle={handleSidebarToggle}
           />
           {/* <TabBar
             notificationOpen={notificationOpen}

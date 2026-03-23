@@ -1,14 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import EmployeeSynonymsInterface from "@/components/EmployeeSynonymsInterface";
 
-import BasicEmployeeForm from "@/components/BasicEmployeeForm.jsx";
-import TenseTabSection from "@/components/TenseTabSection";
-import LoginPage from "@/components/Login";
-import WordListDisplay from "@/components/vocaberra/WordListDisplay";
 import ContentTitle from "@/components/ContentTitle";
-import { Plus } from "lucide-react";
-import CreateWordPopup from "@/components/vocaberra/Popup";
+
 
 const HomePage = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,12 +12,13 @@ const HomePage = () => {
     console.log("clicked");
   };
   return (
-    <>
+    <main className="flex-1 p-6 border border-gray-700 rounded-2xl m-2" >
+
       <ContentTitle
         title="VocabErra"
         btnTitle="Back"
-        // Icon={Plus}
-        // handleMethod={handleChange}
+      // Icon={Plus}
+      // handleMethod={handleChange}
       />
       {/* <ContentTitle
         title="VocabErra"
@@ -36,7 +31,7 @@ const HomePage = () => {
       {/* <BasicEmployeeForm /> */}
       {/* <TenseTabSection /> */}
       {/* <EmployeeSynonymsInterface />; */}
-    </>
+    </main>
   );
 };
 

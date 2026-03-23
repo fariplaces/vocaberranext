@@ -1,16 +1,17 @@
 import React from "react";
 import UserProfile from "../UserProfile";
 import NavigationMenu from "../NavigationMenu";
+import { ScrollArea } from "../ui/scroll-area";
 
 const SideBar = ({ sidebarOpen }) => {
   return (
-    <div
+    <ScrollArea
       className={`${sidebarOpen ? "w-64" : "w-16"
-        } bg-black border-r border-white/30 transition-all duration-300 flex flex-col`}
+        } sticky bg-black border-r border-white/30 max-h-screen transition-all overflow-x-hidden overflow-y-auto duration-300 flex flex-col`}
     >
       <UserProfile sidebarOpen={sidebarOpen} />
       <NavigationMenu />
-    </div>
+    </ScrollArea>
   );
 };
 

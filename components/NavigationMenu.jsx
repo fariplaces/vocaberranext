@@ -154,7 +154,7 @@ const NavigationMenu = () => {
   const sidebarItems = [...staticItems, ...dynamicItems];
 
   return (
-    <nav className="flex-1 overflow-y-auto py-4">
+    <nav className="flex-1 overflow-y-auto overflow-x-hidden overflow-y-auto py-4">
       {sidebarItems.map((item) => {
         // Check if any child is active
         const isParentActive = item.subItems?.some(sub => pathname === sub.href);
