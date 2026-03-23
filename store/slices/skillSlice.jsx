@@ -3,7 +3,7 @@ import axios from "axios";
 
 // ================== ASYNC THUNKS ==================
 
-// Fetch all Exercises and Tests
+// Fetch all Side Menu
 export const fetchSideMenu = createAsyncThunk(
   "skill/fetchSideMenu",
   async (_, thunkAPI) => {
@@ -18,6 +18,21 @@ export const fetchSideMenu = createAsyncThunk(
   }
 );
 
+// Fetch all Categories and Skills
+export const fetchSkills = createAsyncThunk(
+  "skill/fetchSkills",
+  async (_, thunkAPI) => {
+    try {
+      const res = await axios.get("/api/skills/fetchSkills");
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || "Failed to fetch Skills"
+      );
+    }
+  }
+);
+
 
 // ================== SLICE ==================
 
@@ -25,6 +40,7 @@ const skillSlice = createSlice({
   name: "SkillSlice",
   initialState: {
     sideMenu: [],
+    skills: [],
     sidebarOpen: true,
     loading: false,
     error: null,
@@ -52,6 +68,19 @@ const skillSlice = createSlice({
         state.sideMenu = action.payload;
       })
       .addCase(fetchSideMenu.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      // Fetch Exercises
+      .addCase(fetchSkills.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchSkills.fulfilled, (state, action) => {
+        state.loading = false;
+        state.skills = action.payload;
+      })
+      .addCase(fetchSkills.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

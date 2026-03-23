@@ -1,0 +1,4068 @@
+[
+    {
+        "id": "6fa72cda-b707-4d6c-9cdc-6a6f63f9196b",
+        "title": "Operating System",
+        "order": 1,
+        "categories": [
+            {
+                "id": "60712355-968a-4dc5-a710-83aa5ae4c5f3",
+                "title": "Firewall",
+                "order": 1,
+                "parentId": null,
+                "skillId": "6fa72cda-b707-4d6c-9cdc-6a6f63f9196b",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "8f7b61df-baa9-4547-bc2c-6f4f3d4f026a",
+                        "title": "Disable",
+                        "categoryId": "60712355-968a-4dc5-a710-83aa5ae4c5f3",
+                        "order": 1
+                    },
+                    {
+                        "id": "56a61fe8-5617-431f-b8ea-3e10afe699ad",
+                        "title": "Rules",
+                        "categoryId": "60712355-968a-4dc5-a710-83aa5ae4c5f3",
+                        "order": 2
+                    },
+                    {
+                        "id": "953e0e57-14fc-4352-bf6c-5362280aed20",
+                        "title": "Network Profiling",
+                        "categoryId": "60712355-968a-4dc5-a710-83aa5ae4c5f3",
+                        "order": 3
+                    },
+                    {
+                        "id": "51568320-6424-4d95-8e2e-51147d7b0c31",
+                        "title": "Network Sharing",
+                        "categoryId": "60712355-968a-4dc5-a710-83aa5ae4c5f3",
+                        "order": 4
+                    }
+                ]
+            },
+            {
+                "id": "39d8052b-4ee1-46b3-9275-c58907a53424",
+                "title": "ShortCuts",
+                "order": 2,
+                "parentId": null,
+                "skillId": "6fa72cda-b707-4d6c-9cdc-6a6f63f9196b",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "de66ccd1-bf7d-455d-b390-c91f2911ff50",
+                        "title": "Movement",
+                        "categoryId": "39d8052b-4ee1-46b3-9275-c58907a53424",
+                        "order": 1
+                    },
+                    {
+                        "id": "d1bfa878-9633-4c59-a68a-766299cd82ee",
+                        "title": "Naming Conventions",
+                        "categoryId": "39d8052b-4ee1-46b3-9275-c58907a53424",
+                        "order": 2
+                    },
+                    {
+                        "id": "743d4c31-bece-4f60-939c-23667e90feba",
+                        "title": "Navigations",
+                        "categoryId": "39d8052b-4ee1-46b3-9275-c58907a53424",
+                        "order": 3
+                    },
+                    {
+                        "id": "52df9125-c9a1-4885-be3c-3b51490ccf14",
+                        "title": "VS Code",
+                        "categoryId": "39d8052b-4ee1-46b3-9275-c58907a53424",
+                        "order": 4
+                    },
+                    {
+                        "id": "b4489992-bc58-4ba1-ae57-6b3ab826d6ed",
+                        "title": "Comment Styling",
+                        "categoryId": "39d8052b-4ee1-46b3-9275-c58907a53424",
+                        "order": 5
+                    }
+                ]
+            },
+            {
+                "id": "52f7bb70-c353-49ec-8641-766c7e1890ff",
+                "title": "Operating System",
+                "order": 3,
+                "parentId": null,
+                "skillId": "6fa72cda-b707-4d6c-9cdc-6a6f63f9196b",
+                "children": [
+                    {
+                        "id": "667e39a4-a922-4a34-b47e-730e58224dee",
+                        "title": "Windows",
+                        "order": 4,
+                        "parentId": "52f7bb70-c353-49ec-8641-766c7e1890ff",
+                        "skillId": "6fa72cda-b707-4d6c-9cdc-6a6f63f9196b",
+                        "topics": [
+                            {
+                                "id": "006002e0-902e-4e14-b5f5-61a1035f761e",
+                                "title": "Operating System Doc File",
+                                "categoryId": "667e39a4-a922-4a34-b47e-730e58224dee",
+                                "order": 1
+                            }
+                        ]
+                    }
+                ],
+                "topics": []
+            }
+        ]
+    },
+    {
+        "id": "c39af496-fe85-4325-9c54-8ff92637505d",
+        "title": "HTML",
+        "order": 2,
+        "categories": [
+            {
+                "id": "40b9e29b-1b11-4ba1-9424-346850513aba",
+                "title": "Basic",
+                "order": 1,
+                "parentId": null,
+                "skillId": "c39af496-fe85-4325-9c54-8ff92637505d",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "6f25188d-ddcc-4a42-a91f-7fc073240214",
+                        "title": "Syntax",
+                        "categoryId": "40b9e29b-1b11-4ba1-9424-346850513aba",
+                        "order": 1
+                    },
+                    {
+                        "id": "1c7e70eb-70b9-4fa4-8c86-86445272a8f5",
+                        "title": "Inline Vs Block",
+                        "categoryId": "40b9e29b-1b11-4ba1-9424-346850513aba",
+                        "order": 2
+                    },
+                    {
+                        "id": "4736afa8-a139-47f5-ab23-9bbf42227532",
+                        "title": "Comments",
+                        "categoryId": "40b9e29b-1b11-4ba1-9424-346850513aba",
+                        "order": 3
+                    },
+                    {
+                        "id": "016e1c49-0ca9-4d3d-9e6a-42e9650f1d35",
+                        "title": "Title & FavIcon",
+                        "categoryId": "40b9e29b-1b11-4ba1-9424-346850513aba",
+                        "order": 4
+                    }
+                ]
+            },
+            {
+                "id": "c4f51a68-69de-4df9-be24-e6eacf04cce9",
+                "title": "Headings and Paragraph",
+                "order": 2,
+                "parentId": null,
+                "skillId": "c39af496-fe85-4325-9c54-8ff92637505d",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "89890058-2a74-48db-999d-02064081d0b1",
+                        "title": "Heading",
+                        "categoryId": "c4f51a68-69de-4df9-be24-e6eacf04cce9",
+                        "order": 1
+                    },
+                    {
+                        "id": "f0023d69-c4d5-4f84-a26d-45998927e441",
+                        "title": "Paragraph",
+                        "categoryId": "c4f51a68-69de-4df9-be24-e6eacf04cce9",
+                        "order": 2
+                    }
+                ]
+            },
+            {
+                "id": "244481ee-cc61-4d5e-a513-25e2df6485e9",
+                "title": "Formatting",
+                "order": 3,
+                "parentId": null,
+                "skillId": "c39af496-fe85-4325-9c54-8ff92637505d",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "b73c52b7-d119-41cd-ac41-bf910943b977",
+                        "title": "Formetting",
+                        "categoryId": "244481ee-cc61-4d5e-a513-25e2df6485e9",
+                        "order": 1
+                    },
+                    {
+                        "id": "d262e9e2-3cad-4b77-a726-8b81bfb308a3",
+                        "title": "Quotations",
+                        "categoryId": "244481ee-cc61-4d5e-a513-25e2df6485e9",
+                        "order": 2
+                    }
+                ]
+            },
+            {
+                "id": "58ae1751-f8c5-4642-8bab-31e08f46c028",
+                "title": "Anchor & Link",
+                "order": 4,
+                "parentId": null,
+                "skillId": "c39af496-fe85-4325-9c54-8ff92637505d",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "4dc329ec-642b-4f3c-8d99-5c8cc24ff135",
+                        "title": "Anchor",
+                        "categoryId": "58ae1751-f8c5-4642-8bab-31e08f46c028",
+                        "order": 1
+                    },
+                    {
+                        "id": "fedb92a0-4744-4e1c-9409-d87a8305da00",
+                        "title": "Link",
+                        "categoryId": "58ae1751-f8c5-4642-8bab-31e08f46c028",
+                        "order": 2
+                    }
+                ]
+            },
+            {
+                "id": "c6bed183-f945-4972-a2b4-d8c86d90c04a",
+                "title": "Media",
+                "order": 5,
+                "parentId": null,
+                "skillId": "c39af496-fe85-4325-9c54-8ff92637505d",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "1587f1b0-c0cd-4422-add4-f4e4fa96655b",
+                        "title": "Path",
+                        "categoryId": "c6bed183-f945-4972-a2b4-d8c86d90c04a",
+                        "order": 1
+                    },
+                    {
+                        "id": "8b227ad4-a087-4d6e-99e3-b3f029df40d0",
+                        "title": "Image",
+                        "categoryId": "c6bed183-f945-4972-a2b4-d8c86d90c04a",
+                        "order": 2
+                    },
+                    {
+                        "id": "04628eb2-0218-4e56-8252-e2d8d7d9738e",
+                        "title": "Audio",
+                        "categoryId": "c6bed183-f945-4972-a2b4-d8c86d90c04a",
+                        "order": 3
+                    },
+                    {
+                        "id": "3556822d-8a5d-4689-87d9-d18461132177",
+                        "title": "Video",
+                        "categoryId": "c6bed183-f945-4972-a2b4-d8c86d90c04a",
+                        "order": 4
+                    }
+                ]
+            },
+            {
+                "id": "3152e65d-99f9-4af4-91c3-8d17e44f74c5",
+                "title": "Table",
+                "order": 6,
+                "parentId": null,
+                "skillId": "c39af496-fe85-4325-9c54-8ff92637505d",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "908bfe58-bbfd-4610-9c06-3788556fea32",
+                        "title": "Table",
+                        "categoryId": "3152e65d-99f9-4af4-91c3-8d17e44f74c5",
+                        "order": 1
+                    }
+                ]
+            },
+            {
+                "id": "42b296dc-4299-474a-b6db-dc21971ccf45",
+                "title": "Lists & Dropdowns",
+                "order": 7,
+                "parentId": null,
+                "skillId": "c39af496-fe85-4325-9c54-8ff92637505d",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "692fd784-e66a-4506-90ec-2d514e15a396",
+                        "title": "Unorder",
+                        "categoryId": "42b296dc-4299-474a-b6db-dc21971ccf45",
+                        "order": 1
+                    },
+                    {
+                        "id": "f9dbc828-76bb-46bc-9fc3-1ae43ad3d137",
+                        "title": "Order",
+                        "categoryId": "42b296dc-4299-474a-b6db-dc21971ccf45",
+                        "order": 2
+                    },
+                    {
+                        "id": "119c3f89-0b5a-4124-a551-7f78d323f1eb",
+                        "title": "Description",
+                        "categoryId": "42b296dc-4299-474a-b6db-dc21971ccf45",
+                        "order": 3
+                    },
+                    {
+                        "id": "4ccb0369-532d-4beb-b4cb-37531d814d0b",
+                        "title": "Dropdown",
+                        "categoryId": "42b296dc-4299-474a-b6db-dc21971ccf45",
+                        "order": 4
+                    }
+                ]
+            },
+            {
+                "id": "6bc364d6-0f67-4ee4-bfe1-8afba797f4ee",
+                "title": "Forms and Inputs",
+                "order": 8,
+                "parentId": null,
+                "skillId": "c39af496-fe85-4325-9c54-8ff92637505d",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "79ec3586-dd67-4019-a2db-b9da1eac7527",
+                        "title": "Form",
+                        "categoryId": "6bc364d6-0f67-4ee4-bfe1-8afba797f4ee",
+                        "order": 1
+                    },
+                    {
+                        "id": "7c47b3cb-56bd-4b43-8079-8f8febeb6a30",
+                        "title": "Inputs",
+                        "categoryId": "6bc364d6-0f67-4ee4-bfe1-8afba797f4ee",
+                        "order": 2
+                    },
+                    {
+                        "id": "fbf4f921-2c77-4d31-b0cf-25ec52fa6526",
+                        "title": "Text Area",
+                        "categoryId": "6bc364d6-0f67-4ee4-bfe1-8afba797f4ee",
+                        "order": 3
+                    }
+                ]
+            },
+            {
+                "id": "9b274b28-de4f-4fc5-9f4b-f54af45923ee",
+                "title": "Misc",
+                "order": 9,
+                "parentId": null,
+                "skillId": "c39af496-fe85-4325-9c54-8ff92637505d",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "7e230c69-94cd-4d8c-9723-2d023a7fe332",
+                        "title": "Pre",
+                        "categoryId": "9b274b28-de4f-4fc5-9f4b-f54af45923ee",
+                        "order": 1
+                    },
+                    {
+                        "id": "ac77efd7-4dfb-4526-a2c0-dff19a27fc1c",
+                        "title": "Code",
+                        "categoryId": "9b274b28-de4f-4fc5-9f4b-f54af45923ee",
+                        "order": 2
+                    },
+                    {
+                        "id": "89f1b00d-48cc-4f10-ba4f-75c73639a297",
+                        "title": "Samentic",
+                        "categoryId": "9b274b28-de4f-4fc5-9f4b-f54af45923ee",
+                        "order": 3
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "2288038c-e194-4031-870a-f0f4417b3b86",
+        "title": "CSS",
+        "order": 3,
+        "categories": [
+            {
+                "id": "8d02b53b-e892-48cf-83b5-d03d4db53659",
+                "title": "SyntaxAndStructure",
+                "order": 1,
+                "parentId": null,
+                "skillId": "2288038c-e194-4031-870a-f0f4417b3b86",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "83964470-0160-4b3d-aa13-c724add7695e",
+                        "title": "Syntax",
+                        "categoryId": "8d02b53b-e892-48cf-83b5-d03d4db53659",
+                        "order": 1
+                    },
+                    {
+                        "id": "8493f283-d54e-4051-ba39-c354bacda97b",
+                        "title": "Inline",
+                        "categoryId": "8d02b53b-e892-48cf-83b5-d03d4db53659",
+                        "order": 2
+                    },
+                    {
+                        "id": "756e95bf-f7d8-4a90-a1dc-c93b5d022ce5",
+                        "title": "Internal",
+                        "categoryId": "8d02b53b-e892-48cf-83b5-d03d4db53659",
+                        "order": 3
+                    },
+                    {
+                        "id": "33aaa9f3-3de9-4e24-9ab0-0d4f9db1d2ec",
+                        "title": "External",
+                        "categoryId": "8d02b53b-e892-48cf-83b5-d03d4db53659",
+                        "order": 4
+                    },
+                    {
+                        "id": "bb2c427a-2f44-403c-a987-d314703e8cf4",
+                        "title": "Presidence",
+                        "categoryId": "8d02b53b-e892-48cf-83b5-d03d4db53659",
+                        "order": 5
+                    }
+                ]
+            },
+            {
+                "id": "c440d62e-a6c0-458b-8ac3-3ea1a1af5e00",
+                "title": "Selectors",
+                "order": 2,
+                "parentId": null,
+                "skillId": "2288038c-e194-4031-870a-f0f4417b3b86",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "7bd92ab0-8c4a-460c-ae96-076eb063bac0",
+                        "title": "Element",
+                        "categoryId": "c440d62e-a6c0-458b-8ac3-3ea1a1af5e00",
+                        "order": 1
+                    },
+                    {
+                        "id": "4aca0942-a407-439c-8396-fb5298ae9b93",
+                        "title": "Universal",
+                        "categoryId": "c440d62e-a6c0-458b-8ac3-3ea1a1af5e00",
+                        "order": 2
+                    },
+                    {
+                        "id": "1241d099-9f7e-4aa7-a486-d2eb4a9ecd21",
+                        "title": "Class",
+                        "categoryId": "c440d62e-a6c0-458b-8ac3-3ea1a1af5e00",
+                        "order": 3
+                    },
+                    {
+                        "id": "f42087f0-6b1e-454a-b934-ac5780121135",
+                        "title": "ID",
+                        "categoryId": "c440d62e-a6c0-458b-8ac3-3ea1a1af5e00",
+                        "order": 4
+                    }
+                ]
+            },
+            {
+                "id": "68630d78-8ca1-4395-ba6a-99fdf7e70e1b",
+                "title": "Background",
+                "order": 3,
+                "parentId": null,
+                "skillId": "2288038c-e194-4031-870a-f0f4417b3b86",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "56b68be1-a924-4ba7-97c0-4608a71b2d76",
+                        "title": "Color",
+                        "categoryId": "68630d78-8ca1-4395-ba6a-99fdf7e70e1b",
+                        "order": 1
+                    },
+                    {
+                        "id": "61189aba-0034-4160-81f5-17b90d04d7d2",
+                        "title": "Image",
+                        "categoryId": "68630d78-8ca1-4395-ba6a-99fdf7e70e1b",
+                        "order": 2
+                    },
+                    {
+                        "id": "17c71229-332e-48da-94f9-fb372a9fa329",
+                        "title": "Repeat",
+                        "categoryId": "68630d78-8ca1-4395-ba6a-99fdf7e70e1b",
+                        "order": 3
+                    },
+                    {
+                        "id": "506f0159-3da7-4e53-9a15-31de2306e64d",
+                        "title": "Size",
+                        "categoryId": "68630d78-8ca1-4395-ba6a-99fdf7e70e1b",
+                        "order": 4
+                    },
+                    {
+                        "id": "ac561c41-2094-4942-b81f-8f05da266ea9",
+                        "title": "Position",
+                        "categoryId": "68630d78-8ca1-4395-ba6a-99fdf7e70e1b",
+                        "order": 5
+                    },
+                    {
+                        "id": "2f5bfbe5-9b65-4988-9e0d-0221fe8ac6a0",
+                        "title": "Attachment",
+                        "categoryId": "68630d78-8ca1-4395-ba6a-99fdf7e70e1b",
+                        "order": 6
+                    },
+                    {
+                        "id": "85baab3f-cfcf-4571-861c-83d2dd7d6367",
+                        "title": "Shorthand",
+                        "categoryId": "68630d78-8ca1-4395-ba6a-99fdf7e70e1b",
+                        "order": 7
+                    }
+                ]
+            },
+            {
+                "id": "6b3dcdb5-64ad-40f2-865a-8ca224854fb0",
+                "title": "BordersAndOutline",
+                "order": 4,
+                "parentId": null,
+                "skillId": "2288038c-e194-4031-870a-f0f4417b3b86",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "b95a1866-8d6e-461b-8eab-dda881a9c4ef",
+                        "title": "Width",
+                        "categoryId": "6b3dcdb5-64ad-40f2-865a-8ca224854fb0",
+                        "order": 1
+                    },
+                    {
+                        "id": "4d521a0a-43ff-4fe8-b515-853d774250d0",
+                        "title": "Style",
+                        "categoryId": "6b3dcdb5-64ad-40f2-865a-8ca224854fb0",
+                        "order": 2
+                    },
+                    {
+                        "id": "3cf9409c-cfa2-4e99-84a0-365e336989bc",
+                        "title": "Color",
+                        "categoryId": "6b3dcdb5-64ad-40f2-865a-8ca224854fb0",
+                        "order": 3
+                    },
+                    {
+                        "id": "52f1fe34-56e2-4dc2-a0e1-4779310f623d",
+                        "title": "ShortHand",
+                        "categoryId": "6b3dcdb5-64ad-40f2-865a-8ca224854fb0",
+                        "order": 4
+                    },
+                    {
+                        "id": "9aa08b9a-a6a5-4477-ab11-724055a04c05",
+                        "title": "Border Radius",
+                        "categoryId": "6b3dcdb5-64ad-40f2-865a-8ca224854fb0",
+                        "order": 5
+                    },
+                    {
+                        "id": "e6d07282-ff11-44c6-8eda-bf944915ad88",
+                        "title": "Outline",
+                        "categoryId": "6b3dcdb5-64ad-40f2-865a-8ca224854fb0",
+                        "order": 6
+                    }
+                ]
+            },
+            {
+                "id": "dbdbb324-e913-4e2e-b970-293f57386f6e",
+                "title": "BoxModel",
+                "order": 5,
+                "parentId": null,
+                "skillId": "2288038c-e194-4031-870a-f0f4417b3b86",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "53456801-20e1-44be-8d9c-441c316edb66",
+                        "title": "Margin",
+                        "categoryId": "dbdbb324-e913-4e2e-b970-293f57386f6e",
+                        "order": 1
+                    },
+                    {
+                        "id": "a3f1f9e1-9ea2-4337-ba45-41b5160f8ea0",
+                        "title": "Margin Collapse",
+                        "categoryId": "dbdbb324-e913-4e2e-b970-293f57386f6e",
+                        "order": 2
+                    },
+                    {
+                        "id": "5753eae2-a285-4544-9ea8-0dde758e0c58",
+                        "title": "Padding",
+                        "categoryId": "dbdbb324-e913-4e2e-b970-293f57386f6e",
+                        "order": 3
+                    },
+                    {
+                        "id": "e0262bf9-7b26-41c8-a0b8-8c7d361da611",
+                        "title": "Height(Min-h)",
+                        "categoryId": "dbdbb324-e913-4e2e-b970-293f57386f6e",
+                        "order": 4
+                    },
+                    {
+                        "id": "7388dcef-1c80-48b8-9a34-4cb6ef2527ea",
+                        "title": "Width(Min-w)",
+                        "categoryId": "dbdbb324-e913-4e2e-b970-293f57386f6e",
+                        "order": 5
+                    },
+                    {
+                        "id": "b446abe6-7474-4866-93bc-05bf841217d1",
+                        "title": "Box Model",
+                        "categoryId": "dbdbb324-e913-4e2e-b970-293f57386f6e",
+                        "order": 6
+                    }
+                ]
+            },
+            {
+                "id": "9613d608-d300-44eb-8b14-38b4c3d813a2",
+                "title": "MeasurementUnits",
+                "order": 6,
+                "parentId": null,
+                "skillId": "2288038c-e194-4031-870a-f0f4417b3b86",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "626a9238-bcda-410b-9cca-5a9a38584b15",
+                        "title": "MeasurementUnits.php",
+                        "categoryId": "9613d608-d300-44eb-8b14-38b4c3d813a2",
+                        "order": 1
+                    }
+                ]
+            },
+            {
+                "id": "e00b771a-d8c5-41d9-ab5c-98901851bb86",
+                "title": "ShadowAndGradient",
+                "order": 7,
+                "parentId": null,
+                "skillId": "2288038c-e194-4031-870a-f0f4417b3b86",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "644c5efb-f26f-4ef6-ac7a-294eb7a05139",
+                        "title": "Colors",
+                        "categoryId": "e00b771a-d8c5-41d9-ab5c-98901851bb86",
+                        "order": 1
+                    },
+                    {
+                        "id": "30719712-ab3c-49d3-9249-2f6ed51a563c",
+                        "title": "Colors Using Var",
+                        "categoryId": "e00b771a-d8c5-41d9-ab5c-98901851bb86",
+                        "order": 2
+                    },
+                    {
+                        "id": "33c26299-1c91-4d00-987c-96da5f54f6d3",
+                        "title": "Gradient",
+                        "categoryId": "e00b771a-d8c5-41d9-ab5c-98901851bb86",
+                        "order": 3
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "f5dd71b9-dfa4-4310-b67e-570676e5c124",
+        "title": "TailwindCSS",
+        "order": 4,
+        "categories": []
+    },
+    {
+        "id": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+        "title": "JavaScript",
+        "order": 5,
+        "categories": [
+            {
+                "id": "cef3fd47-edf7-40d8-aa12-4fbc081ede01",
+                "title": "Basics JS",
+                "order": 1,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": []
+            },
+            {
+                "id": "6594b2ee-ac79-46a9-9029-52f770646d11",
+                "title": "WindowDimentions",
+                "order": 1,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "3ea71d7f-103d-497a-abbe-4837c2d50f53",
+                        "title": "Inner Width",
+                        "categoryId": "6594b2ee-ac79-46a9-9029-52f770646d11",
+                        "order": 1
+                    },
+                    {
+                        "id": "df62702c-fb14-46a5-b023-bf00c1ddb874",
+                        "title": "Outer Width",
+                        "categoryId": "6594b2ee-ac79-46a9-9029-52f770646d11",
+                        "order": 2
+                    },
+                    {
+                        "id": "4e669793-28c8-4372-a7bd-179991ac6835",
+                        "title": "Inner Height",
+                        "categoryId": "6594b2ee-ac79-46a9-9029-52f770646d11",
+                        "order": 3
+                    },
+                    {
+                        "id": "8cf46a0e-fde3-4390-bd66-7107520d68df",
+                        "title": "Outer Height",
+                        "categoryId": "6594b2ee-ac79-46a9-9029-52f770646d11",
+                        "order": 4
+                    }
+                ]
+            },
+            {
+                "id": "388e48f4-9d58-4964-8ab7-dbef70b20a40",
+                "title": "StringMethods",
+                "order": 1,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "d4d54c9b-abbf-4a4d-ba96-89a244b09ceb",
+                        "title": "Length",
+                        "categoryId": "388e48f4-9d58-4964-8ab7-dbef70b20a40",
+                        "order": 1
+                    },
+                    {
+                        "id": "cf09eed3-d646-41ae-9d98-459a93cfb711",
+                        "title": "LowerCase",
+                        "categoryId": "388e48f4-9d58-4964-8ab7-dbef70b20a40",
+                        "order": 2
+                    },
+                    {
+                        "id": "7b1dbed3-cffe-43ea-9f89-76d09cfaa651",
+                        "title": "UpperCase",
+                        "categoryId": "388e48f4-9d58-4964-8ab7-dbef70b20a40",
+                        "order": 3
+                    },
+                    {
+                        "id": "be1a6396-4abb-4517-b621-fbca639b2b7e",
+                        "title": "Includes",
+                        "categoryId": "388e48f4-9d58-4964-8ab7-dbef70b20a40",
+                        "order": 4
+                    },
+                    {
+                        "id": "16704147-f2a1-41fc-8c7c-3c5f81027d2a",
+                        "title": "Start With",
+                        "categoryId": "388e48f4-9d58-4964-8ab7-dbef70b20a40",
+                        "order": 5
+                    },
+                    {
+                        "id": "0c398f2b-5711-4a02-81aa-b27e8f6d4690",
+                        "title": "End With",
+                        "categoryId": "388e48f4-9d58-4964-8ab7-dbef70b20a40",
+                        "order": 6
+                    },
+                    {
+                        "id": "6eb11e80-20a8-483e-ad67-ae205337dabf",
+                        "title": "Search",
+                        "categoryId": "388e48f4-9d58-4964-8ab7-dbef70b20a40",
+                        "order": 7
+                    },
+                    {
+                        "id": "4af6a7a8-74da-4a38-94c3-a0e6c3ff27e3",
+                        "title": "Matches",
+                        "categoryId": "388e48f4-9d58-4964-8ab7-dbef70b20a40",
+                        "order": 8
+                    },
+                    {
+                        "id": "0ebd9a53-f8e4-4224-8791-41b49951ddd0",
+                        "title": "Last Index Of",
+                        "categoryId": "388e48f4-9d58-4964-8ab7-dbef70b20a40",
+                        "order": 9
+                    },
+                    {
+                        "id": "f6da07c4-f039-434b-adb1-1f00ee5d74db",
+                        "title": "Replace",
+                        "categoryId": "388e48f4-9d58-4964-8ab7-dbef70b20a40",
+                        "order": 10
+                    },
+                    {
+                        "id": "88e7ad0f-5e35-4a3a-86b2-ef917d8c82d1",
+                        "title": "Trim",
+                        "categoryId": "388e48f4-9d58-4964-8ab7-dbef70b20a40",
+                        "order": 11
+                    },
+                    {
+                        "id": "bf8b8964-4372-4a2d-b15a-870cce567a5a",
+                        "title": "CharAt",
+                        "categoryId": "388e48f4-9d58-4964-8ab7-dbef70b20a40",
+                        "order": 12
+                    },
+                    {
+                        "id": "7857eb79-aa0c-4c3b-8059-942996b22558",
+                        "title": "CharCodeAt",
+                        "categoryId": "388e48f4-9d58-4964-8ab7-dbef70b20a40",
+                        "order": 13
+                    },
+                    {
+                        "id": "b433bc36-479e-4323-a286-d1a4e7ee44ea",
+                        "title": "FromCharCode",
+                        "categoryId": "388e48f4-9d58-4964-8ab7-dbef70b20a40",
+                        "order": 14
+                    },
+                    {
+                        "id": "37ce0e04-c2f6-4fbb-91ea-a098ac832e0b",
+                        "title": "Concat",
+                        "categoryId": "388e48f4-9d58-4964-8ab7-dbef70b20a40",
+                        "order": 15
+                    },
+                    {
+                        "id": "c6275536-20bd-4bfd-ac4c-5a40b0aa2f3e",
+                        "title": "Split",
+                        "categoryId": "388e48f4-9d58-4964-8ab7-dbef70b20a40",
+                        "order": 16
+                    },
+                    {
+                        "id": "93db049c-572a-499a-9b27-d561965242fe",
+                        "title": "Repeat",
+                        "categoryId": "388e48f4-9d58-4964-8ab7-dbef70b20a40",
+                        "order": 17
+                    },
+                    {
+                        "id": "acb238fd-eba7-4666-9ab0-9b25b50eb942",
+                        "title": "Slice",
+                        "categoryId": "388e48f4-9d58-4964-8ab7-dbef70b20a40",
+                        "order": 18
+                    },
+                    {
+                        "id": "1bf3e2b6-8565-46a9-8afc-ff14952f9268",
+                        "title": "Splice",
+                        "categoryId": "388e48f4-9d58-4964-8ab7-dbef70b20a40",
+                        "order": 19
+                    },
+                    {
+                        "id": "6c3d0736-678b-4cc7-8914-2b9175ac9144",
+                        "title": "SubStr",
+                        "categoryId": "388e48f4-9d58-4964-8ab7-dbef70b20a40",
+                        "order": 20
+                    },
+                    {
+                        "id": "724a48b0-a21b-4573-bd10-b738fc39e847",
+                        "title": "SubString",
+                        "categoryId": "388e48f4-9d58-4964-8ab7-dbef70b20a40",
+                        "order": 21
+                    },
+                    {
+                        "id": "f8bfa020-e187-43f5-a52d-8e55ec0e71a8",
+                        "title": "ToString",
+                        "categoryId": "388e48f4-9d58-4964-8ab7-dbef70b20a40",
+                        "order": 22
+                    },
+                    {
+                        "id": "871d6e92-5fdb-46de-b193-40a15edbe444",
+                        "title": "Value Of",
+                        "categoryId": "388e48f4-9d58-4964-8ab7-dbef70b20a40",
+                        "order": 23
+                    }
+                ]
+            },
+            {
+                "id": "9880647b-40d1-4baf-a722-8f6b452107b3",
+                "title": "NumberMethods",
+                "order": 1,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "992471ea-76db-490e-8a8e-d4f2cd4f9c2c",
+                        "title": "Number",
+                        "categoryId": "9880647b-40d1-4baf-a722-8f6b452107b3",
+                        "order": 1
+                    },
+                    {
+                        "id": "e44b8502-ce98-4083-925b-9d2dc1387157",
+                        "title": "ParseInt",
+                        "categoryId": "9880647b-40d1-4baf-a722-8f6b452107b3",
+                        "order": 2
+                    },
+                    {
+                        "id": "170cec10-dda6-4ee5-b253-3a724c887ccd",
+                        "title": "ParseFloat",
+                        "categoryId": "9880647b-40d1-4baf-a722-8f6b452107b3",
+                        "order": 3
+                    },
+                    {
+                        "id": "b3fe036e-6f26-4341-b69d-4f5c6cd25aad",
+                        "title": "IsFinite",
+                        "categoryId": "9880647b-40d1-4baf-a722-8f6b452107b3",
+                        "order": 4
+                    },
+                    {
+                        "id": "10f6bde8-db97-436e-b769-03628e474583",
+                        "title": "IsInteger",
+                        "categoryId": "9880647b-40d1-4baf-a722-8f6b452107b3",
+                        "order": 5
+                    },
+                    {
+                        "id": "02732c17-d9e1-4787-8cc0-e90116b243be",
+                        "title": "ToFixed",
+                        "categoryId": "9880647b-40d1-4baf-a722-8f6b452107b3",
+                        "order": 6
+                    },
+                    {
+                        "id": "594c0456-e7fd-4eb6-b61e-e492f35d5291",
+                        "title": "ToPrecision",
+                        "categoryId": "9880647b-40d1-4baf-a722-8f6b452107b3",
+                        "order": 7
+                    }
+                ]
+            },
+            {
+                "id": "00da83b6-3db0-47af-a1ff-48c16c779635",
+                "title": "BooleanMethods",
+                "order": 1,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "01b8f876-5d94-4d95-8dd3-928cfa67cedc",
+                        "title": "Abs",
+                        "categoryId": "00da83b6-3db0-47af-a1ff-48c16c779635",
+                        "order": 1
+                    },
+                    {
+                        "id": "6a226d12-9803-4ae7-8acb-2cb014d28666",
+                        "title": "Cbrt",
+                        "categoryId": "00da83b6-3db0-47af-a1ff-48c16c779635",
+                        "order": 2
+                    },
+                    {
+                        "id": "28c6373a-96b2-405a-a5d6-24ef9553ca12",
+                        "title": "Ceil",
+                        "categoryId": "00da83b6-3db0-47af-a1ff-48c16c779635",
+                        "order": 3
+                    },
+                    {
+                        "id": "9d6db74e-6f71-450c-9954-b5bdf6c1c488",
+                        "title": "Floot",
+                        "categoryId": "00da83b6-3db0-47af-a1ff-48c16c779635",
+                        "order": 4
+                    },
+                    {
+                        "id": "da3438a0-6651-478f-bd23-c62cdfaafafa",
+                        "title": "Max",
+                        "categoryId": "00da83b6-3db0-47af-a1ff-48c16c779635",
+                        "order": 5
+                    },
+                    {
+                        "id": "d107d9f3-dcee-472a-9b96-7296b11e1ffe",
+                        "title": "Min",
+                        "categoryId": "00da83b6-3db0-47af-a1ff-48c16c779635",
+                        "order": 6
+                    },
+                    {
+                        "id": "84d5d336-0770-4449-a0aa-39c0f6505bd4",
+                        "title": "Power",
+                        "categoryId": "00da83b6-3db0-47af-a1ff-48c16c779635",
+                        "order": 7
+                    },
+                    {
+                        "id": "1daf6c6b-f57f-4f47-999e-b53ada5c776a",
+                        "title": "Random",
+                        "categoryId": "00da83b6-3db0-47af-a1ff-48c16c779635",
+                        "order": 8
+                    },
+                    {
+                        "id": "38ff8dbf-630c-4505-ae43-887454b02476",
+                        "title": "Round",
+                        "categoryId": "00da83b6-3db0-47af-a1ff-48c16c779635",
+                        "order": 9
+                    },
+                    {
+                        "id": "6062515d-c77c-402e-a8c2-a7a60077ffa8",
+                        "title": "Sqrt",
+                        "categoryId": "00da83b6-3db0-47af-a1ff-48c16c779635",
+                        "order": 10
+                    },
+                    {
+                        "id": "987d8313-434c-4ebb-a907-e5f6b072bc4a",
+                        "title": "Trunc",
+                        "categoryId": "00da83b6-3db0-47af-a1ff-48c16c779635",
+                        "order": 11
+                    },
+                    {
+                        "id": "a6164865-3516-4757-9250-270737a39ca9",
+                        "title": "Check ?",
+                        "categoryId": "00da83b6-3db0-47af-a1ff-48c16c779635",
+                        "order": 12
+                    },
+                    {
+                        "id": "7d8768d6-0026-46a0-990e-b96e8e06883f",
+                        "title": "Acos",
+                        "categoryId": "00da83b6-3db0-47af-a1ff-48c16c779635",
+                        "order": 13
+                    },
+                    {
+                        "id": "b686ed34-16d4-4a8c-a338-94f704ced2bf",
+                        "title": "Asin",
+                        "categoryId": "00da83b6-3db0-47af-a1ff-48c16c779635",
+                        "order": 14
+                    },
+                    {
+                        "id": "87a456eb-16c0-4b24-a27b-37c3eab4417d",
+                        "title": "Atan",
+                        "categoryId": "00da83b6-3db0-47af-a1ff-48c16c779635",
+                        "order": 15
+                    },
+                    {
+                        "id": "93781fd0-967b-4367-bc3c-4ab8c89a1f03",
+                        "title": "Cos",
+                        "categoryId": "00da83b6-3db0-47af-a1ff-48c16c779635",
+                        "order": 16
+                    },
+                    {
+                        "id": "f0e941b0-bed9-47ba-a5b6-73f90a00a6ee",
+                        "title": "CosH",
+                        "categoryId": "00da83b6-3db0-47af-a1ff-48c16c779635",
+                        "order": 17
+                    },
+                    {
+                        "id": "1b908279-0fe3-48b5-b8ee-4da2bfb1b8bb",
+                        "title": "Exp",
+                        "categoryId": "00da83b6-3db0-47af-a1ff-48c16c779635",
+                        "order": 18
+                    },
+                    {
+                        "id": "edaf4eda-0a38-4377-8476-0af4a913b139",
+                        "title": "Hypot",
+                        "categoryId": "00da83b6-3db0-47af-a1ff-48c16c779635",
+                        "order": 19
+                    },
+                    {
+                        "id": "fb1e6025-5977-4484-8179-f0ac72622c04",
+                        "title": "Log",
+                        "categoryId": "00da83b6-3db0-47af-a1ff-48c16c779635",
+                        "order": 20
+                    },
+                    {
+                        "id": "2ee26a79-60fa-4e41-8dd8-cd9f14f15d5c",
+                        "title": "Sign",
+                        "categoryId": "00da83b6-3db0-47af-a1ff-48c16c779635",
+                        "order": 21
+                    },
+                    {
+                        "id": "0f306dce-34be-461c-b70f-0c0354da28c7",
+                        "title": "Sin",
+                        "categoryId": "00da83b6-3db0-47af-a1ff-48c16c779635",
+                        "order": 22
+                    },
+                    {
+                        "id": "2abad584-6cc3-40ef-9612-5311f2c55c12",
+                        "title": "SinH",
+                        "categoryId": "00da83b6-3db0-47af-a1ff-48c16c779635",
+                        "order": 23
+                    },
+                    {
+                        "id": "3133e14c-967c-4865-af5e-d0bac723bad8",
+                        "title": "Tan",
+                        "categoryId": "00da83b6-3db0-47af-a1ff-48c16c779635",
+                        "order": 24
+                    },
+                    {
+                        "id": "8d3c2d75-2248-4dca-bde7-de4d8fb8b910",
+                        "title": "TanH",
+                        "categoryId": "00da83b6-3db0-47af-a1ff-48c16c779635",
+                        "order": 25
+                    }
+                ]
+            },
+            {
+                "id": "e6472190-7bd3-4409-9b2c-dc67d7f340c8",
+                "title": "ArrayMethods",
+                "order": 1,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "a94a9c50-b230-42c8-b7c5-1a3b20b89023",
+                        "title": "Array Methods",
+                        "categoryId": "e6472190-7bd3-4409-9b2c-dc67d7f340c8",
+                        "order": 1
+                    },
+                    {
+                        "id": "96f5d73d-effb-433f-8102-2fe3691f8cce",
+                        "title": "Sort",
+                        "categoryId": "e6472190-7bd3-4409-9b2c-dc67d7f340c8",
+                        "order": 2
+                    },
+                    {
+                        "id": "9e175399-b2af-4877-b911-badda2651bbb",
+                        "title": "Reverse",
+                        "categoryId": "e6472190-7bd3-4409-9b2c-dc67d7f340c8",
+                        "order": 3
+                    },
+                    {
+                        "id": "e4c72c29-4ca7-4861-b4f0-ba7f5538b76e",
+                        "title": "Pop",
+                        "categoryId": "e6472190-7bd3-4409-9b2c-dc67d7f340c8",
+                        "order": 4
+                    },
+                    {
+                        "id": "61056b84-e2ba-4505-b61a-7c689455641a",
+                        "title": "Push",
+                        "categoryId": "e6472190-7bd3-4409-9b2c-dc67d7f340c8",
+                        "order": 5
+                    },
+                    {
+                        "id": "05629500-7ad1-46c5-92fe-f5abf3f0cd6d",
+                        "title": "Shift",
+                        "categoryId": "e6472190-7bd3-4409-9b2c-dc67d7f340c8",
+                        "order": 6
+                    },
+                    {
+                        "id": "2c63377f-55dd-44ec-abf3-f90516abdbc1",
+                        "title": "Unshift",
+                        "categoryId": "e6472190-7bd3-4409-9b2c-dc67d7f340c8",
+                        "order": 7
+                    },
+                    {
+                        "id": "333bcc1d-ff0d-4387-a952-c516d1a6d6d2",
+                        "title": "Concat",
+                        "categoryId": "e6472190-7bd3-4409-9b2c-dc67d7f340c8",
+                        "order": 8
+                    },
+                    {
+                        "id": "75407bdf-3564-4cb5-8d25-7832c1f0a651",
+                        "title": "Join",
+                        "categoryId": "e6472190-7bd3-4409-9b2c-dc67d7f340c8",
+                        "order": 9
+                    },
+                    {
+                        "id": "3dcf38c5-3a64-4fa8-ac4c-09b399d9066b",
+                        "title": "Slice",
+                        "categoryId": "e6472190-7bd3-4409-9b2c-dc67d7f340c8",
+                        "order": 10
+                    },
+                    {
+                        "id": "34254ee0-00d0-4454-9f78-d7511594270a",
+                        "title": "Splice",
+                        "categoryId": "e6472190-7bd3-4409-9b2c-dc67d7f340c8",
+                        "order": 11
+                    },
+                    {
+                        "id": "e79b87c5-3146-4273-95de-ddde59dfd95f",
+                        "title": "IsArray",
+                        "categoryId": "e6472190-7bd3-4409-9b2c-dc67d7f340c8",
+                        "order": 12
+                    },
+                    {
+                        "id": "6992ff10-cb84-4610-a91b-da3c20a644d7",
+                        "title": "Index",
+                        "categoryId": "e6472190-7bd3-4409-9b2c-dc67d7f340c8",
+                        "order": 13
+                    },
+                    {
+                        "id": "51c91d11-5424-4246-87d0-56ea8d9cc362",
+                        "title": "Last Index",
+                        "categoryId": "e6472190-7bd3-4409-9b2c-dc67d7f340c8",
+                        "order": 14
+                    },
+                    {
+                        "id": "58e926f9-daa1-41c5-8e20-36f0e43cca6b",
+                        "title": "Entries",
+                        "categoryId": "e6472190-7bd3-4409-9b2c-dc67d7f340c8",
+                        "order": 15
+                    },
+                    {
+                        "id": "44aa532a-4475-43b5-9b94-d5aae09ecfd5",
+                        "title": "Every",
+                        "categoryId": "e6472190-7bd3-4409-9b2c-dc67d7f340c8",
+                        "order": 16
+                    },
+                    {
+                        "id": "109254f0-e00c-43c7-9c4b-01615f264b1e",
+                        "title": "Filter",
+                        "categoryId": "e6472190-7bd3-4409-9b2c-dc67d7f340c8",
+                        "order": 17
+                    },
+                    {
+                        "id": "4e75261d-b75d-4636-917b-5d6d279699ce",
+                        "title": "Find",
+                        "categoryId": "e6472190-7bd3-4409-9b2c-dc67d7f340c8",
+                        "order": 18
+                    },
+                    {
+                        "id": "c16e7736-2fba-4eac-84ff-d6fcdd12f76e",
+                        "title": "Find Index",
+                        "categoryId": "e6472190-7bd3-4409-9b2c-dc67d7f340c8",
+                        "order": 19
+                    },
+                    {
+                        "id": "48eac0bf-5bb1-41f1-b733-afe392690649",
+                        "title": "Includes",
+                        "categoryId": "e6472190-7bd3-4409-9b2c-dc67d7f340c8",
+                        "order": 20
+                    },
+                    {
+                        "id": "a30acf38-eb23-4de9-ad69-03858dab39f5",
+                        "title": "Some",
+                        "categoryId": "e6472190-7bd3-4409-9b2c-dc67d7f340c8",
+                        "order": 21
+                    },
+                    {
+                        "id": "0352815f-28c6-4808-a7c3-2c707322b6ab",
+                        "title": "ToString",
+                        "categoryId": "e6472190-7bd3-4409-9b2c-dc67d7f340c8",
+                        "order": 22
+                    },
+                    {
+                        "id": "8689bba1-6cba-4a01-9d45-195b56561b0c",
+                        "title": "Value Of",
+                        "categoryId": "e6472190-7bd3-4409-9b2c-dc67d7f340c8",
+                        "order": 23
+                    },
+                    {
+                        "id": "a3acdb62-714d-4884-96de-fba7fbd1ed6e",
+                        "title": "Fill",
+                        "categoryId": "e6472190-7bd3-4409-9b2c-dc67d7f340c8",
+                        "order": 24
+                    },
+                    {
+                        "id": "60363545-bffd-400d-80c4-55ef1fa5f8b5",
+                        "title": "For Each",
+                        "categoryId": "e6472190-7bd3-4409-9b2c-dc67d7f340c8",
+                        "order": 25
+                    }
+                ]
+            },
+            {
+                "id": "72c521b1-f4f8-4aa1-976d-f597e348ad32",
+                "title": "ObjectMethods",
+                "order": 1,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "fe303111-4d3a-48cf-8ae2-1f62b2befc9c",
+                        "title": "For In Loop",
+                        "categoryId": "72c521b1-f4f8-4aa1-976d-f597e348ad32",
+                        "order": 1
+                    },
+                    {
+                        "id": "b8a823c4-e8e5-44d8-9865-2d6eef924431",
+                        "title": "Map Method",
+                        "categoryId": "72c521b1-f4f8-4aa1-976d-f597e348ad32",
+                        "order": 2
+                    }
+                ]
+            },
+            {
+                "id": "2f94fbcd-3bc7-4149-b030-942c54a19a11",
+                "title": "Alerts",
+                "order": 2,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "129e0f36-158f-4cce-b1cf-a16f1153826b",
+                        "title": "Alert",
+                        "categoryId": "2f94fbcd-3bc7-4149-b030-942c54a19a11",
+                        "order": 1
+                    },
+                    {
+                        "id": "e87db33c-b9b9-4551-b35d-1fa6940793b3",
+                        "title": "Prompt",
+                        "categoryId": "2f94fbcd-3bc7-4149-b030-942c54a19a11",
+                        "order": 2
+                    },
+                    {
+                        "id": "4dbcdea8-e6e7-4a21-aecd-1ffbc9c09e6e",
+                        "title": "Confirm",
+                        "categoryId": "2f94fbcd-3bc7-4149-b030-942c54a19a11",
+                        "order": 3
+                    }
+                ]
+            },
+            {
+                "id": "9d555459-a87b-4ed6-8054-8749841fe7fe",
+                "title": "Number",
+                "order": 2,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "03ef4bae-fd48-4511-a3d6-65b22d2d1b8f",
+                        "title": "Number",
+                        "categoryId": "9d555459-a87b-4ed6-8054-8749841fe7fe",
+                        "order": 1
+                    }
+                ]
+            },
+            {
+                "id": "56ae9569-9d51-43e3-9fd1-26ec0fe60f91",
+                "title": "Assignment Operators",
+                "order": 2,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "66aeabf2-8e03-4bc1-bde2-38bdb8dfc9eb",
+                        "title": "Assignment",
+                        "categoryId": "56ae9569-9d51-43e3-9fd1-26ec0fe60f91",
+                        "order": 1
+                    },
+                    {
+                        "id": "5b5f7cd0-c6a1-4a12-b41f-569bec50970d",
+                        "title": "Addition & Assignment",
+                        "categoryId": "56ae9569-9d51-43e3-9fd1-26ec0fe60f91",
+                        "order": 2
+                    },
+                    {
+                        "id": "073284b3-7f55-47c8-af74-a1e9dc5cb02a",
+                        "title": "Subtraction & Assignment",
+                        "categoryId": "56ae9569-9d51-43e3-9fd1-26ec0fe60f91",
+                        "order": 3
+                    },
+                    {
+                        "id": "ee912330-fed7-463a-9561-2574abbf66a7",
+                        "title": "Multiplication & Assignment",
+                        "categoryId": "56ae9569-9d51-43e3-9fd1-26ec0fe60f91",
+                        "order": 4
+                    },
+                    {
+                        "id": "344585ae-cafd-4daa-ae59-be1ef2f4425e",
+                        "title": "Division & Assignment",
+                        "categoryId": "56ae9569-9d51-43e3-9fd1-26ec0fe60f91",
+                        "order": 5
+                    },
+                    {
+                        "id": "0c08d7fb-fd17-46f6-a8bd-177a234e6a95",
+                        "title": "Modulus & Assignment",
+                        "categoryId": "56ae9569-9d51-43e3-9fd1-26ec0fe60f91",
+                        "order": 6
+                    },
+                    {
+                        "id": "163a98d1-8304-42f7-a36d-81c838367aaa",
+                        "title": "Exponentiation & Assignment",
+                        "categoryId": "56ae9569-9d51-43e3-9fd1-26ec0fe60f91",
+                        "order": 7
+                    }
+                ]
+            },
+            {
+                "id": "fc45d1f0-f915-4d68-b48d-220a09ad1757",
+                "title": "SwitchStatements",
+                "order": 2,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "bc35abb9-e249-4e07-bc73-fb0c84647f5d",
+                        "title": "Switch",
+                        "categoryId": "fc45d1f0-f915-4d68-b48d-220a09ad1757",
+                        "order": 1
+                    },
+                    {
+                        "id": "91c64198-9327-4e40-b45f-a867dfba4113",
+                        "title": "Break",
+                        "categoryId": "fc45d1f0-f915-4d68-b48d-220a09ad1757",
+                        "order": 2
+                    },
+                    {
+                        "id": "a6a09313-ce55-4267-bea0-649671c93ea8",
+                        "title": "Continue",
+                        "categoryId": "fc45d1f0-f915-4d68-b48d-220a09ad1757",
+                        "order": 3
+                    },
+                    {
+                        "id": "34230870-1304-4604-a6ee-1c7323e53640",
+                        "title": "Default",
+                        "categoryId": "fc45d1f0-f915-4d68-b48d-220a09ad1757",
+                        "order": 4
+                    }
+                ]
+            },
+            {
+                "id": "418c40c0-316f-4dbc-b95f-87888cc2fda7",
+                "title": "FormEvents",
+                "order": 2,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "e6b3f529-58f5-4543-ab8a-6a7f62b3b4c4",
+                        "title": "On Focus",
+                        "categoryId": "418c40c0-316f-4dbc-b95f-87888cc2fda7",
+                        "order": 1
+                    },
+                    {
+                        "id": "13bd4913-c2f1-4926-b57a-75220fc72928",
+                        "title": "On Blur",
+                        "categoryId": "418c40c0-316f-4dbc-b95f-87888cc2fda7",
+                        "order": 2
+                    },
+                    {
+                        "id": "2c2cd0c0-7ca2-446a-91ff-abda006bcad3",
+                        "title": "On Input",
+                        "categoryId": "418c40c0-316f-4dbc-b95f-87888cc2fda7",
+                        "order": 3
+                    },
+                    {
+                        "id": "113bde0c-fafb-425a-9808-b29fa286ede8",
+                        "title": "On Change",
+                        "categoryId": "418c40c0-316f-4dbc-b95f-87888cc2fda7",
+                        "order": 4
+                    },
+                    {
+                        "id": "aab95a82-02cc-4b2c-987a-65406805b220",
+                        "title": "On Select",
+                        "categoryId": "418c40c0-316f-4dbc-b95f-87888cc2fda7",
+                        "order": 5
+                    },
+                    {
+                        "id": "5f15b4a1-c057-4073-96d9-ffdf4e156e33",
+                        "title": "On Submit",
+                        "categoryId": "418c40c0-316f-4dbc-b95f-87888cc2fda7",
+                        "order": 6
+                    },
+                    {
+                        "id": "162d0ce2-b2ee-47f1-9560-28f0d35aa319",
+                        "title": "On Invalid",
+                        "categoryId": "418c40c0-316f-4dbc-b95f-87888cc2fda7",
+                        "order": 7
+                    }
+                ]
+            },
+            {
+                "id": "0a5e9203-cce5-49b8-9704-7c7b66debac4",
+                "title": "ElementSelectors",
+                "order": 2,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "108e52b7-8804-497e-800e-b773c3344259",
+                        "title": "Get Element By ID",
+                        "categoryId": "0a5e9203-cce5-49b8-9704-7c7b66debac4",
+                        "order": 1
+                    },
+                    {
+                        "id": "44be170e-4235-4e33-a6df-fe177ac7d3d7",
+                        "title": "Get Element By Class",
+                        "categoryId": "0a5e9203-cce5-49b8-9704-7c7b66debac4",
+                        "order": 2
+                    },
+                    {
+                        "id": "b792f31d-2adc-4859-b324-6ddb56b2438f",
+                        "title": "get Element By TagName",
+                        "categoryId": "0a5e9203-cce5-49b8-9704-7c7b66debac4",
+                        "order": 3
+                    }
+                ]
+            },
+            {
+                "id": "9026208e-ad1d-4d07-8156-2d4ec3b5a81f",
+                "title": "WindowControls",
+                "order": 2,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "53c323ec-c6b0-4114-8241-3dd421d09cdb",
+                        "title": "Open",
+                        "categoryId": "9026208e-ad1d-4d07-8156-2d4ec3b5a81f",
+                        "order": 1
+                    },
+                    {
+                        "id": "1a2f57d9-79f7-4d97-9b1c-e039acdfc4cc",
+                        "title": "Close",
+                        "categoryId": "9026208e-ad1d-4d07-8156-2d4ec3b5a81f",
+                        "order": 2
+                    },
+                    {
+                        "id": "20afe97e-8c8c-4eb7-8fb4-833ac081d9c8",
+                        "title": "Focus",
+                        "categoryId": "9026208e-ad1d-4d07-8156-2d4ec3b5a81f",
+                        "order": 3
+                    }
+                ]
+            },
+            {
+                "id": "94c5685c-7333-40e9-85ee-2fbfe94064b5",
+                "title": "Console",
+                "order": 3,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "36e65113-7071-414f-9962-a068f82e3f75",
+                        "title": "Log",
+                        "categoryId": "94c5685c-7333-40e9-85ee-2fbfe94064b5",
+                        "order": 1
+                    },
+                    {
+                        "id": "249c9b1e-ff40-4980-a255-60987fc3489d",
+                        "title": "Warn",
+                        "categoryId": "94c5685c-7333-40e9-85ee-2fbfe94064b5",
+                        "order": 2
+                    },
+                    {
+                        "id": "2161b2c0-ff8c-4a49-a914-a630640a11f0",
+                        "title": "Error",
+                        "categoryId": "94c5685c-7333-40e9-85ee-2fbfe94064b5",
+                        "order": 3
+                    },
+                    {
+                        "id": "985e12c2-fb3d-41fb-8c90-7b1884e05276",
+                        "title": "Info",
+                        "categoryId": "94c5685c-7333-40e9-85ee-2fbfe94064b5",
+                        "order": 4
+                    },
+                    {
+                        "id": "785dbe11-5e53-47e8-ad95-a23828290778",
+                        "title": "Table",
+                        "categoryId": "94c5685c-7333-40e9-85ee-2fbfe94064b5",
+                        "order": 5
+                    },
+                    {
+                        "id": "6f4be1aa-c345-4126-8cd2-37a8247d9225",
+                        "title": "Clear",
+                        "categoryId": "94c5685c-7333-40e9-85ee-2fbfe94064b5",
+                        "order": 6
+                    },
+                    {
+                        "id": "428d70d1-ed96-4ef2-8b6a-4c0447b7a72c",
+                        "title": "Time",
+                        "categoryId": "94c5685c-7333-40e9-85ee-2fbfe94064b5",
+                        "order": 7
+                    },
+                    {
+                        "id": "a5305fb9-103d-4889-92ce-2f5186282e1c",
+                        "title": "Time End",
+                        "categoryId": "94c5685c-7333-40e9-85ee-2fbfe94064b5",
+                        "order": 8
+                    }
+                ]
+            },
+            {
+                "id": "014c8ca3-b900-4a89-8610-051898c588f7",
+                "title": "Boolean",
+                "order": 3,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "949d09d4-5f46-406f-be83-561227ab5f47",
+                        "title": "Boolean",
+                        "categoryId": "014c8ca3-b900-4a89-8610-051898c588f7",
+                        "order": 1
+                    }
+                ]
+            },
+            {
+                "id": "d8da5a15-0a19-4df7-967b-c03b00c3ba59",
+                "title": "Comparison Operators",
+                "order": 3,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "20bde81d-4e25-479a-a716-06e436c08838",
+                        "title": "Equal To",
+                        "categoryId": "d8da5a15-0a19-4df7-967b-c03b00c3ba59",
+                        "order": 1
+                    },
+                    {
+                        "id": "0ed7f51b-9f52-400b-a11e-95db7d9c5b99",
+                        "title": "Strict Equal To",
+                        "categoryId": "d8da5a15-0a19-4df7-967b-c03b00c3ba59",
+                        "order": 2
+                    },
+                    {
+                        "id": "1ce8525f-065c-4b40-9180-0c862b8b614b",
+                        "title": "Not Equal To",
+                        "categoryId": "d8da5a15-0a19-4df7-967b-c03b00c3ba59",
+                        "order": 3
+                    },
+                    {
+                        "id": "ade4bc8c-2d7a-42e7-ac4b-f160658ab51e",
+                        "title": "Strict Not Equal To",
+                        "categoryId": "d8da5a15-0a19-4df7-967b-c03b00c3ba59",
+                        "order": 4
+                    },
+                    {
+                        "id": "eb30afb4-d1aa-4c12-b99b-7cbbf8e33ab6",
+                        "title": "Greater Than",
+                        "categoryId": "d8da5a15-0a19-4df7-967b-c03b00c3ba59",
+                        "order": 5
+                    },
+                    {
+                        "id": "0591cf58-1f61-4c6a-ab0c-d91335cd8bee",
+                        "title": "Less Than",
+                        "categoryId": "d8da5a15-0a19-4df7-967b-c03b00c3ba59",
+                        "order": 6
+                    },
+                    {
+                        "id": "e3103d44-d3e0-463e-981a-33a476cc0679",
+                        "title": "Greater Than Equal To",
+                        "categoryId": "d8da5a15-0a19-4df7-967b-c03b00c3ba59",
+                        "order": 7
+                    },
+                    {
+                        "id": "808ba174-7325-4cc2-8118-d02f9725dc77",
+                        "title": "Less Than Equal To",
+                        "categoryId": "d8da5a15-0a19-4df7-967b-c03b00c3ba59",
+                        "order": 8
+                    }
+                ]
+            },
+            {
+                "id": "25bdf436-56be-4531-8a9a-9917e2de6638",
+                "title": "Interval",
+                "order": 3,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "d7210c96-c51a-40af-b176-c191554c6d32",
+                        "title": "Set Interval",
+                        "categoryId": "25bdf436-56be-4531-8a9a-9917e2de6638",
+                        "order": 1
+                    },
+                    {
+                        "id": "cb3bd5b8-e2b2-46a4-8482-df96d31cee05",
+                        "title": "Clear Interval",
+                        "categoryId": "25bdf436-56be-4531-8a9a-9917e2de6638",
+                        "order": 2
+                    }
+                ]
+            },
+            {
+                "id": "f62c564a-6361-4940-8906-1a67c3b87739",
+                "title": "QuerySelectors",
+                "order": 3,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "ac6e8cce-2a16-4a25-b846-e96029d94670",
+                        "title": "Query Selector",
+                        "categoryId": "f62c564a-6361-4940-8906-1a67c3b87739",
+                        "order": 1
+                    },
+                    {
+                        "id": "7ff9c311-c2ce-4c54-a15f-75c83c9dad7f",
+                        "title": "Query Selector All",
+                        "categoryId": "f62c564a-6361-4940-8906-1a67c3b87739",
+                        "order": 2
+                    }
+                ]
+            },
+            {
+                "id": "4c453cc1-9fea-484e-8e9a-9e2e01b398ea",
+                "title": "WindowMove",
+                "order": 3,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "4e042e89-6dbe-4b93-96d9-0406a28d61b4",
+                        "title": "Move By",
+                        "categoryId": "4c453cc1-9fea-484e-8e9a-9e2e01b398ea",
+                        "order": 1
+                    },
+                    {
+                        "id": "eba49738-c03a-4515-8d49-39b8297dc89f",
+                        "title": "Move To",
+                        "categoryId": "4c453cc1-9fea-484e-8e9a-9e2e01b398ea",
+                        "order": 2
+                    }
+                ]
+            },
+            {
+                "id": "1972c184-f3c7-49b2-b535-73f39d7c4fe8",
+                "title": "Variables",
+                "order": 4,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "10350fb3-2a3b-4447-be81-ebf85cccf13e",
+                        "title": "Variable",
+                        "categoryId": "1972c184-f3c7-49b2-b535-73f39d7c4fe8",
+                        "order": 1
+                    },
+                    {
+                        "id": "3c9c358a-7ae6-4b30-a494-9ee6b27c7a4e",
+                        "title": "Local Vs Global Variable",
+                        "categoryId": "1972c184-f3c7-49b2-b535-73f39d7c4fe8",
+                        "order": 2
+                    }
+                ]
+            },
+            {
+                "id": "9b5c9aba-0630-447f-961e-afea93195ea6",
+                "title": "NullUndefined",
+                "order": 4,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "a1a614a7-50a1-445c-a2fc-f52dd16ad466",
+                        "title": "Null",
+                        "categoryId": "9b5c9aba-0630-447f-961e-afea93195ea6",
+                        "order": 1
+                    },
+                    {
+                        "id": "5d7a8736-bc57-49bc-af9f-387e01370f8d",
+                        "title": "Undefined",
+                        "categoryId": "9b5c9aba-0630-447f-961e-afea93195ea6",
+                        "order": 2
+                    }
+                ]
+            },
+            {
+                "id": "d15d051c-0fd1-49c5-91be-32e48db8fb26",
+                "title": "Logical Operators",
+                "order": 4,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "b41271c3-5583-4cc3-93ee-80092ffb8606",
+                        "title": "And",
+                        "categoryId": "d15d051c-0fd1-49c5-91be-32e48db8fb26",
+                        "order": 1
+                    },
+                    {
+                        "id": "aad4ce47-2345-42d1-a77e-5725f5e8074a",
+                        "title": "OR",
+                        "categoryId": "d15d051c-0fd1-49c5-91be-32e48db8fb26",
+                        "order": 2
+                    },
+                    {
+                        "id": "42546fb7-00c7-4db4-b091-30d28a11e6ea",
+                        "title": "Not",
+                        "categoryId": "d15d051c-0fd1-49c5-91be-32e48db8fb26",
+                        "order": 3
+                    }
+                ]
+            },
+            {
+                "id": "96e6369e-a65a-4ded-813c-a643d269d95b",
+                "title": "TimeOut",
+                "order": 4,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "2301d9ed-49e8-4ffa-917b-cc1172fe19b5",
+                        "title": "Set Timeout",
+                        "categoryId": "96e6369e-a65a-4ded-813c-a643d269d95b",
+                        "order": 1
+                    },
+                    {
+                        "id": "e1824c48-d05b-41c7-ad8b-5684500575c3",
+                        "title": "Clear Timeout",
+                        "categoryId": "96e6369e-a65a-4ded-813c-a643d269d95b",
+                        "order": 2
+                    }
+                ]
+            },
+            {
+                "id": "e11ce86e-cdbe-4a62-8d34-2278a0afb343",
+                "title": "InnerTextAndHTML",
+                "order": 4,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "6cc74044-72ce-420d-9a60-cc5751cb1918",
+                        "title": "Inner Text",
+                        "categoryId": "e11ce86e-cdbe-4a62-8d34-2278a0afb343",
+                        "order": 1
+                    },
+                    {
+                        "id": "9a6a7502-d4a3-46b5-b74a-b8bdeb2ceed2",
+                        "title": "Inner HTML",
+                        "categoryId": "e11ce86e-cdbe-4a62-8d34-2278a0afb343",
+                        "order": 2
+                    }
+                ]
+            },
+            {
+                "id": "e4cfcd39-883b-470e-a4aa-fb8b5b66f6d4",
+                "title": "WindowResize",
+                "order": 4,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "76230071-829c-4f1d-afb0-494c3b00eec5",
+                        "title": "Resize By",
+                        "categoryId": "e4cfcd39-883b-470e-a4aa-fb8b5b66f6d4",
+                        "order": 1
+                    },
+                    {
+                        "id": "a94b711a-7c9d-4095-9ae7-910b41983aa3",
+                        "title": "Resize To",
+                        "categoryId": "e4cfcd39-883b-470e-a4aa-fb8b5b66f6d4",
+                        "order": 2
+                    }
+                ]
+            },
+            {
+                "id": "f4fd908f-8f7d-41c4-9db9-1b00901cf485",
+                "title": "Data Types",
+                "order": 5,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [
+                    {
+                        "id": "c4de45b6-af4b-4e9c-a87f-8f0386d6b94b",
+                        "title": "String",
+                        "order": 1,
+                        "parentId": "f4fd908f-8f7d-41c4-9db9-1b00901cf485",
+                        "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                        "topics": [
+                            {
+                                "id": "42e4bf1a-9a45-45fe-8ce8-10154c6256f2",
+                                "title": "String",
+                                "categoryId": "c4de45b6-af4b-4e9c-a87f-8f0386d6b94b",
+                                "order": 1
+                            }
+                        ]
+                    }
+                ],
+                "topics": []
+            },
+            {
+                "id": "7428b246-1467-4b31-bb48-339e82578bd9",
+                "title": "Arrays",
+                "order": 5,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "40b13eef-70d7-49a5-b53b-f6696cdafbd2",
+                        "title": "Array",
+                        "categoryId": "7428b246-1467-4b31-bb48-339e82578bd9",
+                        "order": 1
+                    },
+                    {
+                        "id": "d6f6566f-e5e1-4ee7-a90f-b706b9c1b62a",
+                        "title": "Multi Dimentional",
+                        "categoryId": "7428b246-1467-4b31-bb48-339e82578bd9",
+                        "order": 2
+                    },
+                    {
+                        "id": "85e604d8-4695-41da-bccf-6de5fff002bc",
+                        "title": "Object Inside Array",
+                        "categoryId": "7428b246-1467-4b31-bb48-339e82578bd9",
+                        "order": 3
+                    }
+                ]
+            },
+            {
+                "id": "81bfbc02-6038-45ae-b8a5-0eb8af1dcbd6",
+                "title": "Keys",
+                "order": 5,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "04c5fd23-1009-4d23-829c-e3bc49fdab98",
+                        "title": "Ctrl Key",
+                        "categoryId": "81bfbc02-6038-45ae-b8a5-0eb8af1dcbd6",
+                        "order": 1
+                    },
+                    {
+                        "id": "565068ce-f064-40d1-8cf0-1147da4035f5",
+                        "title": "Alt Key",
+                        "categoryId": "81bfbc02-6038-45ae-b8a5-0eb8af1dcbd6",
+                        "order": 2
+                    },
+                    {
+                        "id": "7455767d-752f-4d01-9507-31821f6c06d3",
+                        "title": "Shift Key",
+                        "categoryId": "81bfbc02-6038-45ae-b8a5-0eb8af1dcbd6",
+                        "order": 3
+                    },
+                    {
+                        "id": "c7849800-8196-4450-b605-f6f49095a2e6",
+                        "title": "Meta Key",
+                        "categoryId": "81bfbc02-6038-45ae-b8a5-0eb8af1dcbd6",
+                        "order": 4
+                    },
+                    {
+                        "id": "c8cc3e2a-b9d3-4c17-9331-0379a2b2b04e",
+                        "title": "Mouse Key",
+                        "categoryId": "81bfbc02-6038-45ae-b8a5-0eb8af1dcbd6",
+                        "order": 5
+                    },
+                    {
+                        "id": "aa0143ef-7fb7-4fd7-9460-f6a044b66478",
+                        "title": "Custom Key Code",
+                        "categoryId": "81bfbc02-6038-45ae-b8a5-0eb8af1dcbd6",
+                        "order": 6
+                    }
+                ]
+            },
+            {
+                "id": "b05b83e4-b9ac-4155-b4eb-8d0588defca2",
+                "title": "Attributes",
+                "order": 5,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "1a842c22-a5fe-40a6-bf88-446b325bc01b",
+                        "title": "Attributes",
+                        "categoryId": "b05b83e4-b9ac-4155-b4eb-8d0588defca2",
+                        "order": 1
+                    },
+                    {
+                        "id": "0e455bef-efd3-47ea-a0ab-ca791a5241e2",
+                        "title": "Get Attribute",
+                        "categoryId": "b05b83e4-b9ac-4155-b4eb-8d0588defca2",
+                        "order": 2
+                    },
+                    {
+                        "id": "e2e2e892-e0dd-4894-aa01-94805e0ae61f",
+                        "title": "Set Attribute",
+                        "categoryId": "b05b83e4-b9ac-4155-b4eb-8d0588defca2",
+                        "order": 3
+                    },
+                    {
+                        "id": "9780e2be-cece-4c66-8ec2-25612c7e5522",
+                        "title": "Remove Attribute",
+                        "categoryId": "b05b83e4-b9ac-4155-b4eb-8d0588defca2",
+                        "order": 4
+                    },
+                    {
+                        "id": "3b471e1d-310c-475c-b866-0a3467708e01",
+                        "title": "Get Attribute Node",
+                        "categoryId": "b05b83e4-b9ac-4155-b4eb-8d0588defca2",
+                        "order": 5
+                    },
+                    {
+                        "id": "948fae14-6355-49ea-997f-f454ff9e698d",
+                        "title": "Has Attribute",
+                        "categoryId": "b05b83e4-b9ac-4155-b4eb-8d0588defca2",
+                        "order": 6
+                    }
+                ]
+            },
+            {
+                "id": "e59e248b-9830-43c6-8bc0-816eb3c43870",
+                "title": "WindowScroll",
+                "order": 5,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "f0386b7e-785c-4869-8fce-b4f047592a2c",
+                        "title": "Scroll By",
+                        "categoryId": "e59e248b-9830-43c6-8bc0-816eb3c43870",
+                        "order": 1
+                    },
+                    {
+                        "id": "53ef4cb7-2da4-4e78-b71d-20bad7819dba",
+                        "title": "Scroll To",
+                        "categoryId": "e59e248b-9830-43c6-8bc0-816eb3c43870",
+                        "order": 2
+                    }
+                ]
+            },
+            {
+                "id": "f7672759-e1f0-4833-ae1e-543efab889e3",
+                "title": "Operators",
+                "order": 6,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [
+                    {
+                        "id": "40322198-054c-40c5-996e-29a770d340e6",
+                        "title": "Arithematic Operators",
+                        "order": 1,
+                        "parentId": "f7672759-e1f0-4833-ae1e-543efab889e3",
+                        "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                        "topics": [
+                            {
+                                "id": "617e98d1-cbd5-4037-8c75-7afeecac6879",
+                                "title": "Addition",
+                                "categoryId": "40322198-054c-40c5-996e-29a770d340e6",
+                                "order": 1
+                            },
+                            {
+                                "id": "6d846b53-0ed1-4143-981a-b30d74c0b297",
+                                "title": "Subtraction",
+                                "categoryId": "40322198-054c-40c5-996e-29a770d340e6",
+                                "order": 2
+                            },
+                            {
+                                "id": "0864a55b-b81d-41f5-b12a-d3587ab7e3ad",
+                                "title": "Multiplication",
+                                "categoryId": "40322198-054c-40c5-996e-29a770d340e6",
+                                "order": 3
+                            },
+                            {
+                                "id": "e8f86222-46d1-41bf-84ab-13556bc01d16",
+                                "title": "Division",
+                                "categoryId": "40322198-054c-40c5-996e-29a770d340e6",
+                                "order": 4
+                            },
+                            {
+                                "id": "e7b1c9c4-2a9b-400b-89cf-0bdbc0e269e4",
+                                "title": "Modulus",
+                                "categoryId": "40322198-054c-40c5-996e-29a770d340e6",
+                                "order": 5
+                            },
+                            {
+                                "id": "9f701630-241e-4841-b14a-00c1c96b0817",
+                                "title": "Exponentiation",
+                                "categoryId": "40322198-054c-40c5-996e-29a770d340e6",
+                                "order": 6
+                            },
+                            {
+                                "id": "faba7929-8c93-4e0a-8550-f21e3478c674",
+                                "title": "Increment",
+                                "categoryId": "40322198-054c-40c5-996e-29a770d340e6",
+                                "order": 7
+                            },
+                            {
+                                "id": "1e37e341-00bd-42fa-82b8-aa2a4b1278e5",
+                                "title": "Decrement",
+                                "categoryId": "40322198-054c-40c5-996e-29a770d340e6",
+                                "order": 8
+                            }
+                        ]
+                    }
+                ],
+                "topics": []
+            },
+            {
+                "id": "ccdb07b8-9397-4bca-9825-01fe7c16b0b1",
+                "title": "Objects",
+                "order": 6,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "87525ee5-d17e-4464-bda6-7ec86ec1bde5",
+                        "title": "Object",
+                        "categoryId": "ccdb07b8-9397-4bca-9825-01fe7c16b0b1",
+                        "order": 1
+                    },
+                    {
+                        "id": "48018c6e-1924-430d-ab22-995b5e447e1f",
+                        "title": "Array Inside Object",
+                        "categoryId": "ccdb07b8-9397-4bca-9825-01fe7c16b0b1",
+                        "order": 2
+                    }
+                ]
+            },
+            {
+                "id": "b44108bd-a9b1-498d-a412-223a5e0972e0",
+                "title": "ClipBoard",
+                "order": 6,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "c912a7e6-3591-4877-a3c7-1f291548f91c",
+                        "title": "On Cut",
+                        "categoryId": "b44108bd-a9b1-498d-a412-223a5e0972e0",
+                        "order": 1
+                    },
+                    {
+                        "id": "23a8c4d4-1f13-4990-a6af-405990da15bf",
+                        "title": "On Copy",
+                        "categoryId": "b44108bd-a9b1-498d-a412-223a5e0972e0",
+                        "order": 2
+                    },
+                    {
+                        "id": "729b5aa5-fcdf-4e1b-96d9-7a306a69540f",
+                        "title": "On Paste",
+                        "categoryId": "b44108bd-a9b1-498d-a412-223a5e0972e0",
+                        "order": 3
+                    }
+                ]
+            },
+            {
+                "id": "62cb49e8-aa32-4557-a50e-6c3109f1748a",
+                "title": "Styling",
+                "order": 6,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "4cc20b11-5cd9-40e3-bfbb-25dff29fe2a0",
+                        "title": "Style",
+                        "categoryId": "62cb49e8-aa32-4557-a50e-6c3109f1748a",
+                        "order": 1
+                    },
+                    {
+                        "id": "8c1bcb9f-0af8-4f20-b9f6-55e036017575",
+                        "title": "Class Name",
+                        "categoryId": "62cb49e8-aa32-4557-a50e-6c3109f1748a",
+                        "order": 2
+                    }
+                ]
+            },
+            {
+                "id": "f1f63b10-fecb-45e0-bbd2-c223257c3699",
+                "title": "LocationAndHistory",
+                "order": 6,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "fad3ae64-7487-40b3-b6bc-c758f2b3c5c1",
+                        "title": "Location",
+                        "categoryId": "f1f63b10-fecb-45e0-bbd2-c223257c3699",
+                        "order": 1
+                    },
+                    {
+                        "id": "aeb1fd62-37cb-4671-89be-a2dbf10d727f",
+                        "title": "History",
+                        "categoryId": "f1f63b10-fecb-45e0-bbd2-c223257c3699",
+                        "order": 2
+                    }
+                ]
+            },
+            {
+                "id": "fe90ef3a-be3a-4fb4-9246-97a14db43cbf",
+                "title": "ControlStructures",
+                "order": 7,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [
+                    {
+                        "id": "2d2e97e8-aed4-493e-b950-12ce7d80d56d",
+                        "title": "Conditionals",
+                        "order": 1,
+                        "parentId": "fe90ef3a-be3a-4fb4-9246-97a14db43cbf",
+                        "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                        "topics": [
+                            {
+                                "id": "712995ae-d244-488b-a2d9-72c23db46a21",
+                                "title": "IF",
+                                "categoryId": "2d2e97e8-aed4-493e-b950-12ce7d80d56d",
+                                "order": 1
+                            },
+                            {
+                                "id": "48b5aa60-5ef4-4291-9e7d-dafdbd3c6a68",
+                                "title": "IF Else",
+                                "categoryId": "2d2e97e8-aed4-493e-b950-12ce7d80d56d",
+                                "order": 2
+                            },
+                            {
+                                "id": "d9cf9ea5-0ef9-478b-92cf-3a401dab18af",
+                                "title": "IF Else IF",
+                                "categoryId": "2d2e97e8-aed4-493e-b950-12ce7d80d56d",
+                                "order": 3
+                            },
+                            {
+                                "id": "c28c880f-c1a0-4d3d-8ede-c50228f22baa",
+                                "title": "Nested IF",
+                                "categoryId": "2d2e97e8-aed4-493e-b950-12ce7d80d56d",
+                                "order": 4
+                            }
+                        ]
+                    }
+                ],
+                "topics": []
+            },
+            {
+                "id": "e519cff9-9f83-47c4-9231-9e8e29391f94",
+                "title": "Internet",
+                "order": 7,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "b55c8a8c-65a9-485b-8b70-806722cffb8d",
+                        "title": "Online",
+                        "categoryId": "e519cff9-9f83-47c4-9231-9e8e29391f94",
+                        "order": 1
+                    },
+                    {
+                        "id": "5405847f-3c85-415b-925d-95c9a6747da9",
+                        "title": "Offline",
+                        "categoryId": "e519cff9-9f83-47c4-9231-9e8e29391f94",
+                        "order": 2
+                    },
+                    {
+                        "id": "d6cda3ed-91fa-4b92-b6c3-8645b803d72f",
+                        "title": "Console Navigator",
+                        "categoryId": "e519cff9-9f83-47c4-9231-9e8e29391f94",
+                        "order": 3
+                    }
+                ]
+            },
+            {
+                "id": "02524e38-2922-4eb1-961b-8ba7eea3bccd",
+                "title": "ClassList",
+                "order": 7,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "95bed6db-f29d-4aaf-bdc7-395c74b94888",
+                        "title": "Class List",
+                        "categoryId": "02524e38-2922-4eb1-961b-8ba7eea3bccd",
+                        "order": 1
+                    },
+                    {
+                        "id": "fa932c31-4418-4a03-bb4b-5416924f0a96",
+                        "title": "Add",
+                        "categoryId": "02524e38-2922-4eb1-961b-8ba7eea3bccd",
+                        "order": 2
+                    },
+                    {
+                        "id": "8525c739-fc60-4322-a688-eb09e1b00e8f",
+                        "title": "Remove",
+                        "categoryId": "02524e38-2922-4eb1-961b-8ba7eea3bccd",
+                        "order": 3
+                    },
+                    {
+                        "id": "1e2f8f98-dfba-4db4-a855-3d12075dae85",
+                        "title": "Toggle",
+                        "categoryId": "02524e38-2922-4eb1-961b-8ba7eea3bccd",
+                        "order": 4
+                    },
+                    {
+                        "id": "30c8a015-141a-48ab-ad79-c3ab2d2af7de",
+                        "title": "Contains",
+                        "categoryId": "02524e38-2922-4eb1-961b-8ba7eea3bccd",
+                        "order": 5
+                    },
+                    {
+                        "id": "0f803ff4-272e-468f-9ce2-cc5c085bf6d5",
+                        "title": "Item",
+                        "categoryId": "02524e38-2922-4eb1-961b-8ba7eea3bccd",
+                        "order": 6
+                    },
+                    {
+                        "id": "1207efa7-ec8e-4dde-aac7-36dcfd46480d",
+                        "title": "Length",
+                        "categoryId": "02524e38-2922-4eb1-961b-8ba7eea3bccd",
+                        "order": 7
+                    }
+                ]
+            },
+            {
+                "id": "4ca85571-eb91-4650-9a03-bba8e33c7df5",
+                "title": "CursorCoordinates",
+                "order": 7,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "98100d52-16f8-4eb9-9647-7b75c32c1164",
+                        "title": "Page X",
+                        "categoryId": "4ca85571-eb91-4650-9a03-bba8e33c7df5",
+                        "order": 1
+                    },
+                    {
+                        "id": "e3ba154d-89af-4fe3-8e4e-b2a25f278eac",
+                        "title": "Page Y",
+                        "categoryId": "4ca85571-eb91-4650-9a03-bba8e33c7df5",
+                        "order": 2
+                    },
+                    {
+                        "id": "0dc22292-e278-4254-a46f-2ac5e49015c0",
+                        "title": "Screen X",
+                        "categoryId": "4ca85571-eb91-4650-9a03-bba8e33c7df5",
+                        "order": 3
+                    },
+                    {
+                        "id": "17554df2-32cf-4d4b-89aa-8fe40bcb7c5a",
+                        "title": "Screen Y",
+                        "categoryId": "4ca85571-eb91-4650-9a03-bba8e33c7df5",
+                        "order": 4
+                    },
+                    {
+                        "id": "999359f0-ec1d-4146-9419-8a35d15419c0",
+                        "title": "OffSet X",
+                        "categoryId": "4ca85571-eb91-4650-9a03-bba8e33c7df5",
+                        "order": 5
+                    },
+                    {
+                        "id": "df11c0c8-6b4d-400a-b7d1-f67aabdcd2d1",
+                        "title": "OffSet Y",
+                        "categoryId": "4ca85571-eb91-4650-9a03-bba8e33c7df5",
+                        "order": 6
+                    },
+                    {
+                        "id": "1d4d960e-6873-490d-9186-e0e941915d65",
+                        "title": "Client X",
+                        "categoryId": "4ca85571-eb91-4650-9a03-bba8e33c7df5",
+                        "order": 7
+                    },
+                    {
+                        "id": "5506614a-184a-452c-b245-d12975a86958",
+                        "title": "Client Y",
+                        "categoryId": "4ca85571-eb91-4650-9a03-bba8e33c7df5",
+                        "order": 8
+                    }
+                ]
+            },
+            {
+                "id": "67d2bff9-9f3e-4eca-a81e-a91ea88040fa",
+                "title": "Functions JS",
+                "order": 8,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": []
+            },
+            {
+                "id": "4b92137d-66a2-492f-9c58-2c7da6107518",
+                "title": "TraversingMethods",
+                "order": 8,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "40bb30fd-0912-4951-9adf-8986526569a2",
+                        "title": "Parent Element",
+                        "categoryId": "4b92137d-66a2-492f-9c58-2c7da6107518",
+                        "order": 1
+                    },
+                    {
+                        "id": "6e1f6538-41b8-4ac9-857b-b289c6ae392b",
+                        "title": "Parent Node",
+                        "categoryId": "4b92137d-66a2-492f-9c58-2c7da6107518",
+                        "order": 2
+                    },
+                    {
+                        "id": "e1f5cd97-dcbb-4d71-83ad-65513d4b9efa",
+                        "title": "Children",
+                        "categoryId": "4b92137d-66a2-492f-9c58-2c7da6107518",
+                        "order": 3
+                    },
+                    {
+                        "id": "fcb299a5-d04c-412a-93ac-e28928d4e1e8",
+                        "title": "Child Nodes",
+                        "categoryId": "4b92137d-66a2-492f-9c58-2c7da6107518",
+                        "order": 4
+                    },
+                    {
+                        "id": "f02bf8fc-88c9-4d07-ab8a-6532636340e9",
+                        "title": "First Child",
+                        "categoryId": "4b92137d-66a2-492f-9c58-2c7da6107518",
+                        "order": 5
+                    },
+                    {
+                        "id": "4c3c0e6d-b69c-4655-b380-1cea61ea8103",
+                        "title": "Last Child",
+                        "categoryId": "4b92137d-66a2-492f-9c58-2c7da6107518",
+                        "order": 6
+                    },
+                    {
+                        "id": "ed14249d-e29f-45d4-beba-6d247d93a042",
+                        "title": "First Element ID",
+                        "categoryId": "4b92137d-66a2-492f-9c58-2c7da6107518",
+                        "order": 7
+                    },
+                    {
+                        "id": "6d5f1618-027e-43e7-b239-01228ecece2e",
+                        "title": "Last Element ID",
+                        "categoryId": "4b92137d-66a2-492f-9c58-2c7da6107518",
+                        "order": 8
+                    },
+                    {
+                        "id": "07343080-93a8-42dd-bd74-df9b7d3e198b",
+                        "title": "Next Sibling",
+                        "categoryId": "4b92137d-66a2-492f-9c58-2c7da6107518",
+                        "order": 9
+                    },
+                    {
+                        "id": "7bc38289-cbf0-4df0-aff2-35a307dc9c06",
+                        "title": "Previous Sibling",
+                        "categoryId": "4b92137d-66a2-492f-9c58-2c7da6107518",
+                        "order": 10
+                    },
+                    {
+                        "id": "16d6c5e6-c71a-447e-ae16-5a7102a03b8a",
+                        "title": "Next Element Sibling",
+                        "categoryId": "4b92137d-66a2-492f-9c58-2c7da6107518",
+                        "order": 11
+                    },
+                    {
+                        "id": "74d4de5c-46e5-491f-8d33-1a308a57c154",
+                        "title": "Previous Element Sibling",
+                        "categoryId": "4b92137d-66a2-492f-9c58-2c7da6107518",
+                        "order": 12
+                    }
+                ]
+            },
+            {
+                "id": "b0495b6b-78bc-49c4-b716-998fd8f8c65c",
+                "title": "Loops JS",
+                "order": 9,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": []
+            },
+            {
+                "id": "47ca55c1-65b5-4888-9535-2221821441dd",
+                "title": "CreateMethods",
+                "order": 9,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "3f3fff37-a25d-4124-bd0b-69f9e12fbcc1",
+                        "title": "Create Element",
+                        "categoryId": "47ca55c1-65b5-4888-9535-2221821441dd",
+                        "order": 1
+                    },
+                    {
+                        "id": "aef5c63a-9f31-4973-88ad-59641ecdd034",
+                        "title": "Create Text Node",
+                        "categoryId": "47ca55c1-65b5-4888-9535-2221821441dd",
+                        "order": 2
+                    },
+                    {
+                        "id": "75d15939-122c-4fb8-bad7-410d3b56918f",
+                        "title": "Create Comment",
+                        "categoryId": "47ca55c1-65b5-4888-9535-2221821441dd",
+                        "order": 3
+                    }
+                ]
+            },
+            {
+                "id": "b5f745ba-742b-488a-9f91-da92a33857d1",
+                "title": "Date Methods",
+                "order": 10,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "efc86ae9-e447-4bda-bb51-6c51ea37563e",
+                        "title": "Date & Formats",
+                        "categoryId": "b5f745ba-742b-488a-9f91-da92a33857d1",
+                        "order": 1
+                    },
+                    {
+                        "id": "0ba1200c-0413-4edf-ab42-81c21ac22391",
+                        "title": "Set Date",
+                        "categoryId": "b5f745ba-742b-488a-9f91-da92a33857d1",
+                        "order": 2
+                    },
+                    {
+                        "id": "f6abb14e-d2cc-4d43-aff0-e1c7b440218e",
+                        "title": "Set Month",
+                        "categoryId": "b5f745ba-742b-488a-9f91-da92a33857d1",
+                        "order": 3
+                    },
+                    {
+                        "id": "c3539e7b-e6b7-4f64-b5b3-d69a5c6bcf80",
+                        "title": "Set Full Year",
+                        "categoryId": "b5f745ba-742b-488a-9f91-da92a33857d1",
+                        "order": 4
+                    },
+                    {
+                        "id": "4292f648-cd5a-4d00-b3ba-d609cfb19d98",
+                        "title": "Set Hours",
+                        "categoryId": "b5f745ba-742b-488a-9f91-da92a33857d1",
+                        "order": 5
+                    },
+                    {
+                        "id": "22a5dc53-fbdd-481d-9496-244e166e9756",
+                        "title": "Set Minutes",
+                        "categoryId": "b5f745ba-742b-488a-9f91-da92a33857d1",
+                        "order": 6
+                    },
+                    {
+                        "id": "0931bf82-6419-4163-8589-b2a75945edde",
+                        "title": "Set Seconds",
+                        "categoryId": "b5f745ba-742b-488a-9f91-da92a33857d1",
+                        "order": 7
+                    },
+                    {
+                        "id": "7481a7c2-ceaf-4d9c-8c9e-5ea2b71b88d5",
+                        "title": "Set Miliseconds",
+                        "categoryId": "b5f745ba-742b-488a-9f91-da92a33857d1",
+                        "order": 8
+                    },
+                    {
+                        "id": "60a04df0-b155-49aa-9754-8faeb7394b27",
+                        "title": "Get Day",
+                        "categoryId": "b5f745ba-742b-488a-9f91-da92a33857d1",
+                        "order": 9
+                    },
+                    {
+                        "id": "605903a7-b964-4203-90c4-d9e394fa2e8d",
+                        "title": "Get Time",
+                        "categoryId": "b5f745ba-742b-488a-9f91-da92a33857d1",
+                        "order": 10
+                    },
+                    {
+                        "id": "79b4ce4e-1f7e-4722-913d-8e62a7e83e19",
+                        "title": "Get Date",
+                        "categoryId": "b5f745ba-742b-488a-9f91-da92a33857d1",
+                        "order": 11
+                    },
+                    {
+                        "id": "94593439-7d3a-4965-bb7c-f1c602014d05",
+                        "title": "Get Month",
+                        "categoryId": "b5f745ba-742b-488a-9f91-da92a33857d1",
+                        "order": 12
+                    },
+                    {
+                        "id": "c17414f5-519a-4efd-a0f5-954b1cad7090",
+                        "title": "Get Full Year",
+                        "categoryId": "b5f745ba-742b-488a-9f91-da92a33857d1",
+                        "order": 13
+                    },
+                    {
+                        "id": "6464f77a-c47f-4afa-aa7d-1aadce701fdf",
+                        "title": "Get Hours",
+                        "categoryId": "b5f745ba-742b-488a-9f91-da92a33857d1",
+                        "order": 14
+                    },
+                    {
+                        "id": "1cebcabf-743a-4932-9343-83e2734c820b",
+                        "title": "Get Minutes",
+                        "categoryId": "b5f745ba-742b-488a-9f91-da92a33857d1",
+                        "order": 15
+                    },
+                    {
+                        "id": "2db3b252-b186-49c2-9a99-3c9f503b91c9",
+                        "title": "Get Seconds",
+                        "categoryId": "b5f745ba-742b-488a-9f91-da92a33857d1",
+                        "order": 16
+                    },
+                    {
+                        "id": "98e002ed-f137-4cc1-a986-683d24cdf724",
+                        "title": "Get Miliseconds",
+                        "categoryId": "b5f745ba-742b-488a-9f91-da92a33857d1",
+                        "order": 17
+                    }
+                ]
+            },
+            {
+                "id": "57d87827-690e-4ac9-a1cc-cbfe81218f66",
+                "title": "AppendMethods",
+                "order": 10,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "8e1d6af5-df5d-4d60-abbe-b86369f8aa7f",
+                        "title": "Append Child",
+                        "categoryId": "57d87827-690e-4ac9-a1cc-cbfe81218f66",
+                        "order": 1
+                    },
+                    {
+                        "id": "c9dd859a-83af-438f-a47b-d3ea67cbf257",
+                        "title": "Insert Before",
+                        "categoryId": "57d87827-690e-4ac9-a1cc-cbfe81218f66",
+                        "order": 2
+                    }
+                ]
+            },
+            {
+                "id": "eb7a92fb-cedf-43bb-983b-b17846aabcb1",
+                "title": "Events",
+                "order": 11,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [
+                    {
+                        "id": "e984d22d-950a-449c-af32-7c6d2f40083b",
+                        "title": "BasicEvents",
+                        "order": 1,
+                        "parentId": "eb7a92fb-cedf-43bb-983b-b17846aabcb1",
+                        "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                        "topics": [
+                            {
+                                "id": "d22279d9-6ecf-4b13-adb5-34373767c430",
+                                "title": "On Click",
+                                "categoryId": "e984d22d-950a-449c-af32-7c6d2f40083b",
+                                "order": 1
+                            },
+                            {
+                                "id": "1ef7f6bf-d051-42ef-9ee2-3dfc7e831874",
+                                "title": "On Double Click",
+                                "categoryId": "e984d22d-950a-449c-af32-7c6d2f40083b",
+                                "order": 2
+                            },
+                            {
+                                "id": "72ccc928-f15f-4165-ada3-14aad6e0cd0f",
+                                "title": "On Context Menu",
+                                "categoryId": "e984d22d-950a-449c-af32-7c6d2f40083b",
+                                "order": 3
+                            },
+                            {
+                                "id": "8c1bb2f7-49da-4516-a406-9c8fdf788c10",
+                                "title": "On Mouse Enter",
+                                "categoryId": "e984d22d-950a-449c-af32-7c6d2f40083b",
+                                "order": 4
+                            },
+                            {
+                                "id": "ab83d260-fc3f-4ec9-9ae2-54b614d36e2b",
+                                "title": "On Mouse Over",
+                                "categoryId": "e984d22d-950a-449c-af32-7c6d2f40083b",
+                                "order": 5
+                            },
+                            {
+                                "id": "8569ba64-ab1f-4810-9fa2-c5805760e685",
+                                "title": "On Mouse Out",
+                                "categoryId": "e984d22d-950a-449c-af32-7c6d2f40083b",
+                                "order": 6
+                            },
+                            {
+                                "id": "ef00eaa8-49ca-4aa7-a4bb-d364b7eeffd3",
+                                "title": "On Mouse Up",
+                                "categoryId": "e984d22d-950a-449c-af32-7c6d2f40083b",
+                                "order": 7
+                            },
+                            {
+                                "id": "61c2daaa-959b-4122-93c2-ef903fe7461b",
+                                "title": "On Mouse Down",
+                                "categoryId": "e984d22d-950a-449c-af32-7c6d2f40083b",
+                                "order": 8
+                            },
+                            {
+                                "id": "d2537a6d-e08a-454b-937e-3493959d85fa",
+                                "title": "On Key Press",
+                                "categoryId": "e984d22d-950a-449c-af32-7c6d2f40083b",
+                                "order": 9
+                            },
+                            {
+                                "id": "cae30dbb-6cd9-4a12-aa29-e26ce24029af",
+                                "title": "On Key Down",
+                                "categoryId": "e984d22d-950a-449c-af32-7c6d2f40083b",
+                                "order": 10
+                            },
+                            {
+                                "id": "0886912f-8a56-4a86-90c9-8e13d6c643e4",
+                                "title": "On Key Up",
+                                "categoryId": "e984d22d-950a-449c-af32-7c6d2f40083b",
+                                "order": 11
+                            },
+                            {
+                                "id": "9d06e94a-4447-450e-8f32-1b898bbd3e2c",
+                                "title": "On Load",
+                                "categoryId": "e984d22d-950a-449c-af32-7c6d2f40083b",
+                                "order": 12
+                            },
+                            {
+                                "id": "93abc57d-c3b2-458b-838e-0178cc4e3c55",
+                                "title": "On Resize",
+                                "categoryId": "e984d22d-950a-449c-af32-7c6d2f40083b",
+                                "order": 13
+                            },
+                            {
+                                "id": "aeb6c2cf-72fc-436f-b7ae-9929613252e2",
+                                "title": "On Scroll",
+                                "categoryId": "e984d22d-950a-449c-af32-7c6d2f40083b",
+                                "order": 14
+                            }
+                        ]
+                    }
+                ],
+                "topics": []
+            },
+            {
+                "id": "c4e2c106-49f8-4a76-9c5b-00e24c399c7e",
+                "title": "InsertAdjacentMethods",
+                "order": 11,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "c31428d7-6a97-475c-961e-c1e4bbddebc0",
+                        "title": "Insert Adjacent Element",
+                        "categoryId": "c4e2c106-49f8-4a76-9c5b-00e24c399c7e",
+                        "order": 1
+                    },
+                    {
+                        "id": "71a099d7-36cc-42b3-82cc-029c1cdef8a3",
+                        "title": "Insert Adjacent HTML",
+                        "categoryId": "c4e2c106-49f8-4a76-9c5b-00e24c399c7e",
+                        "order": 2
+                    },
+                    {
+                        "id": "727df215-1f21-4014-86b9-fd71ae294b0f",
+                        "title": "Insert Adjacent Text",
+                        "categoryId": "c4e2c106-49f8-4a76-9c5b-00e24c399c7e",
+                        "order": 3
+                    }
+                ]
+            },
+            {
+                "id": "834cd9c4-dfc5-4214-912f-e744eb4aaa5a",
+                "title": "DOM",
+                "order": 12,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [
+                    {
+                        "id": "03545993-35b0-467b-adc6-3383ff49fc84",
+                        "title": "BasicDocumentCommands",
+                        "order": 1,
+                        "parentId": "834cd9c4-dfc5-4214-912f-e744eb4aaa5a",
+                        "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                        "topics": [
+                            {
+                                "id": "6015fb44-45d1-48cd-baae-2b820a2fa8e6",
+                                "title": "Document",
+                                "categoryId": "03545993-35b0-467b-adc6-3383ff49fc84",
+                                "order": 1
+                            },
+                            {
+                                "id": "c4b030ba-0af9-4d8e-8f83-e8389aff8e6b",
+                                "title": "Document All",
+                                "categoryId": "03545993-35b0-467b-adc6-3383ff49fc84",
+                                "order": 2
+                            },
+                            {
+                                "id": "28611f10-c819-4258-93ee-55cff5d78cbb",
+                                "title": "Document Element",
+                                "categoryId": "03545993-35b0-467b-adc6-3383ff49fc84",
+                                "order": 3
+                            },
+                            {
+                                "id": "4e504130-7f32-4f9f-ae10-cabd8e0770e5",
+                                "title": "Document Head",
+                                "categoryId": "03545993-35b0-467b-adc6-3383ff49fc84",
+                                "order": 4
+                            },
+                            {
+                                "id": "c3715ac2-a10b-41aa-9fd9-01c0cb5a57a5",
+                                "title": "Document Body",
+                                "categoryId": "03545993-35b0-467b-adc6-3383ff49fc84",
+                                "order": 5
+                            },
+                            {
+                                "id": "4b086dca-c61a-4740-9ebe-cce619cf9093",
+                                "title": "Document Image",
+                                "categoryId": "03545993-35b0-467b-adc6-3383ff49fc84",
+                                "order": 6
+                            },
+                            {
+                                "id": "7b93dc93-55ea-49e6-a35d-bf8d09317f5d",
+                                "title": "Document Anchor",
+                                "categoryId": "03545993-35b0-467b-adc6-3383ff49fc84",
+                                "order": 7
+                            },
+                            {
+                                "id": "b71dac67-9c3a-4d75-9bbc-ff6b86c84411",
+                                "title": "Document Links",
+                                "categoryId": "03545993-35b0-467b-adc6-3383ff49fc84",
+                                "order": 8
+                            },
+                            {
+                                "id": "008aeba7-5a84-4ab1-956f-2267e66948f3",
+                                "title": "Document Forms",
+                                "categoryId": "03545993-35b0-467b-adc6-3383ff49fc84",
+                                "order": 9
+                            },
+                            {
+                                "id": "7e45d0c5-b456-4840-b298-f359f46eced4",
+                                "title": "Document Doctype",
+                                "categoryId": "03545993-35b0-467b-adc6-3383ff49fc84",
+                                "order": 10
+                            },
+                            {
+                                "id": "0ead919a-10e8-4901-96db-8e29694729a4",
+                                "title": "Document URL",
+                                "categoryId": "03545993-35b0-467b-adc6-3383ff49fc84",
+                                "order": 11
+                            },
+                            {
+                                "id": "4ef0cd16-be0c-4422-837f-b56b43d93537",
+                                "title": "Document Base URI",
+                                "categoryId": "03545993-35b0-467b-adc6-3383ff49fc84",
+                                "order": 12
+                            },
+                            {
+                                "id": "32d498e9-6e7f-4777-9659-3cf66068c1b6",
+                                "title": "Document Domain",
+                                "categoryId": "03545993-35b0-467b-adc6-3383ff49fc84",
+                                "order": 13
+                            }
+                        ]
+                    }
+                ],
+                "topics": []
+            },
+            {
+                "id": "a00bfb91-f725-4be0-b53d-27e8f0ff8696",
+                "title": "ChildMethod",
+                "order": 12,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "0003e898-e7e5-47f9-9739-9f3572a2fb63",
+                        "title": "Replace Child",
+                        "categoryId": "a00bfb91-f725-4be0-b53d-27e8f0ff8696",
+                        "order": 1
+                    },
+                    {
+                        "id": "53b94b24-5c8b-43a1-93cc-7a179f1cee2a",
+                        "title": "Remove Child",
+                        "categoryId": "a00bfb91-f725-4be0-b53d-27e8f0ff8696",
+                        "order": 2
+                    }
+                ]
+            },
+            {
+                "id": "2e634888-a8f7-4174-80ca-a6b85c858039",
+                "title": "HasMethods",
+                "order": 13,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "208b208d-8cbb-4837-8a80-6a42f65f715f",
+                        "title": "Has Attribute",
+                        "categoryId": "2e634888-a8f7-4174-80ca-a6b85c858039",
+                        "order": 1
+                    },
+                    {
+                        "id": "dc46f4af-95e4-4d9f-b143-412c53294de5",
+                        "title": "Has Child Node",
+                        "categoryId": "2e634888-a8f7-4174-80ca-a6b85c858039",
+                        "order": 2
+                    }
+                ]
+            },
+            {
+                "id": "66fb5ec2-4b01-4a14-a3f2-91eb9551c8ab",
+                "title": "BOM",
+                "order": 14,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [
+                    {
+                        "id": "af71f8cf-7074-4b73-82da-9f27ef561340",
+                        "title": "ScrollAmounts",
+                        "order": 8,
+                        "parentId": "66fb5ec2-4b01-4a14-a3f2-91eb9551c8ab",
+                        "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                        "topics": [
+                            {
+                                "id": "8723ca36-e844-480d-a6fc-5a964a113aa5",
+                                "title": "Page X OffSet",
+                                "categoryId": "af71f8cf-7074-4b73-82da-9f27ef561340",
+                                "order": 1
+                            },
+                            {
+                                "id": "6570cc5b-8f38-48c4-b62e-abfd7cfdac7c",
+                                "title": "Page Y OffSet",
+                                "categoryId": "af71f8cf-7074-4b73-82da-9f27ef561340",
+                                "order": 2
+                            },
+                            {
+                                "id": "878b2fcf-61b1-40f6-9d08-cf2d9db6c4b0",
+                                "title": "Scroll Top",
+                                "categoryId": "af71f8cf-7074-4b73-82da-9f27ef561340",
+                                "order": 3
+                            },
+                            {
+                                "id": "7ea9075f-6559-4535-a43f-337002ec97de",
+                                "title": "Scroll Left",
+                                "categoryId": "af71f8cf-7074-4b73-82da-9f27ef561340",
+                                "order": 4
+                            },
+                            {
+                                "id": "112c1a63-4e0e-4795-856a-ecb417cb5c16",
+                                "title": "Scroll Set Top",
+                                "categoryId": "af71f8cf-7074-4b73-82da-9f27ef561340",
+                                "order": 5
+                            },
+                            {
+                                "id": "4e679d9a-fb7e-4800-8da4-56320a1b88ce",
+                                "title": "Scroll Set Left",
+                                "categoryId": "af71f8cf-7074-4b73-82da-9f27ef561340",
+                                "order": 6
+                            },
+                            {
+                                "id": "5d898a27-de7e-4d2e-b8db-08263fbf3841",
+                                "title": "Scroll Width",
+                                "categoryId": "af71f8cf-7074-4b73-82da-9f27ef561340",
+                                "order": 7
+                            },
+                            {
+                                "id": "16d3d0cd-be9b-4235-8376-b430b7ecb6e2",
+                                "title": "Scroll Height",
+                                "categoryId": "af71f8cf-7074-4b73-82da-9f27ef561340",
+                                "order": 8
+                            },
+                            {
+                                "id": "6e2ad2df-d53d-41f8-a7c2-9487769e2c34",
+                                "title": "OffSet Width",
+                                "categoryId": "af71f8cf-7074-4b73-82da-9f27ef561340",
+                                "order": 9
+                            },
+                            {
+                                "id": "8395e432-256e-42bd-9033-4ae4a40e8ab5",
+                                "title": "OffSet Height",
+                                "categoryId": "af71f8cf-7074-4b73-82da-9f27ef561340",
+                                "order": 10
+                            },
+                            {
+                                "id": "bc73ce10-10b5-41f5-b8bb-dccef8c05576",
+                                "title": "Client Width",
+                                "categoryId": "af71f8cf-7074-4b73-82da-9f27ef561340",
+                                "order": 11
+                            },
+                            {
+                                "id": "a27db85c-79a4-47bb-a999-a33002aef244",
+                                "title": "Client Height",
+                                "categoryId": "af71f8cf-7074-4b73-82da-9f27ef561340",
+                                "order": 12
+                            }
+                        ]
+                    }
+                ],
+                "topics": []
+            },
+            {
+                "id": "cabb5ef7-a59c-464e-a1be-de3a9af63226",
+                "title": "MiscMethods",
+                "order": 14,
+                "parentId": null,
+                "skillId": "a40290a9-9530-4ab5-85b2-0730154ec4f9",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "68aa449d-e2dd-4e55-83fa-649f73650274",
+                        "title": "Clone Node",
+                        "categoryId": "cabb5ef7-a59c-464e-a1be-de3a9af63226",
+                        "order": 1
+                    },
+                    {
+                        "id": "a771b2a4-f3e2-49c3-b55e-7eb895b98078",
+                        "title": "Is Equal Node",
+                        "categoryId": "cabb5ef7-a59c-464e-a1be-de3a9af63226",
+                        "order": 2
+                    },
+                    {
+                        "id": "4068fd41-5c58-4e46-866a-7ec70e37996b",
+                        "title": "Contains",
+                        "categoryId": "cabb5ef7-a59c-464e-a1be-de3a9af63226",
+                        "order": 3
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "4308b476-f07a-4e0b-b419-eecce07b3b83",
+        "title": "PHP Procedural",
+        "order": 6,
+        "categories": [
+            {
+                "id": "2058b288-f804-4860-a082-7182411feb83",
+                "title": "Basics",
+                "order": 1,
+                "parentId": null,
+                "skillId": "4308b476-f07a-4e0b-b419-eecce07b3b83",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "9ced146a-17d2-4723-a922-6f3341914f15",
+                        "title": "Basic Document Commands",
+                        "categoryId": "2058b288-f804-4860-a082-7182411feb83",
+                        "order": 1
+                    },
+                    {
+                        "id": "b47ceed1-288e-417f-9128-c0c7e6313b11",
+                        "title": "Comments",
+                        "categoryId": "2058b288-f804-4860-a082-7182411feb83",
+                        "order": 1
+                    },
+                    {
+                        "id": "2d1971a3-af83-4879-9e7f-85df5eed7b53",
+                        "title": "HTML Inside JS",
+                        "categoryId": "2058b288-f804-4860-a082-7182411feb83",
+                        "order": 2
+                    },
+                    {
+                        "id": "161da624-e621-4615-8b33-967b2d73e948",
+                        "title": "Basic Syntax",
+                        "categoryId": "2058b288-f804-4860-a082-7182411feb83",
+                        "order": 2
+                    },
+                    {
+                        "id": "a4889336-517b-4096-9057-dc7d9a6cdf2a",
+                        "title": "JS Inside HTML",
+                        "categoryId": "2058b288-f804-4860-a082-7182411feb83",
+                        "order": 3
+                    },
+                    {
+                        "id": "39261b08-1c06-4a0a-a0eb-93185d985d2f",
+                        "title": "Echo Print",
+                        "categoryId": "2058b288-f804-4860-a082-7182411feb83",
+                        "order": 3
+                    },
+                    {
+                        "id": "5bc203d7-2ed0-4bee-be40-7ec9cf538023",
+                        "title": "JSON Understanding",
+                        "categoryId": "2058b288-f804-4860-a082-7182411feb83",
+                        "order": 4
+                    },
+                    {
+                        "id": "16308f77-bee4-4bfe-80c3-8c2a7f2e0ba7",
+                        "title": "Here Doc",
+                        "categoryId": "2058b288-f804-4860-a082-7182411feb83",
+                        "order": 4
+                    },
+                    {
+                        "id": "f8e0cd04-10cc-437b-a0ad-fc6f4a51950f",
+                        "title": "Now Doc",
+                        "categoryId": "2058b288-f804-4860-a082-7182411feb83",
+                        "order": 5
+                    },
+                    {
+                        "id": "a4d669b2-7860-461e-9430-707af12b55f6",
+                        "title": "Expression",
+                        "categoryId": "2058b288-f804-4860-a082-7182411feb83",
+                        "order": 6
+                    },
+                    {
+                        "id": "b1af76b9-b80d-4534-9912-b768d4aead66",
+                        "title": "PHP Short Hand",
+                        "categoryId": "2058b288-f804-4860-a082-7182411feb83",
+                        "order": 7
+                    },
+                    {
+                        "id": "64391d50-ac6a-483a-81db-6ddf87ed1b53",
+                        "title": "HTML In PHP",
+                        "categoryId": "2058b288-f804-4860-a082-7182411feb83",
+                        "order": 8
+                    },
+                    {
+                        "id": "a5ceb678-e472-47eb-b627-aa84928145ab",
+                        "title": "Comments & DocBlock",
+                        "categoryId": "2058b288-f804-4860-a082-7182411feb83",
+                        "order": 9
+                    }
+                ]
+            },
+            {
+                "id": "c3942a7b-ae30-436a-a44f-f5f80646950a",
+                "title": "DataTypes",
+                "order": 2,
+                "parentId": null,
+                "skillId": "4308b476-f07a-4e0b-b419-eecce07b3b83",
+                "children": [
+                    {
+                        "id": "10eea9db-dbe9-4346-b7af-6ceb376c4536",
+                        "title": "ScalarTypes",
+                        "order": 1,
+                        "parentId": "c3942a7b-ae30-436a-a44f-f5f80646950a",
+                        "skillId": "4308b476-f07a-4e0b-b419-eecce07b3b83",
+                        "topics": []
+                    },
+                    {
+                        "id": "4f24b39d-ef3d-49c7-baaa-27c1e0d729aa",
+                        "title": "Compound",
+                        "order": 2,
+                        "parentId": "c3942a7b-ae30-436a-a44f-f5f80646950a",
+                        "skillId": "4308b476-f07a-4e0b-b419-eecce07b3b83",
+                        "topics": []
+                    },
+                    {
+                        "id": "3f9208cb-c8a0-4a37-9e4e-6ecabd3322ce",
+                        "title": "Special",
+                        "order": 3,
+                        "parentId": "c3942a7b-ae30-436a-a44f-f5f80646950a",
+                        "skillId": "4308b476-f07a-4e0b-b419-eecce07b3b83",
+                        "topics": []
+                    }
+                ],
+                "topics": []
+            },
+            {
+                "id": "50fbc0ae-b0b1-45b7-bbfa-bd338ba2de7b",
+                "title": "Variable&Scopes",
+                "order": 3,
+                "parentId": null,
+                "skillId": "4308b476-f07a-4e0b-b419-eecce07b3b83",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "799e33a5-37e6-49de-b6aa-ca8c8d42cc01",
+                        "title": "Variable By Value",
+                        "categoryId": "50fbc0ae-b0b1-45b7-bbfa-bd338ba2de7b",
+                        "order": 1
+                    },
+                    {
+                        "id": "6aa3f3be-ead5-4834-9d41-fcdeed9e2e44",
+                        "title": "Variable By Reference",
+                        "categoryId": "50fbc0ae-b0b1-45b7-bbfa-bd338ba2de7b",
+                        "order": 2
+                    },
+                    {
+                        "id": "30498a6f-d041-4b35-9f94-2e0562fea30f",
+                        "title": "Define Const",
+                        "categoryId": "50fbc0ae-b0b1-45b7-bbfa-bd338ba2de7b",
+                        "order": 3
+                    },
+                    {
+                        "id": "b195b604-e20b-4de2-91d4-a5c6f13fd0b0",
+                        "title": "CONST",
+                        "categoryId": "50fbc0ae-b0b1-45b7-bbfa-bd338ba2de7b",
+                        "order": 4
+                    },
+                    {
+                        "id": "f3dbfab1-559a-43d0-afa7-7e41add56cb8",
+                        "title": "Variable Variable",
+                        "categoryId": "50fbc0ae-b0b1-45b7-bbfa-bd338ba2de7b",
+                        "order": 5
+                    },
+                    {
+                        "id": "af1e85d1-4466-4798-86d7-6704ef8bc135",
+                        "title": "Variable Scopes",
+                        "categoryId": "50fbc0ae-b0b1-45b7-bbfa-bd338ba2de7b",
+                        "order": 6
+                    },
+                    {
+                        "id": "32ed858e-1662-4927-9508-db316f2d1a66",
+                        "title": "Static Variable",
+                        "categoryId": "50fbc0ae-b0b1-45b7-bbfa-bd338ba2de7b",
+                        "order": 7
+                    }
+                ]
+            },
+            {
+                "id": "7a1097ff-74aa-4f6a-aef9-cc0de0ec7e9f",
+                "title": "Operators",
+                "order": 4,
+                "parentId": null,
+                "skillId": "4308b476-f07a-4e0b-b419-eecce07b3b83",
+                "children": [
+                    {
+                        "id": "bef6bc39-059f-43fe-82df-395b214f9b67",
+                        "title": "ArithematicOperators",
+                        "order": 1,
+                        "parentId": "7a1097ff-74aa-4f6a-aef9-cc0de0ec7e9f",
+                        "skillId": "4308b476-f07a-4e0b-b419-eecce07b3b83",
+                        "topics": [
+                            {
+                                "id": "2543845c-b059-4ccd-b66e-e60b150970d0",
+                                "title": "Basic Arithematic Operatior",
+                                "categoryId": "bef6bc39-059f-43fe-82df-395b214f9b67",
+                                "order": 1
+                            },
+                            {
+                                "id": "cff238ff-0d79-4bcf-8f71-cafee189f3da",
+                                "title": "Addition",
+                                "categoryId": "bef6bc39-059f-43fe-82df-395b214f9b67",
+                                "order": 2
+                            },
+                            {
+                                "id": "ef568350-3e68-459d-ab44-74733a9013f7",
+                                "title": "Subtraction",
+                                "categoryId": "bef6bc39-059f-43fe-82df-395b214f9b67",
+                                "order": 3
+                            },
+                            {
+                                "id": "3837e69e-ee36-471f-87bc-d5225714e86e",
+                                "title": "Multiplication",
+                                "categoryId": "bef6bc39-059f-43fe-82df-395b214f9b67",
+                                "order": 4
+                            },
+                            {
+                                "id": "2a0ae61d-61b0-4641-940e-76f79e42cfa8",
+                                "title": "Division ",
+                                "categoryId": "bef6bc39-059f-43fe-82df-395b214f9b67",
+                                "order": 5
+                            },
+                            {
+                                "id": "01483693-8188-4e7e-b5ff-6858790dc943",
+                                "title": "Modulus",
+                                "categoryId": "bef6bc39-059f-43fe-82df-395b214f9b67",
+                                "order": 6
+                            },
+                            {
+                                "id": "729b1ddc-9a07-4451-b8e3-a37e7ca9e2e5",
+                                "title": "Exponentiation",
+                                "categoryId": "bef6bc39-059f-43fe-82df-395b214f9b67",
+                                "order": 7
+                            }
+                        ]
+                    },
+                    {
+                        "id": "a41c9eee-c662-4b27-a9cb-f88545f2e167",
+                        "title": "AssignmentOperators",
+                        "order": 2,
+                        "parentId": "7a1097ff-74aa-4f6a-aef9-cc0de0ec7e9f",
+                        "skillId": "4308b476-f07a-4e0b-b419-eecce07b3b83",
+                        "topics": [
+                            {
+                                "id": "3a82da79-333e-41df-a1b4-1b5d88feb3ff",
+                                "title": "Basic Assignment Operator",
+                                "categoryId": "a41c9eee-c662-4b27-a9cb-f88545f2e167",
+                                "order": 1
+                            },
+                            {
+                                "id": "7692d5a1-c402-4a0b-a874-22ec56adf93b",
+                                "title": "Assignment",
+                                "categoryId": "a41c9eee-c662-4b27-a9cb-f88545f2e167",
+                                "order": 2
+                            },
+                            {
+                                "id": "c17a101a-a98a-4957-b6c9-6bff174ada39",
+                                "title": "Addition & Assignment",
+                                "categoryId": "a41c9eee-c662-4b27-a9cb-f88545f2e167",
+                                "order": 3
+                            },
+                            {
+                                "id": "38e65ae0-3aae-485a-a814-00de950a2e50",
+                                "title": "Subtraction & Assignment",
+                                "categoryId": "a41c9eee-c662-4b27-a9cb-f88545f2e167",
+                                "order": 4
+                            },
+                            {
+                                "id": "c2f1e320-d189-4b1c-923b-08e797311a43",
+                                "title": "Multiplication & Assignment",
+                                "categoryId": "a41c9eee-c662-4b27-a9cb-f88545f2e167",
+                                "order": 5
+                            },
+                            {
+                                "id": "e3dcf905-84fb-4a06-9f69-554db828ff86",
+                                "title": "Division & Assignment",
+                                "categoryId": "a41c9eee-c662-4b27-a9cb-f88545f2e167",
+                                "order": 6
+                            },
+                            {
+                                "id": "a3a94041-feeb-48d1-abba-057b5dd55ae7",
+                                "title": "Exponentiation & Assignment",
+                                "categoryId": "a41c9eee-c662-4b27-a9cb-f88545f2e167",
+                                "order": 7
+                            },
+                            {
+                                "id": "79b78d2e-e514-4410-9a37-d7d558aa2a76",
+                                "title": "Concatenate & Assign",
+                                "categoryId": "a41c9eee-c662-4b27-a9cb-f88545f2e167",
+                                "order": 8
+                            }
+                        ]
+                    },
+                    {
+                        "id": "a35becf3-a3a1-4808-a8d3-be1c5382f1cc",
+                        "title": "StringOperators",
+                        "order": 3,
+                        "parentId": "7a1097ff-74aa-4f6a-aef9-cc0de0ec7e9f",
+                        "skillId": "4308b476-f07a-4e0b-b419-eecce07b3b83",
+                        "topics": [
+                            {
+                                "id": "b153f6e9-df7f-4ae2-bb21-0158876fb758",
+                                "title": "Concatenation Operator",
+                                "categoryId": "a35becf3-a3a1-4808-a8d3-be1c5382f1cc",
+                                "order": 1
+                            },
+                            {
+                                "id": "e6b9db90-495c-43b2-9376-e951f41c544b",
+                                "title": "Concatenate & Assign",
+                                "categoryId": "a35becf3-a3a1-4808-a8d3-be1c5382f1cc",
+                                "order": 2
+                            }
+                        ]
+                    },
+                    {
+                        "id": "94bb6e02-9486-4f14-a47c-1c99f2c333c6",
+                        "title": "ComparisonOperators",
+                        "order": 4,
+                        "parentId": "7a1097ff-74aa-4f6a-aef9-cc0de0ec7e9f",
+                        "skillId": "4308b476-f07a-4e0b-b419-eecce07b3b83",
+                        "topics": [
+                            {
+                                "id": "b162f8b3-8461-429e-8827-ecbc3c281d4b",
+                                "title": "Equal",
+                                "categoryId": "94bb6e02-9486-4f14-a47c-1c99f2c333c6",
+                                "order": 1
+                            },
+                            {
+                                "id": "f96a5ebe-26fa-4a96-af82-da24a5d0a87d",
+                                "title": "Identical",
+                                "categoryId": "94bb6e02-9486-4f14-a47c-1c99f2c333c6",
+                                "order": 2
+                            },
+                            {
+                                "id": "2fc02605-1578-4f9e-a109-f6e0137caa6b",
+                                "title": "Not Equal ",
+                                "categoryId": "94bb6e02-9486-4f14-a47c-1c99f2c333c6",
+                                "order": 3
+                            },
+                            {
+                                "id": "1b6e9745-9843-4e17-81a5-331bc567392b",
+                                "title": "Not Identical",
+                                "categoryId": "94bb6e02-9486-4f14-a47c-1c99f2c333c6",
+                                "order": 4
+                            },
+                            {
+                                "id": "b53c783a-221c-4db6-8d2d-c5cca7acab50",
+                                "title": "Grater Than",
+                                "categoryId": "94bb6e02-9486-4f14-a47c-1c99f2c333c6",
+                                "order": 5
+                            },
+                            {
+                                "id": "9b7511ad-168a-4e22-8bb4-fd5cbce23bce",
+                                "title": "Less Than",
+                                "categoryId": "94bb6e02-9486-4f14-a47c-1c99f2c333c6",
+                                "order": 6
+                            },
+                            {
+                                "id": "ef023d15-5b00-40d9-b7a7-33b753c58352",
+                                "title": "Grater Than Equal To",
+                                "categoryId": "94bb6e02-9486-4f14-a47c-1c99f2c333c6",
+                                "order": 7
+                            },
+                            {
+                                "id": "b88416c8-637d-4b77-87e1-81260e73fa68",
+                                "title": "Less Than Equal To",
+                                "categoryId": "94bb6e02-9486-4f14-a47c-1c99f2c333c6",
+                                "order": 8
+                            },
+                            {
+                                "id": "95fd575d-6b6c-4a2e-98fb-da036192c4ed",
+                                "title": "Space Ship Operator",
+                                "categoryId": "94bb6e02-9486-4f14-a47c-1c99f2c333c6",
+                                "order": 9
+                            }
+                        ]
+                    },
+                    {
+                        "id": "76dcfdb8-4ee6-4c18-b4c3-3a1768060a35",
+                        "title": "TurnaryOperator",
+                        "order": 5,
+                        "parentId": "7a1097ff-74aa-4f6a-aef9-cc0de0ec7e9f",
+                        "skillId": "4308b476-f07a-4e0b-b419-eecce07b3b83",
+                        "topics": [
+                            {
+                                "id": "ce253d2a-403f-49e5-9dfb-dbc86d609c72",
+                                "title": "Turnary Operator",
+                                "categoryId": "76dcfdb8-4ee6-4c18-b4c3-3a1768060a35",
+                                "order": 1
+                            }
+                        ]
+                    },
+                    {
+                        "id": "3344e3da-585c-4452-8342-f8bc2e5da742",
+                        "title": "NullCoalescingOperator",
+                        "order": 6,
+                        "parentId": "7a1097ff-74aa-4f6a-aef9-cc0de0ec7e9f",
+                        "skillId": "4308b476-f07a-4e0b-b419-eecce07b3b83",
+                        "topics": [
+                            {
+                                "id": "f7784e43-8dbb-4d53-a058-53b81029a2cb",
+                                "title": "Null Coalesing",
+                                "categoryId": "3344e3da-585c-4452-8342-f8bc2e5da742",
+                                "order": 1
+                            }
+                        ]
+                    },
+                    {
+                        "id": "60273e98-f32e-410d-b0dc-923b8f43eed3",
+                        "title": "ErrorControlOperator",
+                        "order": 7,
+                        "parentId": "7a1097ff-74aa-4f6a-aef9-cc0de0ec7e9f",
+                        "skillId": "4308b476-f07a-4e0b-b419-eecce07b3b83",
+                        "topics": [
+                            {
+                                "id": "40cd91e5-22ec-42c5-a4fb-8d306c5606cc",
+                                "title": "Error Control Operator",
+                                "categoryId": "60273e98-f32e-410d-b0dc-923b8f43eed3",
+                                "order": 1
+                            }
+                        ]
+                    },
+                    {
+                        "id": "8305cb84-305d-4267-b2b9-a41da60e3dd9",
+                        "title": "IncrementDecrementOperator",
+                        "order": 8,
+                        "parentId": "7a1097ff-74aa-4f6a-aef9-cc0de0ec7e9f",
+                        "skillId": "4308b476-f07a-4e0b-b419-eecce07b3b83",
+                        "topics": [
+                            {
+                                "id": "6284d266-3003-41cb-ae81-3349f657f0d1",
+                                "title": "Pre Increment",
+                                "categoryId": "8305cb84-305d-4267-b2b9-a41da60e3dd9",
+                                "order": 1
+                            },
+                            {
+                                "id": "91cb9be7-c07b-43f9-8cf1-7b40bfc02300",
+                                "title": "Pre Decrement",
+                                "categoryId": "8305cb84-305d-4267-b2b9-a41da60e3dd9",
+                                "order": 2
+                            },
+                            {
+                                "id": "74780f84-2db2-440d-a9e8-ea91dd5f1d96",
+                                "title": "Post Increment",
+                                "categoryId": "8305cb84-305d-4267-b2b9-a41da60e3dd9",
+                                "order": 3
+                            },
+                            {
+                                "id": "e8041665-a87c-4534-952f-1d7cbd6a8be2",
+                                "title": "Post Decrement",
+                                "categoryId": "8305cb84-305d-4267-b2b9-a41da60e3dd9",
+                                "order": 4
+                            },
+                            {
+                                "id": "966f97ff-270b-4b22-b267-cef41b56f2c6",
+                                "title": "Increment String",
+                                "categoryId": "8305cb84-305d-4267-b2b9-a41da60e3dd9",
+                                "order": 5
+                            },
+                            {
+                                "id": "3effad67-e863-44a0-9890-d0fdb524b137",
+                                "title": "Decrement String",
+                                "categoryId": "8305cb84-305d-4267-b2b9-a41da60e3dd9",
+                                "order": 6
+                            },
+                            {
+                                "id": "2c010257-e123-41ac-b3ee-4eafd6698fa1",
+                                "title": "Increment Alphabet",
+                                "categoryId": "8305cb84-305d-4267-b2b9-a41da60e3dd9",
+                                "order": 7
+                            },
+                            {
+                                "id": "be7d5660-7461-42c0-b4f9-542d3b82f9dc",
+                                "title": "Decrement Alphabet",
+                                "categoryId": "8305cb84-305d-4267-b2b9-a41da60e3dd9",
+                                "order": 8
+                            }
+                        ]
+                    },
+                    {
+                        "id": "7bd8481b-b341-4195-80b0-cd6ee2edc1e0",
+                        "title": "LogicalOperator",
+                        "order": 9,
+                        "parentId": "7a1097ff-74aa-4f6a-aef9-cc0de0ec7e9f",
+                        "skillId": "4308b476-f07a-4e0b-b419-eecce07b3b83",
+                        "topics": [
+                            {
+                                "id": "12a97750-b091-4d61-8465-d60bead654de",
+                                "title": "AND",
+                                "categoryId": "7bd8481b-b341-4195-80b0-cd6ee2edc1e0",
+                                "order": 1
+                            },
+                            {
+                                "id": "e296c6c3-6776-4795-a954-1ec204c2f6f8",
+                                "title": "OR",
+                                "categoryId": "7bd8481b-b341-4195-80b0-cd6ee2edc1e0",
+                                "order": 2
+                            },
+                            {
+                                "id": "64de60e6-c881-4411-877e-fca7e4b2f2c7",
+                                "title": "NOT",
+                                "categoryId": "7bd8481b-b341-4195-80b0-cd6ee2edc1e0",
+                                "order": 3
+                            },
+                            {
+                                "id": "3a222df8-f795-42d2-879f-bd864dfc808a",
+                                "title": "And",
+                                "categoryId": "7bd8481b-b341-4195-80b0-cd6ee2edc1e0",
+                                "order": 4
+                            },
+                            {
+                                "id": "6966cc14-7ade-4d36-bc54-f36ac89e9b28",
+                                "title": "Or",
+                                "categoryId": "7bd8481b-b341-4195-80b0-cd6ee2edc1e0",
+                                "order": 5
+                            },
+                            {
+                                "id": "dd0f0936-13bc-4515-95e1-f2ce46a66f1b",
+                                "title": "Xor",
+                                "categoryId": "7bd8481b-b341-4195-80b0-cd6ee2edc1e0",
+                                "order": 6
+                            }
+                        ]
+                    },
+                    {
+                        "id": "aefe03d5-ebb6-4e17-b58b-cf7f5925952d",
+                        "title": "ShortCircuitOperator",
+                        "order": 10,
+                        "parentId": "7a1097ff-74aa-4f6a-aef9-cc0de0ec7e9f",
+                        "skillId": "4308b476-f07a-4e0b-b419-eecce07b3b83",
+                        "topics": [
+                            {
+                                "id": "efd6dd27-5db6-49e9-8ddc-bb0c55989807",
+                                "title": "Short Circuit Evaluation",
+                                "categoryId": "aefe03d5-ebb6-4e17-b58b-cf7f5925952d",
+                                "order": 1
+                            }
+                        ]
+                    },
+                    {
+                        "id": "76748355-b568-4d20-b20f-5e6e01a20e85",
+                        "title": "BitWiseOperator",
+                        "order": 11,
+                        "parentId": "7a1097ff-74aa-4f6a-aef9-cc0de0ec7e9f",
+                        "skillId": "4308b476-f07a-4e0b-b419-eecce07b3b83",
+                        "topics": [
+                            {
+                                "id": "24b3406a-9d6e-4ab5-99d0-3bec325a159c",
+                                "title": "And",
+                                "categoryId": "76748355-b568-4d20-b20f-5e6e01a20e85",
+                                "order": 1
+                            },
+                            {
+                                "id": "d17a68c2-4b28-4564-8b75-bcb3a5d5f102",
+                                "title": "Or",
+                                "categoryId": "76748355-b568-4d20-b20f-5e6e01a20e85",
+                                "order": 2
+                            },
+                            {
+                                "id": "e1d5b1d2-f853-44e2-8809-4e219908d307",
+                                "title": "Xor",
+                                "categoryId": "76748355-b568-4d20-b20f-5e6e01a20e85",
+                                "order": 3
+                            },
+                            {
+                                "id": "ceac9b9d-6b14-4bdf-a942-9a2a623a6f4a",
+                                "title": "Not",
+                                "categoryId": "76748355-b568-4d20-b20f-5e6e01a20e85",
+                                "order": 4
+                            },
+                            {
+                                "id": "2f64ea9a-941f-4c78-af0b-37228c0d0cf8",
+                                "title": "Shift Left",
+                                "categoryId": "76748355-b568-4d20-b20f-5e6e01a20e85",
+                                "order": 5
+                            },
+                            {
+                                "id": "ad13aa89-250b-47f4-936b-cdabae346f9c",
+                                "title": "Shift Right",
+                                "categoryId": "76748355-b568-4d20-b20f-5e6e01a20e85",
+                                "order": 6
+                            }
+                        ]
+                    },
+                    {
+                        "id": "59ff656d-a1d3-4d69-a83b-145acd4a2ecf",
+                        "title": "ArrayOperators",
+                        "order": 12,
+                        "parentId": "7a1097ff-74aa-4f6a-aef9-cc0de0ec7e9f",
+                        "skillId": "4308b476-f07a-4e0b-b419-eecce07b3b83",
+                        "topics": [
+                            {
+                                "id": "900b6907-d59c-4b73-a2dd-dbc5cc299e4f",
+                                "title": "Union",
+                                "categoryId": "59ff656d-a1d3-4d69-a83b-145acd4a2ecf",
+                                "order": 1
+                            },
+                            {
+                                "id": "c8500d0b-e283-41ea-95f0-13611c1c5453",
+                                "title": "Equal",
+                                "categoryId": "59ff656d-a1d3-4d69-a83b-145acd4a2ecf",
+                                "order": 2
+                            },
+                            {
+                                "id": "9fc5f440-5932-4369-a3a9-70a4c777bea3",
+                                "title": "Not Equal ",
+                                "categoryId": "59ff656d-a1d3-4d69-a83b-145acd4a2ecf",
+                                "order": 3
+                            },
+                            {
+                                "id": "1c85662e-96b3-4d8b-9334-6f7ec5551892",
+                                "title": "Identical",
+                                "categoryId": "59ff656d-a1d3-4d69-a83b-145acd4a2ecf",
+                                "order": 4
+                            },
+                            {
+                                "id": "b878103e-042d-4f05-ae9f-291055410a39",
+                                "title": "Not Identical",
+                                "categoryId": "59ff656d-a1d3-4d69-a83b-145acd4a2ecf",
+                                "order": 5
+                            }
+                        ]
+                    },
+                    {
+                        "id": "297f99d4-7fca-432b-8d7c-26eeeafe26dd",
+                        "title": "ExecutionOperator",
+                        "order": 13,
+                        "parentId": "7a1097ff-74aa-4f6a-aef9-cc0de0ec7e9f",
+                        "skillId": "4308b476-f07a-4e0b-b419-eecce07b3b83",
+                        "topics": [
+                            {
+                                "id": "c1923ad4-c2b1-4746-8183-86b00e219f54",
+                                "title": "Execution",
+                                "categoryId": "297f99d4-7fca-432b-8d7c-26eeeafe26dd",
+                                "order": 1
+                            }
+                        ]
+                    },
+                    {
+                        "id": "d006b55f-72e0-4ecc-9efc-c558f48d394e",
+                        "title": "TypeOperator",
+                        "order": 14,
+                        "parentId": "7a1097ff-74aa-4f6a-aef9-cc0de0ec7e9f",
+                        "skillId": "4308b476-f07a-4e0b-b419-eecce07b3b83",
+                        "topics": [
+                            {
+                                "id": "facece04-1ab8-4fc0-8caf-2267ef4449e5",
+                                "title": "InstanceOf",
+                                "categoryId": "d006b55f-72e0-4ecc-9efc-c558f48d394e",
+                                "order": 1
+                            }
+                        ]
+                    },
+                    {
+                        "id": "a64326b1-6f55-4e80-8b58-f4fba5ea1c7d",
+                        "title": "NullSafeOperator",
+                        "order": 15,
+                        "parentId": "7a1097ff-74aa-4f6a-aef9-cc0de0ec7e9f",
+                        "skillId": "4308b476-f07a-4e0b-b419-eecce07b3b83",
+                        "topics": [
+                            {
+                                "id": "63b94dfb-e8e3-48fb-9fba-77eb0061e22d",
+                                "title": "Null Safe",
+                                "categoryId": "a64326b1-6f55-4e80-8b58-f4fba5ea1c7d",
+                                "order": 1
+                            }
+                        ]
+                    },
+                    {
+                        "id": "feca1ba9-efed-45b5-8502-2fec00b7344a",
+                        "title": "SpaceshipOperator",
+                        "order": 16,
+                        "parentId": "7a1097ff-74aa-4f6a-aef9-cc0de0ec7e9f",
+                        "skillId": "4308b476-f07a-4e0b-b419-eecce07b3b83",
+                        "topics": [
+                            {
+                                "id": "89e3f439-7a92-4aa5-808b-a839aa07e590",
+                                "title": "Spaceship",
+                                "categoryId": "feca1ba9-efed-45b5-8502-2fec00b7344a",
+                                "order": 1
+                            }
+                        ]
+                    },
+                    {
+                        "id": "c249fba9-f896-48a9-bd32-0342f5ee5836",
+                        "title": "Presidence&Associativity",
+                        "order": 17,
+                        "parentId": "7a1097ff-74aa-4f6a-aef9-cc0de0ec7e9f",
+                        "skillId": "4308b476-f07a-4e0b-b419-eecce07b3b83",
+                        "topics": [
+                            {
+                                "id": "8f9fa70f-9484-454e-82f8-dc8edf7b26f0",
+                                "title": "Presidence",
+                                "categoryId": "c249fba9-f896-48a9-bd32-0342f5ee5836",
+                                "order": 1
+                            },
+                            {
+                                "id": "f4d265f2-6882-495f-b1a8-752f9b0cc82f",
+                                "title": "Associativity",
+                                "categoryId": "c249fba9-f896-48a9-bd32-0342f5ee5836",
+                                "order": 2
+                            }
+                        ]
+                    }
+                ],
+                "topics": []
+            },
+            {
+                "id": "4294f796-b6a4-422f-a33a-8b2603d257bf",
+                "title": "ControlStructure",
+                "order": 5,
+                "parentId": null,
+                "skillId": "4308b476-f07a-4e0b-b419-eecce07b3b83",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "cc37376f-ab95-41fb-a5a9-9110d84387a0",
+                        "title": "Control Structure",
+                        "categoryId": "4294f796-b6a4-422f-a33a-8b2603d257bf",
+                        "order": 1
+                    },
+                    {
+                        "id": "032b3cb1-bd97-42c1-98d5-fb2bf56654b0",
+                        "title": "Switch",
+                        "categoryId": "4294f796-b6a4-422f-a33a-8b2603d257bf",
+                        "order": 2
+                    },
+                    {
+                        "id": "08dcbe15-9a94-47d9-8576-c281377eaf93",
+                        "title": "Match",
+                        "categoryId": "4294f796-b6a4-422f-a33a-8b2603d257bf",
+                        "order": 3
+                    }
+                ]
+            },
+            {
+                "id": "7433717a-1825-4e32-b0e2-e52ae02507bc",
+                "title": "Functions",
+                "order": 6,
+                "parentId": null,
+                "skillId": "4308b476-f07a-4e0b-b419-eecce07b3b83",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "f8232888-a5af-4d94-adfe-e52f67f2c040",
+                        "title": "Basic Function Syntax",
+                        "categoryId": "7433717a-1825-4e32-b0e2-e52ae02507bc",
+                        "order": 1
+                    },
+                    {
+                        "id": "cfd6630d-ce1c-4985-addd-826afeb7469d",
+                        "title": "Echo Print Function",
+                        "categoryId": "7433717a-1825-4e32-b0e2-e52ae02507bc",
+                        "order": 1
+                    },
+                    {
+                        "id": "80d240df-c9a8-434c-8067-5600b6eeef99",
+                        "title": "Function with Return",
+                        "categoryId": "7433717a-1825-4e32-b0e2-e52ae02507bc",
+                        "order": 2
+                    },
+                    {
+                        "id": "5e539d58-c041-4756-b21d-75aa6747f7b0",
+                        "title": "Null Return Function",
+                        "categoryId": "7433717a-1825-4e32-b0e2-e52ae02507bc",
+                        "order": 2
+                    },
+                    {
+                        "id": "bc721354-e736-493f-a21d-58037a2efad9",
+                        "title": "Function With Param",
+                        "categoryId": "7433717a-1825-4e32-b0e2-e52ae02507bc",
+                        "order": 3
+                    },
+                    {
+                        "id": "d13fa679-3b6b-4769-9423-0010bcf9aee8",
+                        "title": "Fn Inside Conditionals",
+                        "categoryId": "7433717a-1825-4e32-b0e2-e52ae02507bc",
+                        "order": 3
+                    },
+                    {
+                        "id": "6fcabfd9-c35d-426a-b451-1809873a2113",
+                        "title": "Named Params",
+                        "categoryId": "7433717a-1825-4e32-b0e2-e52ae02507bc",
+                        "order": 4
+                    },
+                    {
+                        "id": "b570d2fb-8dba-4948-98de-5bf8411cfc20",
+                        "title": "Fn Inside Function",
+                        "categoryId": "7433717a-1825-4e32-b0e2-e52ae02507bc",
+                        "order": 4
+                    },
+                    {
+                        "id": "6e7f0fa7-c71d-4eba-9b36-8a65fc76890e",
+                        "title": "Default Params",
+                        "categoryId": "7433717a-1825-4e32-b0e2-e52ae02507bc",
+                        "order": 5
+                    },
+                    {
+                        "id": "94bc3bc1-002c-4b02-93ec-95571cab2c71",
+                        "title": "Return Types Painting",
+                        "categoryId": "7433717a-1825-4e32-b0e2-e52ae02507bc",
+                        "order": 5
+                    },
+                    {
+                        "id": "101bea04-fcb6-4c08-ae4b-5270c1466fb4",
+                        "title": "Aero Functions",
+                        "categoryId": "7433717a-1825-4e32-b0e2-e52ae02507bc",
+                        "order": 6
+                    },
+                    {
+                        "id": "72642e3e-6382-4e7b-9983-cd87383e912d",
+                        "title": "Params Arguments",
+                        "categoryId": "7433717a-1825-4e32-b0e2-e52ae02507bc",
+                        "order": 6
+                    },
+                    {
+                        "id": "c71622c2-a393-4b4e-8faf-0b49e998565e",
+                        "title": "Variable Function",
+                        "categoryId": "7433717a-1825-4e32-b0e2-e52ae02507bc",
+                        "order": 7
+                    },
+                    {
+                        "id": "20cbd2ff-f37e-4121-9c29-a75b2067396f",
+                        "title": "Variable Scopes",
+                        "categoryId": "7433717a-1825-4e32-b0e2-e52ae02507bc",
+                        "order": 7
+                    },
+                    {
+                        "id": "e4d18d5b-2841-4460-b449-a4bbe0ddcd1d",
+                        "title": "Static Variable",
+                        "categoryId": "7433717a-1825-4e32-b0e2-e52ae02507bc",
+                        "order": 8
+                    },
+                    {
+                        "id": "47856d58-a541-4342-a477-f13721813741",
+                        "title": "Variable Anonomous Arrow Fn",
+                        "categoryId": "7433717a-1825-4e32-b0e2-e52ae02507bc",
+                        "order": 9
+                    },
+                    {
+                        "id": "169affc4-c69e-42f3-8fb0-f21f066ef465",
+                        "title": "Callback Fn",
+                        "categoryId": "7433717a-1825-4e32-b0e2-e52ae02507bc",
+                        "order": 10
+                    }
+                ]
+            },
+            {
+                "id": "4101ff84-41f6-4834-8654-95d32b1ac149",
+                "title": "Date",
+                "order": 7,
+                "parentId": null,
+                "skillId": "4308b476-f07a-4e0b-b419-eecce07b3b83",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "e4329d4c-cea9-4468-ba62-9425670126c7",
+                        "title": "Date & Methods",
+                        "categoryId": "4101ff84-41f6-4834-8654-95d32b1ac149",
+                        "order": 1
+                    },
+                    {
+                        "id": "95321a45-890d-4f56-ba47-49aae3cf9b2c",
+                        "title": "Date Formates",
+                        "categoryId": "4101ff84-41f6-4834-8654-95d32b1ac149",
+                        "order": 2
+                    }
+                ]
+            },
+            {
+                "id": "cb21cff3-e1dc-4045-aafb-1c8ce67d88d7",
+                "title": "Loops",
+                "order": 8,
+                "parentId": null,
+                "skillId": "4308b476-f07a-4e0b-b419-eecce07b3b83",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "eda4fc1f-1dde-4c4b-9314-5c9b9b9adb5b",
+                        "title": "While",
+                        "categoryId": "cb21cff3-e1dc-4045-aafb-1c8ce67d88d7",
+                        "order": 1
+                    },
+                    {
+                        "id": "4b322842-cf9a-455c-9c88-ec891ae4f460",
+                        "title": "Do While",
+                        "categoryId": "cb21cff3-e1dc-4045-aafb-1c8ce67d88d7",
+                        "order": 2
+                    },
+                    {
+                        "id": "18f4fb54-ad7c-4fb8-8797-7730251e9072",
+                        "title": "For",
+                        "categoryId": "cb21cff3-e1dc-4045-aafb-1c8ce67d88d7",
+                        "order": 3
+                    },
+                    {
+                        "id": "8b579bbc-ea02-46f7-9ee6-0fe85eefc5de",
+                        "title": "For Loop",
+                        "categoryId": "cb21cff3-e1dc-4045-aafb-1c8ce67d88d7",
+                        "order": 3
+                    },
+                    {
+                        "id": "60741474-5441-40c5-aea6-1af62dbddb48",
+                        "title": "Break",
+                        "categoryId": "cb21cff3-e1dc-4045-aafb-1c8ce67d88d7",
+                        "order": 4
+                    },
+                    {
+                        "id": "813d593b-3e94-421e-bebb-a2548e91e8b6",
+                        "title": "For Each",
+                        "categoryId": "cb21cff3-e1dc-4045-aafb-1c8ce67d88d7",
+                        "order": 4
+                    },
+                    {
+                        "id": "7a464719-f626-4166-9331-f445e06dd4ee",
+                        "title": "Continue",
+                        "categoryId": "cb21cff3-e1dc-4045-aafb-1c8ce67d88d7",
+                        "order": 5
+                    },
+                    {
+                        "id": "af2ed534-7cb2-4590-99f8-2ce0cf7e5a61",
+                        "title": "Nested Loop",
+                        "categoryId": "cb21cff3-e1dc-4045-aafb-1c8ce67d88d7",
+                        "order": 6
+                    },
+                    {
+                        "id": "15322606-110f-4df4-b120-48ac8d969abd",
+                        "title": "For Each Array To Str",
+                        "categoryId": "cb21cff3-e1dc-4045-aafb-1c8ce67d88d7",
+                        "order": 6
+                    },
+                    {
+                        "id": "b57b429f-7f60-43dc-9802-a79f021acf4e",
+                        "title": "Ex Even",
+                        "categoryId": "cb21cff3-e1dc-4045-aafb-1c8ce67d88d7",
+                        "order": 7
+                    },
+                    {
+                        "id": "817cec40-2135-403e-944e-b014ede4bd5f",
+                        "title": "Ex Odd",
+                        "categoryId": "cb21cff3-e1dc-4045-aafb-1c8ce67d88d7",
+                        "order": 8
+                    },
+                    {
+                        "id": "49459305-dd41-4ea5-b1f1-df85847bb4d4",
+                        "title": "Ex SNO",
+                        "categoryId": "cb21cff3-e1dc-4045-aafb-1c8ce67d88d7",
+                        "order": 9
+                    }
+                ]
+            },
+            {
+                "id": "ce104578-1a56-4c1c-8668-9f720f872b30",
+                "title": "Declare",
+                "order": 9,
+                "parentId": null,
+                "skillId": "4308b476-f07a-4e0b-b419-eecce07b3b83",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "dc9023d2-668e-415e-8316-04c656c60a23",
+                        "title": "Declare Encoding",
+                        "categoryId": "ce104578-1a56-4c1c-8668-9f720f872b30",
+                        "order": 1
+                    },
+                    {
+                        "id": "f88b63ce-1892-49bd-ad06-1ba0a23b3454",
+                        "title": "Declare Statement",
+                        "categoryId": "ce104578-1a56-4c1c-8668-9f720f872b30",
+                        "order": 2
+                    },
+                    {
+                        "id": "c9596020-7d4c-4bad-96d0-a0564313e377",
+                        "title": "Declare Strict Types",
+                        "categoryId": "ce104578-1a56-4c1c-8668-9f720f872b30",
+                        "order": 3
+                    },
+                    {
+                        "id": "db93003b-b7e0-454c-abb9-1159573fedd5",
+                        "title": "Declare Tick",
+                        "categoryId": "ce104578-1a56-4c1c-8668-9f720f872b30",
+                        "order": 4
+                    }
+                ]
+            },
+            {
+                "id": "59ac25e1-0040-4a39-b804-896ebde9ccbd",
+                "title": "Return&Yield",
+                "order": 10,
+                "parentId": null,
+                "skillId": "4308b476-f07a-4e0b-b419-eecce07b3b83",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "f84b4288-25d1-4671-8d2b-166c8eccb547",
+                        "title": "Return Statement",
+                        "categoryId": "59ac25e1-0040-4a39-b804-896ebde9ccbd",
+                        "order": 1
+                    },
+                    {
+                        "id": "3ec03784-3ae5-4c28-a875-09322ded4e28",
+                        "title": "Yield Include",
+                        "categoryId": "59ac25e1-0040-4a39-b804-896ebde9ccbd",
+                        "order": 2
+                    }
+                ]
+            },
+            {
+                "id": "1dc36a03-3570-4134-97e9-b91361edf022",
+                "title": "Include&Require",
+                "order": 11,
+                "parentId": null,
+                "skillId": "4308b476-f07a-4e0b-b419-eecce07b3b83",
+                "children": [],
+                "topics": [
+                    {
+                        "id": "c0cfb98e-cb72-4675-9e66-f8d010c53a9c",
+                        "title": "Include",
+                        "categoryId": "1dc36a03-3570-4134-97e9-b91361edf022",
+                        "order": 1
+                    },
+                    {
+                        "id": "d36a63e0-964c-4b0a-8f7d-4a8a678df04e",
+                        "title": "Require",
+                        "categoryId": "1dc36a03-3570-4134-97e9-b91361edf022",
+                        "order": 2
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "d8da5fb4-071c-4733-b1b6-3ac8d59a7edb",
+        "title": "PHP OOP",
+        "order": 7,
+        "categories": []
+    },
+    {
+        "id": "42410732-3cb0-4de1-a47a-cf42ffb2b2ba",
+        "title": "Terminal",
+        "order": 8,
+        "categories": []
+    },
+    {
+        "id": "aef95b83-d599-4693-a749-e53c66b139bc",
+        "title": "WordPress",
+        "order": 9,
+        "categories": []
+    },
+    {
+        "id": "686a2931-ae1f-4377-ab6a-c268ab122ff6",
+        "title": "Git",
+        "order": 10,
+        "categories": []
+    },
+    {
+        "id": "7da9ac4d-0782-4b40-aed7-c06f93108227",
+        "title": "Docker",
+        "order": 11,
+        "categories": []
+    },
+    {
+        "id": "cb3f06b9-1781-49a5-8b39-7ed6c1f2f37f",
+        "title": "Figma",
+        "order": 12,
+        "categories": []
+    },
+    {
+        "id": "167ce7e2-1236-46bf-834c-f2e994109119",
+        "title": "Office",
+        "order": 13,
+        "categories": []
+    },
+    {
+        "id": "e9371eda-7038-4f53-878b-f91e7266718b",
+        "title": "Laravel",
+        "order": 14,
+        "categories": []
+    },
+    {
+        "id": "f2e259ee-e14e-4819-a398-e615a7ce5b89",
+        "title": "React",
+        "order": 15,
+        "categories": []
+    },
+    {
+        "id": "696da92f-7258-493f-897c-a4879ab2517b",
+        "title": "ShadCN",
+        "order": 16,
+        "categories": []
+    },
+    {
+        "id": "2ad01c6d-9ac2-4df3-afd5-b2930ebca062",
+        "title": "MaterialUI",
+        "order": 17,
+        "categories": []
+    },
+    {
+        "id": "a41f4735-2e2a-49ae-bcd2-16f8757e91df",
+        "title": "AntDesign",
+        "order": 18,
+        "categories": []
+    },
+    {
+        "id": "675db403-1619-4d4c-9610-6464111508c4",
+        "title": "Tanstack",
+        "order": 19,
+        "categories": []
+    }
+]

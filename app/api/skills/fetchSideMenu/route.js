@@ -22,11 +22,6 @@ export async function GET() {
                      orderBy: {
                         order: "asc",
                      },
-                     include: {
-                        topics: {
-                           orderBy: { order: "asc" },
-                        },
-                     },
                   },
                   // Include topics that belong directly to the parent category
                   topics: {

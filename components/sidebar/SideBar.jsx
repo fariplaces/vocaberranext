@@ -7,7 +7,7 @@ const SideBar = ({ sidebarOpen }) => {
   return (
     <ScrollArea
       className={`${sidebarOpen ? "w-64" : "w-16"
-        } sticky bg-black border-r border-white/30 max-h-screen transition-all overflow-x-hidden overflow-y-auto duration-300 flex flex-col`}
+        } sticky bg-black border-r border-white/30 h-screen transition-all overflow-x-hidden overflow-y-auto duration-300 flex flex-col`}
     >
       <UserProfile sidebarOpen={sidebarOpen} />
       <NavigationMenu />

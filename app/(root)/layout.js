@@ -25,26 +25,23 @@ const PageLayout = ({ children }) => {
   };
   return (
     <AuthCheck>
-      <div className="flex max-screen bg-black text-white">
-        <SideBar sidebarOpen={sidebarOpen} />
-        <div className="flex-1 min-h-screen flex flex-col">
-          <TopBar
-            handleNotifictionToggle={handleNotifictionToggle}
-          />
-          {/* <TabBar
+      <div className="flex w-full">
+        <div className={`fixed ${sidebarOpen ? "w-64" : "w-16"} bg-black h-screen`}>
+          <SideBar sidebarOpen={sidebarOpen} />
+        </div>
+
+        <div className={`flex w-full ${sidebarOpen ? "ml-64" : "ml-16"} bg-black text-white`}>
+          <div className="flex-1 min-h-screen flex flex-col">
+            <TopBar handleNotifictionToggle={handleNotifictionToggle} />
+            {children}
+            <Footer />
+          </div>
+
+          <RightSideBar
             notificationOpen={notificationOpen}
             setNotificationOpen={setNotificationOpen}
-          /> */}
-          {/* <main className="flex-1 p-6 border border-gray-700 rounded-2xl m-2"> */}
-          {children}
-          {/* </main> */}
-          <Footer />
+          />
         </div>
-        {/* Notification Panel */}
-        <RightSideBar
-          notificationOpen={notificationOpen}
-          setNotificationOpen={setNotificationOpen}
-        />
       </div>
     </AuthCheck>
   );
