@@ -8,28 +8,31 @@ import RightSideBar from "@/components/sidebar/RightSideBar";
 import { useState } from "react";
 import AuthCheck from "@/components/AuthCheck";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSideMenu } from "@/store/slices/skillSlice";
+import { fetchSideMenu, toggleSidebar } from "@/store/slices/skillSlice";
 
 const PageLayout = ({ children }) => {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  // const [sidebarOpen, setSidebarOpen] = useState(true);
   const [notificationOpen, setNotificationOpen] = useState(false);
-  const { sideMenu } = useSelector((state) => state.skill);
+  const { sideMenu, sidebarOpen } = useSelector((state) => state.skill);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchSideMenu());
-  }, [])
+  }, [dispatch])
 
   const handleNotifictionToggle = () => {
     setNotificationOpen(!notificationOpen);
   };
   const handleSidebarToggle = () => {
-    setSidebarOpen(!sidebarOpen);
+    dispatch(toggleSidebar()); // Global state update
   };
+  // const handleSidebarToggle = () => {
+  //   setSidebarOpen(!sidebarOpen);
+  // };
   return (
     <AuthCheck>
       <div className="flex max-screen bg-black text-white">
-        <SideBar sidebarOpen={sidebarOpen} sideMenu={sideMenu} />
+        <SideBar sidebarOpen={sidebarOpen} />
         <div className="flex-1 min-h-screen flex flex-col">
           <TopBar
             handleNotifictionToggle={handleNotifictionToggle}

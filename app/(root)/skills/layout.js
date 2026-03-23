@@ -8,7 +8,7 @@ const PageLayout = ({ children }) => {
       // notificationOpen={notificationOpen}
       // setNotificationOpen={setNotificationOpen}
       />
-      <main main className="flex-1 p-6 border border-gray-700 rounded-2xl m-2" >
+      <main className="flex-1 p-6 border border-gray-700 rounded-2xl m-2" >
         {children}
       </main >
     </>

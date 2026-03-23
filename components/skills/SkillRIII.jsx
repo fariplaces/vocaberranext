@@ -3,6 +3,7 @@ import {
    Edit2,
    Trash2,
 } from "lucide-react";
+import { Checkbox } from '../ui/checkbox';
 
 const SkillRIII = ({ route }) => {
    return (
@@ -68,9 +69,9 @@ const SkillRIII = ({ route }) => {
 
                      <td className="border border-gray-700 px-4 py-2 text-sm text-white">
                         <div className="flex justify-evenly">
-                           <input type='checkbox' />
-                           {/* {item.net} */}<Edit2 />
-                           {/* {item.net} */}<Edit2 />
+                           <Checkbox />
+                           <Checkbox />
+                           <Checkbox />
                         </div>
                      </td>
 

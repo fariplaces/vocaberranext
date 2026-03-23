@@ -25,10 +25,15 @@ const skillSlice = createSlice({
   name: "SkillSlice",
   initialState: {
     sideMenu: [],
+    sidebarOpen: true,
     loading: false,
     error: null,
   },
   reducers: {
+    // Add this reducer
+    toggleSidebar: (state) => {
+      state.sidebarOpen = !state.sidebarOpen;
+    },
     resetTypingState: (state) => {
       state.sideMenu = [];
       state.loading = false;
@@ -53,5 +58,5 @@ const skillSlice = createSlice({
   },
 });
 
-export const { resetTypingState } = skillSlice.actions;
+export const { resetTypingState, toggleSidebar } = skillSlice.actions;
 export default skillSlice.reducer;
