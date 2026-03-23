@@ -1,11 +1,6 @@
 import { fetchTypings } from "@/store/slices/typingSlice";
 import {
-  Delete,
-  DeleteIcon,
   Edit2,
-  LucideDelete,
-  Recycle,
-  Trash,
   Trash2,
 } from "lucide-react";
 import React, { useEffect } from "react";
@@ -19,8 +14,8 @@ function CourseExercises({ route, handleEditClick, handleDelClick }) {
     route === "course"
       ? item.exercise.lesson.lesson !== "TEST"
       : route === "test"
-      ? item.exercise.lesson.lesson === "TEST"
-      : true
+        ? item.exercise.lesson.lesson === "TEST"
+        : true
   );
 
   useEffect(() => {

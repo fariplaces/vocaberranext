@@ -28,13 +28,15 @@ import authReducer from "./slices/authSlice";
 import wordReducer from "./slices/wordSlice";
 import wordMeaningReducer from "./slices/wordMeaningSlice";
 import typingReducer from "./slices/typingSlice";
+import skillReducer from "./slices/skillSlice";
 
 // combine reducers (if more slices later)
 const rootReducer = combineReducers({
   auth: authReducer,
   words: wordReducer,
   wordMeanings: wordMeaningReducer,
-  typing: typingReducer
+  typing: typingReducer,
+  skill: skillReducer
 
 });
 
@@ -42,7 +44,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["auth"], 
+  whitelist: ["auth"],
 };
 
 // wrap reducer

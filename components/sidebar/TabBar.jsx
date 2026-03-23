@@ -1,3 +1,4 @@
+'use client'
 import React, { useState } from "react";
 
 const TabBar = () => {
@@ -19,11 +20,10 @@ const TabBar = () => {
             key={tab}
             onClick={() => setActiveTab(tab)}
             className={`py-2 px-4 text-sm font-medium rounded-2xl whitespace-nowrap border border-gray-700 transition-colors duration-200
-          ${
-            activeTab === tab
-              ? "bg-gray-600 text-white"
-              : "text-white hover:bg-gray-800"
-          }`}
+          ${activeTab === tab
+                ? "bg-gray-600 text-white"
+                : "text-white hover:bg-gray-800"
+              }`}
           >
             {tab}
           </button>

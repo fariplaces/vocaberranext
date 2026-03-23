@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-const NavigationMenu = ({ sidebarOpen }) => {
+const NavigationMenu = ({ sidebarOpen, data }) => {
   const [expandedMenus, setExpandedMenus] = useState({
     Employees: true,
     Typing: true,
@@ -36,10 +36,23 @@ const NavigationMenu = ({ sidebarOpen }) => {
     }));
   };
 
-  const sidebarItems = [
-    { name: "Overview", icon: Home, hasSubmenu: false },
+
+
+  const staticItems = [
     {
-      name: "Employees",
+      name: "DASHBOARD",
+      icon: WholeWord,
+      hasSubmenu: true,
+      subItems: [
+        {
+          item: "Typing Skill",
+          href: "/typing/typingDashboard",
+        },
+      ],
+    },
+    // { name: "COMMUNICATION", icon: Home, hasSubmenu: false },
+    {
+      name: "Communication Skill",
       icon: Users,
       hasSubmenu: true,
       subItems: [
@@ -63,10 +76,6 @@ const NavigationMenu = ({ sidebarOpen }) => {
       hasSubmenu: true,
       subItems: [
         {
-          item: "Stats",
-          href: "/typing/typingDashboard",
-        },
-        {
           item: "Exercises",
           href: "/typing/exercise/course",
         },
@@ -76,130 +85,34 @@ const NavigationMenu = ({ sidebarOpen }) => {
         },
       ],
     },
-
-    // {
-    //   name: "Transactions",
-    //   icon: HandCoins,
-    //   hasSubmenu: true,
-    //   subItems: [
-    //     "Employees",
-    //     "Employee Performance",
-    //     "Employee Leaves",
-    //     "Addresses",
-    //     "Contacts",
-    //     "Documents",
-    //     "Employee Contracts",
-    //   ],
-    // },
-    // {
-    //   name: "Loans",
-    //   icon: HandCoins,
-    //   hasSubmenu: true,
-    //   subItems: [
-    //     "Employees",
-    //     "Employee Performance",
-    //     "Employee Leaves",
-    //     "Addresses",
-    //     "Contacts",
-    //     "Documents",
-    //     "Employee Contracts",
-    //   ],
-    // },
-    // { name: "Meetings", icon: Calendar, hasSubmenu: false },
-    // {
-    //   name: "Payrolls",
-    //   icon: Users,
-    //   hasSubmenu: true,
-    //   subItems: [
-    //     "Employees",
-    //     "Employee Performance",
-    //     "Employee Leaves",
-    //     "Addresses",
-    //     "Contacts",
-    //     "Documents",
-    //     "Employee Contracts",
-    //   ],
-    // },
-    // {
-    //   name: "Attendance",
-    //   icon: Calendar,
-    //   hasSubmenu: true,
-    //   subItems: [
-    //     "Employees",
-    //     "Employee Performance",
-    //     "Employee Leaves",
-    //     "Addresses",
-    //     "Contacts",
-    //     "Documents",
-    //     "Employee Contracts",
-    //   ],
-    // },
-    // { name: "Company Policies", icon: FileText, hasSubmenu: false },
-    // {
-    //   name: "Appreciations",
-    //   icon: Award,
-    //   hasSubmenu: true,
-    //   subItems: [
-    //     "Employees",
-    //     "Employee Performance",
-    //     "Employee Leaves",
-    //     "Addresses",
-    //     "Contacts",
-    //     "Documents",
-    //     "Employee Contracts",
-    //   ],
-    // },
-    // {
-    //   name: "Onboarding",
-    //   icon: UserPlus,
-    //   hasSubmenu: true,
-    //   subItems: [
-    //     "Employees",
-    //     "Employee Performance",
-    //     "Employee Leaves",
-    //     "Addresses",
-    //     "Contacts",
-    //     "Documents",
-    //     "Employee Contracts",
-    //   ],
-    // },
-    // {
-    //   name: "Offboarding",
-    //   icon: UserMinus,
-    //   hasSubmenu: true,
-    //   subItems: [
-    //     "Employees",
-    //     "Employee Performance",
-    //     "Employee Leaves",
-    //     "Addresses",
-    //     "Contacts",
-    //     "Documents",
-    //     "Employee Contracts",
-    //   ],
-    // },
-    // {
-    //   name: "Reports",
-    //   icon: BarChart3,
-    //   hasSubmenu: true,
-    //   subItems: [
-    //     "Employees",
-    //     "Employee Performance",
-    //     "Employee Leaves",
-    //     "Addresses",
-    //     "Contacts",
-    //     "Documents",
-    //     "Employee Contracts",
-    //   ],
-    // },
   ];
+
+
+  // 2. Transform the dynamic Skills/Categories data
+  const dynamicItems = data.map((skill) => ({
+    name: skill.title,
+    // icon: skill.title.toLowerCase().includes("os") ? Terminal : Code,
+    icon: WholeWord,
+    hasSubmenu: true,
+    subItems: skill.categories.map((cat) => ({
+      item: cat.title,
+      // href: `/skills/${skill.id}/${cat.id}`, // Using IDs for cleaner routing
+      href: `/skills/${cat.id}`, // Using IDs for cleaner routing
+    })),
+  }));
+
+  // 3. Combine them
+  const sidebarItems = [...staticItems, ...dynamicItems];
+
+
+
   return (
     <nav className="flex-1 overflow-y-auto py-4">
       {sidebarItems.map((item) => (
         <div key={item.name}>
           <div
-            className={`flex items-center justify-between px-4 py-2 hover:bg-gray-700 cursor-pointer ${
-              item.name === "Employees" ? "bg-gray-700" : ""
-            }`}
+            className={`flex items-center justify-between px-4 py-2 hover:bg-gray-700 cursor-pointer ${item.name === "Employees" ? "bg-gray-700" : ""
+              }`}
             onClick={() => item.hasSubmenu && toggleMenu(item.name)}
           >
             <div className="flex items-center space-x-3">
