@@ -3,6 +3,9 @@ import axios from "axios";
 
 // ================== ASYNC THUNKS ==================
 
+
+// Exercises and Tests Actions
+
 // Fetch all Exercises and Tests
 export const fetchExercises = createAsyncThunk(
   "typing/fetchExercises",
@@ -18,7 +21,56 @@ export const fetchExercises = createAsyncThunk(
   }
 );
 
-// Fetch all Exercises and Tests
+
+// Create a new Exercises and Tests
+export const createExercise = createAsyncThunk(
+  "typing/createExercise",
+  async (formData, thunkAPI) => {
+    try {
+      const res = await axios.post(`/api/typing/createExercise`, formData);
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || "Failed to create Typing Record"
+      );
+    }
+  }
+);
+
+// Update a Exercises and Tests
+export const updateExercise = createAsyncThunk(
+  "typing/updateExercise",
+  async (payload, thunkAPI) => {
+    try {
+      const res = await axios.patch(`/api/typing/updateExercise`, payload);
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || "Failed to update Typing"
+      );
+    }
+  }
+);
+
+// Delete a Exercises and Tests
+export const deleteExercise = createAsyncThunk(
+  "typing/deleteExercise",
+  async (id, thunkAPI) => {
+    try {
+      const res = await axios.delete(`/api/typing/deleteExercise/${id}`);
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || "Failed to Delete Typing"
+      );
+    }
+  }
+);
+
+
+// Lessons Actions
+
+// Fetch all Lessons
 export const fetchLessons = createAsyncThunk(
   "typing/fetchLessons",
   async (_, thunkAPI) => {
@@ -32,8 +84,26 @@ export const fetchLessons = createAsyncThunk(
     }
   }
 );
+// Exercise Types Actions
 
-// Fetch all Exercises and Tests
+// Fetch all Exercise Types
+export const fetchExerciseTypes = createAsyncThunk(
+  "typing/fetchExerciseTypes",
+  async (_, thunkAPI) => {
+    try {
+      const res = await axios.get("/api/typing/fetchExerciseTypes");
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || "Failed to fetch Lessons"
+      );
+    }
+  }
+);
+
+// Duration Actions
+
+// Fetch all Durations
 export const fetchDurations = createAsyncThunk(
   "typing/fetchDurations",
   async (_, thunkAPI) => {
@@ -47,6 +117,9 @@ export const fetchDurations = createAsyncThunk(
     }
   }
 );
+
+// Typing Actions
+
 // Fetch all Typing Records
 export const fetchTypings = createAsyncThunk(
   "typing/fetchTypings",
@@ -107,21 +180,6 @@ export const deleteTyping = createAsyncThunk(
   }
 );
 
-// // Delete a meaning
-// export const deleteMeaning = createAsyncThunk(
-//   "meanings/delete",
-//   async ({ wordId, meaningId }, thunkAPI) => {
-//     try {
-//       await API.delete(`/words/${wordId}/meanings/${meaningId}`);
-//       return { wordId, meaningId };
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(
-//         error.response?.data?.message || "Failed to delete meaning"
-//       );
-//     }
-//   }
-// );
-
 // ================== SLICE ==================
 
 const typingSlice = createSlice({
@@ -129,6 +187,7 @@ const typingSlice = createSlice({
   initialState: {
     exercises: [],
     lessons: [],
+    exerciseTypes: [],
     durations: [],
     typingData: [],
     loading: false,
@@ -146,16 +205,16 @@ const typingSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // Fetch Exercises
-      .addCase(fetchExercises.pending, (state) => {
+      // Fetch Exercise Types
+      .addCase(fetchExerciseTypes.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchExercises.fulfilled, (state, action) => {
+      .addCase(fetchExerciseTypes.fulfilled, (state, action) => {
         state.loading = false;
-        state.exercises = action.payload;
+        state.exerciseTypes = action.payload;
       })
-      .addCase(fetchExercises.rejected, (state, action) => {
+      .addCase(fetchExerciseTypes.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
@@ -231,7 +290,7 @@ const typingSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-      // Update Typing
+      // Delete Typing
       .addCase(deleteTyping.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -243,6 +302,67 @@ const typingSlice = createSlice({
         );
       })
       .addCase(deleteTyping.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      // Fetch Exercises
+      .addCase(fetchExercises.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchExercises.fulfilled, (state, action) => {
+        state.loading = false;
+        state.exercises = action.payload;
+      })
+      .addCase(fetchExercises.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      // Create Exercise
+      .addCase(createExercise.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(createExercise.fulfilled, (state, action) => {
+        state.loading = false;
+        state.exercises = [action.payload, ...state.exercises];
+      })
+      .addCase(createExercise.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      // Update Exercise
+      .addCase(updateExercise.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateExercise.fulfilled, (state, action) => {
+        state.loading = false;
+        // 1. Find the index of the record that was just updated
+        const index = state.exercises.findIndex(
+          (item) => item.id === action.payload.id
+        );
+        // 2. If found, replace the old object with the new one from the API
+        if (index !== -1) {
+          state.exercises[index] = action.payload;
+        }
+      })
+      .addCase(updateExercise.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      // Delete Exercise
+      .addCase(deleteExercise.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteExercise.fulfilled, (state, action) => {
+        state.loading = false;
+        state.exercises = state.exercises.filter(
+          (item) => item.id !== action.meta.arg
+        );
+      })
+      .addCase(deleteExercise.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

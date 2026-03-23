@@ -1,9 +1,10 @@
 'use client'
 import React, { useEffect, useMemo } from 'react'
-import { Edit2, Trash2 } from "lucide-react";
+import { Edit2, Plus, Trash2 } from "lucide-react";
 import { Checkbox } from '../ui/checkbox';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSkills } from '@/store/slices/skillSlice';
+import ContentTitle from "@/components/ContentTitle";
 
 const SkillRIII = ({ route }) => {
    const { skills } = useSelector((state) => state.skill);
@@ -32,9 +33,14 @@ const SkillRIII = ({ route }) => {
    // Helper component to render a single table
    const TopicTable = ({ title, topics }) => (
       <div className="mb-10">
-         <h3 className="text-lg font-semibold text-blue-400 mb-3 ml-1">
-            {title}
-         </h3>
+
+         <ContentTitle
+            title={title}
+            btnTitle="Back"
+            Icon={Plus}
+         // handleMethod={handleChange}
+         />
+
          <div className="border border-gray-700 rounded-lg overflow-hidden">
             <table className="min-w-full border-collapse">
                <thead className="bg-gray-800">

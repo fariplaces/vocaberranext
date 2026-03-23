@@ -6,6 +6,7 @@ import {
   ChevronRight,
   Users,
   ChartNoAxesColumn,
+  TrendingUp,
 } from "lucide-react";
 import Link from "next/link";
 import { FaLaravel, FaReact, FaWordpressSimple } from "react-icons/fa";
@@ -119,7 +120,42 @@ const NavigationMenu = () => {
         },
       ],
     },
+    {
+      name: "Manage Typing",
+      type: "Admin",
+      icon: GoTypography,
+      hasSubmenu: true,
+      subItems: [
+        {
+          item: "Exercises List",
+          href: "/typing/manage/exercises",
+        },
+        {
+          item: "Tests List",
+          href: "/typing/manage/tests",
+        },
+      ],
+    },
+    {
+      name: "Manage Skills",
+      icon: TrendingUp,
+      type: "Admin",
+      hasSubmenu: true,
+      subItems: [
+        {
+          item: "Skills List",
+          href: "/skills/manage/skills",
+        },
+        {
+          item: "Categories List",
+          href: "/skills/manage/categories",
+        },
+      ],
+    },
   ];
+
+
+
 
   const handleItemClick = (item) => {
     if (item.hasSubmenu) {
@@ -153,9 +189,17 @@ const NavigationMenu = () => {
   // 3. Combine them
   const sidebarItems = [...staticItems, ...dynamicItems];
 
+  const filterSkillMenu = sidebarItems.filter(item => !('type' in item));
+
+  const filterAdminMenu = sidebarItems.filter(item => 'type' in item);
+
+
   return (
     <nav className="flex-1 overflow-y-auto overflow-x-hidden overflow-y-auto py-4">
-      {sidebarItems.map((item) => {
+      <div className="px-4 w-full text-center py-2 transition-colors cursor-pointer bg-gray-900 text-white">
+        Skills Improvement
+      </div>
+      {filterSkillMenu.map((item) => {
         // Check if any child is active
         const isParentActive = item.subItems?.some(sub => pathname === sub.href);
 
@@ -166,7 +210,57 @@ const NavigationMenu = () => {
                 ${isParentActive ? "bg-gray-700 text-white border-r-4 border-blue-500" : "hover:bg-gray-800 text-gray-400"}
               `}
               onClick={() => handleItemClick(item)}
-            // onClick={() => item.hasSubmenu && toggleMenu(item.name)}
+            >
+              <div className="flex items-center space-x-3">
+                {/* Icon also highlights when active */}
+                <item.icon className={`w-5 h-5 ${isParentActive ? "text-blue-400" : ""}`} />
+                {sidebarOpen && <span className="text-sm font-medium">{item.name}</span>}
+              </div>
+              {sidebarOpen && item.hasSubmenu && (
+                expandedMenus[item.name] ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />
+              )}
+            </div>
+
+            {/* Submenu */}
+            {sidebarOpen && item.hasSubmenu && expandedMenus[item.name] && (
+              <div className="ml-8 mt-1 space-y-1 border-l border-gray-600">
+                {item.subItems.map((subItem, i) => {
+                  const isChildActive = pathname === subItem.href;
+
+                  return (
+                    <Link
+                      href={subItem.href}
+                      key={i}
+                      className={`flex py-1.5 px-4 text-sm transition-all
+                        ${isChildActive
+                          ? "text-white font-bold translate-x-1"
+                          : "text-gray-400 hover:text-gray-100"
+                        }
+                      `}
+                    >
+                      {subItem.item}
+                    </Link>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        );
+      })}
+      <div className="px-4 w-full text-center py-2 transition-colors cursor-pointer bg-gray-900 text-white">
+        ADMIN
+      </div>
+      {filterAdminMenu.map((item) => {
+        // Check if any child is active
+        const isParentActive = item.subItems?.some(sub => pathname === sub.href);
+
+        return (
+          <div key={item.name}>
+            <div
+              className={`flex items-center justify-between px-4 py-2 transition-colors cursor-pointer 
+                ${isParentActive ? "bg-gray-700 text-white border-r-4 border-blue-500" : "hover:bg-gray-800 text-gray-400"}
+              `}
+              onClick={() => handleItemClick(item)}
             >
               <div className="flex items-center space-x-3">
                 {/* Icon also highlights when active */}
