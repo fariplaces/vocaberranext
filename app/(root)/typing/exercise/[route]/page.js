@@ -1,4 +1,4 @@
-import TypingExercisePage from "@/components/Typing/TypingPage";
+import TypingPage from "@/components/Typing/TypingPage";
 import React from "react";
 
 const Typing = async ({ params }) => {
