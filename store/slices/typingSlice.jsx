@@ -189,7 +189,7 @@ const typingSlice = createSlice({
     lessons: [],
     exerciseTypes: [],
     durations: [],
-    typingData: [],
+    typings: [],
     loading: false,
     error: null,
   },
@@ -198,7 +198,7 @@ const typingSlice = createSlice({
       state.exercises = [];
       state.lessons = [];
       state.durations = [];
-      state.typingData = [];
+      state.typings = [];
       state.loading = false;
       state.error = null;
     },
@@ -251,7 +251,7 @@ const typingSlice = createSlice({
       })
       .addCase(fetchTypings.fulfilled, (state, action) => {
         state.loading = false;
-        state.typingData = action.payload;
+        state.typings = action.payload;
       })
       .addCase(fetchTypings.rejected, (state, action) => {
         state.loading = false;
@@ -264,7 +264,7 @@ const typingSlice = createSlice({
       })
       .addCase(createTyping.fulfilled, (state, action) => {
         state.loading = false;
-        state.typingData = [action.payload, ...state.typingData];
+        state.typings = [action.payload, ...state.typings];
       })
       .addCase(createTyping.rejected, (state, action) => {
         state.loading = false;
@@ -278,12 +278,12 @@ const typingSlice = createSlice({
       .addCase(updateTyping.fulfilled, (state, action) => {
         state.loading = false;
         // 1. Find the index of the record that was just updated
-        const index = state.typingData.findIndex(
+        const index = state.typings.findIndex(
           (item) => item.id === action.payload.id
         );
         // 2. If found, replace the old object with the new one from the API
         if (index !== -1) {
-          state.typingData[index] = action.payload;
+          state.typings[index] = action.payload;
         }
       })
       .addCase(updateTyping.rejected, (state, action) => {
@@ -297,7 +297,7 @@ const typingSlice = createSlice({
       })
       .addCase(deleteTyping.fulfilled, (state, action) => {
         state.loading = false;
-        state.typingData = state.typingData.filter(
+        state.typings = state.typings.filter(
           (item) => item.id !== action.meta.arg
         );
       })

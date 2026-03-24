@@ -10,7 +10,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const ExerciseBarChart = ({ data, title }) => {
+const TypingBarChart = ({ data, title }) => {
   return (
     <div className="bg-black p-4 rounded-xl border border-gray-700 h-[400px] w-full">
       <h3 className="text-white mb-4 text-center font-bold">{title}</h3>
@@ -74,4 +74,4 @@ const ExerciseBarChart = ({ data, title }) => {
   );
 };
 
-export default ExerciseBarChart;
+export default TypingBarChart;

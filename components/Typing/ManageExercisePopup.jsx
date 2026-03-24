@@ -1,5 +1,5 @@
 "use client";
-import { createTyping, updateTyping } from "@/store/slices/typingSlice";
+import { createExercise, createTyping, updateExercise, updateTyping } from "@/store/slices/typingSlice";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -10,7 +10,7 @@ const initialFormState = {
   exerciseNo: "",
 };
 
-const ExercisePopupManage = ({
+const ManageExercisePopup = ({
   route,
   isOpen,
   setIsOpen,
@@ -34,12 +34,11 @@ const ExercisePopupManage = ({
     return state;
   };
   const { user } = useSelector((state) => state.auth);
-  const { lessons } = useSelector((state) => state.typing);
-  const { exerciseTypes } = useSelector((state) => state.typing);
+  const { lessons, exerciseTypes, exercises } = useSelector((state) => state.typing);
   const dispatch = useDispatch();
   const [formData, setFormData] = useState(() => getInitialState());
 
-  const lessonsData = lessons.filter((item) =>
+  const routedLessons = lessons.filter((item) =>
     route === "exercises"
       ? item.lesson !== "TEST"
       : route === "tests"
@@ -61,11 +60,21 @@ const ExercisePopupManage = ({
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
     setFormData((prev) => {
       const newState = { ...prev, [name]: value };
-      // if (name === "net" && parseInt(value) > parseInt(prev.gross)) {
-      //   console.warn("Net exceeds Gross!");
-      // }
+
+      // Check duplicate exerciseNo
+      if (name === "exerciseNo") {
+        const exists = exercises.some(
+          (item) => item.exerciseNo === value
+        );
+
+        if (exists) {
+          console.warn("Exercise Already Exists!");
+        }
+      }
+
       return newState;
     });
   };
@@ -74,32 +83,35 @@ const ExercisePopupManage = ({
     const isFormIncomplete = Object.values(formData).some(
       (val) => String(val).trim() === ""
     );
+
     if (isFormIncomplete || !user?.id) {
       alert("Please fill all fields!");
       return;
     }
 
-    const grossNum = parseInt(formData.gross);
-    const netNum = parseInt(formData.net);
+    // ✅ Duplicate Exercise No check
+    const isDuplicate = exercises.some(
+      (item) =>
+        item.exerciseNo === formData.exerciseNo &&
+        item.id !== formData.id // ignore self in edit mode
+    );
 
-    if (netNum > grossNum) {
-      alert("Net speed cannot be greater than Gross speed!");
+    if (isDuplicate) {
+      alert("Exercise number already exists!");
       return;
     }
 
     const payload = {
       ...formData,
       userId: user.id,
-      accuracy: parseFloat(String(formData.accuracy).replace("%", "")),
-      gross: parseInt(formData.gross),
-      net: parseInt(formData.net),
     };
 
     if (editData?.id) {
-      dispatch(updateTyping({ id: editData.id, ...payload }));
+      dispatch(updateExercise({ id: editData.id, ...payload }));
     } else {
-      dispatch(createTyping(payload));
+      dispatch(createExercise(payload));
     }
+
     setIsOpen(false);
     resetPopup();
   };
@@ -110,7 +122,7 @@ const ExercisePopupManage = ({
       {isOpen && (
         <>
           <div
-            className="absolute flex items-center justify-center inset-0 bg-white/10 backdrop-blur-sm transition-all duration-300"
+            className="fixed flex items-center justify-center inset-0 bg-white/10 backdrop-blur-sm transition-all duration-300"
             onClick={() => setIsOpen(false)}
           >
             {/* <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"> */}
@@ -142,7 +154,7 @@ const ExercisePopupManage = ({
                   <option className="bg-black" value="">
                     Select a Lesson
                   </option>
-                  {lessonsData.map((lesson) => (
+                  {routedLessons.map((lesson) => (
                     <option
                       key={lesson.id}
                       value={lesson.id}
@@ -161,7 +173,7 @@ const ExercisePopupManage = ({
                   Type
                 </label>
                 <select
-                  disabled="true"
+                  disabled
                   name="typeId"
                   value={formData.typeId}
                   onChange={handleChange}
@@ -193,6 +205,7 @@ const ExercisePopupManage = ({
                   placeholder="Enter Exercise Title..."
                 />
               </div>
+
               {/* Word Input */}
               <div className="mb-4">
                 <label className="block text-sm mb-1">Exercise No</label>
@@ -201,9 +214,27 @@ const ExercisePopupManage = ({
                   name="exerciseNo"
                   value={formData.exerciseNo}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 bg-transparent border border-gray-600 rounded-md focus:outline-none focus:border-blue-500"
-                  placeholder="Enter Exercise No..."
+                  className={`w-full px-3 py-2 bg-transparent border rounded-md focus:outline-none 
+      ${exercises.some(
+                    (item) =>
+                      item.exerciseNo === formData.exerciseNo &&
+                      item.id !== formData.id // ignore self in edit
+                  )
+                      ? "border-red-500"
+                      : "border-gray-600 focus:border-blue-500"
+                    }`}
+                  placeholder="Enter Exercise No"
                 />
+
+                {exercises.some(
+                  (item) =>
+                    item.exerciseNo === formData.exerciseNo &&
+                    item.id !== formData.id
+                ) && (
+                    <p className="text-red-500 text-xs mt-1">
+                      Exercise number already exists
+                    </p>
+                  )}
               </div>
               {/* Buttons */}
               <div className="flex justify-end space-x-2">
@@ -229,4 +260,4 @@ const ExercisePopupManage = ({
   );
 };
 
-export default ExercisePopupManage;
+export default ManageExercisePopup;

@@ -6,11 +6,11 @@ import {
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-function CourseExercisesList({ route, handleEditClick, handleDelClick }) {
+function RenderExercises({ route, handleEditClick, handleDelClick }) {
   const { exercises } = useSelector((state) => state.typing);
   const dispatch = useDispatch();
 
-  const filteredExercisesData = exercises.filter((item) =>
+  const routedExercises = exercises.filter((item) =>
     route === "exercises"
       ? item.lesson.lesson !== "TEST"
       : route === "tests"
@@ -47,7 +47,7 @@ function CourseExercisesList({ route, handleEditClick, handleDelClick }) {
           </thead>
           <tbody>
             {/* Idioms Row */}
-            {filteredExercisesData.map((item, i) => (
+            {routedExercises.map((item, i) => (
               <tr key={item.id}>
                 <td className="border border-gray-700 px-4 py-2 text-sm text-white">
                   {i + 1}
@@ -79,4 +79,4 @@ function CourseExercisesList({ route, handleEditClick, handleDelClick }) {
     </div>
   );
 }
-export default CourseExercisesList;
+export default RenderExercises;

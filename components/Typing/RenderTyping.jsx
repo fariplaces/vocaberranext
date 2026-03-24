@@ -6,11 +6,11 @@ import {
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-function CourseExercises({ route, handleEditClick, handleDelClick }) {
-  const { typingData } = useSelector((state) => state.typing);
+function RenderTyping({ route, handleEditClick, handleDelClick }) {
+  const { typings } = useSelector((state) => state.typing);
   const dispatch = useDispatch();
 
-  const filteredTypingData = typingData.filter((item) =>
+  const filteredTypings = typings.filter((item) =>
     route === "course"
       ? item.exercise.lesson.lesson !== "TEST"
       : route === "test"
@@ -53,7 +53,7 @@ function CourseExercises({ route, handleEditClick, handleDelClick }) {
           </thead>
           <tbody>
             {/* Idioms Row */}
-            {filteredTypingData.map((item, i) => (
+            {filteredTypings.map((item, i) => (
               <tr key={item.id}>
                 <td className="border border-gray-700 px-4 py-2 text-sm text-white">
                   {i + 1}
@@ -88,4 +88,4 @@ function CourseExercises({ route, handleEditClick, handleDelClick }) {
     </div>
   );
 }
-export default CourseExercises;
+export default RenderTyping;

@@ -11,7 +11,7 @@ const initialFormState = {
   net: "",
 };
 
-const ExercisePopup = ({
+const ManageTypingPopup = ({
   route,
   isOpen,
   setIsOpen,
@@ -29,17 +29,16 @@ const ExercisePopup = ({
     return state;
   };
   const { user } = useSelector((state) => state.auth);
-  const lessonsToFilter = useSelector((state) => state.typing.lessons);
-  const durationsData = useSelector((state) => state.typing.durations);
+  const { lessons, durations } = useSelector((state) => state.typing.lessons);
   const dispatch = useDispatch();
   const [formData, setFormData] = useState(() => getInitialState());
 
-  const lessonsData = lessonsToFilter.filter((item) =>
+  const filteredLessons = lessons.filter((item) =>
     route === "course"
       ? item.lesson !== "TEST"
       : route === "test"
-      ? item.lesson === "TEST"
-      : true
+        ? item.lesson === "TEST"
+        : true
   );
 
   const resetPopup = () => {
@@ -52,7 +51,7 @@ const ExercisePopup = ({
     if (isOpen) {
       setFormData(editData ? { ...editData } : getInitialState());
     }
-  }, [isOpen, route, editData, durationsData]);
+  }, [isOpen, route, editData, durations]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -105,7 +104,7 @@ const ExercisePopup = ({
       {isOpen && (
         <>
           <div
-            className="absolute flex items-center justify-center inset-0 bg-white/10 backdrop-blur-sm transition-all duration-300"
+            className="fixed flex items-center justify-center inset-0 bg-white/10 backdrop-blur-sm transition-all duration-300"
             onClick={() => setIsOpen(false)}
           >
             {/* <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"> */}
@@ -119,10 +118,10 @@ const ExercisePopup = ({
                     ? "Edit Exercise"
                     : "Add a New Exercise"
                   : route === "test"
-                  ? editData
-                    ? "Edit Test"
-                    : "Add a New Test"
-                  : ""}
+                    ? editData
+                      ? "Edit Test"
+                      : "Add a New Test"
+                    : ""}
               </h2>
 
               {/* Type Input */}
@@ -137,7 +136,7 @@ const ExercisePopup = ({
                   <option className="bg-black" value="">
                     Select Exercise
                   </option>
-                  {lessonsData.map((lesson) => (
+                  {filteredLessons.map((lesson) => (
                     <optgroup
                       key={lesson.id}
                       label={lesson.lesson}
@@ -159,9 +158,8 @@ const ExercisePopup = ({
               {/* Type Input */}
               <div className="mb-4">
                 <label
-                  className={`block ${
-                    route === "course" ? "text-gray-600" : "text-white"
-                  } text-sm mb-1`}
+                  className={`block ${route === "course" ? "text-gray-600" : "text-white"
+                    } text-sm mb-1`}
                 >
                   Duration
                 </label>
@@ -170,14 +168,13 @@ const ExercisePopup = ({
                   name="durationId"
                   value={formData.durationId}
                   onChange={handleChange}
-                  className={`w-full ${
-                    route === "course" ? "text-gray-600" : "text-white"
-                  } px-3 py-2 bg-transparent border border-gray-600 rounded-md focus:outline-none focus:border-blue-500`}
+                  className={`w-full ${route === "course" ? "text-gray-600" : "text-white"
+                    } px-3 py-2 bg-transparent border border-gray-600 rounded-md focus:outline-none focus:border-blue-500`}
                 >
                   <option className="bg-black" value="">
                     Select Duration
                   </option>
-                  {durationsData.map((duration) => (
+                  {durations.map((duration) => (
                     <option
                       className="bg-black"
                       key={duration.id}
@@ -220,11 +217,10 @@ const ExercisePopup = ({
                   value={formData.net}
                   onChange={handleChange}
                   className={`w-full px-3 py-2 bg-transparent border rounded-md focus:outline-none 
-                  ${
-                    parseInt(formData.net) > parseInt(formData.gross)
+                  ${parseInt(formData.net) > parseInt(formData.gross)
                       ? "border-red-500"
                       : "border-gray-600 focus:border-blue-500"
-                  }`}
+                    }`}
                   placeholder="Enter Net Speed"
                 />
                 {parseInt(formData.net) > parseInt(formData.gross) && (
@@ -258,4 +254,4 @@ const ExercisePopup = ({
   );
 };
 
-export default ExercisePopup;
+export default ManageTypingPopup;

@@ -1,18 +1,18 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import CourseExercises from "@/components/Typing/CourseExercises";
 import ContentTitle from "@/components/ContentTitle";
 import { Plus } from "lucide-react";
-import ExercisePopup from "@/components/Typing/ExercisePopup";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteTyping,
   fetchDurations,
   fetchLessons,
 } from "@/store/slices/typingSlice";
-import DeletePopup from "@/components/DeletePopup";
+import RenderTyping from "@/components/Typing/RenderTyping";
+import ManageTypingPopup from "@/components/Typing/ManageTypingPopup";
+import DeleteTypingPopup from "@/components/Typing/DeleteTypingPopup";
 
-const TypingExercisePage = ({ route }) => {
+const TypingPage = ({ route }) => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isDelPopupOpen, setIsDelPopupOpen] = useState(false);
@@ -20,7 +20,7 @@ const TypingExercisePage = ({ route }) => {
   const { loading } = useSelector((state) => state.typing);
 
   const handleEditClick = (item) => {
-    setSelectedItem(item); // Pass the whole typing record
+    setSelectedItem(item);
     setIsPopupOpen(true);
   };
 
@@ -35,9 +35,7 @@ const TypingExercisePage = ({ route }) => {
 
   const handleDelete = async () => {
     if (itemToDelete?.id) {
-      // Wait for the dispatch to finish
       dispatch(deleteTyping(itemToDelete.id));
-      // Only close if it was successful (optional)
       setIsDelPopupOpen(false);
       setItemToDelete(null);
     }
@@ -57,19 +55,19 @@ const TypingExercisePage = ({ route }) => {
         Icon={Plus}
         handleMethod={handleAddClick}
       />
-      <CourseExercises
+      <RenderTyping
         handleEditClick={handleEditClick}
         handleDelClick={handleDelClick}
         route={route}
       />
-      <ExercisePopup
+      <ManageTypingPopup
         route={route}
         isOpen={isPopupOpen}
         setIsOpen={setIsPopupOpen}
         editData={selectedItem}
         setEditData={setSelectedItem}
       />
-      <DeletePopup
+      <DeleteTypingPopup
         isDelPopupOpen={isDelPopupOpen}
         setIsDelPopupOpen={setIsDelPopupOpen}
         itemName={`${itemToDelete?.exercise?.exerciseNo} - ${itemToDelete?.exercise?.title}`}
@@ -80,4 +78,4 @@ const TypingExercisePage = ({ route }) => {
   );
 };
 
-export default TypingExercisePage;
+export default TypingPage;

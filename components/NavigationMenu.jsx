@@ -80,8 +80,12 @@ const NavigationMenu = () => {
       hasSubmenu: true,
       subItems: [
         {
-          item: "Typing Skill",
-          href: "/typing/typingDashboard",
+          item: "Typing Exercises",
+          href: "/typing/stats/exercises",
+        },
+        {
+          item: "Typing Tests",
+          href: "/typing/stats/tests",
         },
       ],
     },

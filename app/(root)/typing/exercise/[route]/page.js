@@ -1,10 +1,10 @@
-import TypingExercisePage from "@/components/Typing/TypingExercisePage";
+import TypingExercisePage from "@/components/Typing/TypingPage";
 import React from "react";
 
-const TypingExercises = async ({ params }) => {
+const Typing = async ({ params }) => {
   const { route } = await params;
 
-  return <TypingExercisePage route={route} />;
+  return <TypingPage route={route} />;
 };
 
-export default TypingExercises;
+export default Typing;

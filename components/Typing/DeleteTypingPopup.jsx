@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 
-const DeletePopup = ({
+const DeleteTypingPopup = ({
   isDelPopupOpen,
   setIsDelPopupOpen,
   onDelete,
@@ -12,7 +12,7 @@ const DeletePopup = ({
 
   return (
     <div
-      className="absolute flex items-center justify-center inset-0 bg-white/10 backdrop-blur-sm transition-all duration-300 z-50"
+      className="fixed flex items-center justify-center inset-0 bg-white/10 backdrop-blur-sm transition-all duration-300 z-50"
       onClick={() => !isLoading && setIsDelPopupOpen(false)} // Prevent closing while deleting
     >
       <div
@@ -53,4 +53,4 @@ const DeletePopup = ({
   );
 };
 
-export default DeletePopup;
+export default DeleteTypingPopup;

@@ -1,11 +1,11 @@
-import ManageExercisePage from '@/components/Typing/ManageExercisePage'
+import ExercisePage from '@/components/Typing/ExercisePage';
 import React from 'react'
 
-const MangeExercisesPage = async ({ params }) => {
+const Exercise = async ({ params }) => {
    const { route } = await params;
    return (
-      <ManageExercisePage route={route} />
+      <ExercisePage route={route} />
    )
 }
 
-export default MangeExercisesPage
+export default Exercise
