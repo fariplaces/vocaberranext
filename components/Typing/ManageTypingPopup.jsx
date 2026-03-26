@@ -18,19 +18,20 @@ const ManageTypingPopup = ({
   editData = null,
   setEditData,
 }) => {
+  const { user } = useSelector((state) => state.auth);
+  const { lessons, durations } = useSelector((state) => state.typing);
+  const dispatch = useDispatch();
   const getInitialState = () => {
     const state = { ...initialFormState };
     if (route === "course") {
-      const defaultDuration = durationsData.find((d) => d.duration === "5M");
+      const defaultDuration = durations.find((d) => d.duration === "5M");
       state.durationId = defaultDuration
         ? defaultDuration.id
         : "ed238f81-d08b-4315-912b-a7df01aa7f46";
     }
     return state;
   };
-  const { user } = useSelector((state) => state.auth);
-  const { lessons, durations } = useSelector((state) => state.typing.lessons);
-  const dispatch = useDispatch();
+
   const [formData, setFormData] = useState(() => getInitialState());
 
   const filteredLessons = lessons.filter((item) =>

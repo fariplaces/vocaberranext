@@ -1,11 +1,10 @@
+import CategoriesPage from '@/components/skills/CategoriesPage'
 import React from 'react'
 
-const MangeCategoriesPage = () => {
+const Categories = () => {
    return (
-      <div>
-         Mange Categories Page
-      </div>
+      <CategoriesPage />
    )
 }
 
-export default MangeCategoriesPage
+export default Categories

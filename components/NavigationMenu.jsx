@@ -154,6 +154,10 @@ const NavigationMenu = () => {
           item: "Categories List",
           href: "/skills/manage/categories",
         },
+        {
+          item: "Topics List",
+          href: "/skills/manage/topics",
+        },
       ],
     },
   ];

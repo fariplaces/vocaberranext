@@ -1,3 +1,4 @@
+'use client'
 import { fetchExercises, fetchTypings } from "@/store/slices/typingSlice";
 import {
   Edit2,

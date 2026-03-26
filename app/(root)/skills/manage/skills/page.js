@@ -1,11 +1,10 @@
+import SkillsPage from '@/components/skills/SkillsPage'
 import React from 'react'
 
-const MangeSkillsPage = () => {
+const Skills = () => {
    return (
-      <div>
-         Mange Skills Page
-      </div>
+      <SkillsPage />
    )
 }
 
-export default MangeSkillsPage
+export default Skills
