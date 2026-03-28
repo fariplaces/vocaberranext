@@ -3,10 +3,11 @@ import React, { useEffect, useState } from "react";
 import ContentTitle from "@/components/ContentTitle";
 import { Plus } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteSkill, fetchRevisions, fetchSkills, fetchTopics } from "@/store/slices/skillSlice";
+import { deleteRevision, deleteSkill, fetchRevisions, fetchSkills, fetchTopics, updateRevision } from "@/store/slices/skillSlice";
 import RenderRevisions from "./RenderRevisions";
 import ManageRevisionPopup from "./ManageRevisionPopup";
 import DeleteRevisionPopup from "./DeleteRevisionPopup";
+import { formatForInput } from "@/lib/utils";
 
 const RevisionPage = ({ route }) => {
   const [selectedItem, setSelectedItem] = useState(null);
@@ -16,9 +17,24 @@ const RevisionPage = ({ route }) => {
   const { loading } = useSelector((state) => state.skill);
 
   const handleEditClick = (item) => {
-    setSelectedItem(item);
+    const dateFields = ["scheduled", "practiced", "revision1date", "revision2date", "revision3date"];
+
+    setSelectedItem({
+      ...item,
+      ...Object.fromEntries(
+        dateFields.map((field) => [field, formatForInput(item[field])])
+      ),
+    });
+
     setIsPopupOpen(true);
   };
+
+
+  const handleUpdateRevisionClick = (item) => {
+    console.log(item);
+    dispatch(updateRevision(item));
+  }
+
 
   const handleAddClick = () => {
     setSelectedItem(null);
@@ -31,7 +47,7 @@ const RevisionPage = ({ route }) => {
 
   const handleDelete = async () => {
     if (itemToDelete?.id) {
-      dispatch(deleteSkill(itemToDelete.id));
+      dispatch(deleteRevision(itemToDelete.id));
       setIsDelPopupOpen(false);
       setItemToDelete(null);
     }
@@ -42,7 +58,7 @@ const RevisionPage = ({ route }) => {
     dispatch(fetchSkills());
     dispatch(fetchTopics());
     dispatch(fetchRevisions());
-  }, []);
+  }, [updateRevision]);
 
   return (
     <>
@@ -54,6 +70,7 @@ const RevisionPage = ({ route }) => {
       />
       <RenderRevisions
         route={route}
+        handleUpdateRevisionClick={handleUpdateRevisionClick}
         handleEditClick={handleEditClick}
         handleDelClick={handleDelClick}
       />
@@ -66,7 +83,7 @@ const RevisionPage = ({ route }) => {
       <DeleteRevisionPopup
         isDelPopupOpen={isDelPopupOpen}
         setIsDelPopupOpen={setIsDelPopupOpen}
-        itemName={`${itemToDelete?.title} - ${itemToDelete?.order}`}
+        itemName={`${itemToDelete?.topic.title} - ${itemToDelete?.topic.category?.skill?.title}`}
         onDelete={handleDelete}
         isLoading={loading}
       />

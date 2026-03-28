@@ -27,7 +27,11 @@ export async function PATCH(req) {
          },
          include: {
             skill: true,
-            parent: true,
+            parent: {
+               include: {
+                  skill: true
+               }
+            },
             children: true,
             topics: true,
          },

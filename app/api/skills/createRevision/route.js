@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export async function POST(req) {
    try {
       const body = await req.json();
-      const { topicId, userId, scheduled } = body;
+      const { topicId, userId, scheduled, practiced, revision1, revision1date, revision2, revision2date, revision3, revision3date, revision4, revision4date, revision5, revision5date } = body;
 
       // 1. Basic Validation
       if (!topicId || !userId) {
@@ -21,7 +21,17 @@ export async function POST(req) {
             topicId,
             userId,
             scheduled: scheduled ? new Date(scheduled) : new Date(),
-            // Booleans (revision1, etc.) default to false via schema
+            practiced: practiced ? new Date(practiced) : new Date(),
+            revision1date: revision1date ? new Date(revision1date) : new Date(),
+            revision2date: revision2date ? new Date(revision2date) : new Date(),
+            revision3date: revision3date ? new Date(revision3date) : new Date(),
+            revision4date: revision4date ? new Date(revision4date) : new Date(),
+            revision5date: revision5date ? new Date(revision5date) : new Date(),
+            revision1: revision1 || false,
+            revision2: revision2 || false,
+            revision3: revision3 || false,
+            revision4: revision4 || false,
+            revision5: revision5 || false,
          },
          include: {
             topic: {

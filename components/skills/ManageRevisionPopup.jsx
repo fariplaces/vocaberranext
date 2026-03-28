@@ -1,5 +1,6 @@
 "use client";
-import { createTopic, updateTopic } from "@/store/slices/skillSlice";
+import { incrementDate } from "@/lib/utils";
+import { createRevision, createTopic, updateRevision, updateTopic } from "@/store/slices/skillSlice";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -26,10 +27,9 @@ const ManageRevisionPopup = ({
   setEditData,
 }) => {
   const { user } = useSelector((state) => state.auth);
-  const { categories, topics } = useSelector((state) => state.skill);
+  const { topics } = useSelector((state) => state.skill);
   const [formData, setFormData] = useState(initialFormState);
   const dispatch = useDispatch();
-  // 1 3 7
 
   const resetPopup = () => {
     setFormData(initialFormState);
@@ -45,11 +45,8 @@ const ManageRevisionPopup = ({
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     setFormData((prev) => {
       const newState = { ...prev, [name]: value };
-
-
       return newState;
     });
   };
@@ -58,11 +55,23 @@ const ManageRevisionPopup = ({
     console.log(formData);
 
     const payloadData = {
-      title: formData.title,
-      order: parseInt(formData.order),
-      categoryId: formData.categoryId,
+      topicId: formData.topicId,
+      scheduled: formData.scheduled,
+      practiced: formData.practiced ?? formData.scheduled,
+      revision1: false,
+      revision1date: incrementDate(formData.practiced ?? formData.scheduled) || null,
+      revision2: false,
+      revision2date: incrementDate(formData.practiced ?? formData.scheduled, 3) || null,
+      revision3: false,
+      revision3date: incrementDate(formData.practiced ?? formData.scheduled, 7) || null,
+      revision4: false,
+      revision4date: incrementDate(formData.practiced ?? formData.scheduled, 22) || null,
+      revision5: false,
+      revision5date: incrementDate(formData.practiced ?? formData.scheduled, 72) || null,
     };
-    const ignoreFields = ["categories, revisions"];
+
+    console.log(payloadData);
+    const ignoreFields = [""];
 
     const filteredData = Object.fromEntries(
       Object.entries(payloadData).filter(
@@ -81,16 +90,27 @@ const ManageRevisionPopup = ({
 
 
     const payload = {
-      title: payloadData.title,
-      order: parseInt(payloadData.order),
-      categoryId: payloadData.categoryId,
+      topicId: payloadData.topicId,
+      scheduled: payloadData.scheduled,
+      practiced: payloadData.practiced ?? payloadData.scheduled,
+      revision1: payloadData.revision1,
+      revision1date: payloadData.revision1date,
+      revision2: payloadData.revision2,
+      revision2date: payloadData.revision2date,
+      revision3: payloadData.revision3,
+      revision3date: payloadData.revision3date,
+      revision4: payloadData.revision4,
+      revision4date: payloadData.revision4date,
+      revision5: payloadData.revision5,
+      revision5date: payloadData.revision5date,
+      userId: user.id,
     };
     console.log(payload);
 
     if (editData?.id) {
-      dispatch(updateTopic({ id: editData.id, ...payload }));
+      dispatch(updateRevision({ id: editData.id, ...payload }));
     } else {
-      dispatch(createTopic(payload));
+      dispatch(createRevision(payload));
     }
 
     setIsOpen(false);
@@ -113,22 +133,12 @@ const ManageRevisionPopup = ({
             >
               <h2 className="text-xl font-semibold mb-4">
                 {editData
-                  ? "Edit Topic"
-                  : "Add a New Topic"
+                  ? "Edit Revision Details"
+                  : "Add a New Revision"
                 }
               </h2>
               {/* Word Input */}
-              <div className="mb-4">
-                <label className="block text-sm mb-1">Scheduled On</label>
-                <input
-                  type="date"
-                  name="scheduled"
-                  value={formData.scheduled}
-                  onChange={handleChange}
-                  className="w-full px-3 py-2 bg-transparent border border-gray-600 rounded-md focus:outline-none focus:border-blue-500"
-                  placeholder="Enter Topic Title..."
-                />
-              </div>
+
 
               <div className="mb-4">
                 <label className="block text-sm mb-1">Topic</label>
@@ -141,19 +151,52 @@ const ManageRevisionPopup = ({
                   <option className="bg-black" value="">
                     Select a Topic
                   </option>
-                  {topics.map((topic) => (
-                    <option
-                      key={topic.id}
-                      value={topic.id}
-                      className="bg-black text-white"
-                    >
-                      {/* {topic.title} */}
-                      ({topic.category.skill.title}):{topic.title} {topic.parent && "-" + topic.parent.title}
-                    </option>
-                  ))}
+                  {topics.map((topic) => {
+                    const skillTitle =
+                      topic?.category?.parent?.skill?.title ||
+                      topic?.category?.skill?.title;
+
+                    const parentCategory = topic?.category?.parent?.title;
+                    const category = topic?.category?.title;
+
+                    const categoryPath = [parentCategory, category]
+                      .filter(Boolean)
+                      .join(" > ");
+
+                    return (
+                      <option
+                        key={topic.id}
+                        value={topic.id}
+                        className="bg-black text-white"
+                      >
+                        {`${skillTitle}: ${topic?.title}${categoryPath ? ` (${categoryPath})` : ""
+                          }`}
+                      </option>
+                    );
+                  })}
                 </select>
               </div>
 
+              <div className="mb-4">
+                <label className="block text-sm mb-1">Scheduled On</label>
+                <input
+                  type="date"
+                  name="scheduled"
+                  value={formData.scheduled || ""}
+                  onChange={handleChange}
+                  className="w-full px-3 py-2 bg-black text-white border border-gray-600 rounded-md focus:outline-none focus:border-blue-500"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-sm mb-1">Practiced On</label>
+                <input
+                  type="date"
+                  name="practiced"
+                  value={formData.practiced || ""}
+                  onChange={handleChange}
+                  className="w-full px-3 py-2 bg-black text-white border border-gray-600 rounded-md focus:outline-none focus:border-blue-500"
+                />
+              </div>
 
               {/* Buttons */}
               <div className="flex justify-end space-x-2">

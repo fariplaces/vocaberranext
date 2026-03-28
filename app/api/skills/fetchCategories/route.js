@@ -13,7 +13,11 @@ export async function GET() {
             // Include the Skill this category belongs to
             skill: true,
             // Include the Parent details (will be null for root categories)
-            parent: true,
+            parent: {
+               include: {
+                  skill: true
+               }
+            },
             // Include topics belonging to this specific category
             topics: {
                orderBy: {

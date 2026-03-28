@@ -8,7 +8,7 @@ import RenderCategories from "./RenderCategories";
 import ManageCategoryPopup from "./ManageCategoryPopup";
 import DeleteCategoryPopup from "./DeleteCategoryPopup";
 
-const CategoriesPage = () => {
+const CategoriesPage = ({ route }) => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isDelPopupOpen, setIsDelPopupOpen] = useState(false);
@@ -52,6 +52,7 @@ const CategoriesPage = () => {
         handleMethod={handleAddClick}
       />
       <RenderCategories
+        route={route}
         handleEditClick={handleEditClick}
         handleDelClick={handleDelClick}
       />

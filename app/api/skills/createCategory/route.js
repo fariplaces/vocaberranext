@@ -34,7 +34,11 @@ export async function POST(req) {
             // Include the parent skill details if they exist
             skill: true,
             // Include the parent category details if they exist
-            parent: true,
+            parent: {
+               include: {
+                  skill: true
+               }
+            },
             // Keep your existing structures for the UI
             children: true,
             topics: true,

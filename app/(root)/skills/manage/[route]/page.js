@@ -1,9 +1,9 @@
 import CategoriesPage from '@/components/skills/CategoriesPage'
 import React from 'react'
-
-const Categories = () => {
+const Categories = async ({ params }) => {
+   const { route } = await params;
    return (
-      <CategoriesPage />
+      <CategoriesPage route={route} />
    )
 }
 

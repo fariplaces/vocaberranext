@@ -4,8 +4,9 @@ import { Edit2, Plus, Trash2 } from "lucide-react";
 import { Checkbox } from '../ui/checkbox';
 import { useSelector } from 'react-redux';
 import ContentTitle from "@/components/ContentTitle";
+import { formatDate } from '@/lib/utils';
 
-const RenderRevisions = ({ route }) => {
+const RenderRevisions = ({ route, handleDelClick, handleEditClick, handleUpdateRevisionClick }) => {
    const { skills, revisions } = useSelector((state) => state.skill);
    const categoryId = route;
 
@@ -49,31 +50,56 @@ const RenderRevisions = ({ route }) => {
                      <th className="border border-gray-700 px-4 py-2 text-left text-sm font-medium text-white">R-I</th>
                      <th className="border border-gray-700 px-4 py-2 text-left text-sm font-medium text-white">R-II</th>
                      <th className="border border-gray-700 px-4 py-2 text-left text-sm font-medium text-white">R-III</th>
-                     <th className="border border-gray-700 px-4 py-2 text-center text-sm font-medium text-white">Revisions (I - II - III)</th>
+                     <th className="border border-gray-700 px-4 py-2 text-center text-sm font-medium text-white">I - II - III</th>
                      <th className="border border-gray-700 px-4 py-2 text-center text-sm font-medium text-white w-24">Action</th>
                   </tr>
                </thead>
                <tbody>
-                  {topics.map((topic, i) => (
-                     <tr key={topic.id} className="hover:bg-gray-800/40 transition-colors">
+                  {revisions.map((revision, i) => (
+                     <tr key={revision.id} className="hover:bg-gray-800/40 transition-colors">
                         <td className="border border-gray-700 px-4 py-2 text-sm text-white">{i + 1}</td>
-                        <td className="border border-gray-700 px-4 py-2 text-sm text-white font-medium">{topic.title}</td>
-                        <td className="border border-gray-700 px-4 py-2 text-sm text-white text-center"></td>
-                        <td className="border border-gray-700 px-4 py-2 text-sm text-white text-center">-</td>
-                        <td className="border border-gray-700 px-4 py-2 text-sm text-white text-center">-</td>
-                        <td className="border border-gray-700 px-4 py-2 text-sm text-white text-center">-</td>
-                        <td className="border border-gray-700 px-4 py-2 text-sm text-white text-center">-</td>
+                        <td className="border border-gray-700 px-4 py-2 text-sm text-white font-medium">{revision.topic.title}</td>
+                        <td className="border border-gray-700 px-4 py-2 text-sm text-white text-center">{formatDate(revision.scheduled)}</td>
+                        <td className="border border-gray-700 px-4 py-2 text-sm text-white text-center">{formatDate(revision.practiced)}</td>
+                        <td className="border border-gray-700 px-4 py-2 text-sm text-white text-center">{formatDate(revision.revision1date)}</td>
+                        <td className="border border-gray-700 px-4 py-2 text-sm text-white text-center">{formatDate(revision.revision2date)}</td>
+                        <td className="border border-gray-700 px-4 py-2 text-sm text-white text-center">{formatDate(revision.revision3date)}</td>
                         <td className="border border-gray-700 px-4 py-2 text-sm text-white">
                            <div className="flex justify-center gap-6">
-                              <Checkbox id={`r1-${topic.id}`} />
-                              <Checkbox id={`r2-${topic.id}`} />
-                              <Checkbox id={`r3-${topic.id}`} />
+                              <Checkbox
+                                 checked={!!revision.revision1}
+                                 onClick={() =>
+                                    handleUpdateRevisionClick({
+                                       id: revision.id,
+                                       revision1: !revision.revision1,
+                                    })
+                                 }
+                              />
+                              <Checkbox
+                                 checked={!!revision.revision2}
+                                 onClick={() =>
+                                    handleUpdateRevisionClick({
+                                       id: revision.id,
+                                       revision2: !revision.revision2,
+                                    })
+                                 }
+                              />
+                              <Checkbox
+                                 checked={!!revision.revision3}
+                                 onClick={() =>
+                                    handleUpdateRevisionClick({
+                                       id: revision.id,
+                                       revision3: !revision.revision3,
+                                    })
+                                 }
+                              />
+
                            </div>
                         </td>
                         <td className="border border-gray-700 px-4 py-2 text-sm text-white">
                            <div className="flex justify-center space-x-3">
-                              <Edit2 size={16} className="cursor-pointer hover:text-blue-400" />
-                              <Trash2 size={16} className="cursor-pointer text-red-600 hover:text-red-400" />
+                              <Edit2 onClick={() => handleEditClick(revision)} size={16} className="cursor-pointer hover:text-blue-400" />
+                              <Trash2 onClick={() => handleDelClick(revision)} size={16} className="cursor-pointer text-red-600 hover:text-red-400" />
                            </div>
                         </td>
                      </tr>

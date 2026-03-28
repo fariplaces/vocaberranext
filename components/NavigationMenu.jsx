@@ -147,11 +147,19 @@ const NavigationMenu = () => {
       hasSubmenu: true,
       subItems: [
         {
-          item: "Skills List",
+          item: "Skills",
           href: "/skills/manage/skills",
         },
         {
-          item: "Categories List",
+          item: "Parent-Categories",
+          href: "/skills/manage/Parent-Categories",
+        },
+        {
+          item: "Sub-Categories",
+          href: "/skills/manage/Sub-Categories",
+        },
+        {
+          item: "Categories",
           href: "/skills/manage/categories",
         },
         {
