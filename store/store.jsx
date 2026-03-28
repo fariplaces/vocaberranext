@@ -29,6 +29,7 @@ import wordReducer from "./slices/wordSlice";
 import wordMeaningReducer from "./slices/wordMeaningSlice";
 import typingReducer from "./slices/typingSlice";
 import skillReducer from "./slices/skillSlice";
+import taskReducer from "./slices/taskSlice";
 
 // combine reducers (if more slices later)
 const rootReducer = combineReducers({
@@ -36,7 +37,8 @@ const rootReducer = combineReducers({
   words: wordReducer,
   wordMeanings: wordMeaningReducer,
   typing: typingReducer,
-  skill: skillReducer
+  skill: skillReducer,
+  tasks: taskReducer
 
 });
 

@@ -20,6 +20,9 @@ import { SiAntdesign, SiDocker, SiMui, SiOnlyoffice, SiShadcnui } from "react-ic
 import { LuFigma } from "react-icons/lu";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleSidebar } from "@/store/slices/skillSlice";
+import { LuListTodo } from "react-icons/lu";
+import { GiBrain } from "react-icons/gi";
+import { RiEnglishInput } from "react-icons/ri";
 
 const NavigationMenu = () => {
   const pathname = usePathname();
@@ -81,6 +84,10 @@ const NavigationMenu = () => {
       link: "",
       subItems: [
         {
+          item: "Tasking Stats",
+          href: "/task/stats",
+        },
+        {
           item: "Typing Exercises",
           href: "/typing/stats/exercises",
         },
@@ -88,11 +95,19 @@ const NavigationMenu = () => {
           item: "Typing Tests",
           href: "/typing/stats/tests",
         },
+        {
+          item: "Revisions",
+          href: "/revision/stats/tests",
+        },
+        {
+          item: "Skills",
+          href: "/revision/stats/tests",
+        },
       ],
     },
     {
       name: "Revisions",
-      icon: ChartNoAxesColumn,
+      icon: GiBrain,
       hasSubmenu: true,
       link: "",
       subItems: [
@@ -114,10 +129,38 @@ const NavigationMenu = () => {
         },
       ],
     },
+    {
+      name: "Taskings",
+      icon: LuListTodo,
+      hasSubmenu: true,
+      link: "",
+      subItems: [
+        {
+          item: "TODO Tasks",
+          href: "/tasks/today-tasks",
+        },
+        {
+          item: "Tomorrow Tasks",
+          href: "/tasks/tom-tasks",
+        },
+        {
+          item: "Yesterday Tasks",
+          href: "/tasks/yes-tasks",
+        },
+        {
+          item: "All Tasks",
+          href: "/tasks/all-tasks",
+        },
+        {
+          item: "Default Tasks",
+          href: "/tasks/default-tasks",
+        },
+      ],
+    },
     // { name: "COMMUNICATION", icon: Home, hasSubmenu: false },
     {
       name: "Communication Skill",
-      icon: Users,
+      icon: RiEnglishInput,
       hasSubmenu: true,
       subItems: [
         {
@@ -238,9 +281,9 @@ const NavigationMenu = () => {
 
   return (
     <nav className="flex-1 overflow-y-auto overflow-x-hidden overflow-y-auto py-4">
-      <div className="px-4 w-full text-center py-2 transition-colors cursor-pointer bg-gray-900 text-white">
+      {/* <div className="px-4 w-full text-center py-2 transition-colors cursor-pointer bg-gray-900 text-white">
         Skills Improvement
-      </div>
+      </div> */}
       {filterSkillMenu.map((item) => {
         // Check if the current route matches the parent link OR any sub-item href
         const isDirectActive = item.link && pathname === item.link;
@@ -303,9 +346,9 @@ const NavigationMenu = () => {
         );
       })}
 
-      <div className="px-4 w-full text-center py-2 transition-colors cursor-pointer bg-gray-900 text-white">
+      {/* <div className="px-4 w-full text-center py-2 transition-colors cursor-pointer bg-gray-900 text-white">
         ADMIN
-      </div>
+      </div> */}
       {filterAdminMenu.map((item) => {
         // Check if any child is active
         const isParentActive = item.subItems?.some(sub => pathname === sub.href);

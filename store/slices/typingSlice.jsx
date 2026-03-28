@@ -197,6 +197,7 @@ const typingSlice = createSlice({
     resetTypingState: (state) => {
       state.exercises = [];
       state.lessons = [];
+      state.exerciseTypes = [];
       state.durations = [];
       state.typings = [];
       state.loading = false;
