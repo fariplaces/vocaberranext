@@ -11,15 +11,22 @@ const initialFormState = {
 };
 
 const ManageCategoryPopup = ({
+  route,
   isOpen,
   setIsOpen,
   editData = null,
   setEditData,
 }) => {
-  const { user } = useSelector((state) => state.auth);
   const { categories, skills } = useSelector((state) => state.skill);
   const [formData, setFormData] = useState(initialFormState);
   const dispatch = useDispatch();
+  let filteredCategories = null;
+
+  if (route === "sub-categories") {
+    filteredCategories = categories.filter((item) => item.parentId === null);
+  } else if (route === "categories") {
+    filteredCategories = categories.filter((item) => item.parentId !== null);
+  }
 
 
   const resetPopup = () => {
@@ -178,28 +185,30 @@ const ManageCategoryPopup = ({
                   )
                 } */}
               </div>
-              <div className="mb-4">
-                <label className="block text-sm mb-1">Parent Category</label>
-                <select
-                  name="parentId"
-                  value={formData.parentId || ""}
-                  onChange={handleChange}
-                  className="w-full  px-3 py-2 bg-transparent border border-gray-600 rounded-md focus:outline-none focus:border-blue-500"
-                >
-                  <option className="bg-black" value="">
-                    Select a Parent Category
-                  </option>
-                  {categories.map((cat) => (
-                    <option
-                      key={cat.id}
-                      value={cat.id}
-                      className="bg-black text-white"
-                    >
-                      ({cat.skill.title}):{cat.title}
+              {filteredCategories &&
+                <div className="mb-4">
+                  <label className="block text-sm mb-1">Parent Category</label>
+                  <select
+                    name="parentId"
+                    value={formData.parentId || ""}
+                    onChange={handleChange}
+                    className="w-full  px-3 py-2 bg-transparent border border-gray-600 rounded-md focus:outline-none focus:border-blue-500"
+                  >
+                    <option className="bg-black" value="">
+                      Select a Parent Category
                     </option>
-                  ))}
-                </select>
-              </div>
+                    {filteredCategories.map((cat) => (
+                      <option
+                        key={cat.id}
+                        value={cat.id}
+                        className="bg-black text-white"
+                      >
+                        ({cat.skill.title}):{cat.title}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              }
               <div className="mb-4">
                 <label className="block text-sm mb-1">Skill</label>
                 <select

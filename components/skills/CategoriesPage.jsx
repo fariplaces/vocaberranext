@@ -57,6 +57,7 @@ const CategoriesPage = ({ route }) => {
         handleDelClick={handleDelClick}
       />
       <ManageCategoryPopup
+        route={route}
         isOpen={isPopupOpen}
         setIsOpen={setIsPopupOpen}
         editData={selectedItem}

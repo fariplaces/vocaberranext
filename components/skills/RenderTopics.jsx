@@ -2,8 +2,10 @@
 import { Edit2, Trash2 } from "lucide-react";
 import React from "react";
 import { useSelector } from "react-redux";
+import { MdOutlineAddToPhotos } from "react-icons/md";
 
-function RenderTopics({ handleEditClick, handleDelClick }) {
+
+function RenderTopics({ handleEditClick, handleRevisionClick, handleDelClick }) {
   const { topics } = useSelector((state) => state.skill);
 
   // --- 1. Grouping Logic ---
@@ -68,6 +70,11 @@ function RenderTopics({ handleEditClick, handleDelClick }) {
                             <td className="border border-gray-700 px-4 py-2 text-sm text-white w-20">{item.order}</td>
                             <td className="border border-gray-700 px-4 py-2 text-sm text-white">
                               <div className="flex justify-center gap-4">
+                                <MdOutlineAddToPhotos
+                                  size={18}
+                                  className="cursor-pointer hover:text-blue-400"
+                                  onClick={() => handleRevisionClick(item)}
+                                />
                                 <Edit2
                                   size={18}
                                   className="cursor-pointer hover:text-blue-400"

@@ -7,10 +7,12 @@ import { deleteTopic, fetchCategories, fetchTopics } from "@/store/slices/skillS
 import RenderTopics from "./RenderTopics";
 import ManageTopicPopup from "./ManageTopicPopup";
 import DeleteTopicPopup from "./DeleteTopicPopup";
+import ManageRevisionPopup from "./ManageRevisionPopup";
 
 const TopicsPage = () => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isRevisionPopupOpen, setIsRevisionPopupOpen] = useState(false);
   const [isDelPopupOpen, setIsDelPopupOpen] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(null);
   const { loading } = useSelector((state) => state.skill);
@@ -18,6 +20,12 @@ const TopicsPage = () => {
   const handleEditClick = (item) => {
     setSelectedItem(item);
     setIsPopupOpen(true);
+  };
+
+  const handleRevisionClick = (item) => {
+    // console.log(item);
+    setSelectedItem({ topicId: item.id });
+    setIsRevisionPopupOpen(true);
   };
 
   const handleAddClick = () => {
@@ -55,10 +63,17 @@ const TopicsPage = () => {
       <RenderTopics
         handleEditClick={handleEditClick}
         handleDelClick={handleDelClick}
+        handleRevisionClick={handleRevisionClick}
       />
       <ManageTopicPopup
         isOpen={isPopupOpen}
         setIsOpen={setIsPopupOpen}
+        editData={selectedItem}
+        setEditData={setSelectedItem}
+      />
+      <ManageRevisionPopup
+        isOpen={isRevisionPopupOpen}
+        setIsOpen={setIsRevisionPopupOpen}
         editData={selectedItem}
         setEditData={setSelectedItem}
       />

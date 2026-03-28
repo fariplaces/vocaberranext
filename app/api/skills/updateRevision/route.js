@@ -50,7 +50,24 @@ export async function PATCH(req) {
             ...(revision5date && { revision5date: new Date(revision5date) }),
          },
          include: {
-            topic: true // Useful for showing "Topic X Updated" in UI
+            topic: {
+               include: {
+                  // 2. Get the Category the topic belongs to
+                  category: {
+                     include: {
+                        // 3. Get the Skill (if this is a root category)
+                        skill: true,
+                        // 4. Get the Parent Category
+                        parent: {
+                           include: {
+                              // 5. Get the Skill of the Parent Category
+                              skill: true,
+                           },
+                        },
+                     },
+                  },
+               },
+            }
          }
       });
 

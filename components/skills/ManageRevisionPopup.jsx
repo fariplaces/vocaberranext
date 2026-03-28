@@ -57,21 +57,21 @@ const ManageRevisionPopup = ({
     const payloadData = {
       topicId: formData.topicId,
       scheduled: formData.scheduled,
-      practiced: formData.practiced ?? formData.scheduled,
+      practiced: formData.practiced || null,
       revision1: false,
-      revision1date: incrementDate(formData.practiced ?? formData.scheduled) || null,
+      revision1date: incrementDate(formData.practiced || formData.scheduled) || null,
       revision2: false,
-      revision2date: incrementDate(formData.practiced ?? formData.scheduled, 3) || null,
+      revision2date: incrementDate(formData.practiced || formData.scheduled, 3) || null,
       revision3: false,
-      revision3date: incrementDate(formData.practiced ?? formData.scheduled, 7) || null,
+      revision3date: incrementDate(formData.practiced || formData.scheduled, 7) || null,
       revision4: false,
-      revision4date: incrementDate(formData.practiced ?? formData.scheduled, 22) || null,
+      revision4date: incrementDate(formData.practiced || formData.scheduled, 22) || null,
       revision5: false,
-      revision5date: incrementDate(formData.practiced ?? formData.scheduled, 72) || null,
+      revision5date: incrementDate(formData.practiced || formData.scheduled, 72) || null,
     };
 
     console.log(payloadData);
-    const ignoreFields = [""];
+    const ignoreFields = ["practiced"];
 
     const filteredData = Object.fromEntries(
       Object.entries(payloadData).filter(
@@ -92,7 +92,7 @@ const ManageRevisionPopup = ({
     const payload = {
       topicId: payloadData.topicId,
       scheduled: payloadData.scheduled,
-      practiced: payloadData.practiced ?? payloadData.scheduled,
+      practiced: payloadData.practiced,
       revision1: payloadData.revision1,
       revision1date: payloadData.revision1date,
       revision2: payloadData.revision2,

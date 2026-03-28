@@ -21,7 +21,7 @@ export async function POST(req) {
             topicId,
             userId,
             scheduled: scheduled ? new Date(scheduled) : new Date(),
-            practiced: practiced ? new Date(practiced) : new Date(),
+            practiced: practiced ? new Date(practiced) : null,
             revision1date: revision1date ? new Date(revision1date) : new Date(),
             revision2date: revision2date ? new Date(revision2date) : new Date(),
             revision3date: revision3date ? new Date(revision3date) : new Date(),

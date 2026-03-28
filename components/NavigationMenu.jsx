@@ -78,6 +78,7 @@ const NavigationMenu = () => {
       name: "DASHBOARD",
       icon: ChartNoAxesColumn,
       hasSubmenu: true,
+      link: "",
       subItems: [
         {
           item: "Typing Exercises",
@@ -86,6 +87,30 @@ const NavigationMenu = () => {
         {
           item: "Typing Tests",
           href: "/typing/stats/tests",
+        },
+      ],
+    },
+    {
+      name: "Revisions",
+      icon: ChartNoAxesColumn,
+      hasSubmenu: true,
+      link: "",
+      subItems: [
+        {
+          item: "Pending R-I",
+          href: "/skills/pendingri",
+        },
+        {
+          item: "Pending R-II",
+          href: "/skills/pendingrii",
+        },
+        {
+          item: "Pending R-III",
+          href: "/skills/pendingriii",
+        },
+        {
+          item: "Scheduled",
+          href: "/skills/scheduled",
         },
       ],
     },
@@ -152,11 +177,11 @@ const NavigationMenu = () => {
         },
         {
           item: "Parent-Categories",
-          href: "/skills/manage/Parent-Categories",
+          href: "/skills/manage/parent-categories",
         },
         {
           item: "Sub-Categories",
-          href: "/skills/manage/Sub-Categories",
+          href: "/skills/manage/sub-categories",
         },
         {
           item: "Categories",
@@ -194,6 +219,7 @@ const NavigationMenu = () => {
     return {
       name: skill.title,
       icon: IconComponent,
+      link: `/skills/${skill.id}`,
       hasSubmenu: skill.categories.length > 0,
       subItems: skill.categories.map((cat) => ({
         item: cat.title,
@@ -216,43 +242,56 @@ const NavigationMenu = () => {
         Skills Improvement
       </div>
       {filterSkillMenu.map((item) => {
-        // Check if any child is active
-        const isParentActive = item.subItems?.some(sub => pathname === sub.href);
+        // Check if the current route matches the parent link OR any sub-item href
+        const isDirectActive = item.link && pathname === item.link;
+        const isSubActive = item.subItems?.some(sub => pathname === sub.href);
+        const isParentActive = isDirectActive || isSubActive;
+
+        // We wrap the header in a Link only if item.link is provided
+        const ParentWrapper = item.link ? Link : 'div';
 
         return (
           <div key={item.name}>
-            <div
+            <ParentWrapper
+              href={item.link || "#"}
               className={`flex items-center justify-between px-4 py-2 transition-colors cursor-pointer 
-                ${isParentActive ? "bg-gray-700 text-white border-r-4 border-blue-500" : "hover:bg-gray-800 text-gray-400"}
-              `}
-              onClick={() => handleItemClick(item)}
+          ${isParentActive ? "bg-gray-700 text-white border-r-4 border-blue-500" : "hover:bg-gray-800 text-gray-400"}
+        `}
+              onClick={(e) => {
+                // If there is a submenu, toggle it. 
+                // If it's a direct link, the Link component handles navigation.
+                if (item.hasSubmenu) {
+                  handleItemClick(item);
+                }
+              }}
             >
               <div className="flex items-center space-x-3">
-                {/* Icon also highlights when active */}
                 <item.icon className={`w-5 h-5 ${isParentActive ? "text-blue-400" : ""}`} />
                 {sidebarOpen && <span className="text-sm font-medium">{item.name}</span>}
               </div>
-              {sidebarOpen && item.hasSubmenu && (
-                expandedMenus[item.name] ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />
-              )}
-            </div>
 
-            {/* Submenu */}
+              {sidebarOpen && item.hasSubmenu && (
+                <div className="hover:bg-gray-600 p-1 rounded-md transition-colors">
+                  {expandedMenus[item.name] ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
+                </div>
+              )}
+            </ParentWrapper>
+
+            {/* Submenu Logic remains the same */}
             {sidebarOpen && item.hasSubmenu && expandedMenus[item.name] && (
               <div className="ml-8 mt-1 space-y-1 border-l border-gray-600">
                 {item.subItems.map((subItem, i) => {
                   const isChildActive = pathname === subItem.href;
-
                   return (
                     <Link
                       href={subItem.href}
                       key={i}
                       className={`flex py-1.5 px-4 text-sm transition-all
-                        ${isChildActive
+                  ${isChildActive
                           ? "text-white font-bold translate-x-1"
                           : "text-gray-400 hover:text-gray-100"
                         }
-                      `}
+                `}
                     >
                       {subItem.item}
                     </Link>
@@ -263,6 +302,7 @@ const NavigationMenu = () => {
           </div>
         );
       })}
+
       <div className="px-4 w-full text-center py-2 transition-colors cursor-pointer bg-gray-900 text-white">
         ADMIN
       </div>
