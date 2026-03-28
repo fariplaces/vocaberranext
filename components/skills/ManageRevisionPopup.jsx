@@ -4,22 +4,32 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const initialFormState = {
-  title: "",
-  order: "",
-  categoryId: "",
+  topicId: "",
+  scheduled: "",
+  practiced: "",
+  revision1: "",
+  revision1date: "",
+  revision2: "",
+  revision2date: "",
+  revision3: "",
+  revision3date: "",
+  revision4: "",
+  revision4date: "",
+  revision5: "",
+  revision5date: "",
 };
 
-const ManageTopicPopup = ({
+const ManageRevisionPopup = ({
   isOpen,
   setIsOpen,
   editData = null,
   setEditData,
 }) => {
   const { user } = useSelector((state) => state.auth);
-  const { categories } = useSelector((state) => state.skill);
+  const { categories, topics } = useSelector((state) => state.skill);
   const [formData, setFormData] = useState(initialFormState);
   const dispatch = useDispatch();
-
+  // 1 3 7
 
   const resetPopup = () => {
     setFormData(initialFormState);
@@ -109,92 +119,41 @@ const ManageTopicPopup = ({
               </h2>
               {/* Word Input */}
               <div className="mb-4">
-                <label className="block text-sm mb-1">Topic Title</label>
+                <label className="block text-sm mb-1">Scheduled On</label>
                 <input
-                  type="text"
-                  name="title"
-                  value={formData.title}
+                  type="date"
+                  name="scheduled"
+                  value={formData.scheduled}
                   onChange={handleChange}
                   className="w-full px-3 py-2 bg-transparent border border-gray-600 rounded-md focus:outline-none focus:border-blue-500"
                   placeholder="Enter Topic Title..."
                 />
               </div>
-              {/* Word Input */}
-              <div className="mb-4">
-                <label className="block text-sm mb-1">Topic Order No</label>
-                <input
-                  type="string"
-                  name="order"
-                  value={formData.order}
-                  onChange={handleChange}
-                  className={`w-full px-3 py-2 bg-transparent border rounded-md focus:outline-none`}
-                  // {skills.some(
-                  //               (item) =>
-                  //                 item.order === parseInt(formData.order) &&
-                  //                 item.id !== formData.id
-                  //             )
-                  //                 ? "border-red-500"
-                  //                 : "border-gray-600 focus:border-blue-500"
-                  //               }
-                  placeholder="Enter Skill Order No. i.e 1,2,3..."
-                />
 
-                {/* {
-                  skills.some(
-                    (item) =>
-                      item.order === parseInt(formData.order) &&
-                      item.id !== formData.id
-                  ) && (
-                    <p className="text-red-500 text-xs mt-1">
-                      Skill Order No already exists
-                    </p>
-                  )
-                } */}
-              </div>
               <div className="mb-4">
-                <label className="block text-sm mb-1">Category</label>
+                <label className="block text-sm mb-1">Topic</label>
                 <select
-                  name="categoryId"
-                  value={formData.categoryId || ""}
+                  name="topicId"
+                  value={formData.topicId || ""}
                   onChange={handleChange}
                   className="w-full  px-3 py-2 bg-transparent border border-gray-600 rounded-md focus:outline-none focus:border-blue-500"
                 >
                   <option className="bg-black" value="">
-                    Select a Category
+                    Select a Topic
                   </option>
-                  {categories.map((cat) => (
+                  {topics.map((topic) => (
                     <option
-                      key={cat.id}
-                      value={cat.id}
+                      key={topic.id}
+                      value={topic.id}
                       className="bg-black text-white"
                     >
-                      ({cat.skill.title}):{cat.title} {cat.parent && "-" + cat.parent.title}
+                      {/* {topic.title} */}
+                      ({topic.category.skill.title}):{topic.title} {topic.parent && "-" + topic.parent.title}
                     </option>
                   ))}
                 </select>
               </div>
-              {/* <div className="mb-4">
-                <label className="block text-sm mb-1">Skill</label>
-                <select
-                  name="skillId"
-                  value={formData.skillId}
-                  onChange={handleChange}
-                  className="w-full  px-3 py-2 bg-transparent border border-gray-600 rounded-md focus:outline-none focus:border-blue-500"
-                >
-                  <option className="bg-black" value="">
-                    Select a Skill
-                  </option>
-                  {skills.map((skill) => (
-                    <option
-                      key={skill.id}
-                      value={skill.id}
-                      className="bg-black text-white"
-                    >
-                      {skill.title}
-                    </option>
-                  ))}
-                </select>
-              </div> */}
+
 
               {/* Buttons */}
               <div className="flex justify-end space-x-2">
@@ -215,9 +174,10 @@ const ManageTopicPopup = ({
           </div>
           {/* </div> */}
         </>
-      )}
+      )
+      }
     </>
   );
 };
 
-export default ManageTopicPopup;
+export default ManageRevisionPopup;

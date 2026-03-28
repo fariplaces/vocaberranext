@@ -6,44 +6,45 @@ export async function DELETE(req, { params }) {
       const resolvedParams = await params;
       const { id } = resolvedParams;
 
-
+      // 1. Validation: Ensure the ID exists in the URL
       if (!id) {
          return NextResponse.json(
-            { error: "Category ID is required" },
+            { error: "Topic ID is required" },
             { status: 400 }
          );
       }
 
-      // Attempt to delete the category
-      const deletedCategory = await prisma.category.delete({
+      // 2. Delete the Topic
+      // Note: If you have Revisions, ensure your schema has 'onDelete: Cascade'
+      // or delete them manually before this step.
+      const deletedTopic = await prisma.topic.delete({
          where: {
             id: id,
          },
       });
 
       return NextResponse.json({
-         message: "Category deleted successfully",
-         deletedCategory,
+         message: "Topic deleted successfully",
+         deletedTopic,
       });
    } catch (error) {
-      console.error("Delete Category Error:", error);
-
-      // Prisma Error P2003: Foreign key constraint failed (has children or topics)
-      if (error.code === "P2003") {
-         return NextResponse.json(
-            {
-               error:
-                  "Cannot delete category. Please delete all sub-categories and topics first.",
-            },
-            { status: 400 }
-         );
-      }
+      console.error("Delete Topic Error:", error);
 
       // Prisma Error P2025: Record to delete does not exist
       if (error.code === "P2025") {
          return NextResponse.json(
-            { error: "Category not found" },
+            { error: "Topic not found" },
             { status: 404 }
+         );
+      }
+
+      // Prisma Error P2003: Foreign key constraint (e.g., if Revision exists)
+      if (error.code === "P2003") {
+         return NextResponse.json(
+            {
+               error: "Cannot delete topic. Please delete its revisions first.",
+            },
+            { status: 400 }
          );
       }
 

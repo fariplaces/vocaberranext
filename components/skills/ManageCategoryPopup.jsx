@@ -195,7 +195,7 @@ const ManageCategoryPopup = ({
                       value={cat.id}
                       className="bg-black text-white"
                     >
-                      {cat.title}
+                      ({cat.skill.title}):{cat.title}
                     </option>
                   ))}
                 </select>

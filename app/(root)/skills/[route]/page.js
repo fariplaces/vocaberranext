@@ -1,16 +1,15 @@
 import React from "react";
-import SkillRIII from "@/components/skills/SkillRIII";
+import RevisionPage from "@/components/skills/RevisionPage";
 
-const SkillImprovement = async ({ params }) => {
+const Revision = async ({ params }) => {
    const { route } = await params;
    return (
 
       <>
-
-         <SkillRIII route={route} />
+         <RevisionPage route={route} />
       </>
 
    );
 };
 
-export default SkillImprovement;
+export default Revision;

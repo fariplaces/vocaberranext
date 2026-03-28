@@ -207,6 +207,67 @@ export const deleteTopic = createAsyncThunk(
   }
 );
 
+// Fetch all Revision
+export const fetchRevisions = createAsyncThunk(
+  "skill/fetchRevisions",
+  async (_, thunkAPI) => {
+    try {
+      const res = await axios.get("/api/skills/fetchRevisions");
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || "Failed to fetch Revision"
+      );
+    }
+  }
+);
+
+
+// Create a new Revision
+export const createRevision = createAsyncThunk(
+  "skill/createRevision",
+  async (formData, thunkAPI) => {
+    try {
+      const res = await axios.post(`/api/skills/createRevision`, formData);
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || "Failed to create Revision"
+      );
+    }
+  }
+);
+
+// Update a Revision
+export const updateRevision = createAsyncThunk(
+  "skill/updateRevision",
+  async (payload, thunkAPI) => {
+    try {
+      const res = await axios.patch(`/api/skills/updateRevision`, payload);
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || "Failed to update Revision"
+      );
+    }
+  }
+);
+
+// Delete a Revision
+export const deleteRevision = createAsyncThunk(
+  "skill/deleteRevision",
+  async (id, thunkAPI) => {
+    try {
+      const res = await axios.delete(`/api/skills/deleteRevision/${id}`);
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || "Failed to Delete Revision"
+      );
+    }
+  }
+);
+
 
 // ================== SLICE ==================
 
@@ -217,6 +278,7 @@ const skillSlice = createSlice({
     skills: [],
     categories: [],
     topics: [],
+    revisions: [],
     sidebarOpen: true,
     loading: false,
     error: null,
@@ -426,6 +488,65 @@ const skillSlice = createSlice({
         );
       })
       .addCase(deleteTopic.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })  // Fetch Revisions
+      .addCase(fetchRevisions.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchRevisions.fulfilled, (state, action) => {
+        state.loading = false;
+        state.revisions = action.payload;
+      })
+      .addCase(fetchRevisions.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      }) // Create Revision
+      .addCase(createRevision.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(createRevision.fulfilled, (state, action) => {
+        state.loading = false;
+        state.revisions = [action.payload, ...state.revisions];
+      })
+      .addCase(createRevision.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      // Update Revision
+      .addCase(updateRevision.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateRevision.fulfilled, (state, action) => {
+        state.loading = false;
+        // 1. Find the index of the record that was just updated
+        const index = state.revisions.findIndex(
+          (item) => item.id === action.payload.id
+        );
+        // 2. If found, replace the old object with the new one from the API
+        if (index !== -1) {
+          state.revisions[index] = action.payload;
+        }
+      })
+      .addCase(updateRevision.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      // Delete Revision
+      .addCase(deleteRevision.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteRevision.fulfilled, (state, action) => {
+        state.loading = false;
+        state.revisions = state.revisions.filter(
+          (item) => item.id !== action.meta.arg
+        );
+      })
+      .addCase(deleteRevision.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

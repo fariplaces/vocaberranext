@@ -3,12 +3,12 @@ import React, { useEffect, useState } from "react";
 import ContentTitle from "@/components/ContentTitle";
 import { Plus } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteTopic, fetchCategories, fetchTopics } from "@/store/slices/skillSlice";
-import RenderTopics from "./RenderTopics";
-import ManageTopicPopup from "./ManageTopicPopup";
-import DeleteTopicPopup from "./DeleteTopicPopup";
+import { deleteSkill, fetchRevisions, fetchSkills, fetchTopics } from "@/store/slices/skillSlice";
+import RenderRevisions from "./RenderRevisions";
+import ManageRevisionPopup from "./ManageRevisionPopup";
+import DeleteRevisionPopup from "./DeleteRevisionPopup";
 
-const TopicsPage = () => {
+const RevisionPage = ({ route }) => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isDelPopupOpen, setIsDelPopupOpen] = useState(false);
@@ -30,9 +30,8 @@ const TopicsPage = () => {
   };
 
   const handleDelete = async () => {
-    console.log(itemToDelete);
     if (itemToDelete?.id) {
-      dispatch(deleteTopic(itemToDelete.id));
+      dispatch(deleteSkill(itemToDelete.id));
       setIsDelPopupOpen(false);
       setItemToDelete(null);
     }
@@ -40,38 +39,34 @@ const TopicsPage = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(fetchSkills());
     dispatch(fetchTopics());
-    dispatch(fetchCategories());
+    dispatch(fetchRevisions());
   }, []);
 
   return (
     <>
       <ContentTitle
-        title={"Manage Topics"}
-        btnTitle={"Add Topic"}
+        title={"Manage Revisions"}
+        btnTitle={"Add Revision"}
         Icon={Plus}
         handleMethod={handleAddClick}
       />
-      <RenderTopics
+      <RenderRevisions
+        route={route}
         handleEditClick={handleEditClick}
         handleDelClick={handleDelClick}
       />
-      <ManageTopicPopup
+      <ManageRevisionPopup
         isOpen={isPopupOpen}
         setIsOpen={setIsPopupOpen}
         editData={selectedItem}
         setEditData={setSelectedItem}
       />
-      <DeleteTopicPopup
+      <DeleteRevisionPopup
         isDelPopupOpen={isDelPopupOpen}
         setIsDelPopupOpen={setIsDelPopupOpen}
-        itemName={`${itemToDelete?.title} — ${[
-          itemToDelete?.category?.title,
-          itemToDelete?.category?.parent?.title,
-          itemToDelete?.category?.skill?.title
-        ]
-          .filter(Boolean)
-          .join(" > ")}`}
+        itemName={`${itemToDelete?.title} - ${itemToDelete?.order}`}
         onDelete={handleDelete}
         isLoading={loading}
       />
@@ -79,10 +74,4 @@ const TopicsPage = () => {
   );
 };
 
-export default TopicsPage;
-
-
-
-
-
-
+export default RevisionPage;

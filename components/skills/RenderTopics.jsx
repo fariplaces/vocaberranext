@@ -7,7 +7,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 function RenderTopics({ handleEditClick, handleDelClick }) {
-  const { skills } = useSelector((state) => state.skill);
+  const { topics } = useSelector((state) => state.skill);
 
   return (
     <div className="space-y-6">
@@ -19,12 +19,20 @@ function RenderTopics({ handleEditClick, handleDelClick }) {
                 S No
               </th>
               <th className="border border-gray-700 px-4 py-2 text-left text-sm font-medium text-white">
-                Skill Title
+                Topic Title
               </th>
               <th className="border border-gray-700 px-4 py-2 text-left text-sm font-medium text-white">
                 Order
               </th>
-
+              <th className="border border-gray-700 px-4 py-2 text-left text-sm font-medium text-white">
+                Category
+              </th>
+              <th className="border border-gray-700 px-4 py-2 text-left text-sm font-medium text-white">
+                Parent Category
+              </th>
+              <th className="border border-gray-700 px-4 py-2 text-left text-sm font-medium text-white">
+                Skill
+              </th>
               <th className="border border-gray-700 px-4 py-2 text-left text-sm font-medium text-white">
                 Action
               </th>
@@ -32,7 +40,7 @@ function RenderTopics({ handleEditClick, handleDelClick }) {
           </thead>
           <tbody>
             {/* Idioms Row */}
-            {skills.map((item, i) => (
+            {topics.map((item, i) => (
               <tr key={item.id}>
                 <td className="border border-gray-700 px-4 py-2 text-sm text-white">
                   {i + 1}
@@ -42,6 +50,15 @@ function RenderTopics({ handleEditClick, handleDelClick }) {
                 </td>
                 <td className="border border-gray-700 px-4 py-2 text-sm text-white">
                   {item.order}
+                </td>
+                <td className="border border-gray-700 px-4 py-2 text-sm text-white">
+                  {item.category.title}
+                </td>
+                <td className="border border-gray-700 px-4 py-2 text-sm text-white">
+                  {item.category.parent ? item.category.parent.title : "-"}
+                </td>
+                <td className="border border-gray-700 px-4 py-2 text-sm text-white">
+                  {item.category.parent ? item.category.parent.skill.title : item.category.skill.title}
                 </td>
 
                 <td className=" flex justify-evenly border border-gray-700 px-4 py-2 text-sm text-white">

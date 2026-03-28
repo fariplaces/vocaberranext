@@ -1,20 +1,15 @@
 'use client'
-import React, { useEffect, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { Edit2, Plus, Trash2 } from "lucide-react";
 import { Checkbox } from '../ui/checkbox';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchSkills } from '@/store/slices/skillSlice';
+import { useSelector } from 'react-redux';
 import ContentTitle from "@/components/ContentTitle";
 
-const SkillRIII = ({ route }) => {
-   const { skills } = useSelector((state) => state.skill);
-   const dispatch = useDispatch();
+const RenderRevisions = ({ route }) => {
+   const { skills, revisions } = useSelector((state) => state.skill);
    const categoryId = route;
 
-   useEffect(() => {
-      dispatch(fetchSkills());
-   }, [dispatch]);
-
+   console.log(revisions);
    // Find the Parent Category or the specific Category
    const targetCategory = useMemo(() => {
       if (!skills || !categoryId) return null;
@@ -34,12 +29,14 @@ const SkillRIII = ({ route }) => {
    const TopicTable = ({ title, topics }) => (
       <div className="mb-10">
 
-         <ContentTitle
-            title={title}
-            btnTitle="Back"
-            Icon={Plus}
-         // handleMethod={handleChange}
-         />
+         {title !== "Null" &&
+            <ContentTitle
+               title={title}
+               btnTitle="Null"
+            // Icon={Plus}
+            // handleMethod={handleChange}
+            />
+         }
 
          <div className="border border-gray-700 rounded-lg overflow-hidden">
             <table className="min-w-full border-collapse">
@@ -97,7 +94,7 @@ const SkillRIII = ({ route }) => {
 
          {/* 1. Render direct topics if they exist */}
          {targetCategory.topics?.length > 0 && (
-            <TopicTable title="General Topics" topics={targetCategory.topics} />
+            <TopicTable title="Null" topics={targetCategory.topics} />
          )}
 
          {/* 2. Render separate tables for each child category (e.g., Arithmetic Operators) */}
@@ -118,4 +115,4 @@ const SkillRIII = ({ route }) => {
    );
 };
 
-export default SkillRIII;
+export default RenderRevisions;

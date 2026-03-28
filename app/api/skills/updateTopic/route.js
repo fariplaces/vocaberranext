@@ -5,44 +5,66 @@ export async function PATCH(req) {
    try {
       const body = await req.json();
 
-      // Now we extract the ID from the body along with other data
-      const { id, title, order, parentId, skillId } = body;
+      // 1. Extract the ID and the fields we want to update from the body
+      const { id, title, order, categoryId } = body;
 
+      // 2. Basic Validation: ID is mandatory to find the record
       if (!id) {
          return NextResponse.json(
-            { error: "Category ID is required in the request body" },
+            { error: "Topic ID is required in the request body" },
             { status: 400 }
          );
       }
 
-      const updatedCategory = await prisma.category.update({
+      // 3. Update the Topic
+      const updatedTopic = await prisma.topic.update({
          where: {
             id: id,
          },
          data: {
+            // Use conditional spread to only update fields provided in the body
             ...(title !== undefined && { title }),
             ...(order !== undefined && { order }),
-            ...(parentId !== undefined && { parentId }),
-            ...(skillId !== undefined && { skillId }),
+            ...(categoryId !== undefined && { categoryId }),
          },
          include: {
-            skill: true,
-            parent: true,
-            children: true,
-            topics: true,
+            // Include the full category/skill tree for the UI to update its state
+            category: {
+               include: {
+                  skill: true,
+                  parent: {
+                     include: {
+                        skill: true
+                     }
+                  }
+               }
+            },
+            revisions: true
          },
       });
 
-      return NextResponse.json(updatedCategory);
+      return NextResponse.json(updatedTopic);
    } catch (error) {
-      console.error("Update Category Error:", error);
+      console.error("Update Topic Error:", error);
 
-      if (error.code === 'P2025') {
-         return NextResponse.json({ error: "Category not found" }, { status: 404 });
+      // Prisma Error P2025: Record to update not found
+      if (error.code === "P2025") {
+         return NextResponse.json(
+            { error: "Topic not found" },
+            { status: 404 }
+         );
+      }
+
+      // Prisma Error P2003: Foreign key constraint (if categoryId is invalid)
+      if (error.code === "P2003") {
+         return NextResponse.json(
+            { error: "The provided Category ID is invalid" },
+            { status: 400 }
+         );
       }
 
       return NextResponse.json(
-         { error: "Failed to update category" },
+         { error: "Failed to update topic" },
          { status: 500 }
       );
    }

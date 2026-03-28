@@ -4,49 +4,61 @@ import { NextResponse } from "next/server";
 export async function POST(req) {
    try {
       const body = await req.json();
-      const { title, order, skillId, parentId } = body;
+      const { title, order, categoryId } = body;
 
       // 1. Basic Validation
       if (!title) {
          return NextResponse.json(
-            { error: "Category title is required" },
+            { error: "Topic title is required" },
             { status: 400 }
          );
       }
 
-      // 2. Logic Check
-      if (!skillId && !parentId) {
+      // 2. Logic Check: Topic must be linked to a Category
+      if (!categoryId) {
          return NextResponse.json(
-            { error: "Category must be linked to a Skill or a Parent Category" },
+            { error: "Topic must be linked to a Category" },
             { status: 400 }
          );
       }
 
-      // 3. Create the Category with extended includes
-      const newCategory = await prisma.category.create({
+      // 3. Create the Topic with extended includes
+      const newTopic = await prisma.topic.create({
          data: {
             title,
             order: order || 0,
-            skillId: skillId || null,
-            parentId: parentId || null,
+            categoryId: categoryId,
          },
          include: {
-            // Include the parent skill details if they exist
-            skill: true,
-            // Include the parent category details if they exist
-            parent: true,
-            // Keep your existing structures for the UI
-            children: true,
-            topics: true,
+            // Include the category, its parent, and the skills
+            category: {
+               include: {
+                  skill: true,
+                  parent: {
+                     include: {
+                        skill: true
+                     }
+                  }
+               }
+            },
+            revisions: true // Include revisions (likely empty for a new topic)
          },
       });
 
-      return NextResponse.json(newCategory);
+      return NextResponse.json(newTopic);
    } catch (error) {
-      console.error("Create Category Error:", error);
+      console.error("Create Topic Error:", error);
+
+      // Handle case where categoryId might be invalid
+      if (error.code === 'P2003') {
+         return NextResponse.json(
+            { error: "The provided Category ID does not exist" },
+            { status: 400 }
+         );
+      }
 
       return NextResponse.json(
-         { error: "Failed to create category" },
+         { error: "Failed to create topic" },
          { status: 500 }
       );
    }
