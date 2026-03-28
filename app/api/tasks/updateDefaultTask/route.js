@@ -7,11 +7,11 @@ export async function PATCH(req) {
       const { id, title, remarks, order } = body;
 
       if (!id) {
-         return NextResponse.json({ error: "Default Task ID is required" }, { status: 400 });
+         return NextResponse.json({ error: "ID is missing" }, { status: 400 });
       }
 
       const updatedDefaultTask = await prisma.defaultTask.update({
-         where: { id: parseInt(id) },
+         where: { id: id }, // REMOVED parseInt here
          data: {
             ...(title !== undefined && { title }),
             ...(remarks !== undefined && { remarks }),

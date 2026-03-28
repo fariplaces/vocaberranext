@@ -1,12 +1,10 @@
+import DefaultTaskPage from "@/components/taskings/DefaultTaskPage";
 import React from "react";
-import DefaultTasksPage from "@/components/taskings/DefaultTasksPage";
 
-const DefaultTasks = async ({ params }) => {
-   const { route } = await params;
+const DefaultTasks = () => {
    return (
-
       <>
-         {/* <DefaultTasksPage route={route} /> */}
+         <DefaultTaskPage />
       </>
 
    );

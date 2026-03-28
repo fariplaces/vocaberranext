@@ -88,6 +88,67 @@ export const deleteTask = createAsyncThunk(
   }
 );
 
+// Fetch all Default Tasks
+export const fetchDefaultTasks = createAsyncThunk(
+  "tasks/fetchDefaultTasks",
+  async (_, thunkAPI) => {
+    try {
+      const res = await axios.get("/api/tasks/fetchDefaultTasks");
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || "Failed to fetch Default Tasks"
+      );
+    }
+  }
+);
+
+
+// Create a new Default Task
+export const createDefaultTask = createAsyncThunk(
+  "tasks/createDefaultTask",
+  async (formData, thunkAPI) => {
+    try {
+      const res = await axios.post(`/api/tasks/createDefaultTask`, formData);
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || "Failed to create Task"
+      );
+    }
+  }
+);
+
+// Update a Default Task
+export const updateDefaultTask = createAsyncThunk(
+  "tasks/updateDefaultTask",
+  async (payload, thunkAPI) => {
+    try {
+      const res = await axios.patch(`/api/tasks/updateDefaultTask`, payload);
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || "Failed to update Default Task"
+      );
+    }
+  }
+);
+
+// Delete a Default Task
+export const deleteDefaultTask = createAsyncThunk(
+  "tasks/deleteDefaultTask",
+  async (id, thunkAPI) => {
+    try {
+      const res = await axios.delete(`/api/tasks/deleteDefaultTask/${id}`);
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || "Failed to Delete Default Task"
+      );
+    }
+  }
+);
+
 
 
 // ================== SLICE ==================
@@ -110,7 +171,7 @@ const taskSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // Fetch Exercise Types
+      // Fetch Tasks
       .addCase(fetchTasks.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -181,6 +242,67 @@ const taskSlice = createSlice({
         );
       })
       .addCase(deleteTask.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      // Fetch Default Tasks
+      .addCase(fetchDefaultTasks.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchDefaultTasks.fulfilled, (state, action) => {
+        state.loading = false;
+        state.defaultTasks = action.payload;
+      })
+      .addCase(fetchDefaultTasks.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      // Create Default Task
+      .addCase(createDefaultTask.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(createDefaultTask.fulfilled, (state, action) => {
+        state.loading = false;
+        state.defaultTasks = [action.payload, ...state.defaultTasks];
+      })
+      .addCase(createDefaultTask.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      // Update Default Task
+      .addCase(updateDefaultTask.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateDefaultTask.fulfilled, (state, action) => {
+        state.loading = false;
+        // 1. Find the index of the record that was just updated
+        const index = state.defaultTasks.findIndex(
+          (item) => item.id === action.payload.id
+        );
+        // 2. If found, replace the old object with the new one from the API
+        if (index !== -1) {
+          state.defaultTasks[index] = action.payload;
+        }
+      })
+      .addCase(updateDefaultTask.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      // Delete Default Task
+      .addCase(deleteDefaultTask.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteDefaultTask.fulfilled, (state, action) => {
+        state.loading = false;
+        state.defaultTasks = state.defaultTasks.filter(
+          (item) => item.id !== action.meta.arg
+        );
+      })
+      .addCase(deleteDefaultTask.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
