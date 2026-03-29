@@ -85,7 +85,7 @@ const NavigationMenu = () => {
       subItems: [
         {
           item: "Tasking Stats",
-          href: "/task/stats",
+          href: "/tasks/stats",
         },
         {
           item: "Typing Exercises",
@@ -97,11 +97,11 @@ const NavigationMenu = () => {
         },
         {
           item: "Revisions",
-          href: "/revision/stats/tests",
+          href: "/skills/stats/revisions",
         },
         {
           item: "Skills",
-          href: "/revision/stats/tests",
+          href: "/skills/stats/skills",
         },
       ],
     },
