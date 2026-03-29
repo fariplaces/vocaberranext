@@ -70,9 +70,8 @@ export default function RegisterPage() {
             <label className="block text-sm text-gray-300">Name</label>
             <input
               type="text"
-              className={`w-full p-3 mt-1 rounded-xl bg-gray-800 border ${
-                errors.userName ? "border-red-500" : "border-gray-600"
-              } text-white focus:outline-none focus:ring-2 focus:ring-blue-500`}
+              className={`w-full p-3 mt-1 rounded-xl bg-gray-800 border ${errors.userName ? "border-red-500" : "border-gray-600"
+                } text-white focus:outline-none focus:ring-2 focus:ring-blue-500`}
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
               placeholder="Enter your Name.."
@@ -86,9 +85,8 @@ export default function RegisterPage() {
             <label className="block text-sm text-gray-300">Email</label>
             <input
               type="text"
-              className={`w-full p-3 mt-1 rounded-xl bg-gray-800 border ${
-                errors.email ? "border-red-500" : "border-gray-600"
-              } text-white focus:outline-none focus:ring-2 focus:ring-blue-500`}
+              className={`w-full p-3 mt-1 rounded-xl bg-gray-800 border ${errors.email ? "border-red-500" : "border-gray-600"
+                } text-white focus:outline-none focus:ring-2 focus:ring-blue-500`}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="example@mail.com"
@@ -103,9 +101,8 @@ export default function RegisterPage() {
             <label className="block text-sm text-gray-300">Password</label>
             <input
               type="password"
-              className={`w-full p-3 mt-1 rounded-xl bg-gray-800 border ${
-                errors.password ? "border-red-500" : "border-gray-600"
-              } text-white focus:outline-none focus:ring-2 focus:ring-blue-500`}
+              className={`w-full p-3 mt-1 rounded-xl bg-gray-800 border ${errors.password ? "border-red-500" : "border-gray-600"
+                } text-white focus:outline-none focus:ring-2 focus:ring-blue-500`}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
@@ -126,7 +123,7 @@ export default function RegisterPage() {
 
         {/* Extra Links */}
         <div className="flex justify-between mt-4 text-sm text-gray-400">
-          <a href="#" className="hover:text-blue-400 transition">
+          <a href="/auth/login" className="hover:text-blue-400 transition">
             Already have an account?
           </a>
         </div>
