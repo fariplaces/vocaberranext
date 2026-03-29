@@ -3,7 +3,7 @@
 
 .env
 .env.local
-# /prisma/dbs
+/prisma/dbs
 # dependencies
 /node_modules
 /.pnp
