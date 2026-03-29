@@ -4,11 +4,7 @@ import RevisionPage from "@/components/skills/RevisionPage";
 const Revision = async ({ params }) => {
    const { route } = await params;
    return (
-
-      <>
-         <RevisionPage route={route} />
-      </>
-
+      <RevisionPage route={route} />
    );
 };
 

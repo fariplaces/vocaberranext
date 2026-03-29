@@ -56,9 +56,6 @@ function RenderExercises({ route, handleEditClick, handleDelClick }) {
                 <td className="border border-gray-700 px-4 py-2 text-sm text-white">
                   {item.exerciseNo} - {item.title}
                 </td>
-                {/* <td className="border border-gray-700 px-4 py-2 text-sm text-white">
-                  {item.duration.duration}
-                </td> */}
                 <td className="border border-gray-700 px-4 py-2 text-sm text-white">
                   {item.type.type}
                 </td>

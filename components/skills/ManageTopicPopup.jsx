@@ -128,28 +128,11 @@ const ManageTopicPopup = ({
                   value={formData.order}
                   onChange={handleChange}
                   className={`w-full px-3 py-2 bg-transparent border rounded-md focus:outline-none`}
-                  // {skills.some(
-                  //               (item) =>
-                  //                 item.order === parseInt(formData.order) &&
-                  //                 item.id !== formData.id
-                  //             )
-                  //                 ? "border-red-500"
-                  //                 : "border-gray-600 focus:border-blue-500"
-                  //               }
+
                   placeholder="Enter Skill Order No. i.e 1,2,3..."
                 />
 
-                {/* {
-                  skills.some(
-                    (item) =>
-                      item.order === parseInt(formData.order) &&
-                      item.id !== formData.id
-                  ) && (
-                    <p className="text-red-500 text-xs mt-1">
-                      Skill Order No already exists
-                    </p>
-                  )
-                } */}
+
               </div>
               <div className="mb-4">
                 <label className="block text-sm mb-1">Category</label>
@@ -173,28 +156,6 @@ const ManageTopicPopup = ({
                   ))}
                 </select>
               </div>
-              {/* <div className="mb-4">
-                <label className="block text-sm mb-1">Skill</label>
-                <select
-                  name="skillId"
-                  value={formData.skillId}
-                  onChange={handleChange}
-                  className="w-full  px-3 py-2 bg-transparent border border-gray-600 rounded-md focus:outline-none focus:border-blue-500"
-                >
-                  <option className="bg-black" value="">
-                    Select a Skill
-                  </option>
-                  {skills.map((skill) => (
-                    <option
-                      key={skill.id}
-                      value={skill.id}
-                      className="bg-black text-white"
-                    >
-                      {skill.title}
-                    </option>
-                  ))}
-                </select>
-              </div> */}
 
               {/* Buttons */}
               <div className="flex justify-end space-x-2">

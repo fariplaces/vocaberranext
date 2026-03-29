@@ -47,27 +47,13 @@ const ManageCategoryPopup = ({
     setFormData((prev) => {
       const newState = { ...prev, [name]: value };
 
-      // Check duplicate order no
-      // if (name === "order") {
-      //   const exists = skills.some(
-      //     (item) => item.order === parseInt(value)
-      //   );
 
-      //   if (exists) {
-      //     console.warn("Order Already Exists!");
-      //   }
-      // }
 
       return newState;
     });
   };
 
   const handleSave = async () => {
-    console.log(formData);
-    // const { categories, ...filteredFormData } = formData;
-    // const isFormIncomplete = Object.values(formData).some(
-    //   (val) => String(val).trim() === ""
-    // );
 
     const payloadData = {
       title: formData.title,
@@ -91,18 +77,6 @@ const ManageCategoryPopup = ({
       alert("Please fill all required fields!");
       return;
     }
-
-    // ✅ Duplicate skill order check
-    // const isDuplicate = skills.some(
-    //   (item) =>
-    //     item.order === parseInt(formData.order) &&
-    //     item.id !== formData.id // ignore self in edit mode
-    // );
-
-    // if (isDuplicate) {
-    //   alert("Order number already exists!");
-    //   return;
-    // }
 
     const payload = {
       title: payloadData.title,
@@ -173,17 +147,7 @@ const ManageCategoryPopup = ({
                   placeholder="Enter Skill Order No. i.e 1,2,3..."
                 />
 
-                {/* {
-                  skills.some(
-                    (item) =>
-                      item.order === parseInt(formData.order) &&
-                      item.id !== formData.id
-                  ) && (
-                    <p className="text-red-500 text-xs mt-1">
-                      Skill Order No already exists
-                    </p>
-                  )
-                } */}
+
               </div>
               {filteredCategories &&
                 <div className="mb-4">

@@ -4,11 +4,7 @@ import TaskingPage from "@/components/taskings/TaskingPage";
 const Taskings = async ({ params }) => {
    const { route } = await params;
    return (
-
-      <>
-         <TaskingPage route={route} />
-      </>
-
+      <TaskingPage route={route} />
    );
 };
 

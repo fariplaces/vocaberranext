@@ -3,10 +3,7 @@ import React from "react";
 
 const DefaultTasks = () => {
    return (
-      <>
-         <DefaultTaskPage />
-      </>
-
+      <DefaultTaskPage />
    );
 };
 
