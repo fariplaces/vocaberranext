@@ -26,7 +26,15 @@ export async function GET(req) {
       const formattedTasks = tasks.map((task) => {
          return {
             ...task,
-            displayDate: task.date ? new Date(task.date).toDateString() : "No Date",
+            displayDate: task.date
+               ? new Date(task.date).toLocaleDateString("en-GB", {
+                  weekday: "short",
+                  day: "numeric",
+                  month: "short",
+                  year: "numeric",
+                  timeZone: "UTC", // 👈 important
+               })
+               : "No Date",
             userName: task.user?.name || "Unknown User",
          };
       });
