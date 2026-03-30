@@ -21,6 +21,7 @@ const initialFormState = {
 };
 
 const ManageRevisionPopup = ({
+  route,
   isOpen,
   setIsOpen,
   editData = null,
@@ -30,6 +31,23 @@ const ManageRevisionPopup = ({
   const { topics } = useSelector((state) => state.skill);
   const [formData, setFormData] = useState(initialFormState);
   const dispatch = useDispatch();
+
+
+  const filteredTopics = topics?.filter((topic) => {
+    const cat = topic.category;
+
+    return (
+      topic.categoryId === route ||
+
+      cat?.parentId === route ||
+      cat?.parent?.parentId === route ||
+
+      cat?.skillId === route ||
+      cat?.parent?.skillId === route ||
+      cat?.parent?.parent?.skillId === route
+    );
+  });
+
 
   const resetPopup = () => {
     setFormData(initialFormState);
@@ -151,7 +169,7 @@ const ManageRevisionPopup = ({
                   <option className="bg-black" value="">
                     Select a Topic
                   </option>
-                  {topics.map((topic) => {
+                  {filteredTopics.map((topic) => {
                     const skillTitle =
                       topic?.category?.parent?.skill?.title ||
                       topic?.category?.skill?.title;

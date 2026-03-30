@@ -75,6 +75,7 @@ const RevisionPage = ({ route }) => {
         handleDelClick={handleDelClick}
       />
       <ManageRevisionPopup
+        route={route}
         isOpen={isPopupOpen}
         setIsOpen={setIsPopupOpen}
         editData={selectedItem}
