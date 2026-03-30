@@ -72,7 +72,7 @@ const TypingDashboardPage = ({ route }) => {
         {isExercises ? "Typing Course Stats" : "Typing Test Stats"}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className={isTests ? `grid grid-cols-1 gap-8` : `grid grid-cols-1 lg:grid-cols-2 gap-8`}>
         {isExercises &&
           sortedLessonNames.map((lessonName) => (
             <TypingBarChart

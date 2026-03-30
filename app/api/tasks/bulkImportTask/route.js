@@ -1,31 +1,45 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { randomUUID } from "crypto"; // 👈 1. Import this to generate fresh IDs
 
 export async function POST(req) {
    try {
       const body = await req.json();
-      // 1. Extract the selected IDs from the body
       const { userId, date, ids } = body;
 
       if (!userId) {
          return NextResponse.json({ error: "User ID is required" }, { status: 400 });
       }
 
-      // If no specific IDs are provided, we should probably stop here 
-      // or return an error to avoid importing everything by accident.
       if (!ids || ids.length === 0) {
          return NextResponse.json({ error: "No tasks selected for import" }, { status: 400 });
       }
 
-      let targetDate = date ? new Date(date) : new Date();
-      if (!date) targetDate.setDate(targetDate.getDate() + 1);
-      targetDate.setHours(0, 0, 0, 0);
+      let targetDate;
+
+      // ... (Keep your existing date processing exactly as it is) ...
+      if (date instanceof Date) {
+         targetDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+      } else if (typeof date === "number") {
+         const now = new Date();
+         targetDate = new Date(Date.UTC(now.getFullYear(), now.getMonth(), date));
+      } else if (date) {
+         const parsed = new Date(date);
+         targetDate = new Date(Date.UTC(parsed.getFullYear(), parsed.getMonth(), parsed.getDate()));
+      } else {
+         const now = new Date();
+         targetDate = new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate() + 1));
+      }
+
+      if (isNaN(targetDate.getTime())) {
+         throw new Error("Invalid date before DB insert");
+      }
 
       // 2. FETCH ONLY SELECTED TEMPLATES
       const templates = await prisma.defaultTask.findMany({
          where: {
             userId: userId,
-            id: { in: ids } // This filters the database to only your selected UUIDs
+            id: { in: ids }
          },
          orderBy: { order: 'asc' }
       });
@@ -34,8 +48,9 @@ export async function POST(req) {
          return NextResponse.json([], { status: 200 });
       }
 
-      // 3. Map to Task format
+      // 3. Map to Task format & generate NEW IDs manually ✨
       const tasksToCreate = templates.map((tpl) => ({
+         id: randomUUID(), // 👈 2. Force a completely new unique ID here!
          userId: tpl.userId,
          title: tpl.title,
          remarks: tpl.remarks || "",
@@ -50,12 +65,10 @@ export async function POST(req) {
       });
 
       // 5. Re-fetch the newly created tasks for Redux
+      // Fetching by specific array of IDs we just generated is faster and highly accurate
       const newTasks = await prisma.task.findMany({
          where: {
-            userId: userId,
-            date: targetDate,
-            // To be precise, only fetch tasks with titles matching our imported templates
-            title: { in: templates.map(t => t.title) }
+            id: { in: tasksToCreate.map(t => t.id) } // 👈 3. Target the exact new IDs
          },
          orderBy: { order: 'asc' },
       });

@@ -52,7 +52,6 @@ function RenderTasks({ route, handleEditClick, handleStatusToggle, handleDelClic
     }, {});
   }, [filteredTasks]);
 
-  console.log("grouped Tasks:", groupedTasks);
 
   if (filteredTasks.length === 0) {
     return (

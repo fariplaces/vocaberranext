@@ -25,20 +25,24 @@ const DefaultTaskPage = () => {
     setIsPopupOpen(true);
   };
 
-  const handleBulkImport = () => {
+  const handleBulkImport = (date) => {
     if (selectedIds.length === 0) return;
+    console.log(date);
 
     const result = dispatch(
       bulkImportTask({
+        date: date.toISOString(),
         ids: selectedIds,
         userId: user.id
       })
     );
+    alert("Tasks imported!");
+    setSelectedIds([]); // Clear the checkboxes
 
-    if (bulkImportTask.fulfilled.match(result)) {
-      alert("Tasks imported for tomorrow!");
-      setSelectedIds([]); // Clear the checkboxes
-    }
+    // console.log(result);
+
+    // if (bulkImportTask.fulfilled.match(result)) {
+    // }
   };
 
   const handleAddClick = () => {

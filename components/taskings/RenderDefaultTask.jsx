@@ -63,18 +63,36 @@ function RenderDefaultTasks({
             {selectedIds.length} of {defaultTasks.length} Selected
           </span>
         </div>
+        <div className="flex gap-2">
 
-        <button
-          onClick={handleBulkImport}
-          disabled={selectedIds.length === 0}
-          className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-all ${selectedIds.length > 0
-            ? "bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-900/20"
-            : "bg-gray-800 text-gray-500 cursor-not-allowed"
-            }`}
-        >
-          <Import size={18} />
-          Import for Tomorrow
-        </button>
+          <button
+            onClick={() => handleBulkImport(new Date())}
+            disabled={selectedIds.length === 0}
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-all ${selectedIds.length > 0
+              ? "bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-900/20"
+              : "bg-gray-800 text-gray-500 cursor-not-allowed"
+              }`}
+          >
+            <Import size={18} />
+            Import for Today
+          </button>
+          <button
+            // onClick={() => handleBulkImport(new Date())}
+            onClick={() => {
+              const tomorrow = new Date();
+              tomorrow.setDate(tomorrow.getDate() + 1);
+              handleBulkImport(tomorrow);
+            }}
+            disabled={selectedIds.length === 0}
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-all ${selectedIds.length > 0
+              ? "bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-900/20"
+              : "bg-gray-800 text-gray-500 cursor-not-allowed"
+              }`}
+          >
+            <Import size={18} />
+            Import for Tomorrow
+          </button>
+        </div>
       </div>
 
       {/* --- Task List --- */}
