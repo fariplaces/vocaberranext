@@ -42,7 +42,7 @@ function RenderTasks({ route, handleEditClick, handleStatusToggle, handleDelClic
     return filteredTasks.reduce((acc, task) => {
       const dateKey = task.date
         ? new Date(task.date).toLocaleDateString('en-GB', {
-          weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+          weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC'
         })
         : "Master Templates";
 
@@ -51,6 +51,8 @@ function RenderTasks({ route, handleEditClick, handleStatusToggle, handleDelClic
       return acc;
     }, {});
   }, [filteredTasks]);
+
+  console.log("grouped Tasks:", groupedTasks);
 
   if (filteredTasks.length === 0) {
     return (
