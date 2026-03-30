@@ -3,7 +3,9 @@
 
 .env
 .env.local
-/prisma/dbs
+/prisma/dbs/
+/prisma/dbs/**
+/package-lock.json
 
 # dependencies
 /node_modules
