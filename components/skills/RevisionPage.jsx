@@ -64,7 +64,11 @@ const RevisionPage = ({ route }) => {
     <>
       <ContentTitle
         title={"Manage Revisions"}
-        btnTitle={"Add Revision"}
+        btnTitle={
+          ["pendingri", "pendingrii", "pendingriii", "scheduled"].includes(route)
+            ? "Null"
+            : "Add Revision"
+        }
         Icon={Plus}
         handleMethod={handleAddClick}
       />
