@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import ContentTitle from "@/components/ContentTitle";
 import { Plus } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteRevision, deleteSkill, fetchRevisions, fetchSkills, fetchTopics, updateRevision } from "@/store/slices/skillSlice";
+import { deleteRevision, fetchRevisions, fetchSkills, fetchTopics, updateRevision } from "@/store/slices/skillSlice";
 import RenderRevisions from "./RenderRevisions";
 import ManageRevisionPopup from "./ManageRevisionPopup";
 import DeleteRevisionPopup from "./DeleteRevisionPopup";

@@ -6,7 +6,8 @@ import { BarChart3 } from "lucide-react";
 
 // Individual colors for each specific metric bar
 const METRIC_COLORS = [
-   "#6b7280", // Total Topics (Gray)
+   "#a855f7", // All Topics in Skill (Purple) -> NEW
+   "#6b7280", // Total Revisions Entered (Gray)
    "#eab308", // Scheduled (Yellow)
    "#3b82f6", // Practiced (Blue)
    "#10b981", // R1 (Bright Green)
@@ -17,21 +18,38 @@ const METRIC_COLORS = [
 ];
 
 const SkillProgress = () => {
-   // Adjust these selectors according to your actual store slices
-   // const {  } = useSelector((state) => state.skillSlice);
    const { skills = [], revisions = [] } = useSelector((state) => state.skill);
+
+   // Helper function to recursively sum topics from categories and their infinite children
+   const countTopicsRecursively = (categories = []) => {
+      let total = 0;
+      categories.forEach((category) => {
+         // Add topics length of current category
+         if (Array.isArray(category.topics)) {
+            total += category.topics.length;
+         }
+         // If there are subcategories (children), drill down recursively
+         if (Array.isArray(category.children) && category.children.length > 0) {
+            total += countTopicsRecursively(category.children);
+         }
+      });
+      return total;
+   };
 
    // Calculate stats and generate a separate dataset for EACH skill
    const skillsChartsData = useMemo(() => {
       return skills.map((skill) => {
-         // 1. Filter revisions belonging to this specific skill
+         // 1. Calculate TRUE total topics using our recursive function
+         const trueTotalTopics = countTopicsRecursively(skill.categories || []);
+
+         // 2. Filter revisions belonging to this specific skill
          const skillRevisions = revisions.filter((item) => {
             const matchesBreadcrumb = item.breadcrumb?.skill === skill.title;
             const matchesSkillId = item.topic?.category?.skillId === skill.id;
             return matchesBreadcrumb || matchesSkillId;
          });
 
-         const totalTopics = skillRevisions.length;
+         const enteredRevisions = skillRevisions.length;
          const scheduled = skillRevisions.filter((t) => t.scheduled !== null).length;
          const practiced = skillRevisions.filter((t) => t.practiced !== null).length;
 
@@ -43,7 +61,8 @@ const SkillProgress = () => {
 
          // Reshaping data so the metrics become X-axis categories for this skill's chart
          const chartData = [
-            { metric: "Total", count: totalTopics },
+            { metric: "All", count: trueTotalTopics }, // 👈 New Bar at the beginning
+            { metric: "Total", count: enteredRevisions }, // Shifted original 'Total' here
             { metric: "Sched", count: scheduled },
             { metric: "Prac", count: practiced },
             { metric: "R1", count: r1 },
@@ -56,7 +75,7 @@ const SkillProgress = () => {
          return {
             skillTitle: skill.title,
             data: chartData,
-            totalTopics // keeping this to optionally sort or hide empty skills
+            trueTotalTopics // Keeping reference
          };
       });
    }, [skills, revisions]);
@@ -78,7 +97,7 @@ const SkillProgress = () => {
                   <div className="flex justify-between items-center mb-4">
                      <h4 className="text-md font-bold text-white">{skillObj.skillTitle}</h4>
                      <span className="text-xs text-gray-400 font-mono">
-                        Topics: {skillObj.totalTopics}
+                        Topics in Skill: {skillObj.trueTotalTopics}
                      </span>
                   </div>
 

@@ -195,15 +195,37 @@ const ManageRevisionPopup = ({
                 </select>
               </div>
 
-              <div className="mb-4">
-                <label className="block text-sm mb-1">Scheduled On</label>
+              <div className="">
+                <label className="block text-sm">Scheduled On</label>
                 <input
                   type="date"
                   name="scheduled"
                   value={formData.scheduled || ""}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 bg-black text-white border border-gray-600 rounded-md focus:outline-none focus:border-blue-500"
+                  className="w-full px-3 py-2 mb-0.5 bg-black text-white border border-gray-600 rounded-md focus:outline-none focus:border-blue-500"
                 />
+                <div className="flex justify-end space-x-2 p-1">
+                  <button
+                    onClick={() => setFormData((prev) => ({ ...prev, scheduled: new Date().toISOString().split("T")[0] }))}
+                    className="px-4 py-0.5 border border-gray-600 rounded-lg hover:bg-gray-700"
+                  >
+                    Today
+                  </button>
+                  <button
+                    className="flex items-center space-x-2 border border-gray-400 bg-transparent hover:bg-gray-600 px-4 py-0.5 rounded-lg"
+                    onClick={() => {
+                      const tomorrow = new Date();
+                      tomorrow.setDate(tomorrow.getDate() + 1);
+
+                      setFormData((prev) => ({
+                        ...prev,
+                        scheduled: tomorrow.toISOString().split("T")[0],
+                      }));
+                    }}
+                  >
+                    <span>Tomorrow</span>
+                  </button>
+                </div>
               </div>
               <div className="mb-4">
                 <label className="block text-sm mb-1">Practiced On</label>
@@ -214,7 +236,9 @@ const ManageRevisionPopup = ({
                   onChange={handleChange}
                   className="w-full px-3 py-2 bg-black text-white border border-gray-600 rounded-md focus:outline-none focus:border-blue-500"
                 />
+
               </div>
+
 
               {/* Buttons */}
               <div className="flex justify-end space-x-2">

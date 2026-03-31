@@ -22,6 +22,7 @@ model User {
   revisions    Revision[]
   tasks        Task[]
   defaultTasks DefaultTask[]
+  notes        Note[]
 }
 
 // Session table
@@ -188,6 +189,42 @@ model DefaultTask {
   title   String
   remarks String?
   order   Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// --- MIGRATION FOR NOTION-LIKE NOTES ---
+
+model Note {
+  id    String  @id @default(uuid())
+  title String? // Optional title for the note
+
+  // Notion-style rich text content stored as a JSON string
+  content String // You will JSON.stringify() your editor state here
+
+  // Polymorphic connection fields
+  targetId   String // The ID of the Topic, Exercise, etc.
+  targetType String // Identifies the connected table (e.g., "TOPIC", "EXERCISE", "SKILL")
+
+  // Every note should belong to a user
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([targetId]) // Crucial for querying notes for a specific topic fast
+}
+
+model NoteTemplate {
+  id      String @id @default(uuid())
+  name    String // Name of the template (e.g., "Bug Report", "Daily Reflection")
+  pattern String @unique // The shortcut trigger (e.g., "bug", "daily")
+
+  // The default Notion-style JSON content for this template
+  content String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
