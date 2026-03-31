@@ -1,6 +1,6 @@
 // import createBlockSpec from "./utils/createBlockSpec";
 
-const AlertComponent = ({ block }) => (
+const AlertBlock = ({ block }) => (
    <div
       className="flex items-start gap-3 p-4 bg-red-900/20 border border-red-800 rounded-lg text-red-300 my-2 w-full"
       contentEditable={false}
@@ -22,4 +22,4 @@ const AlertComponent = ({ block }) => (
    </div>
 );
 
-export default AlertComponent
+export default AlertBlock
