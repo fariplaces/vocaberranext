@@ -3,11 +3,11 @@ import React, { useEffect, useState } from "react";
 import ContentTitle from "@/components/ContentTitle";
 import { Plus } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteTopic, fetchCategories, fetchTopics } from "@/store/slices/skillSlice";
 import RenderTopics from "./RenderTopics";
 import ManageTopicPopup from "./ManageTopicPopup";
 import DeleteTopicPopup from "./DeleteTopicPopup";
 import ManageRevisionPopup from "./ManageRevisionPopup";
+import { deleteTopic, fetchCategories, fetchTopics } from "@/store/actions/skillActions";
 
 const TopicsPage = () => {
   const [selectedItem, setSelectedItem] = useState(null);

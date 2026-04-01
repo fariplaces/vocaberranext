@@ -1,7 +1,7 @@
 "use client";
+import { importNote } from "@/store/actions/notesActions";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { importNote } from "@/store/slices/notesSlice";
 
 export default function GlobalNotesPanel() {
    const dispatch = useDispatch();

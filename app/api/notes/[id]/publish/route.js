@@ -16,6 +16,9 @@ export async function PATCH(req, { params }) {
       const session = await getSession();
       if (!session) return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
 
+      const resolvedParams = await params;
+      const { id } = resolvedParams;
+
       // keep trying until shareCode is unique
       let shareCode;
       let attempts = 0;
@@ -27,7 +30,7 @@ export async function PATCH(req, { params }) {
       }
 
       const note = await prisma.note.update({
-         where: { id: params.id },
+         where: { id: id },
          data: {
             visibility: "GLOBAL",
             userId: null,

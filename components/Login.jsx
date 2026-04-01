@@ -1,8 +1,8 @@
 "use client";
-import { loginUser } from "@/store/slices/authSlice";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
+import { loginUser } from "@/store/actions/authActions";
 
 export default function LoginPage() {
   const [email, setEmail] = useState(process.env.NEXT_PUBLIC_DEFAULT_USER);

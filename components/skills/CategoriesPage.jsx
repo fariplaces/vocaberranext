@@ -3,10 +3,10 @@ import React, { useEffect, useState } from "react";
 import ContentTitle from "@/components/ContentTitle";
 import { Plus } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCategory, fetchCategories, fetchSkills } from "@/store/slices/skillSlice";
 import RenderCategories from "./RenderCategories";
 import ManageCategoryPopup from "./ManageCategoryPopup";
 import DeleteCategoryPopup from "./DeleteCategoryPopup";
+import { deleteCategory, fetchCategories, fetchSkills } from "@/store/actions/skillActions";
 
 const CategoriesPage = ({ route }) => {
   const [selectedItem, setSelectedItem] = useState(null);

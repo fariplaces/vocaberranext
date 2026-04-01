@@ -3,10 +3,10 @@ import React, { useEffect, useState } from "react";
 import ContentTitle from "@/components/ContentTitle";
 import { Plus } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteSkill, fetchSkills } from "@/store/slices/skillSlice";
 import RenderSkills from "./RenderSkills";
 import ManageSkillPopup from "./ManageSkillPopup";
 import DeleteSkillPopup from "./DeleteSkillPopup";
+import { deleteSkill, fetchSkills } from "@/store/actions/skillActions";
 
 const SkillsPage = () => {
   const [selectedItem, setSelectedItem] = useState(null);

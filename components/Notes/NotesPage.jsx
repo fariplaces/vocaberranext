@@ -1,11 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchNotes, fetchGlobalNotes, fetchTemplates, createNote, deleteNote, setActiveNote } from "@/store/slices/notesSlice";
 import NotesSidebar from "@/components/Notes/NotesSidebar";
 import NotesEditor from "@/components/Notes/NotesEditor";
 import TemplatesPanel from "@/components/Notes/TemplatesPanel";
 import GlobalNotesPanel from "@/components/Notes/GlobalNotesPanel";
+import { setActiveNote } from "@/store/slices/notesSlice";
+import { createNote, deleteNote, fetchGlobalNotes, fetchNotes, fetchTemplates } from "@/store/actions/notesActions";
 
 export default function NotesPage() {
    const dispatch = useDispatch();
@@ -27,7 +28,7 @@ export default function NotesPage() {
          {/* Top nav */}
          <div className="notes-topbar">
             <div className="notes-topbar-left">
-               <span className="notes-logo">Notes</span>
+               <span className="notes-logo">{view == "notes" ? "Notes" : view == "templates" ? "Templates" : "Global"}</span>
             </div>
             <div className="notes-topbar-tabs">
                <button

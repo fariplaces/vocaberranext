@@ -1,5 +1,5 @@
 "use client";
-import { checkAuth } from "@/store/slices/authSlice";
+import { checkAuth } from "@/store/actions/authActions";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";

@@ -1,5 +1,5 @@
 "use client";
-import { createTopic, updateTopic } from "@/store/slices/skillSlice";
+import { createTopic, updateTopic } from "@/store/actions/skillActions";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 

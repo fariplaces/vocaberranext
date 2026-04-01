@@ -1,5 +1,5 @@
 "use client";
-import { createWord } from "@/store/slices/wordSlice";
+import { createWord } from "@/store/actions/wordActions";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
@@ -36,7 +36,7 @@ const CreateWordPopup = ({ isOpen, setIsOpen }) => {
         <>
           <div
             className="absolute flex items-center justify-center inset-0 bg-white/10 backdrop-blur-sm transition-all duration-300"
-            // onClick={() => setIsOpen(false)}
+          // onClick={() => setIsOpen(false)}
           >
             {/* <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"> */}
             <div className="bg-black text-white p-6 rounded-xl shadow-lg w-96 border border-gray-700">

@@ -3,11 +3,11 @@ import React, { useEffect, useState } from "react";
 import ContentTitle from "@/components/ContentTitle";
 import { Plus } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import { bulkImportTask, deleteDefaultTask, fetchDefaultTasks } from "@/store/slices/taskSlice";
 import DeleteTaskPopup from "./DeleteTaskPopup";
 import { formatDate } from "@/lib/utils";
 import RenderDefaultTasks from "./RenderDefaultTask";
 import ManageDefaultTaskPopup from "./ManageDefaultTaskPopup";
+import { bulkImportTask, deleteDefaultTask, fetchDefaultTasks } from "@/store/actions/taskActions";
 
 
 const DefaultTaskPage = () => {

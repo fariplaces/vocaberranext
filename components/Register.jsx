@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import { registerUser } from "@/store/slices/authSlice";
+import { registerUser } from "@/store/actions/authActions";
 
 export default function RegisterPage() {
   const [email, setEmail] = useState("");

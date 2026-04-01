@@ -3,14 +3,10 @@ import React, { useEffect, useState } from "react";
 import ContentTitle from "@/components/ContentTitle";
 import { Plus } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  deleteTyping,
-  fetchDurations,
-  fetchLessons,
-} from "@/store/slices/typingSlice";
 import RenderTyping from "@/components/Typing/RenderTyping";
 import ManageTypingPopup from "@/components/Typing/ManageTypingPopup";
 import DeleteTypingPopup from "@/components/Typing/DeleteTypingPopup";
+import { deleteTyping, fetchDurations, fetchLessons } from "@/store/actions/typingActions";
 
 const TypingPage = ({ route }) => {
   const [selectedItem, setSelectedItem] = useState(null);

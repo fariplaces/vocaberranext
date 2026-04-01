@@ -52,7 +52,9 @@ export default function BlockNoteEditor({ onChange, initialContent }) {
             editor={editor}
             slashMenu={false}
             onChange={() => {
-               if (onChange) onChange(JSON.stringify(editor.document));
+               if (onChange) {
+                  onChange(JSON.stringify(editor.document));
+               }
             }}
          >
             <SuggestionMenuController
@@ -68,3 +70,4 @@ export default function BlockNoteEditor({ onChange, initialContent }) {
       </div>
    );
 }
+

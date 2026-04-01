@@ -1,6 +1,6 @@
 "use client";
 import { incrementDate } from "@/lib/utils";
-import { createRevision, createTopic, updateRevision, updateTopic } from "@/store/slices/skillSlice";
+import { createRevision, updateRevision } from "@/store/actions/skillActions";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 

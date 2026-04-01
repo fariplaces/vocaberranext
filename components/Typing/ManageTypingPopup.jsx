@@ -1,5 +1,5 @@
 "use client";
-import { createTyping, updateTyping } from "@/store/slices/typingSlice";
+import { createTyping, updateTyping } from "@/store/actions/typingActions";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 

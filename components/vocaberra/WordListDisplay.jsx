@@ -1,4 +1,4 @@
-import { fetchWords } from "@/store/slices/wordSlice";
+import { fetchWords } from "@/store/actions/wordActions";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 

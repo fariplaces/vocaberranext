@@ -4,10 +4,10 @@ import ContentTitle from "@/components/ContentTitle";
 import { Plus } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import RenderTasks from "./RenderTasks";
-import { deleteTask, fetchTasks, updateTask } from "@/store/slices/taskSlice";
 import ManageTaskPopup from "./ManageTaskPopup";
 import DeleteTaskPopup from "./DeleteTaskPopup";
 import { formatDate } from "@/lib/utils";
+import { deleteTask, fetchTasks, updateTask } from "@/store/actions/taskActions";
 
 
 const TaskingPage = ({ route }) => {

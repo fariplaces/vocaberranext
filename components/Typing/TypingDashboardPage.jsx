@@ -1,6 +1,6 @@
 "use client";
 import TypingBarChart from "@/components/Typing/TypingBarChart";
-import { fetchTypings } from "@/store/slices/typingSlice";
+import { fetchTypings } from "@/store/actions/typingActions";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 

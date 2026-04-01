@@ -1,5 +1,5 @@
 'use client'
-import { fetchExercises, fetchTypings } from "@/store/slices/typingSlice";
+import { fetchExercises } from "@/store/actions/typingActions";
 import {
   Edit2,
   Trash2,

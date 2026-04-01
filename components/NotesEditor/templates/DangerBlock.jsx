@@ -13,10 +13,7 @@ const DangerBlock = ({ block }) => (
             className="block text-red-800 font-bold mb-1"
             contentEditable={true}
             suppressContentEditableWarning={true}
-            onBlur={(e) => {
-               // Keeps your BlockNote JSON state in sync when you edit the title
-               block.props.title = e.target.innerText;
-            }}
+            onBlur={(e) => updateBlockProp('title', e.currentTarget.innerText)}
          >
             {block.props.title}
          </strong>
@@ -24,10 +21,7 @@ const DangerBlock = ({ block }) => (
             className="text-white outline-none"
             contentEditable={true}
             suppressContentEditableWarning={true}
-            onBlur={(e) => {
-               // Keeps your BlockNote JSON state in sync when you edit the message
-               block.props.message = e.target.innerText;
-            }}
+            onBlur={(e) => updateBlockProp('message', e.currentTarget.innerText)}
          >
             {block.props.message}
          </div>

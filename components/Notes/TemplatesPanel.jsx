@@ -1,12 +1,8 @@
 "use client";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-   createTemplate,
-   updateTemplate,
-   deleteTemplate,
-} from "@/store/slices/notesSlice";
 import dynamic from "next/dynamic";
+import { createTemplate, deleteTemplate, updateTemplate } from "@/store/actions/notesActions";
 
 const BlockNoteEditor = dynamic(
    () => import("@/components/NotesEditor/BlockNoteEditor"),

@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState, useCallback, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { updateNote, linkNote, unlinkNote, publishNote, unpublishNote } from "@/store/slices/notesSlice";
 import dynamic from "next/dynamic";
 import LinkNoteModal from "./LinkNoteModal";
+import { linkNote, publishNote, unlinkNote, unpublishNote, updateNote } from "@/store/actions/notesActions";
 
 const BlockNoteEditor = dynamic(() => import("@/components/NotesEditor/BlockNoteEditor"), {
    ssr: false,
@@ -35,6 +35,7 @@ export default function NotesEditor({ note }) {
    const handleContentChange = useCallback(
       (content) => {
          clearTimeout(saveTimer.current);
+         console.log("Content updating");
          saveTimer.current = setTimeout(() => {
             setSaving(true);
             dispatch(updateNote({ id: note.id, content })).finally(() =>
@@ -131,6 +132,7 @@ export default function NotesEditor({ note }) {
          {/* Editor */}
          <div className="editor-content">
             <BlockNoteEditor
+               key={note.id}
                initialContent={note.content}
                onChange={handleContentChange}
             />

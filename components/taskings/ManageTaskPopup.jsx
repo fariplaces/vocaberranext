@@ -1,5 +1,5 @@
 "use client";
-import { createTask, updateTask } from "@/store/slices/taskSlice";
+import { createTask, updateTask } from "@/store/actions/taskActions";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 

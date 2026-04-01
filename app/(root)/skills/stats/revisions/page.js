@@ -1,6 +1,6 @@
 'use client'
 import RevisionStats from '@/components/skills/RevisionStatsPage'
-import { fetchRevisions } from '@/store/slices/skillSlice';
+import { fetchRevisions } from '@/store/actions/skillActions';
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 

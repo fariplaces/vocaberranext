@@ -1,4 +1,4 @@
-import { logoutUser } from "@/store/slices/authSlice";
+import { logoutUser } from "@/store/actions/authActions";
 import { ChevronDown, LogOut } from "lucide-react";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";

@@ -1,6 +1,6 @@
 'use client'
 import TaskStats from '@/components/taskings/TasksStats'
-import { fetchTasks } from '@/store/slices/taskSlice'
+import { fetchTasks } from '@/store/actions/taskActions'
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 

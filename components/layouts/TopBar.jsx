@@ -1,10 +1,11 @@
-import { toggleSidebar } from "@/store/slices/skillSlice";
+'use client'
 import { Bell, PanelLeft, PanelRight, Search, Settings, Star } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import React from "react";
 import ThemeToggle from "../ThemeToggle";
+import { toggleSidebar } from "@/store/slices/skillSlice";
 
 const TopBar = ({ handleNotifictionToggle }) => {
   const pathname = usePathname();

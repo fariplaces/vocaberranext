@@ -11,10 +11,10 @@ const CriticalBlock = ({ block }) => (
          <ShieldCheckIcon />
       </div>
       <div className="flex-1">
-         <strong className="block text-yellow-400 font-bold mb-1" contentEditable={true} suppressContentEditableWarning>
+         <strong className="block text-yellow-400 font-bold mb-1" contentEditable={true} suppressContentEditableWarning onBlur={(e) => updateBlockProp('title', e.currentTarget.innerText)}>
             {block.props.title}
          </strong>
-         <div className="text-white/90 outline-none" contentEditable={true} suppressContentEditableWarning>
+         <div className="text-white/90 outline-none" contentEditable={true} suppressContentEditableWarning onBlur={(e) => updateBlockProp('message', e.currentTarget.innerText)}>
             {block.props.message}
          </div>
       </div>

@@ -3,15 +3,10 @@ import React, { useEffect, useState } from "react";
 import ContentTitle from "@/components/ContentTitle";
 import { Plus } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  deleteExercise,
-  fetchExercises,
-  fetchExerciseTypes,
-  fetchLessons,
-} from "@/store/slices/typingSlice";
 import DeleteExercisePopup from "./DeleteExercisePopup";
 import ManageExercisePopup from "./ManageExercisePopup";
 import RenderExercises from "./RenderExercises";
+import { deleteExercise, fetchExercises, fetchExerciseTypes, fetchLessons } from "@/store/actions/typingActions";
 
 const ExercisePage = ({ route }) => {
   const [selectedItem, setSelectedItem] = useState(null);

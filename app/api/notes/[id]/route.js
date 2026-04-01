@@ -8,8 +8,11 @@ export async function GET(req, { params }) {
       const session = await getSession();
       if (!session) return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
 
+      const resolvedParams = await params;
+      const { id } = resolvedParams;
+
       const note = await prisma.note.findFirst({
-         where: { id: params.id, userId: session.userId },
+         where: { id: id, userId: session.userId },
       });
 
       if (!note) return NextResponse.json({ message: "Not found" }, { status: 404 });
@@ -28,8 +31,11 @@ export async function PATCH(req, { params }) {
 
       const { title, content } = await req.json();
 
+      const resolvedParams = await params;
+      const { id } = resolvedParams;
+
       const note = await prisma.note.update({
-         where: { id: params.id },
+         where: { id: id },
          data: { title, content },
       });
 
@@ -45,7 +51,10 @@ export async function DELETE(req, { params }) {
       const session = await getSession();
       if (!session) return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
 
-      await prisma.note.delete({ where: { id: params.id } });
+      const resolvedParams = await params;
+      const { id } = resolvedParams;
+
+      await prisma.note.delete({ where: { id: id } });
 
       return NextResponse.json({ message: "Deleted" });
    } catch (err) {

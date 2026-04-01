@@ -1,3 +1,4 @@
+'use client'
 import React, { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 
@@ -19,58 +20,32 @@ import { TbFileTypePhp } from "react-icons/tb";
 import { SiAntdesign, SiDocker, SiMui, SiOnlyoffice, SiShadcnui } from "react-icons/si";
 import { LuFigma } from "react-icons/lu";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleSidebar } from "@/store/slices/skillSlice";
 import { LuListTodo } from "react-icons/lu";
 import { GiBrain } from "react-icons/gi";
 import { RiEnglishInput } from "react-icons/ri";
+import { toggleSidebar } from "@/store/slices/skillSlice";
 
-const NavigationMenu = () => {
+const HomeNavigations = () => {
   const pathname = usePathname();
   // Initialize expanded menus based on current path
   const [expandedMenus, setExpandedMenus] = useState({});
-  const { sideMenu, sidebarOpen } = useSelector((state) => state.skill);
-  const dispatch = useDispatch();
+  const { sidebarOpen } = useSelector((state) => state.skill);
+  // const dispatch = useDispatch();
 
   // Effect to auto-expand the parent menu if a child is active
-  useEffect(() => {
-    const allItems = [...staticItems, ...dynamicItems];
-    allItems.forEach(item => {
-      if (item.subItems?.some(sub => pathname === sub.href)) {
-        setExpandedMenus(prev => ({ ...prev, [item.name]: true }));
-      }
-    });
-  }, [pathname]);
+  // useEffect(() => {
+  //   staticItems.forEach(item => {
+  //     if (item.subItems?.some(sub => pathname === sub.href)) {
+  //       setExpandedMenus(prev => ({ ...prev, [item.name]: true }));
+  //     }
+  //   });
+  // }, [pathname]);
 
   const toggleMenu = (menu) => {
     setExpandedMenus((prev) => ({
       ...prev,
       [menu]: !prev[menu],
     }));
-  };
-
-  // The Map
-  const SKILL_ICONS = {
-    "React": FaReact,
-    "Operating System": PiWindowsLogo,
-    "HTML": PiFileHtml,
-    "JavaScript": IoLogoJavascript,
-    "CSS": MdCss,
-    "TailwindCSS": RiTailwindCssFill,
-    "PHP Procedural": TbFileTypePhp,
-    "PHP OOP": RiPhpFill,
-    "Terminal": PiTerminalBold,
-    "WordPress": FaWordpressSimple,
-    "Git": PiGithubLogoBold,
-    "Docker": SiDocker,
-    "Figma": LuFigma,
-    "Office": PiMicrosoftExcelLogoFill,
-    "Laravel": FaLaravel,
-    "React": FaReact,
-    "ShadCN": SiShadcnui,
-    "MaterialUI": SiMui,
-    "AntDesign": SiAntdesign,
-    "Tanstack": SiOnlyoffice,
-    // Add as many as you need
   };
 
   // Fallback icon if no match is found
@@ -255,24 +230,24 @@ const NavigationMenu = () => {
 
 
 
-  const dynamicItems = sideMenu.map((skill) => {
-    // Look up the icon, or use the default if not found
-    const IconComponent = SKILL_ICONS[skill.title] || DEFAULT_ICON;
+  // const dynamicItems = sideMenu.map((skill) => {
+  //   // Look up the icon, or use the default if not found
+  //   const IconComponent = SKILL_ICONS[skill.title] || DEFAULT_ICON;
 
-    return {
-      name: skill.title,
-      icon: IconComponent,
-      link: `/skills/${skill.id}`,
-      hasSubmenu: skill.categories.length > 0,
-      subItems: skill.categories.map((cat) => ({
-        item: cat.title,
-        href: `/skills/${cat.id}`,
-      })),
-    };
-  });
+  //   return {
+  //     name: skill.title,
+  //     icon: IconComponent,
+  //     link: `/skills/${skill.id}`,
+  //     hasSubmenu: skill.categories.length > 0,
+  //     subItems: skill.categories.map((cat) => ({
+  //       item: cat.title,
+  //       href: `/skills/${cat.id}`,
+  //     })),
+  //   };
+  // });
 
   // 3. Combine them
-  const sidebarItems = [...staticItems, ...dynamicItems];
+  const sidebarItems = [...staticItems];
 
   const filterSkillMenu = sidebarItems.filter(item => !('type' in item));
 
@@ -401,4 +376,4 @@ const NavigationMenu = () => {
   );
 };
 
-export default NavigationMenu;
+export default HomeNavigations;
