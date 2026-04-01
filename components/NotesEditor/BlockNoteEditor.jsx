@@ -7,7 +7,8 @@ import {
    // createReactBlockSpec,
 } from "@blocknote/react";
 import { BlockNoteView } from "@blocknote/mantine";
-import { BlockNoteSchema, defaultBlockSpecs, filterSuggestionItems } from "@blocknote/core";
+import { BlockNoteSchema, defaultBlockSpecs, filterSuggestionItems, defaultStyleSpecs } from "@blocknote/core";
+
 
 import "@blocknote/core/fonts/inter.css";
 import "@blocknote/mantine/style.css";

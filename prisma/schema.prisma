@@ -12,17 +12,18 @@ generator client {
 
 // User table
 model User {
-  id           String        @id @default(uuid())
-  name         String
-  email        String        @unique
-  password     String
-  sessions     Session[]
-  typings      Typing[]
-  createdAt    DateTime      @default(now())
-  revisions    Revision[]
-  tasks        Task[]
-  defaultTasks DefaultTask[]
-  notes        Note[]
+  id            String         @id @default(uuid())
+  name          String
+  email         String         @unique
+  password      String
+  sessions      Session[]
+  typings       Typing[]
+  createdAt     DateTime       @default(now())
+  revisions     Revision[]
+  tasks         Task[]
+  defaultTasks  DefaultTask[]
+  notes         Note[]
+  noteTemplates NoteTemplate[]
 }
 
 // Session table
@@ -195,37 +196,123 @@ model DefaultTask {
 }
 
 // --- MIGRATION FOR NOTION-LIKE NOTES ---
+// enum NoteTargetType {
+//   TOPIC
+//   EXERCISE
+//   SKILL
+//   CATEGORY
+//   LESSON
+//   TASK
+// }
+
+// model Note {
+//   id      String  @id @default(uuid())
+//   title   String  @default("Untitled")
+//   content String?
+
+//   targetId   String
+//   targetType NoteTargetType
+
+//   userId String
+//   user   User   @relation(fields: [userId], references: [id])
+
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+
+//   @@index([userId])
+//   @@index([targetId, targetType, userId])
+// }
+
+// model NoteTemplate {
+//   id      String @id @default(uuid())
+//   name    String
+//   pattern String // trigger shortcut e.g. "bug", "daily"
+//   content String // JSON editor state
+
+//   // null = global template available to everyone
+//   // set = private template for that user only
+//   userId String?
+//   user   User?   @relation(fields: [userId], references: [id])
+
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+
+//   @@unique([pattern, userId]) // same pattern can exist as global AND per-user
+// }
+
+// ============================================================
+// ENUMS
+// ============================================================
+
+enum NoteVisibility {
+  PERSONAL
+  GLOBAL
+}
+
+enum NoteTargetType {
+  TOPIC
+  SKILL
+  CATEGORY
+  TASK
+}
+
+// ============================================================
+// NOTES
+// ============================================================
 
 model Note {
-  id    String  @id @default(uuid())
-  title String? // Optional title for the note
+  id      String  @id @default(uuid())
+  title   String  @default("Untitled")
+  content String? // BlockNote JSON stored as string
 
-  // Notion-style rich text content stored as a JSON string
-  content String // You will JSON.stringify() your editor state here
+  // PERSONAL = private to user
+  // GLOBAL   = shareable, importable by anyone via shareCode
+  visibility NoteVisibility @default(PERSONAL)
 
-  // Polymorphic connection fields
-  targetId   String // The ID of the Topic, Exercise, etc.
-  targetType String // Identifies the connected table (e.g., "TOPIC", "EXERCISE", "SKILL")
+  // Linking — both null means the note is standalone
+  // A note can be PERSONAL+linked, PERSONAL+unlinked,
+  // GLOBAL+linked, or GLOBAL+unlinked independently
+  targetId   String?
+  targetType NoteTargetType?
 
-  // Every note should belong to a user
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
+  // Only set when visibility = GLOBAL
+  // Short unique code e.g. "NOTE-A3X9K" used to import this note
+  shareCode String? @unique
+
+  // null when visibility = GLOBAL (global notes have no owner)
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([userId])
-  @@index([targetId]) // Crucial for querying notes for a specific topic fast
+  @@index([visibility])
+  @@index([shareCode])
+  @@index([targetId, targetType, userId])
 }
+
+// ============================================================
+// NOTE TEMPLATES
+// ============================================================
 
 model NoteTemplate {
   id      String @id @default(uuid())
-  name    String // Name of the template (e.g., "Bug Report", "Daily Reflection")
-  pattern String @unique // The shortcut trigger (e.g., "bug", "daily")
+  name    String // Display name e.g. "Daily Reflection"
+  pattern String // Slash menu trigger e.g. "daily", "bug"
+  content String // BlockNote JSON — pre-built starter content
 
-  // The default Notion-style JSON content for this template
-  content String
+  // null = global template available to all users (ships with app)
+  // set  = private template created by that user only
+  // A user's /daily overrides the global /daily if both exist
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  // Same pattern can exist as global (null) AND per-user
+  // but a user cannot have two templates with the same pattern
+  @@unique([pattern, userId])
+  @@index([userId])
 }
