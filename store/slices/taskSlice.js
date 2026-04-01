@@ -1,8 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { bulkImportTask, createDefaultTask, createTask, deleteDefaultTask, deleteTask, fetchDefaultTasks, fetchTasks, updateDefaultTask, updateTask } from "../actions/taskActions";
-
-
-// ================== SLICE ==================
 
 const taskSlice = createSlice({
   name: "Taskings",

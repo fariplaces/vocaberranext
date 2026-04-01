@@ -25,6 +25,7 @@ import {
 import storage from "redux-persist/lib/storage"; // defaults to localStorage in browser
 
 import authReducer from "./slices/authSlice";
+import globalReducer from "./slices/globalSlice";
 import wordReducer from "./slices/wordSlice";
 import wordMeaningReducer from "./slices/wordMeaningSlice";
 import typingReducer from "./slices/typingSlice";
@@ -35,6 +36,7 @@ import notesReducer from "./slices/notesSlice";
 // combine reducers (if more slices later)
 const rootReducer = combineReducers({
   auth: authReducer,
+  global: globalReducer,
   words: wordReducer,
   wordMeanings: wordMeaningReducer,
   typing: typingReducer,

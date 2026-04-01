@@ -1,8 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { createCategory, createRevision, createSkill, createTopic, deleteCategory, deleteRevision, deleteSkill, deleteTopic, fetchCategories, fetchRevisions, fetchSideMenu, fetchSkills, fetchTopics, updateCategory, updateRevision, updateSkill, updateTopic } from "../actions/skillActions";
-
-
-// ================== SLICE ==================
 
 const skillSlice = createSlice({
   name: "SkillSlice",
@@ -281,5 +278,5 @@ const skillSlice = createSlice({
   },
 });
 
-export const { resetSkillsState, toggleSidebar } = skillSlice.actions;
+export const { resetSkillsState } = skillSlice.actions;
 export default skillSlice.reducer;

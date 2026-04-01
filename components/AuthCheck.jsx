@@ -15,7 +15,6 @@ const AuthCheck = ({ children }) => {
   }, [dispatch]);
 
   useEffect(() => {
-    // Only redirect once loading is finished
     if (!loading) {
       if (!isLoggedIn && pathName !== "/auth/login") {
         router.push("/auth/login");
@@ -29,7 +28,6 @@ const AuthCheck = ({ children }) => {
     return <div>Loading...</div>;
   }
 
-  // Only show children if logged in (or if on the login page)
   if (!isLoggedIn && pathName !== "/auth/login") {
     return null;
   }

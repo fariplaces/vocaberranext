@@ -1,20 +1,14 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import SideBar from "@/components/sidebar/SideBar";
 import TopBar from "@/components/layouts/TopBar";
 import RightSideBar from "@/components/sidebar/RightSideBar";
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchSideMenu } from '@/store/actions/skillActions';
+import { useSelector } from 'react-redux';
 import Footer from './Footer';
 
 const RootLayout = ({ children }) => {
    const [notificationOpen, setNotificationOpen] = useState(false);
-   const { sideMenu, sidebarOpen } = useSelector((state) => state.skill);
-   const dispatch = useDispatch();
-
-   useEffect(() => {
-      dispatch(fetchSideMenu());
-   }, [dispatch])
+   const { sidebarOpen } = useSelector((state) => state.global);
 
    const handleNotifictionToggle = () => {
       setNotificationOpen(!notificationOpen);

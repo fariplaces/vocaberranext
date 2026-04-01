@@ -1,7 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { createMeaning, deleteMeaning, fetchMeanings, updateMeaning } from "../actions/vocabActions";
-
-// ================== SLICE ==================
 
 const wordMeaningSlice = createSlice({
   name: "meanings",

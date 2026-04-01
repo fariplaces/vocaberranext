@@ -23,7 +23,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { LuListTodo } from "react-icons/lu";
 import { GiBrain } from "react-icons/gi";
 import { RiEnglishInput } from "react-icons/ri";
-import { toggleSidebar } from "@/store/slices/skillSlice";
+import { toggleSidebar } from "@/store/slices/globalSlice";
 
 const NavigationMenu = () => {
   const pathname = usePathname();

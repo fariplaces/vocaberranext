@@ -1,5 +1,4 @@
-
-
+import { createSlice } from "@reduxjs/toolkit";
 
 const globalSlice = createSlice({
    name: "GlobalSlice",
@@ -11,4 +10,7 @@ const globalSlice = createSlice({
          state.sidebarOpen = !state.sidebarOpen;
       },
    }
-})
+});
+
+export const { toggleSidebar } = globalSlice.actions;
+export default globalSlice.reducer;

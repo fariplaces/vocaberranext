@@ -1,7 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { createExercise, createTyping, deleteExercise, deleteTyping, fetchDurations, fetchExercises, fetchExerciseTypes, fetchLessons, fetchTypings, updateExercise, updateTyping } from "../actions/typingActions";
-
-// ================== SLICE ==================
 
 const typingSlice = createSlice({
   name: "TypingDetails",

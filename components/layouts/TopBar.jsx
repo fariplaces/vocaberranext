@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import React from "react";
 import ThemeToggle from "../ThemeToggle";
-import { toggleSidebar } from "@/store/slices/skillSlice";
+import { toggleSidebar } from "@/store/slices/globalSlice";
 
 const TopBar = ({ handleNotifictionToggle }) => {
   const pathname = usePathname();

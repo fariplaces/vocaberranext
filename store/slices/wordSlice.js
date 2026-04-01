@@ -1,9 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import API from "@/config/api.config"; // <-- using centralized axios instance
+import { createSlice } from "@reduxjs/toolkit";
 import { createWord, deleteWord, fetchWords, updateWord } from "../actions/wordActions";
-
-
-// ================== SLICE ==================
 
 const wordSlice = createSlice({
   name: "words",
