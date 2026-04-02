@@ -16,20 +16,20 @@ export async function GET() {
                orderBy: {
                   order: "asc",
                },
-               include: {
-                  // Include sub-categories (children) nested inside the parent
-                  children: {
-                     orderBy: {
-                        order: "asc",
-                     },
-                  },
-                  // Include topics that belong directly to the parent category
-                  topics: {
-                     orderBy: {
-                        order: "asc",
-                     },
-                  },
-               },
+               // include: {
+               //    // Include sub-categories (children) nested inside the parent
+               //    children: {
+               //       orderBy: {
+               //          order: "asc",
+               //       },
+               //    },
+               //    // Include topics that belong directly to the parent category
+               //    topics: {
+               //       orderBy: {
+               //          order: "asc",
+               //       },
+               //    },
+               // },
             },
          },
       });

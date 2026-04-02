@@ -1,11 +1,11 @@
-import React from "react";
-import RevisionPage from "@/components/skills/RevisionPage";
+import React from 'react'
+import TopicsPage from '@/components/skills/topic2/TopicsPage';
 
-const Revision = async ({ params }) => {
+const Topics = async ({ params }) => {
    const { route } = await params;
    return (
-      <RevisionPage route={route} />
-   );
-};
+      <TopicsPage route={route} />
+   )
+}
 
-export default Revision;
+export default Topics

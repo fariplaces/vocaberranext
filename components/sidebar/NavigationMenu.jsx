@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { usePathName } from "next/navigation";
 
 import {
   ChevronDown,
@@ -26,7 +26,9 @@ import { RiEnglishInput } from "react-icons/ri";
 import { toggleSidebar } from "@/store/slices/globalSlice";
 
 const NavigationMenu = () => {
-  const pathname = usePathname();
+  const pathName = usePathname();
+  const baseRoute = pathName.split("/")[1];
+  console.log(baseRoute);
   // Initialize expanded menus based on current path
   const [expandedMenus, setExpandedMenus] = useState({});
   const { sideMenu, sidebarOpen } = useSelector((state) => state.skill);
@@ -36,11 +38,11 @@ const NavigationMenu = () => {
   useEffect(() => {
     const allItems = [...staticItems, ...dynamicItems];
     allItems.forEach(item => {
-      if (item.subItems?.some(sub => pathname === sub.href)) {
+      if (item.subItems?.some(sub => pathName === sub.href)) {
         setExpandedMenus(prev => ({ ...prev, [item.name]: true }));
       }
     });
-  }, [pathname]);
+  }, [pathName]);
 
   const toggleMenu = (menu) => {
     setExpandedMenus((prev) => ({
@@ -287,8 +289,8 @@ const NavigationMenu = () => {
       </div> */}
       {filterSkillMenu.map((item) => {
         // Check if the current route matches the parent link OR any sub-item href
-        const isDirectActive = item.link && pathname === item.link;
-        const isSubActive = item.subItems?.some(sub => pathname === sub.href);
+        const isDirectActive = item.link && pathName === item.link;
+        const isSubActive = item.subItems?.some(sub => pathName === sub.href);
         const isParentActive = isDirectActive || isSubActive;
 
         // We wrap the header in a Link only if item.link is provided
@@ -325,7 +327,7 @@ const NavigationMenu = () => {
             {sidebarOpen && item.hasSubmenu && expandedMenus[item.name] && (
               <div className="ml-8 mt-1 space-y-1 border-l border-gray-600">
                 {item.subItems.map((subItem, i) => {
-                  const isChildActive = pathname === subItem.href;
+                  const isChildActive = pathName === subItem.href;
                   return (
                     <Link
                       href={subItem.href}
@@ -352,7 +354,7 @@ const NavigationMenu = () => {
       </div> */}
       {filterAdminMenu.map((item) => {
         // Check if any child is active
-        const isParentActive = item.subItems?.some(sub => pathname === sub.href);
+        const isParentActive = item.subItems?.some(sub => pathName === sub.href);
 
         return (
           <div key={item.name}>
@@ -376,7 +378,7 @@ const NavigationMenu = () => {
             {sidebarOpen && item.hasSubmenu && expandedMenus[item.name] && (
               <div className="ml-8 mt-1 space-y-1 border-l border-gray-600">
                 {item.subItems.map((subItem, i) => {
-                  const isChildActive = pathname === subItem.href;
+                  const isChildActive = pathName === subItem.href;
 
                   return (
                     <Link

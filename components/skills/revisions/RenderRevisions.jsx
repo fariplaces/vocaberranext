@@ -1,7 +1,7 @@
 'use client'
 import React, { useMemo } from 'react'
 import { Edit2, Trash2 } from "lucide-react";
-import { Checkbox } from '../ui/checkbox';
+import { Checkbox } from '../../ui/checkbox';
 import { useSelector } from 'react-redux';
 import { formatDate } from '@/lib/utils';
 

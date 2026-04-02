@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createCategory, createRevision, createSkill, createTopic, deleteCategory, deleteRevision, deleteSkill, deleteTopic, fetchCategories, fetchRevisions, fetchSideMenu, fetchSkills, fetchTopics, updateCategory, updateRevision, updateSkill, updateTopic } from "../actions/skillActions";
+import { createCategory, createRevision, createSkill, createTopic, deleteCategory, deleteRevision, deleteSkill, deleteTopic, fetchCategories, fetchRevisions, fetchSkills, fetchTopics, updateCategory, updateRevision, updateSkill, updateTopic } from "../actions/skillActions";
 
 const skillSlice = createSlice({
   name: "SkillSlice",
@@ -25,19 +25,6 @@ const skillSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // Fetch Side Menu
-      .addCase(fetchSideMenu.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(fetchSideMenu.fulfilled, (state, action) => {
-        state.loading = false;
-        state.sideMenu = action.payload;
-      })
-      .addCase(fetchSideMenu.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      })
       // Fetch Skills
       .addCase(fetchSkills.pending, (state) => {
         state.loading = true;

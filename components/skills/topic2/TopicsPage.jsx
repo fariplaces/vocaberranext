@@ -3,14 +3,16 @@ import React, { useEffect, useState } from "react";
 import ContentTitle from "@/components/ContentTitle";
 import { Plus } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import RenderCategories from "./RenderCategories";
-import ManageCategoryPopup from "./ManageCategoryPopup";
-import DeleteCategoryPopup from "./DeleteCategoryPopup";
-import { deleteCategory, fetchCategories, fetchSkills } from "@/store/actions/skillActions";
+import RenderTopics from "./RenderTopics";
+import ManageTopicPopup from "./ManageTopicPopup";
+import DeleteTopicPopup from "./DeleteTopicPopup";
+import ManageRevisionPopup from "../revisions/ManageRevisionPopup";
+import { deleteTopic, fetchCategories, fetchTopics } from "@/store/actions/skillActions";
 
-const CategoriesPage = ({ route }) => {
+const TopicsPage = ({ route }) => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isRevisionPopupOpen, setIsRevisionPopupOpen] = useState(false);
   const [isDelPopupOpen, setIsDelPopupOpen] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(null);
   const { loading } = useSelector((state) => state.skill);
@@ -18,6 +20,11 @@ const CategoriesPage = ({ route }) => {
   const handleEditClick = (item) => {
     setSelectedItem(item);
     setIsPopupOpen(true);
+  };
+
+  const handleRevisionClick = (item) => {
+    setSelectedItem({ topicId: item.id });
+    setIsRevisionPopupOpen(true);
   };
 
   const handleAddClick = () => {
@@ -30,8 +37,9 @@ const CategoriesPage = ({ route }) => {
   };
 
   const handleDelete = async () => {
+    console.log(itemToDelete);
     if (itemToDelete?.id) {
-      dispatch(deleteCategory(itemToDelete.id));
+      dispatch(deleteTopic(itemToDelete.id));
       setIsDelPopupOpen(false);
       setItemToDelete(null);
     }
@@ -39,34 +47,46 @@ const CategoriesPage = ({ route }) => {
 
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(fetchTopics());
     dispatch(fetchCategories());
-    dispatch(fetchSkills());
   }, []);
 
   return (
     <>
       <ContentTitle
-        title={"Manage Categories"}
-        btnTitle={"Add Category"}
+        title={"Manage Topics"}
+        btnTitle={"Add Topic"}
         Icon={Plus}
         handleMethod={handleAddClick}
       />
-      <RenderCategories
+      <RenderTopics
         route={route}
         handleEditClick={handleEditClick}
         handleDelClick={handleDelClick}
+        handleRevisionClick={handleRevisionClick}
       />
-      <ManageCategoryPopup
-        route={route}
+      <ManageTopicPopup
         isOpen={isPopupOpen}
         setIsOpen={setIsPopupOpen}
         editData={selectedItem}
         setEditData={setSelectedItem}
       />
-      <DeleteCategoryPopup
+      <ManageRevisionPopup
+        isOpen={isRevisionPopupOpen}
+        setIsOpen={setIsRevisionPopupOpen}
+        editData={selectedItem}
+        setEditData={setSelectedItem}
+      />
+      <DeleteTopicPopup
         isDelPopupOpen={isDelPopupOpen}
         setIsDelPopupOpen={setIsDelPopupOpen}
-        itemName={`${itemToDelete?.title} - ${itemToDelete?.skill.title}`}
+        itemName={`${itemToDelete?.title} — ${[
+          itemToDelete?.category?.title,
+          itemToDelete?.category?.parent?.title,
+          itemToDelete?.category?.skill?.title
+        ]
+          .filter(Boolean)
+          .join(" > ")}`}
         onDelete={handleDelete}
         isLoading={loading}
       />
@@ -74,4 +94,10 @@ const CategoriesPage = ({ route }) => {
   );
 };
 
-export default CategoriesPage;
+export default TopicsPage;
+
+
+
+
+
+

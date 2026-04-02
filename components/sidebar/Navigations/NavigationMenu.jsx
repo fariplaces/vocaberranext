@@ -25,27 +25,55 @@ import { GiBrain } from "react-icons/gi";
 import { RiEnglishInput } from "react-icons/ri";
 import { toggleSidebar } from "@/store/slices/globalSlice";
 
-const HomeNavigations = () => {
-  const pathname = usePathname();
+const NavigationMenu = () => {
+  const pathName = usePathname();
+  const baseRoute = pathName.split("/")[1];
+  console.log(baseRoute);
   // Initialize expanded menus based on current path
   const [expandedMenus, setExpandedMenus] = useState({});
-  const { sidebarOpen } = useSelector((state) => state.skill);
-  // const dispatch = useDispatch();
+  const { sideMenu, sidebarOpen } = useSelector((state) => state.skill);
+  const dispatch = useDispatch();
 
   // Effect to auto-expand the parent menu if a child is active
-  // useEffect(() => {
-  //   staticItems.forEach(item => {
-  //     if (item.subItems?.some(sub => pathname === sub.href)) {
-  //       setExpandedMenus(prev => ({ ...prev, [item.name]: true }));
-  //     }
-  //   });
-  // }, [pathname]);
+  useEffect(() => {
+    const allItems = [...staticItems, ...dynamicItems];
+    allItems.forEach(item => {
+      if (item.subItems?.some(sub => pathName === sub.href)) {
+        setExpandedMenus(prev => ({ ...prev, [item.name]: true }));
+      }
+    });
+  }, [pathName]);
 
   const toggleMenu = (menu) => {
     setExpandedMenus((prev) => ({
       ...prev,
       [menu]: !prev[menu],
     }));
+  };
+
+  // The Map
+  const SKILL_ICONS = {
+    "React": FaReact,
+    "Operating System": PiWindowsLogo,
+    "HTML": PiFileHtml,
+    "JavaScript": IoLogoJavascript,
+    "CSS": MdCss,
+    "TailwindCSS": RiTailwindCssFill,
+    "PHP Procedural": TbFileTypePhp,
+    "PHP OOP": RiPhpFill,
+    "Terminal": PiTerminalBold,
+    "WordPress": FaWordpressSimple,
+    "Git": PiGithubLogoBold,
+    "Docker": SiDocker,
+    "Figma": LuFigma,
+    "Office": PiMicrosoftExcelLogoFill,
+    "Laravel": FaLaravel,
+    "React": FaReact,
+    "ShadCN": SiShadcnui,
+    "MaterialUI": SiMui,
+    "AntDesign": SiAntdesign,
+    "Tanstack": SiOnlyoffice,
+    // Add as many as you need
   };
 
   // Fallback icon if no match is found
@@ -230,24 +258,24 @@ const HomeNavigations = () => {
 
 
 
-  // const dynamicItems = sideMenu.map((skill) => {
-  //   // Look up the icon, or use the default if not found
-  //   const IconComponent = SKILL_ICONS[skill.title] || DEFAULT_ICON;
+  const dynamicItems = sideMenu.map((skill) => {
+    // Look up the icon, or use the default if not found
+    const IconComponent = SKILL_ICONS[skill.title] || DEFAULT_ICON;
 
-  //   return {
-  //     name: skill.title,
-  //     icon: IconComponent,
-  //     link: `/skills/${skill.id}`,
-  //     hasSubmenu: skill.categories.length > 0,
-  //     subItems: skill.categories.map((cat) => ({
-  //       item: cat.title,
-  //       href: `/skills/${cat.id}`,
-  //     })),
-  //   };
-  // });
+    return {
+      name: skill.title,
+      icon: IconComponent,
+      link: `/skills/${skill.id}`,
+      hasSubmenu: skill.categories.length > 0,
+      subItems: skill.categories.map((cat) => ({
+        item: cat.title,
+        href: `/skills/${cat.id}`,
+      })),
+    };
+  });
 
   // 3. Combine them
-  const sidebarItems = [...staticItems];
+  const sidebarItems = [...staticItems, ...dynamicItems];
 
   const filterSkillMenu = sidebarItems.filter(item => !('type' in item));
 
@@ -261,8 +289,8 @@ const HomeNavigations = () => {
       </div> */}
       {filterSkillMenu.map((item) => {
         // Check if the current route matches the parent link OR any sub-item href
-        const isDirectActive = item.link && pathname === item.link;
-        const isSubActive = item.subItems?.some(sub => pathname === sub.href);
+        const isDirectActive = item.link && pathName === item.link;
+        const isSubActive = item.subItems?.some(sub => pathName === sub.href);
         const isParentActive = isDirectActive || isSubActive;
 
         // We wrap the header in a Link only if item.link is provided
@@ -299,7 +327,7 @@ const HomeNavigations = () => {
             {sidebarOpen && item.hasSubmenu && expandedMenus[item.name] && (
               <div className="ml-8 mt-1 space-y-1 border-l border-gray-600">
                 {item.subItems.map((subItem, i) => {
-                  const isChildActive = pathname === subItem.href;
+                  const isChildActive = pathName === subItem.href;
                   return (
                     <Link
                       href={subItem.href}
@@ -326,7 +354,7 @@ const HomeNavigations = () => {
       </div> */}
       {filterAdminMenu.map((item) => {
         // Check if any child is active
-        const isParentActive = item.subItems?.some(sub => pathname === sub.href);
+        const isParentActive = item.subItems?.some(sub => pathName === sub.href);
 
         return (
           <div key={item.name}>
@@ -350,7 +378,7 @@ const HomeNavigations = () => {
             {sidebarOpen && item.hasSubmenu && expandedMenus[item.name] && (
               <div className="ml-8 mt-1 space-y-1 border-l border-gray-600">
                 {item.subItems.map((subItem, i) => {
-                  const isChildActive = pathname === subItem.href;
+                  const isChildActive = pathName === subItem.href;
 
                   return (
                     <Link
@@ -376,4 +404,4 @@ const HomeNavigations = () => {
   );
 };
 
-export default HomeNavigations;
+export default NavigationMenu;
