@@ -1,4 +1,4 @@
-import SkillsPage from '@/components/skills/skill2/SkillsPage'
+import SkillsPage from '@/components/skills/skills/SkillsPage'
 import React from 'react'
 
 const Skills = () => {
