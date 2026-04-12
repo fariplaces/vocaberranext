@@ -1,21 +1,10 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-
-// ================== ASYNC THUNKS ==================
-
-//## Side Menu Action
+// @/store/actions/skillActions.js
+import { createApiThunk } from "@/store/utils/actionBuilder";
 
 // Fetch all Side Menu
-export const fetchSideMenu = createAsyncThunk(
-   "skill/fetchSideMenu",
-   async (_, thunkAPI) => {
-      try {
-         const res = await axios.get("/api/skills/fetchSideMenu");
-         return res.data;
-      } catch (error) {
-         return thunkAPI.rejectWithValue(
-            error.response?.data?.message || "Failed to fetch Side Bar Menu"
-         );
-      }
-   }
+export const fetchSideMenu = createApiThunk(
+   "menu",
+   "fetchSideMenu",
+   "get",
+   "/skills/fetchSideMenu"
 );

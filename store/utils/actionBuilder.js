@@ -1,38 +1,30 @@
+import api from "@/config/apiConfig"; // Import your custom instance
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { TYPING_KEYS } from "../constants/typingConstants";
 
-/**
- * @param {string} actionName - The specific action (e.g., 'fetchTypings')
- * @param {string} method - 'get', 'post', 'patch', 'delete'
- * @param {string} endpoint - The API URL
- */
-export const createApiThunk = (actionName, method, endpoint) => {
+// Add a 5th parameter for custom sub-paths
+export const createApiThunk = (prefix, actionName, method, endpoint, subPath = "") => {
    return createAsyncThunk(
-      `${TYPING_KEYS.PREFIX}/${actionName}`,
+      `${prefix}/${actionName}`,
       async (arg, thunkAPI) => {
          try {
             let response;
+            const id = arg?.id || arg; // Get ID if arg is object or simple value
 
-            // Handle different argument types based on method
+            // Construct dynamic URL: e.g., /notes/5/publish
+            const dynamicUrl = subPath
+               ? `${endpoint}/${id}/${subPath}`
+               : (method === "delete" || actionName.includes("ById") || method === "patch")
+                  ? `${endpoint}/${id}`
+                  : endpoint;
+
             if (method === "get") {
-               // If arg has a page, append it; otherwise use arg as params
-               const params = arg?.page ? { page: arg.page } : arg;
-               response = await axios.get(endpoint, { params });
+               response = await api.get(dynamicUrl, { params: arg });
+            } else {
+               response = await api[method](dynamicUrl, arg);
             }
-            else if (method === "post" || method === "patch") {
-               response = await axios[method](endpoint, arg);
-            }
-            else if (method === "delete") {
-               // For delete, 'arg' is usually the ID
-               response = await axios.delete(`${endpoint}/${arg}`);
-            }
-
             return response.data;
          } catch (error) {
-            return thunkAPI.rejectWithValue(
-               error.response?.data?.message || `Failed to ${actionName}`
-            );
+            return thunkAPI.rejectWithValue(error.response?.data?.message || "Error");
          }
       }
    );

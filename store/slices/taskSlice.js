@@ -160,3 +160,104 @@ const taskSlice = createSlice({
 
 export const { resetTaskingState } = taskSlice.actions;
 export default taskSlice.reducer;
+
+
+
+
+// @/store/slices/taskSlice.js
+// import { createSlice } from "@reduxjs/toolkit";
+// import * as actions from "../actions/taskActions";
+// import { SLICE_NAMES } from "../constants/sliceConstants";
+// import { TASKS_KEYS } from "../constants/tasksConstants";
+
+// const taskSlice = createSlice({
+//   name: SLICE_NAMES.TASKS,
+//   initialState: {
+//     [TASKS_KEYS.TASKS]: [],
+//     [TASKS_KEYS.DEFAULT_TASKS]: [],
+//     [TASKS_KEYS.LOADING]: false,
+//     [TASKS_KEYS.ERROR]: null,
+//   },
+//   reducers: {
+//     resetTaskingState: (state) => {
+//       state[TASKS_KEYS.TASKS] = [];
+//       state[TASKS_KEYS.DEFAULT_TASKS] = [];
+//       state[TASKS_KEYS.LOADING] = false;
+//       state[TASKS_KEYS.ERROR] = null;
+//     },
+//   },
+//   extraReducers: (builder) => {
+//     builder
+//       // ================== DATA FETCHING ==================
+//       .addCase(actions.fetchTasks.fulfilled, (state, action) => {
+//         state[TASKS_KEYS.TASKS] = action.payload;
+//       })
+//       .addCase(actions.fetchDefaultTasks.fulfilled, (state, action) => {
+//         state[TASKS_KEYS.DEFAULT_TASKS] = action.payload;
+//       })
+
+//       // ================== CREATION & IMPORT ==================
+//       .addCase(actions.createTask.fulfilled, (state, action) => {
+//         state[TASKS_KEYS.TASKS].unshift(action.payload);
+//       })
+//       .addCase(actions.createDefaultTask.fulfilled, (state, action) => {
+//         state[TASKS_KEYS.DEFAULT_TASKS].unshift(action.payload);
+//       })
+//       .addCase(actions.bulkImportTask.fulfilled, (state, action) => {
+//         // Spread the imported array at the start of the list
+//         state[TASKS_KEYS.TASKS] = [...action.payload, ...state[TASKS_KEYS.TASKS]];
+//       })
+
+//       // ================== DYNAMIC UPDATES ==================
+//       // This matcher handles BOTH updateTask and updateDefaultTask
+//       .addMatcher(
+//         (action) => action.type.startsWith(`${TASKS_KEYS.PREFIX}/update`) && action.type.endsWith("/fulfilled"),
+//         (state, action) => {
+//           const updated = action.payload;
+//           const target = action.type.includes("Default") ? TASKS_KEYS.DEFAULT_TASKS : TASKS_KEYS.TASKS;
+          
+//           state[target] = state[target].map(item => item.id === updated.id ? updated : item);
+//         }
+//       )
+
+//       // ================== DYNAMIC DELETES ==================
+//       // This matcher handles BOTH deleteTask and deleteDefaultTask
+//       .addMatcher(
+//         (action) => action.type.startsWith(`${TASKS_KEYS.PREFIX}/delete`) && action.type.endsWith("/fulfilled"),
+//         (state, action) => {
+//           const id = action.meta.arg; // Using action argument (ID)
+//           const target = action.type.includes("Default") ? TASKS_KEYS.DEFAULT_TASKS : TASKS_KEYS.TASKS;
+          
+//           state[target] = state[target].filter(item => item.id !== id);
+//         }
+//       )
+
+//       // ============================================================
+//       // GLOBAL STATE MATCHERS (Loading & Errors)
+//       // ============================================================
+//       .addMatcher(
+//         (action) => action.type.startsWith(`${TASKS_KEYS.PREFIX}/`) && action.type.endsWith("/pending"),
+//         (state) => {
+//           state[TASKS_KEYS.LOADING] = true;
+//           state[TASKS_KEYS.ERROR] = null;
+//         }
+//       )
+//       .addMatcher(
+//         (action) => 
+//           action.type.startsWith(`${TASKS_KEYS.PREFIX}/`) && 
+//           (action.type.endsWith("/fulfilled") || action.type.endsWith("/rejected")),
+//         (state) => {
+//           state[TASKS_KEYS.LOADING] = false;
+//         }
+//       )
+//       .addMatcher(
+//         (action) => action.type.startsWith(`${TASKS_KEYS.PREFIX}/`) && action.type.endsWith("/rejected"),
+//         (state, action) => {
+//           state[TASKS_KEYS.ERROR] = action.payload || "A task operation failed.";
+//         }
+//       );
+//   },
+// });
+
+// export const { resetTaskingState } = taskSlice.actions;
+// export default taskSlice.reducer;

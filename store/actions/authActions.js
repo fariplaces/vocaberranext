@@ -1,73 +1,10 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+// @/store/actions/authActions.js
+import { createApiThunk } from "@/store/utils/actionBuilder";
 
-// Async thunk for login
-export const loginUser = createAsyncThunk(
-   "auth/loginUser",
-   async ({ email, password }, thunkAPI) => {
-      try {
-         const res = await axios.post(
-            "/api/login",
-            { email, password },
-            { withCredentials: true } // send cookies
-         );
-         return res.data.user;
-      } catch (err) {
-         return thunkAPI.rejectWithValue(
-            err.response?.data?.message || err.message
-         );
-      }
-   }
-);
+const PREFIX = "auth";
 
-// Async thunk for register
-export const registerUser = createAsyncThunk(
-   "auth/registerUser",
-   async ({ userName, email, password }, thunkAPI) => {
-      try {
-         const res = await axios.post(
-            "/api/register",
-            { userName, email, password },
-            { withCredentials: true } // allow cookies if your API sets session
-         );
+export const loginUser = createApiThunk(PREFIX, "loginUser", "post", "/login");
+export const registerUser = createApiThunk(PREFIX, "registerUser", "post", "/register");
+export const checkAuth = createApiThunk(PREFIX, "checkAuth", "get", "/me");
+export const logoutUser = createApiThunk(PREFIX, "logoutUser", "post", "/logout");
 
-         return res.data.user;
-      } catch (err) {
-         return thunkAPI.rejectWithValue(
-            err.response?.data?.message || err.message
-         );
-      }
-   }
-);
-
-// Async thunk for Me
-export const checkAuth = createAsyncThunk(
-   "auth/checkAuth",
-   async (_, thunkAPI) => {
-      try {
-         const res = await axios.get("/api/me", { withCredentials: true });
-         return res.data.user;
-      } catch (err) {
-         return thunkAPI.rejectWithValue(null);
-      }
-   }
-);
-
-// Async thunk for logout
-export const logoutUser = createAsyncThunk(
-   "auth/logoutUser",
-   async (_, thunkAPI) => {
-      try {
-         const res = await axios.post(
-            "/api/logout",
-            {},
-            { withCredentials: true }
-         );
-         return res.data;
-      } catch (err) {
-         return thunkAPI.rejectWithValue(
-            err.response?.data?.message || err.message
-         );
-      }
-   }
-);

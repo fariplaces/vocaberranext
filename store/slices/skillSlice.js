@@ -268,3 +268,119 @@ const skillSlice = createSlice({
 
 export const { resetSkillsState } = skillSlice.actions;
 export default skillSlice.reducer;
+
+
+
+// import { createSlice } from "@reduxjs/toolkit";
+// import * as actions from "../actions/skillActions"; // Import all for easier case handling
+// import { SLICE_NAMES } from "../constants/sliceConstants";
+// import { SKILL_KEYS } from "../constants/skillConstants";
+
+// const skillSlice = createSlice({
+//   name: SLICE_NAMES.SKILL,
+//   initialState: {
+//     [SKILL_KEYS.SIDE_MENU]: [],
+//     [SKILL_KEYS.SKILLS]: [],
+//     [SKILL_KEYS.CATEGORIES]: [],
+//     [SKILL_KEYS.TOPICS]: [],
+//     [SKILL_KEYS.REVISIONS]: [],
+//     [SKILL_KEYS.LOADING]: false,
+//     [SKILL_KEYS.ERROR]: null,
+//   },
+//   reducers: {
+//     resetSkillsState: (state) => {
+//       state[SKILL_KEYS.SIDE_MENU] = [];
+//       state[SKILL_KEYS.SKILLS] = [];
+//       state[SKILL_KEYS.CATEGORIES] = [];
+//       state[SKILL_KEYS.TOPICS] = [];
+//       state[SKILL_KEYS.REVISIONS] = [];
+//       state[SKILL_KEYS.LOADING] = false;
+//       state[SKILL_KEYS.ERROR] = null;
+//     },
+//   },
+//   extraReducers: (builder) => {
+//     builder
+//       // ================== FETCH FULFILLED ==================
+//       .addCase(actions.fetchSkills.fulfilled, (state, action) => {
+//         state[SKILL_KEYS.SKILLS] = action.payload;
+//       })
+//       .addCase(actions.fetchCategories.fulfilled, (state, action) => {
+//         state[SKILL_KEYS.CATEGORIES] = action.payload;
+//       })
+//       .addCase(actions.fetchTopics.fulfilled, (state, action) => {
+//         state[SKILL_KEYS.TOPICS] = action.payload;
+//       })
+//       .addCase(actions.fetchRevisions.fulfilled, (state, action) => {
+//         state[SKILL_KEYS.REVISIONS] = action.payload;
+//       })
+
+//       // ================== CREATE FULFILLED ==================
+//       .addCase(actions.createSkill.fulfilled, (state, action) => {
+//         state[SKILL_KEYS.SKILLS].unshift(action.payload);
+//       })
+//       .addCase(actions.createCategory.fulfilled, (state, action) => {
+//         state[SKILL_KEYS.CATEGORIES].unshift(action.payload);
+//       })
+//       .addCase(actions.createTopic.fulfilled, (state, action) => {
+//         state[SKILL_KEYS.TOPICS].unshift(action.payload);
+//       })
+//       .addCase(actions.createRevision.fulfilled, (state, action) => {
+//         state[SKILL_KEYS.REVISIONS].unshift(action.payload);
+//       })
+
+//       // ================== UPDATE FULFILLED ==================
+//       // Logic: Generic update helper to keep code clean
+//       .addMatcher(
+//         (action) => action.type.startsWith(`${SKILL_KEYS.PREFIX}/update`) && action.type.endsWith("/fulfilled"),
+//         (state, action) => {
+//           const updated = action.payload;
+//           const entityType = action.type.split('/')[1].replace('update', '').toLowerCase() + 's';
+          
+//           if (state[entityType]) {
+//             state[entityType] = state[entityType].map(item => 
+//               item.id === updated.id ? updated : item
+//             );
+//           }
+//         }
+//       )
+
+//       // ================== DELETE FULFILLED ==================
+//       .addMatcher(
+//         (action) => action.type.startsWith(`${SKILL_KEYS.PREFIX}/delete`) && action.type.endsWith("/fulfilled"),
+//         (state, action) => {
+//           const id = action.meta.arg; // The ID passed to the delete call
+//           const entityType = action.type.split('/')[1].replace('delete', '').toLowerCase() + 's';
+          
+//           if (state[entityType]) {
+//             state[entityType] = state[entityType].filter(item => item.id !== id);
+//           }
+//         }
+//       )
+
+//       // ============================================================
+//       // GLOBAL STATE MATCHERS (Handles Loading & Errors for ALL)
+//       // ============================================================
+//       .addMatcher(
+//         (action) => action.type.startsWith(`${SKILL_KEYS.PREFIX}/`) && action.type.endsWith("/pending"),
+//         (state) => {
+//           state[SKILL_KEYS.LOADING] = true;
+//           state[SKILL_KEYS.ERROR] = null;
+//         }
+//       )
+//       .addMatcher(
+//         (action) => action.type.startsWith(`${SKILL_KEYS.PREFIX}/`) && (action.type.endsWith("/fulfilled") || action.type.endsWith("/rejected")),
+//         (state) => {
+//           state[SKILL_KEYS.LOADING] = false;
+//         }
+//       )
+//       .addMatcher(
+//         (action) => action.type.startsWith(`${SKILL_KEYS.PREFIX}/`) && action.type.endsWith("/rejected"),
+//         (state, action) => {
+//           state[SKILL_KEYS.ERROR] = action.payload || "Skill module error";
+//         }
+//       );
+//   },
+// });
+
+// export const { resetSkillsState } = skillSlice.actions;
+// export default skillSlice.reducer;

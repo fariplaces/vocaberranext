@@ -1,211 +1,29 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+// @/store/actions/notesActions.js
+import { createApiThunk } from "../utils/actionBuilder";
 
-// ============================================================
-// THUNKS — NOTES
-// ============================================================
+const { PREFIX = "notes" } = NOTES_KEYS || {};
 
-export const fetchNotes = createAsyncThunk(
-   "notes/fetchNotes",
-   async (_, { rejectWithValue }) => {
-      try {
-         const { data } = await axios.get("/api/notes");
-         return data;
-      } catch (err) {
-         return rejectWithValue(err.response.data);
-      }
-   }
-);
+// ================== THUNKS — NOTES ==================
 
-export const fetchNotesByTarget = createAsyncThunk(
-   "notes/fetchNoteByTarget",
-   async ({ targetId, targetType }, { rejectWithValue }) => {
-      try {
-         const { data } = await axios.get("/api/notes/target", {
-            params: { targetId, targetType },
-         });
-         return data;
-      } catch (err) {
-         return rejectWithValue(err.response.data);
-      }
-   }
-);
+export const fetchNotes = createApiThunk(PREFIX, "fetchNotes", "get", "/notes");
+export const fetchNoteById = createApiThunk(PREFIX, "fetchNoteById", "get", "/notes"); // Builder handles /${id}
+export const fetchNotesByTarget = createApiThunk(PREFIX, "fetchNoteByTarget", "get", "/notes/target");
+export const fetchGlobalNotes = createApiThunk(PREFIX, "fetchGlobalNotes", "get", "/notes/global");
 
-export const fetchNoteById = createAsyncThunk(
-   "notes/fetchNoteById",
-   async (id, { rejectWithValue }) => {
-      try {
-         const { data } = await axios.get(`/api/notes/${id}`);
-         return data;
-      } catch (err) {
-         return rejectWithValue(err.response.data);
-      }
-   }
-);
+export const createNote = createApiThunk(PREFIX, "createNote", "post", "/notes");
+export const updateNote = createApiThunk(PREFIX, "updateNote", "patch", "/notes");
+export const deleteNote = createApiThunk(PREFIX, "deleteNote", "delete", "/notes");
 
-export const createNote = createAsyncThunk(
-   "notes/createNote",
-   async (payload, { rejectWithValue }) => {
-      try {
-         const { data } = await axios.post("/api/notes", payload);
-         return data;
-      } catch (err) {
-         return rejectWithValue(err.response.data);
-      }
-   }
-);
+// --- Custom Note Actions ---
+export const linkNote = createApiThunk(PREFIX, "linkNote", "patch", "/notes"); // see note below
+export const unlinkNote = createApiThunk(PREFIX, "unlinkNote", "patch", "/notes");
+export const publishNote = createApiThunk(PREFIX, "publishNote", "patch", "/notes");
+export const unpublishNote = createApiThunk(PREFIX, "unpublishNote", "patch", "/notes");
+export const importNote = createApiThunk(PREFIX, "importNote", "post", "/notes/import");
 
-export const updateNote = createAsyncThunk(
-   "notes/updateNote",
-   async ({ id, ...payload }, { rejectWithValue }) => {
-      try {
-         const { data } = await axios.patch(`/api/notes/${id}`, payload);
-         return data;
-      } catch (err) {
-         return rejectWithValue(err.response.data);
-      }
-   }
-);
+// ================== THUNKS — TEMPLATES ==================
 
-export const deleteNote = createAsyncThunk(
-   "notes/deleteNote",
-   async (id, { rejectWithValue }) => {
-      try {
-         await axios.delete(`/api/notes/${id}`);
-         return id;
-      } catch (err) {
-         return rejectWithValue(err.response.data);
-      }
-   }
-);
-
-export const linkNote = createAsyncThunk(
-   "notes/linkNote",
-   async ({ id, targetId, targetType }, { rejectWithValue }) => {
-      try {
-         const { data } = await axios.patch(`/api/notes/${id}/link`, {
-            targetId,
-            targetType,
-         });
-         return data;
-      } catch (err) {
-         return rejectWithValue(err.response.data);
-      }
-   }
-);
-
-export const unlinkNote = createAsyncThunk(
-   "notes/unlinkNote",
-   async (id, { rejectWithValue }) => {
-      try {
-         const { data } = await axios.patch(`/api/notes/${id}/unlink`);
-         return data;
-      } catch (err) {
-         return rejectWithValue(err.response.data);
-      }
-   }
-);
-
-export const publishNote = createAsyncThunk(
-   "notes/publishNote",
-   async (id, { rejectWithValue }) => {
-      try {
-         const { data } = await axios.patch(`/api/notes/${id}/publish`);
-         return data;
-      } catch (err) {
-         return rejectWithValue(err.response.data);
-      }
-   }
-);
-
-export const unpublishNote = createAsyncThunk(
-   "notes/unpublishNote",
-   async (id, { rejectWithValue }) => {
-      try {
-         const { data } = await axios.patch(`/api/notes/${id}/unpublish`);
-         return data;
-      } catch (err) {
-         return rejectWithValue(err.response.data);
-      }
-   }
-);
-
-export const importNote = createAsyncThunk(
-   "notes/importNote",
-   async ({ shareCode, targetId, targetType }, { rejectWithValue }) => {
-      try {
-         const { data } = await axios.post("/api/notes/import", {
-            shareCode,
-            targetId,
-            targetType,
-         });
-         return data;
-      } catch (err) {
-         return rejectWithValue(err.response.data);
-      }
-   }
-);
-
-export const fetchGlobalNotes = createAsyncThunk(
-   "notes/fetchGlobalNotes",
-   async (_, { rejectWithValue }) => {
-      try {
-         const { data } = await axios.get("/api/notes/global");
-         return data;
-      } catch (err) {
-         return rejectWithValue(err.response.data);
-      }
-   }
-);
-
-// ============================================================
-// THUNKS — TEMPLATES
-// ============================================================
-
-export const fetchTemplates = createAsyncThunk(
-   "notes/fetchTemplates",
-   async (_, { rejectWithValue }) => {
-      try {
-         const { data } = await axios.get("/api/notes/templates");
-         return data;
-      } catch (err) {
-         return rejectWithValue(err.response.data);
-      }
-   }
-);
-
-export const createTemplate = createAsyncThunk(
-   "notes/createTemplate",
-   async (payload, { rejectWithValue }) => {
-      try {
-         const { data } = await axios.post("/api/notes/templates", payload);
-         return data;
-      } catch (err) {
-         return rejectWithValue(err.response.data);
-      }
-   }
-);
-
-export const updateTemplate = createAsyncThunk(
-   "notes/updateTemplate",
-   async ({ id, ...payload }, { rejectWithValue }) => {
-      try {
-         const { data } = await axios.patch(`/api/notes/templates/${id}`, payload);
-         return data;
-      } catch (err) {
-         return rejectWithValue(err.response.data);
-      }
-   }
-);
-
-export const deleteTemplate = createAsyncThunk(
-   "notes/deleteTemplate",
-   async (id, { rejectWithValue }) => {
-      try {
-         await axios.delete(`/api/notes/templates/${id}`);
-         return id;
-      } catch (err) {
-         return rejectWithValue(err.response.data);
-      }
-   }
-);
+export const fetchTemplates = createApiThunk(PREFIX, "fetchTemplates", "get", "/notes/templates");
+export const createTemplate = createApiThunk(PREFIX, "createTemplate", "post", "/notes/templates");
+export const updateTemplate = createApiThunk(PREFIX, "updateTemplate", "patch", "/notes/templates");
+export const deleteTemplate = createApiThunk(PREFIX, "deleteTemplate", "delete", "/notes/templates");
