@@ -1,47 +1,35 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import ContentTitle from "@/components/ContentTitle";
 import { Plus } from "lucide-react";
-import { useDispatch, useSelector } from "react-redux";
 import RenderTyping from "@/components/Typing/RenderTyping";
 import ManageTypingPopup from "@/components/Typing/ManageTypingPopup";
 import DeleteTypingPopup from "@/components/Typing/DeleteTypingPopup";
-import { deleteTyping, fetchDurations, fetchLessons } from "@/store/actions/typingActions";
+import { fetchDurations, fetchLessons, fetchTypings } from "@/store/actions/typingActions";
+import { openManagePopup } from "@/store/slices/typingSlices/typingFormSlice";
+import { resetTypingState, setFilterMode } from "@/store/slices/typingSlices/typingSlice";
 
 const TypingPage = ({ route }) => {
-  const [selectedItem, setSelectedItem] = useState(null);
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [isDelPopupOpen, setIsDelPopupOpen] = useState(false);
-  const [itemToDelete, setItemToDelete] = useState(null);
-  const { loading } = useSelector((state) => state.typing);
-
-  const handleEditClick = (item) => {
-    setSelectedItem(item);
-    setIsPopupOpen(true);
-  };
-
-  const handleAddClick = () => {
-    setSelectedItem(null);
-    setIsPopupOpen(true);
-  };
-  const handleDelClick = (item) => {
-    setItemToDelete(item);
-    setIsDelPopupOpen(true);
-  };
-
-  const handleDelete = async () => {
-    if (itemToDelete?.id) {
-      dispatch(deleteTyping(itemToDelete.id));
-      setIsDelPopupOpen(false);
-      setItemToDelete(null);
-    }
-  };
-
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchLessons());
     dispatch(fetchDurations());
-  }, []);
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(setFilterMode(route));
+    dispatch(resetTypingState());
+    dispatch(fetchTypings({ page: 1, route }));
+  }, [route, dispatch]);
+
+  const handleAddClick = () => {
+    dispatch(openManagePopup({
+      route,
+      defaultDurationId: "ed238f81-d08b-4315-912b-a7df01aa7f46"
+    }));
+  };
 
   return (
     <>
@@ -51,25 +39,9 @@ const TypingPage = ({ route }) => {
         Icon={Plus}
         handleMethod={handleAddClick}
       />
-      <RenderTyping
-        handleEditClick={handleEditClick}
-        handleDelClick={handleDelClick}
-        route={route}
-      />
-      <ManageTypingPopup
-        route={route}
-        isOpen={isPopupOpen}
-        setIsOpen={setIsPopupOpen}
-        editData={selectedItem}
-        setEditData={setSelectedItem}
-      />
-      <DeleteTypingPopup
-        isDelPopupOpen={isDelPopupOpen}
-        setIsDelPopupOpen={setIsDelPopupOpen}
-        itemName={`${itemToDelete?.exercise?.exerciseNo} - ${itemToDelete?.exercise?.title}`}
-        onDelete={handleDelete}
-        isLoading={loading}
-      />
+      <RenderTyping route={route} />
+      <ManageTypingPopup route={route} />
+      <DeleteTypingPopup />
     </>
   );
 };

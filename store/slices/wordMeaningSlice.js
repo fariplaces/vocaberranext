@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createMeaning, deleteMeaning, fetchMeanings, updateMeaning } from "../actions/vocabActions";
+import { SLICE_NAMES } from "../constants/sliceConstants";
 
 const wordMeaningSlice = createSlice({
-  name: "meanings",
+  name: SLICE_NAMES.WORD_MEANINGS,
   initialState: {
     meaningsByWord: {}, // { [wordId]: [meanings] }
     loading: false,

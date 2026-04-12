@@ -20,6 +20,15 @@ const SideBar = () => {
 
   return (
     <ScrollArea
+      //       className={`
+      //   ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
+      //   fixed lg:static
+      //   w-64 lg:${sidebarOpen ? "w-64" : "w-16"}
+      //   bg-black border-r border-white/30 h-screen
+      //   transition-all duration-300
+      //   overflow-x-hidden overflow-y-auto
+      //   flex flex-col
+      // `}
       className={`${sidebarOpen ? "w-64" : "w-16"
         } sticky bg-black border-r border-white/30 h-screen transition-all overflow-x-hidden overflow-y-auto duration-300 flex flex-col`}
     >

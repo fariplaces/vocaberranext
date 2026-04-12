@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { checkAuth, loginUser, logoutUser, registerUser } from "../actions/authActions";
+import { SLICE_NAMES } from "../constants/sliceConstants";
 
 const authSlice = createSlice({
-  name: "auth",
+  name: SLICE_NAMES.GLOBAL,
   initialState: {
     user: null,
     loading: true,

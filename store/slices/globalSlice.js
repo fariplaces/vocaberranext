@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchSideMenu } from "../actions/globalActions";
+import { SLICE_NAMES } from "../constants/sliceConstants";
 
 const globalSlice = createSlice({
-   name: "GlobalSlice",
+   name: SLICE_NAMES.GLOBAL,
    initialState: {
       sideMenu: [],
       sidebarOpen: true,

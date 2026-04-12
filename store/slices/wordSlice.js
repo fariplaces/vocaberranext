@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createWord, deleteWord, fetchWords, updateWord } from "../actions/wordActions";
+import { SLICE_NAMES } from "../constants/sliceConstants";
 
 const wordSlice = createSlice({
-  name: "words",
+  name: SLICE_NAMES.WORDS,
   initialState: {
     words: [],
     loading: false,

@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createCategory, createRevision, createSkill, createTopic, deleteCategory, deleteRevision, deleteSkill, deleteTopic, fetchCategories, fetchRevisions, fetchSkills, fetchTopics, updateCategory, updateRevision, updateSkill, updateTopic } from "../actions/skillActions";
+import { SLICE_NAMES } from "../constants/sliceConstants";
 
 const skillSlice = createSlice({
-  name: "SkillSlice",
+  name: SLICE_NAMES.SKILL,
   initialState: {
     sideMenu: [],
     skills: [],

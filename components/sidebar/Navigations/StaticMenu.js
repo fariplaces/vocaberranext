@@ -119,7 +119,7 @@ const StaticNavitaionMenu = [
       link: "/notes2",
    },
    {
-      name: "Tying",
+      name: "Typing",
       icon: GoTypography,
       hasSubmenu: true,
       subItems: [

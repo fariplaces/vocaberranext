@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createNote, createTemplate, deleteNote, deleteTemplate, fetchGlobalNotes, fetchNoteById, fetchNotes, fetchNotesByTarget, fetchTemplates, importNote, linkNote, publishNote, unlinkNote, unpublishNote, updateNote, updateTemplate } from "../actions/notesActions";
+import { SLICE_NAMES } from "../constants/sliceConstants";
 
 const notesSlice = createSlice({
-   name: "notes",
+   name: SLICE_NAMES.NOTES,
    initialState: {
       notes: [],
       targetNotes: [],

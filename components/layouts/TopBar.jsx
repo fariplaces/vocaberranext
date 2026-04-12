@@ -100,19 +100,19 @@ const TopBar = ({ handleNotifictionToggle }) => {
         <div className="flex items-center space-x-4">
           {/* Search Bar */}
           <div className="relative">
-            <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <Search className="w-4 h-4 absolute left-3 top-1/2 hidden lg-block transform -translate-y-1/2 text-gray-400" />
             <input
               type="text"
               placeholder="Search"
-              className="bg-transparent border border-gray-700 text-white pl-10 pr-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
+              className="bg-transparent border border-gray-700 hidden lg-block text-white pl-10 pr-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
             />
           </div>
 
-          <button className="p-2 hover:bg-gray-700 rounded-lg">
+          <button className="p-2 hover:bg-gray-700 hidden lg-block rounded-lg">
             <Settings className="w-5 h-5" />
           </button>
 
-          <button className="p-2 hover:bg-gray-700 rounded-lg">
+          <button className="p-2 hover:bg-gray-700 hidden lg-block rounded-lg">
             <Bell className="w-5 h-5" />
           </button>
 
