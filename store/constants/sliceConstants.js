@@ -7,7 +7,7 @@ export const SLICE_NAMES = {
    WORD_MEANINGS: "wordMeanings",
 
    // Typing Slices
-   TYPING: "typingDetails",
+   TYPING: "typing",
    TYPING_FORM: "typingForm",
 
    SKILL: "skill",

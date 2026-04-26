@@ -1,5 +1,6 @@
 "use client";
 import { createDefaultTask, updateDefaultTask } from "@/store/actions/taskActions";
+import { selectUser } from "@/store/selectors/authSelectors";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -15,7 +16,7 @@ const ManageDefaultTaskPopup = ({
   editData = null,
   setEditData,
 }) => {
-  const { user } = useSelector((state) => state.auth);
+  const user = useSelector(selectUser);
   const [formData, setFormData] = useState(initialFormState);
   const dispatch = useDispatch();
 

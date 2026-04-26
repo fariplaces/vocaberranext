@@ -1,5 +1,5 @@
 // @/store/actions/skillActions.js
-import { createApiThunk } from "@/store/utils/actionBuilder";
+import { createApiThunk } from "@/store/utils/actionBuilder-smart";
 
 // Fetch all Side Menu
 export const fetchSideMenu = createApiThunk(

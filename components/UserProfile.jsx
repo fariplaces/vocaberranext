@@ -1,4 +1,5 @@
 import { logoutUser } from "@/store/actions/authActions";
+import { selectUser } from "@/store/selectors/authSelectors";
 import { ChevronDown, LogOut } from "lucide-react";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 const UserProfile = ({ sidebarOpen }) => {
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth);
+  const user = useSelector(selectUser);
   function getInitials(name) {
     const words = name.trim().split(/\s+/); // split by spaces
 

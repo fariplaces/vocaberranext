@@ -1,31 +1,29 @@
-import api from "@/config/apiConfig"; // Import your custom instance
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-// Add a 5th parameter for custom sub-paths
-export const createApiThunk = (prefix, actionName, method, endpoint, subPath = "") => {
-   return createAsyncThunk(
-      `${prefix}/${actionName}`,
-      async (arg, thunkAPI) => {
-         try {
-            let response;
-            const id = arg?.id || arg; // Get ID if arg is object or simple value
+/**
+ * @param {string} type - The action type string (e.g., 'auth/login')
+ * @param {Function} serviceFn - The service function to call
+ */
+export const createServiceThunk = (type, serviceFn) => {
+  return createAsyncThunk(
+    type,
+    async (arg, { getState, rejectWithValue }) => {
+      try {
+        // The serviceFn handles the API call
+        const response = await serviceFn(arg, getState);
 
-            // Construct dynamic URL: e.g., /notes/5/publish
-            const dynamicUrl = subPath
-               ? `${endpoint}/${id}/${subPath}`
-               : (method === "delete" || actionName.includes("ById") || method === "patch")
-                  ? `${endpoint}/${id}`
-                  : endpoint;
-
-            if (method === "get") {
-               response = await api.get(dynamicUrl, { params: arg });
-            } else {
-               response = await api[method](dynamicUrl, arg);
-            }
-            return response.data;
-         } catch (error) {
-            return thunkAPI.rejectWithValue(error.response?.data?.message || "Error");
-         }
+        /**
+         * If your API returns the structure expected by your 
+         * handleResourceFulfilled helper, we return the whole object.
+         * Structure: { payloadData: { data: ... }, resourceMeta: { ... } }
+         */
+        return response.data;
+      } catch (error) {
+        // Standard error handling for Laravel/Node backends
+        return rejectWithValue(
+          error.response?.data?.message || "Something went wrong"
+        );
       }
-   );
+    }
+  );
 };

@@ -1,12 +1,13 @@
 import { SLICE_NAMES } from "@/store/constants/sliceConstants";
+import { TYPING_FORM_KEYS } from "@/store/constants/typingConstants"; // Ensure this path is correct
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
    // Add/Edit Popup
-   managePopup: {
-      isOpen: false,
-      editId: null,
-      formData: {
+   [TYPING_FORM_KEYS.MANAGE_POPUP]: {
+      [TYPING_FORM_KEYS.IS_OPEN]: false,
+      [TYPING_FORM_KEYS.EDIT_ID]: null,
+      [TYPING_FORM_KEYS.FORM_DATA]: {
          exerciseId: "",
          durationId: "",
          accuracy: "",
@@ -15,8 +16,8 @@ const initialState = {
       },
    },
    // Delete Popup
-   deletePopup: {
-      isOpen: false,
+   [TYPING_FORM_KEYS.DELETE_POPUP]: {
+      [TYPING_FORM_KEYS.IS_OPEN]: false,
       item: null, // Stores the whole object {id, title, etc.}
    },
 };
@@ -28,12 +29,14 @@ const typingFormSlice = createSlice({
       // --- Manage Popup Actions ---
       openManagePopup: (state, action) => {
          const { editData, route, defaultDurationId } = action.payload;
-         state.managePopup.isOpen = true;
-         state.managePopup.editId = editData?.id || null;
+         const manage = state[TYPING_FORM_KEYS.MANAGE_POPUP];
+
+         manage[TYPING_FORM_KEYS.IS_OPEN] = true;
+         manage[TYPING_FORM_KEYS.EDIT_ID] = editData?.id || null;
 
          if (editData) {
-            // ✅ Enterprise Practice: Explicit Mapping
-            state.managePopup.formData = {
+            // ✅ Explicit Mapping
+            manage[TYPING_FORM_KEYS.FORM_DATA] = {
                exerciseId: editData.exerciseId || editData.exercise?.id || "",
                durationId: editData.durationId || editData.duration?.id || "",
                accuracy: editData.accuracy || "",
@@ -41,34 +44,42 @@ const typingFormSlice = createSlice({
                net: editData.net || "",
             };
          } else {
-            state.managePopup.formData = {
-               ...initialState.managePopup.formData,
-               durationId: route === "course" ? defaultDurationId : ""
+            manage[TYPING_FORM_KEYS.FORM_DATA] = {
+               ...initialState[TYPING_FORM_KEYS.MANAGE_POPUP][TYPING_FORM_KEYS.FORM_DATA],
+               durationId: route === "course" ? defaultDurationId : "",
             };
          }
       },
+
       closeManagePopup: (state) => {
-         state.managePopup = initialState.managePopup;
+         state[TYPING_FORM_KEYS.MANAGE_POPUP] = initialState[TYPING_FORM_KEYS.MANAGE_POPUP];
       },
+
       updateFormField: (state, action) => {
          const { name, value } = action.payload;
-         state.managePopup.formData[name] = value;
+         // Access: managePopup -> formData -> [fieldName]
+         state[TYPING_FORM_KEYS.MANAGE_POPUP][TYPING_FORM_KEYS.FORM_DATA][name] = value;
       },
 
       // --- Delete Popup Actions ---
       openDeletePopup: (state, action) => {
-         state.deletePopup.isOpen = true;
-         state.deletePopup.item = action.payload;
+         const del = state[TYPING_FORM_KEYS.DELETE_POPUP];
+         del[TYPING_FORM_KEYS.IS_OPEN] = true;
+         del.item = action.payload;
       },
+
       closeDeletePopup: (state) => {
-         state.deletePopup = initialState.deletePopup;
+         state[TYPING_FORM_KEYS.DELETE_POPUP] = initialState[TYPING_FORM_KEYS.DELETE_POPUP];
       },
    },
 });
 
 export const {
-   openManagePopup, closeManagePopup, updateFormField,
-   openDeletePopup, closeDeletePopup
+   openManagePopup,
+   closeManagePopup,
+   updateFormField,
+   openDeletePopup,
+   closeDeletePopup,
 } = typingFormSlice.actions;
 
 export default typingFormSlice.reducer;

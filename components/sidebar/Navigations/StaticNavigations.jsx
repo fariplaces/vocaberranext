@@ -31,7 +31,7 @@ const StaticNavigation = ({ sidebarOpen }) => {
 
 
   return (
-    <nav className="flex-1 overflow-y-auto overflow-x-hidden overflow-y-auto py-4">
+    <nav className="flex-1 overflow-y-auto overflow-x-hidden py-4">
       {StaticNavigations.map((item) => {
         const isDirectActive = item.link && pathName === item.link;
         const isSubActive = item.subItems?.some(sub => pathName === sub.href);

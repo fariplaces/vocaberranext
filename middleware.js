@@ -50,7 +50,7 @@ export function middleware(req) {
    // 2. 🔥 THE FIX: Only redirect logged-in users away from AUTH pages, not the landing page!
    const authPages = ["/auth/login", "/auth/register"];
    if (sessionId && authPages.includes(pathname)) {
-      return NextResponse.redirect(new URL("/dashboard", req.url));
+      return NextResponse.redirect(new URL("/", req.url));
    }
 
    return NextResponse.next();

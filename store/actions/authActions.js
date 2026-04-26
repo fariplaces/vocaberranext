@@ -1,10 +1,11 @@
 // @/store/actions/authActions.js
-import { createApiThunk } from "@/store/utils/actionBuilder";
+import { createServiceThunk } from "@/store/utils/actionBuilder";
+import { AUTH_KEYS } from "../constants/authConstants";
 
-const PREFIX = "auth";
+const { PREFIX = "auth" } = AUTH_KEYS || {};
 
-export const loginUser = createApiThunk(PREFIX, "loginUser", "post", "/login");
-export const registerUser = createApiThunk(PREFIX, "registerUser", "post", "/register");
-export const checkAuth = createApiThunk(PREFIX, "checkAuth", "get", "/me");
-export const logoutUser = createApiThunk(PREFIX, "logoutUser", "post", "/logout");
+export const loginUser = createServiceThunk(PREFIX, "loginUser", "post", "/login");
+export const registerUser = createServiceThunk(PREFIX, "registerUser", "post", "/register");
+export const checkAuth = createServiceThunk(PREFIX, "checkAuth", "get", "/me");
+export const logoutUser = createServiceThunk(PREFIX, "logoutUser", "post", "/logout");
 

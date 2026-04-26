@@ -1,8 +1,10 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
-export async function PATCH(req) {
+export async function PATCH(req, { params }) {
   try {
+    // const resolvedParams = await params;
+    // const { id } = resolvedParams;
     const body = await req.json();
     const { id, userId, exerciseId, durationId, accuracy, gross, net } = body;
 

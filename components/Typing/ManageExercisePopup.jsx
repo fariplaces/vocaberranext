@@ -1,5 +1,6 @@
 "use client";
 import { createExercise, createTyping, updateExercise, updateTyping } from "@/store/actions/typingActions";
+import { selectUser } from "@/store/selectors/authSelectors";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -33,7 +34,7 @@ const ManageExercisePopup = ({
     }
     return state;
   };
-  const { user } = useSelector((state) => state.auth);
+  const user = useSelector(selectUser);
   const { lessons, exerciseTypes, exercises } = useSelector((state) => state.typing);
   const dispatch = useDispatch();
   const [formData, setFormData] = useState(() => getInitialState());

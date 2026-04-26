@@ -1,6 +1,6 @@
 // @/store/actions/skillActions.js
 import { SKILL_KEYS } from "../constants/skillsConstants";
-import { createApiThunk } from "../utils/actionBuilder";
+import { createApiThunk } from "../utils/actionBuilder-smart";
 
 const { PREFIX = "skill" } = SKILL_KEYS || {};
 

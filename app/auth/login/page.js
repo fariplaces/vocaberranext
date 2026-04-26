@@ -1,9 +1,8 @@
-import AuthCheck from "@/components/AuthCheck";
-import LoginPage from "@/components/Login";
+import LoginPage from "@/features/auth/LoginPage";
 import React from "react";
 
 const SignIn = () => {
-  return <AuthCheck><LoginPage /></AuthCheck>;
+  return <LoginPage />;
 };
 
 export default SignIn;

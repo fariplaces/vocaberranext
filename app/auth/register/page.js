@@ -1,4 +1,4 @@
-import RegisterPage from "@/components/Register";
+import RegisterPage from "@/features/auth/RegisterPage";
 import React from "react";
 
 const SignUp = () => {

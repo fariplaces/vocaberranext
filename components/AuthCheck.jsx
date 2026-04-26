@@ -1,5 +1,7 @@
 "use client";
 import { checkAuth } from "@/store/actions/authActions";
+import { AUTH_KEYS } from "@/store/constants/authConstants";
+import { selectAuthMetaData } from "@/store/selectors/authSelectors";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 const AuthCheck = ({ children }) => {
   const dispatch = useDispatch();
   const pathName = usePathname();
-  const { isLoggedIn, loading } = useSelector((state) => state.auth);
+  const { isAuthenticated: isLoggedIn, loading, user } = useSelector(selectAuthMetaData);
   const router = useRouter();
 
   useEffect(() => {

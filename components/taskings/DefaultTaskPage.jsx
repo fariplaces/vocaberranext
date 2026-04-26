@@ -8,6 +8,7 @@ import { formatDate } from "@/lib/utils";
 import RenderDefaultTasks from "./RenderDefaultTask";
 import ManageDefaultTaskPopup from "./ManageDefaultTaskPopup";
 import { bulkImportTask, deleteDefaultTask, fetchDefaultTasks } from "@/store/actions/taskActions";
+import { selectUser } from "@/store/selectors/authSelectors";
 
 
 const DefaultTaskPage = () => {
@@ -17,7 +18,7 @@ const DefaultTaskPage = () => {
   const [itemToDelete, setItemToDelete] = useState(null);
   const [selectedIds, setSelectedIds] = useState([]);
   const { loading } = useSelector((state) => state.skill);
-  const { user } = useSelector((state) => state.auth);
+  const user = useSelector(selectUser);
   const dispatch = useDispatch();
 
   const handleEditClick = (item) => {

@@ -7,10 +7,11 @@ import TemplatesPanel from "@/components/Notes/TemplatesPanel";
 import GlobalNotesPanel from "@/components/Notes/GlobalNotesPanel";
 import { setActiveNote } from "@/store/slices/notesSlice";
 import { createNote, deleteNote, fetchGlobalNotes, fetchNotes, fetchTemplates } from "@/store/actions/notesActions";
+import { selectNotesMetaData } from "@/store/selectors/notesSelectors";
 
 export default function NotesPage() {
    const dispatch = useDispatch();
-   const { notes, activeNote, loading } = useSelector((s) => s.notes);
+   const { notes, activeNote, loading } = useSelector(selectNotesMetaData);
    const [view, setView] = useState("notes"); // "notes" | "templates" | "global"
 
    useEffect(() => {

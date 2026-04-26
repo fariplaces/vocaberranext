@@ -1,45 +1,26 @@
 'use client'
-import React, { useCallback, useRef } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Edit2, Trash2 } from "lucide-react";
-
-// Actions & Selectors
 import { fetchTypings } from "@/store/actions/typingActions";
-import { selectFilteredTypings } from "@/store/selectors/typingSelectors";
+import { selectFetchingMoreTyping, selectFilteredTypings, selectTypingLoading, selectTypingPagination } from "@/store/selectors/typingSelectors";
 import { openManagePopup, openDeletePopup } from "@/store/slices/typingSlices/typingFormSlice";
+import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
 
-// Constants
-import { TYPING_KEYS } from "@/store/constants/typingConstants";
-import { SLICE_NAMES } from "@/store/constants/sliceConstants";
 
 function RenderTyping({ route }) {
   const dispatch = useDispatch();
 
-  // 1. Pull data using our Smart Selector
-  const filteredTypings = useSelector((state) => selectFilteredTypings(state, route));
+  const filteredTypings = useSelector(selectFilteredTypings);
+  const isInitialLoading = useSelector(selectTypingLoading);
+  const isFetchingMore = useSelector(selectFetchingMoreTyping);
+  const pagination = useSelector(selectTypingPagination);
 
-  // 2. Pull Pagination & Loading from the main Typing Slice
-  const typingState = useSelector((state) => state[SLICE_NAMES.TYPING]);
-  const loading = typingState?.loading;
-  const pagination = typingState?.[TYPING_KEYS.TYPING_PAGINATION];
 
-  // --- Infinite Scroll Logic ---
-  const observer = useRef();
-  const lastElementRef = useCallback((node) => {
-    if (loading) return;
-    if (observer.current) observer.current.disconnect();
-
-    observer.current = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && pagination?.hasMore && !loading) {
-        dispatch(fetchTypings({
-          page: (pagination?.currentPage || 1) + 1,
-          route
-        }));
-      }
-    });
-
-    if (node) observer.current.observe(node);
-  }, [loading, pagination?.hasMore, pagination?.currentPage, route, dispatch]);
+  const lastElementRef = useInfiniteScroll(
+    isInitialLoading || isFetchingMore, pagination?.hasMore,
+    () => dispatch(fetchTypings({ page: (pagination?.currentPage || 1) + 1, route }))
+  )
 
   return (
     <div className="space-y-6">
@@ -102,7 +83,7 @@ function RenderTyping({ route }) {
 
       {/* Infinite Scroll Trigger Zone */}
       <div ref={lastElementRef} className="h-16 w-full flex justify-center items-center">
-        {loading ? (
+        {isInitialLoading ? (
           <div className="flex items-center space-x-3 text-gray-400 bg-gray-800/50 px-4 py-2 rounded-full border border-gray-700">
             <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
             <span className="text-xs font-medium uppercase tracking-widest">Syncing Records...</span>

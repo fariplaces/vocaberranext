@@ -1,5 +1,5 @@
 // @/store/actions/taskActions.js
-import { createApiThunk } from "../utils/actionBuilder";
+import { createApiThunk } from "../utils/actionBuilder-smart";
 import { TASKS_KEYS } from "../constants/tasksConstants";
 
 const { PREFIX = "tasks" } = TASKS_KEYS || {};

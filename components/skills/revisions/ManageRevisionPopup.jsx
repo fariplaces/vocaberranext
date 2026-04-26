@@ -1,6 +1,7 @@
 "use client";
 import { incrementDate } from "@/lib/utils";
 import { createRevision, updateRevision } from "@/store/actions/skillActions";
+import { selectUser } from "@/store/selectors/authSelectors";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -27,7 +28,7 @@ const ManageRevisionPopup = ({
   editData = null,
   setEditData,
 }) => {
-  const { user } = useSelector((state) => state.auth);
+  const user = useSelector(selectUser);
   const { topics } = useSelector((state) => state.skill);
   const [formData, setFormData] = useState(initialFormState);
   const dispatch = useDispatch();

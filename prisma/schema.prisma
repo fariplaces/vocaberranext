@@ -195,51 +195,6 @@ model DefaultTask {
   updatedAt DateTime @updatedAt
 }
 
-// --- MIGRATION FOR NOTION-LIKE NOTES ---
-// enum NoteTargetType {
-//   TOPIC
-//   EXERCISE
-//   SKILL
-//   CATEGORY
-//   LESSON
-//   TASK
-// }
-
-// model Note {
-//   id      String  @id @default(uuid())
-//   title   String  @default("Untitled")
-//   content String?
-
-//   targetId   String
-//   targetType NoteTargetType
-
-//   userId String
-//   user   User   @relation(fields: [userId], references: [id])
-
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-
-//   @@index([userId])
-//   @@index([targetId, targetType, userId])
-// }
-
-// model NoteTemplate {
-//   id      String @id @default(uuid())
-//   name    String
-//   pattern String // trigger shortcut e.g. "bug", "daily"
-//   content String // JSON editor state
-
-//   // null = global template available to everyone
-//   // set = private template for that user only
-//   userId String?
-//   user   User?   @relation(fields: [userId], references: [id])
-
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-
-//   @@unique([pattern, userId]) // same pattern can exist as global AND per-user
-// }
-
 // ============================================================
 // ENUMS
 // ============================================================

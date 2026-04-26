@@ -14,7 +14,7 @@ const ManageSkillPopup = ({
   editData = null,
   setEditData,
 }) => {
-  const { user } = useSelector((state) => state.auth);
+  const user = useSelector(selectUser);
   const { skills } = useSelector((state) => state.skill);
   const [formData, setFormData] = useState(initialFormState);
   const dispatch = useDispatch();

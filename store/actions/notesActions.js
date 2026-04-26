@@ -1,5 +1,6 @@
 // @/store/actions/notesActions.js
-import { createApiThunk } from "../utils/actionBuilder";
+import { NOTES_KEYS } from "../constants/notesConstants";
+import { createApiThunk } from "../utils/actionBuilder-smart";
 
 const { PREFIX = "notes" } = NOTES_KEYS || {};
 
