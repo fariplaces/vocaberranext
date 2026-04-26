@@ -1,36 +1,44 @@
-// @/store/selectors/authSelectors.js
 import { createSelector } from "@reduxjs/toolkit";
-import { AUTH_KEYS } from "@/store/constants/authConstants";
+import { AUTH_KEYS } from "../constants/authConstants";
 
-export const selectAuthState = (state) => state.auth;
+// 1. Base Selector (Internal)
+// In JS, we don't need the RootState type; it just takes the global state object.
+const selectAuthSlice = (state) => state.auth;
+
+// 2. Granular Memoized Selectors
+// We use dynamic keys (AUTH_KEYS) to stay consistent with your reducer/constants.
 
 export const selectUser = createSelector(
-   [selectAuthState],
-   (auth) => auth[AUTH_KEYS.USER]
+  [selectAuthSlice],
+  (auth) => auth[AUTH_KEYS.USER]
 );
 
 export const selectIsAuthenticated = createSelector(
-   [selectAuthState],
-   (auth) => auth[AUTH_KEYS.IS_AUTHENTICATED]
+  [selectAuthSlice],
+  (auth) => auth[AUTH_KEYS.IS_AUTHENTICATED]
 );
 
 export const selectAuthLoading = createSelector(
-   [selectAuthState],
-   (auth) => auth[AUTH_KEYS.LOADING]
+  [selectAuthSlice],
+  (auth) => auth[AUTH_KEYS.LOADING]
 );
 
 export const selectAuthError = createSelector(
-   [selectAuthState],
-   (auth) => auth[AUTH_KEYS.ERROR]
+  [selectAuthSlice],
+  (auth) => auth[AUTH_KEYS.ERROR]
 );
 
-// This combined selector is now memoized and performance-optimized
+/**
+ * 3. Combined Meta-Data Selector
+ * This is very efficient for your 'AuthCheck' component.
+ * It only re-calculates if one of the underlying values actually changes.
+ */
 export const selectAuthMetaData = createSelector(
-   [selectUser, selectIsAuthenticated, selectAuthLoading, selectAuthError],
-   (user, isAuthenticated, loading, error) => ({
-      user,
-      isAuthenticated,
-      loading,
-      error,
-   })
+  [selectUser, selectIsAuthenticated, selectAuthLoading, selectAuthError],
+  (user, isAuthenticated, loading, error) => ({
+    user,
+    isAuthenticated,
+    loading,
+    error,
+  })
 );

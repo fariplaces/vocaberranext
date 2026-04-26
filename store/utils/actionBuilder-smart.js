@@ -1,4 +1,4 @@
-import api from "@/config/api.config";
+import api from "@/config/apiConfig";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const createApiThunk = (prefix, actionName, method, endpoint, subPath = "") => {

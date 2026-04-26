@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { registerUser } from "@/store/actions/authActions";
 import { selectAuthMetaData } from "@/store/selectors/authSelectors";
 import { useRouter } from "next/navigation";
-import { validateRegister } from "@/utils/authValidation";
 import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { validateRegister } from "@/utils/validations/authValidation";
 
 export const useRegister = () => {
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
   const router = useRouter();
-  const { loading, error: apiError } = useAppSelector(selectAuthMetaData);
+  const { loading, error: apiError } = useSelector(selectAuthMetaData);
 
   const [formData, setFormData] = useState({
     userName: "",

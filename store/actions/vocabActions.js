@@ -1,4 +1,4 @@
-import API from "@/config/api.config";
+import API from "@/config/apiConfig";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 // ================== ASYNC THUNKS ==================

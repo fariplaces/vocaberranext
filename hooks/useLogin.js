@@ -1,14 +1,15 @@
 import { loginUser } from "@/store/actions/authActions";
 import { selectAuthMetaData } from "@/store/selectors/authSelectors";
-import { validateLogin } from "@/utils/authValidation";
+import { validateLogin } from "@/utils/validations/authValidation";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
 
 export const useLogin = () => {
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
   const router = useRouter();
-  const { loading, error: apiError } = useAppSelector(selectAuthMetaData);
+  const { loading, error: apiError } = useSelector(selectAuthMetaData);
 
   const [formData, setFormData] = useState({
     email: process.env.NEXT_PUBLIC_DEFAULT_USER || "",

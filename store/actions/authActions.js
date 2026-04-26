@@ -1,11 +1,46 @@
-// @/store/actions/authActions.js
-import { createServiceThunk } from "@/store/utils/actionBuilder";
+// store/actions/authActions.js
+import { authServices } from "@/services/client/authServices";
 import { AUTH_KEYS } from "../constants/authConstants";
+import { createServiceThunk } from "@/store/utils/thunkFactory";
 
-const { PREFIX = "auth" } = AUTH_KEYS || {};
+const PREFIX = AUTH_KEYS.PREFIX;
 
-export const loginUser = createServiceThunk(PREFIX, "loginUser", "post", "/login");
-export const registerUser = createServiceThunk(PREFIX, "registerUser", "post", "/register");
-export const checkAuth = createServiceThunk(PREFIX, "checkAuth", "get", "/me");
-export const logoutUser = createServiceThunk(PREFIX, "logoutUser", "post", "/logout");
+// LOGIN: Sets the user object (FETCH operation)
+export const loginUser = createServiceThunk(
+  `${PREFIX}/loginUser`,
+  (params) => authServices.loginUser(params),
+  { 
+    dataKey: AUTH_KEYS.USER, 
+    operation: "FETCH" 
+  }
+);
 
+// CHECK AUTH: Validates current session
+export const checkAuth = createServiceThunk(
+  `${PREFIX}/checkAuth`,
+  () => authServices.checkAuth(),
+  { 
+    dataKey: AUTH_KEYS.USER, 
+    operation: "FETCH" 
+  }
+);
+
+// REGISTER: Creates account and logs user in (FETCH operation)
+export const registerUser = createServiceThunk(
+  `${PREFIX}/registerUser`,
+  (params) => authServices.registerUser(params),
+  {
+    dataKey: AUTH_KEYS.USER,
+    operation: "FETCH",
+  }
+);
+
+// LOGOUT: Clears the user state
+export const logoutUser = createServiceThunk(
+  `${PREFIX}/logoutUser`,
+  () => authServices.logoutUser(),
+  {
+    dataKey: AUTH_KEYS.USER,
+    operation: "FETCH", // Payload returns null/empty, clearing the dataKey
+  }
+);

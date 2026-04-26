@@ -1,62 +1,31 @@
-// import { NextResponse } from "next/server";
-// import { routes } from "./lib/routes";
-
-// export function middleware(req) {
-//    const sessionId = req.cookies.sessionId;
-//    const { pathname } = req.nextUrl;
-
-//    const isProtected = (routes.protected || []).some(route =>
-//       pathname.startsWith(route)
-//    );
-//    const isAdmin = (routes.admin || []).some(route =>
-//       pathname.startsWith(route)
-//    );
-
-//    if (!sessionId && (isProtected || isAdmin)) {
-//       return NextResponse.redirect("/auth/login");
-//    }
-
-//    if (sessionId && (routes.public || []).includes(pathname)) {
-//       return NextResponse.redirect("/dashboard");
-//    }
-
-//    return NextResponse.next();
-// }
-
-// export const config = { matcher: "/:path*" };
-
-
-
-// middleware.js
+// middleware.js (Root folder)
+import { withAuth } from "./middlewares/withAuth";
 import { NextResponse } from "next/server";
-import { routes } from "@/lib/routes"; // Path to your routes file
 
-export function middleware(req) {
-   const sessionId = req.cookies.get("sessionId")?.value; // Next.js 15+ uses .get()
-   const { pathname } = req.nextUrl;
+/**
+ * Higher-Order Function to stack multiple middlewares.
+ * It executes them in order, passing the 'next' function to the current one.
+ */
+function stack(functions = [], index = 0) {
+  const current = functions[index];
+  
+  if (current) {
+    const next = stack(functions, index + 1);
+    return current(next);
+  }
 
-   const isProtected = (routes.protected || []).some(route =>
-      pathname.startsWith(route)
-   );
-   const isAdmin = (routes.admin || []).some(route =>
-      pathname.startsWith(route)
-   );
-
-   // 1. If trying to access protected/admin without a session
-   if (!sessionId && (isProtected || isAdmin)) {
-      return NextResponse.redirect(new URL("/auth/login", req.url));
-   }
-
-   // 2. 🔥 THE FIX: Only redirect logged-in users away from AUTH pages, not the landing page!
-   const authPages = ["/auth/login", "/auth/register"];
-   if (sessionId && authPages.includes(pathname)) {
-      return NextResponse.redirect(new URL("/", req.url));
-   }
-
-   return NextResponse.next();
+  // Final fallback: proceed with the request
+  return () => NextResponse.next();
 }
 
+/**
+ * MIDDLEWARE ORDER: 
+ * Auth check usually comes first to protect the entire application.
+ * You can add more here later, e.g., stack([withAuth, withAnalytics, withHeaders])
+ */
+export default stack([withAuth]);
+
 export const config = {
-   // We ignore Next.js internals and static files to prevent middleware lag
-   matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"]
+  // Ensures middleware runs on all routes except static assets and internal Next.js files
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };
