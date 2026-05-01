@@ -43,7 +43,9 @@ export const useLogin = () => {
       router.push("/");
     } catch (err) {
       // API error is handled by the useEffect above
-      console.error("Login process failed", err);
+      // toast.error(`Login Failed: ${err}`)
+      console.error("Login process failed ", err);
+      // console.error(`Login Failed: ${err}`)
     }
   };
 
