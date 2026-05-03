@@ -1,5 +1,4 @@
-// app/api/typing/deleteTyping/[id]/route.js
-import { prisma } from "@/lib/prisma";
+import { typingDbServices } from "@/services/server/typingDbServices";
 import { NextResponse } from "next/server";
 
 export async function DELETE(req, { params }) {
@@ -13,9 +12,7 @@ export async function DELETE(req, { params }) {
     }
 
     // 2. Perform the delete using the extracted ID
-    await prisma.typing.delete({
-      where: { id: id },
-    });
+    await typingDbServices.deleteTyping(id);
 
     return NextResponse.json({ message: "Deleted successfully" });
   } catch (error) {

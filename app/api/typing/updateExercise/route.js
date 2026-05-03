@@ -1,33 +1,25 @@
 import { prisma } from "@/lib/prisma";
+import { typingDbServices } from "@/services/server/typingDbServices";
 import { NextResponse } from "next/server";
 
 export async function PATCH(req) {
   try {
     const body = await req.json();
-    const { id, title, exerciseNo, typeId, lessonId } = body;
+    const { id, ...updateData } = body;
 
     // 1. Basic Validation
     if (!id) {
       return NextResponse.json(
         { error: "Missing Exercise ID" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     // 2. Update Exercise
-    const updatedExercise = await prisma.exercise.update({
-      where: { id: id },
-      data: {
-        title,
-        exerciseNo,
-        typeId,
-        lessonId,
-      },
-      include: {
-        type: true,
-        lesson: true,
-      },
-    });
+    const updatedExercise = await typingDbServices.updateExercise(
+      id,
+      updateData,
+    );
 
     return NextResponse.json(updatedExercise, { status: 200 });
   } catch (error) {
@@ -37,7 +29,7 @@ export async function PATCH(req) {
     if (error.code === "P2025") {
       return NextResponse.json(
         { error: "Exercise not found" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -45,13 +37,13 @@ export async function PATCH(req) {
     if (error.code === "P2002") {
       return NextResponse.json(
         { error: "Exercise number must be unique" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     return NextResponse.json(
       { error: "Failed to update exercise" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

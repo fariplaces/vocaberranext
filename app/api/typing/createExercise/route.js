@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+import { typingDbServices } from "@/services/server/typingDbServices";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
@@ -6,28 +6,14 @@ export async function POST(req) {
     const body = await req.json();
     const { title, exerciseNo, typeId, lessonId } = body;
 
-    // 1. Basic Validation
+// 1. Basic Validation
     if (!title || !exerciseNo || !typeId || !lessonId) {
-      return NextResponse.json(
-        { error: "Missing required fields" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Missing fields" }, { status: 400 });
     }
 
     // 2. Create Exercise
-    const newExercise = await prisma.exercise.create({
-      data: {
-        title,
-        exerciseNo,
-        typeId,
-        lessonId,
-      },
-      // Optional: return related data
-      include: {
-        type: true,
-        lesson: true,
-      },
-    });
+     const newExercise = await typingDbServices.createExercise(body);
+
 
     return NextResponse.json(newExercise, { status: 201 });
   } catch (error) {

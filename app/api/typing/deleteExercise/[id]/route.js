@@ -1,5 +1,4 @@
-// app/api/exercise/deleteExercise/[id]/route.js
-import { prisma } from "@/lib/prisma";
+import { typingDbServices } from "@/services/server/typingDbServices";
 import { NextResponse } from "next/server";
 
 export async function DELETE(req, { params }) {
@@ -9,16 +8,11 @@ export async function DELETE(req, { params }) {
     const { id } = resolvedParams;
 
     if (!id) {
-      return NextResponse.json(
-        { error: "No ID provided" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "No ID provided" }, { status: 400 });
     }
 
     // 2. Delete Exercise
-    await prisma.exercise.delete({
-      where: { id: id },
-    });
+    await typingDbServices.deleteExercise(id);
 
     return NextResponse.json({ message: "Exercise deleted successfully" });
   } catch (error) {
@@ -28,13 +22,10 @@ export async function DELETE(req, { params }) {
     if (error.code === "P2025") {
       return NextResponse.json(
         { error: "Exercise not found" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
-    return NextResponse.json(
-      { error: "Delete failed" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Delete failed" }, { status: 500 });
   }
 }

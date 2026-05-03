@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { typingDbServices } from "@/services/server/typingDbServices";
 import { NextResponse } from "next/server";
 
 export async function PATCH(req, { params }) {
@@ -6,7 +7,7 @@ export async function PATCH(req, { params }) {
     // const resolvedParams = await params;
     // const { id } = resolvedParams;
     const body = await req.json();
-    const { id, userId, exerciseId, durationId, accuracy, gross, net } = body;
+    const { id, ...updateData } = body;
 
     // 1. Basic Validation
     if (!id) {
@@ -14,30 +15,14 @@ export async function PATCH(req, { params }) {
     }
 
     // 2. Update the record
-    const updatedTyping = await prisma.typing.update({
-      where: { id: id },
-      data: {
-        userId,
-        exerciseId,
-        durationId,
-        accuracy: parseFloat(accuracy),
-        gross: parseInt(gross),
-        net: parseInt(net),
-      },
-      include: {
-        exercise: {
-          select: { title: true, exerciseNo: true, lesson: true },
-        },
-        duration: true,
-      },
-    });
+    const updatedTyping = await typingDbServices.updateTyping(id, updateData);
 
     return NextResponse.json(updatedTyping, { status: 200 });
   } catch (error) {
     console.error("Typing Update Error:", error);
     return NextResponse.json(
       { error: "Failed to update typing record" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
