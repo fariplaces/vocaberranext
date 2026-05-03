@@ -29,6 +29,11 @@ export const handleResourceFulfilled = (state, action) => {
   const resourceMeta = action.payload?.resourceMeta;
   const payloadData = action.payload?.payloadData;
 
+  // Optional: Save the message globally
+  if (payloadData?.message) {
+    state.lastServerMessage = action.payload.message;
+  }
+
   if (!resourceMeta) {
     console.warn("Helper: No resourceMeta found in payload for", action.type);
     return;
@@ -46,7 +51,7 @@ export const handleResourceFulfilled = (state, action) => {
 
     // Filter to prevent duplicate IDs if the API sends a cached item
     const newData = data.filter(
-      (newItem) => !existingData.find((oldItem) => oldItem.id === newItem.id)
+      (newItem) => !existingData.find((oldItem) => oldItem.id === newItem.id),
     );
 
     state[dataKey] = current_page === 1 ? data : [...existingData, ...newData];
@@ -75,7 +80,7 @@ export const handleResourceFulfilled = (state, action) => {
     case "UPDATE":
       if (resourceData) {
         const index = (state[dataKey] || []).findIndex(
-          (item) => item.id === resourceData.id
+          (item) => item.id === resourceData.id,
         );
         if (index !== -1) state[dataKey][index] = resourceData;
       }
@@ -83,9 +88,7 @@ export const handleResourceFulfilled = (state, action) => {
 
     case "DELETE":
       const id = action.meta?.arg?.id || action.meta?.arg;
-      state[dataKey] = (state[dataKey] || []).filter(
-        (item) => item.id !== id
-      );
+      state[dataKey] = (state[dataKey] || []).filter((item) => item.id !== id);
       break;
   }
 

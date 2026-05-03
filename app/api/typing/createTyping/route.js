@@ -17,7 +17,7 @@ export async function POST(req) {
     // 2. Create the record
     const newTyping = await typingDbServices.createTyping(body);
 
-    return NextResponse.json(newTyping, { status: 201 });
+    return NextResponse.json({ data: newTyping }, { status: 201 });
   } catch (error) {
     console.error("Typing Save Error:", error);
     return NextResponse.json(
