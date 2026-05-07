@@ -4,9 +4,10 @@ import { SLICE_NAMES } from "../constants/sliceConstants";
 import rootReducer from "../reducers/reducers";
 
 const persistConfig = {
-   key: "root",
-   storage,
-   whitelist: [SLICE_NAMES.AUTH], // Keep user logged in after refresh
+  key: "root",
+  storage,
+  whitelist: [], // Keep user logged in after refresh
+  // whitelist: [SLICE_NAMES.AUTH], // Keep user logged in after refresh
 };
 
 export const persistedReducer = persistReducer(persistConfig, rootReducer);

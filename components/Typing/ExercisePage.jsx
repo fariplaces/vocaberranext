@@ -6,7 +6,12 @@ import { useDispatch, useSelector } from "react-redux";
 import DeleteExercisePopup from "./DeleteExercisePopup";
 import ManageExercisePopup from "./ManageExercisePopup";
 import RenderExercises from "./RenderExercises";
-import { deleteExercise, fetchExercises, fetchExerciseTypes, fetchLessons } from "@/store/actions/typingActions";
+import {
+  deleteExercise,
+  fetchExercises,
+  fetchExerciseTypes,
+  fetchLessons,
+} from "@/store/actions/typingActions";
 
 const ExercisePage = ({ route }) => {
   const [selectedItem, setSelectedItem] = useState(null);
@@ -16,7 +21,7 @@ const ExercisePage = ({ route }) => {
   const { loading } = useSelector((state) => state.typing);
 
   const handleEditClick = (item) => {
-    setSelectedItem(item); // Pass the whole typing record
+    setSelectedItem(item);
     setIsPopupOpen(true);
   };
 

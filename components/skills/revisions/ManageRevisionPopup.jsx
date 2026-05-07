@@ -1,7 +1,7 @@
 "use client";
-import { incrementDate } from "@/lib/utils";
 import { createRevision, updateRevision } from "@/store/actions/skillActions";
 import { selectUser } from "@/store/selectors/authSelectors";
+import { incrementDate } from "@/utils/date";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -33,22 +33,18 @@ const ManageRevisionPopup = ({
   const [formData, setFormData] = useState(initialFormState);
   const dispatch = useDispatch();
 
-
   const filteredTopics = topics?.filter((topic) => {
     const cat = topic.category;
 
     return (
       topic.categoryId === route ||
-
       cat?.parentId === route ||
       cat?.parent?.parentId === route ||
-
       cat?.skillId === route ||
       cat?.parent?.skillId === route ||
       cat?.parent?.parent?.skillId === route
     );
   });
-
 
   const resetPopup = () => {
     setFormData(initialFormState);
@@ -78,24 +74,27 @@ const ManageRevisionPopup = ({
       scheduled: formData.scheduled,
       practiced: formData.practiced || null,
       revision1: false,
-      revision1date: incrementDate(formData.practiced || formData.scheduled) || null,
+      revision1date:
+        incrementDate(formData.practiced || formData.scheduled) || null,
       revision2: false,
-      revision2date: incrementDate(formData.practiced || formData.scheduled, 3) || null,
+      revision2date:
+        incrementDate(formData.practiced || formData.scheduled, 3) || null,
       revision3: false,
-      revision3date: incrementDate(formData.practiced || formData.scheduled, 7) || null,
+      revision3date:
+        incrementDate(formData.practiced || formData.scheduled, 7) || null,
       revision4: false,
-      revision4date: incrementDate(formData.practiced || formData.scheduled, 22) || null,
+      revision4date:
+        incrementDate(formData.practiced || formData.scheduled, 22) || null,
       revision5: false,
-      revision5date: incrementDate(formData.practiced || formData.scheduled, 72) || null,
+      revision5date:
+        incrementDate(formData.practiced || formData.scheduled, 72) || null,
     };
 
     console.log(payloadData);
     const ignoreFields = ["practiced"];
 
     const filteredData = Object.fromEntries(
-      Object.entries(payloadData).filter(
-        ([key]) => !ignoreFields.includes(key)
-      )
+      Object.entries(payloadData).filter(([key]) => !ignoreFields.includes(key))
     );
 
     const isFormIncomplete = Object.values(filteredData).some(
@@ -106,7 +105,6 @@ const ManageRevisionPopup = ({
       alert("Please fill all required fields!");
       return;
     }
-
 
     const payload = {
       topicId: payloadData.topicId,
@@ -151,13 +149,9 @@ const ManageRevisionPopup = ({
               onClick={(e) => e.stopPropagation()}
             >
               <h2 className="text-xl font-semibold mb-4">
-                {editData
-                  ? "Edit Revision Details"
-                  : "Add a New Revision"
-                }
+                {editData ? "Edit Revision Details" : "Add a New Revision"}
               </h2>
               {/* Word Input */}
-
 
               <div className="mb-4">
                 <label className="block text-sm mb-1">Topic</label>
@@ -188,8 +182,9 @@ const ManageRevisionPopup = ({
                         value={topic.id}
                         className="bg-black text-white"
                       >
-                        {`${skillTitle}: ${topic?.title}${categoryPath ? ` (${categoryPath})` : ""
-                          }`}
+                        {`${skillTitle}: ${topic?.title}${
+                          categoryPath ? ` (${categoryPath})` : ""
+                        }`}
                       </option>
                     );
                   })}
@@ -207,7 +202,12 @@ const ManageRevisionPopup = ({
                 />
                 <div className="flex justify-end space-x-2 p-1">
                   <button
-                    onClick={() => setFormData((prev) => ({ ...prev, scheduled: new Date().toISOString().split("T")[0] }))}
+                    onClick={() =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        scheduled: new Date().toISOString().split("T")[0],
+                      }))
+                    }
                     className="px-4 py-0.5 border border-gray-600 rounded-lg hover:bg-gray-700"
                   >
                     Today
@@ -237,9 +237,7 @@ const ManageRevisionPopup = ({
                   onChange={handleChange}
                   className="w-full px-3 py-2 bg-black text-white border border-gray-600 rounded-md focus:outline-none focus:border-blue-500"
                 />
-
               </div>
-
 
               {/* Buttons */}
               <div className="flex justify-end space-x-2">
@@ -260,8 +258,7 @@ const ManageRevisionPopup = ({
           </div>
           {/* </div> */}
         </>
-      )
-      }
+      )}
     </>
   );
 };

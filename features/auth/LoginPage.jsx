@@ -15,6 +15,7 @@ export default function LoginPage() {
           <div>
             <label className="block text-sm text-gray-300">Email</label>
             <input
+              name="email"
               type="text"
               className={`w-full p-3 mt-1 rounded-xl bg-gray-800 border ${
                 errors.email ? "border-red-500" : "border-gray-600"
@@ -32,6 +33,7 @@ export default function LoginPage() {
           <div>
             <label className="block text-sm text-gray-300">Password</label>
             <input
+              name="password"
               type="password"
               className={`w-full p-3 mt-1 rounded-xl bg-gray-800 border ${
                 errors.password ? "border-red-500" : "border-gray-600"

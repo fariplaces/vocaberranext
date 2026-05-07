@@ -6,8 +6,14 @@ import { useDispatch, useSelector } from "react-redux";
 import RenderRevisions from "./RenderRevisions";
 import ManageRevisionPopup from "./ManageRevisionPopup";
 import DeleteRevisionPopup from "./DeleteRevisionPopup";
-import { formatForInput } from "@/lib/utils";
-import { deleteRevision, fetchRevisions, fetchSkills, fetchTopics, updateRevision } from "@/store/actions/skillActions";
+import {
+  deleteRevision,
+  fetchRevisions,
+  fetchSkills,
+  fetchTopics,
+  updateRevision,
+} from "@/store/actions/skillActions";
+import { formatForInput } from "@/utils/date";
 
 const RevisionPage = ({ route }) => {
   const [selectedItem, setSelectedItem] = useState(null);
@@ -17,7 +23,13 @@ const RevisionPage = ({ route }) => {
   const { loading } = useSelector((state) => state.skill);
 
   const handleEditClick = (item) => {
-    const dateFields = ["scheduled", "practiced", "revision1date", "revision2date", "revision3date"];
+    const dateFields = [
+      "scheduled",
+      "practiced",
+      "revision1date",
+      "revision2date",
+      "revision3date",
+    ];
 
     setSelectedItem({
       ...item,
@@ -29,12 +41,10 @@ const RevisionPage = ({ route }) => {
     setIsPopupOpen(true);
   };
 
-
   const handleUpdateRevisionClick = (item) => {
     console.log(item);
     dispatch(updateRevision(item));
-  }
-
+  };
 
   const handleAddClick = () => {
     setSelectedItem(null);
@@ -65,7 +75,9 @@ const RevisionPage = ({ route }) => {
       <ContentTitle
         title={"Manage Revisions"}
         btnTitle={
-          ["pendingri", "pendingrii", "pendingriii", "scheduled"].includes(route)
+          ["pendingri", "pendingrii", "pendingriii", "scheduled"].includes(
+            route
+          )
             ? "Null"
             : "Add Revision"
         }

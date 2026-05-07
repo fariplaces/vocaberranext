@@ -15,7 +15,7 @@ export const createServiceThunk = (type, serviceFn, meta) => {
 
         // This structure allows our helpers to know which key to update
         return {
-          payloadData: response?.data,
+          payloadData: response?.data || response,
           resourceMeta: meta,
         };
       } catch (error) {
@@ -25,7 +25,7 @@ export const createServiceThunk = (type, serviceFn, meta) => {
       }
     },
     {
-      // This attaches the meta to the 'pending' action so the UI 
+      // This attaches the meta to the 'pending' action so the UI
       // knows which specific list is loading (e.g., for pagination)
       getPendingMeta: () => ({ resourceMeta: meta }),
     }
