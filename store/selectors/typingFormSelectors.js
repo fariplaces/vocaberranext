@@ -1,94 +1,101 @@
+// store/selectors/typingFormSelectors.js
 import { createSelector } from "@reduxjs/toolkit";
 import { SLICE_NAMES } from "../constants/sliceConstants";
-import { TYPING_FORM_KEYS } from "../constants/typingConstants";
-import { selectFilterMode, selectAllLessons, selectAllDurations } from "./typingSelectors"; // Import from your main typing selectors
+// import { TYPING_FORM_KEYS } from "../constants/typingConstants";
+import {
+  selectAllLessons,
+  selectAllDurations,
+  selectAllExerciseTypes,
+  selectFilterMode,
+} from "./typingSelectors";
+import { UI_KEYS } from "../constants/typingConstants";
 
-
-// 1. Base Selector for this slice
+// 1. Base Selector for the whole slice
 export const selectTypingFormState = (state) => state[SLICE_NAMES.TYPING_FORM];
 
-// 2. Base Selector for the manage popup object
-export const selectManagePopup = (state) => selectTypingFormState(state)[TYPING_FORM_KEYS.MANAGE_POPUP];
+/**
+ * 2. Dynamic Factory Selectors
+ * These take a 'formType' argument ('typings' or 'exercises')
+ */
+export const selectFormByType = (state, formType) =>
+  selectTypingFormState(state)[formType];
 
+export const selectManagePopup = (state, formType) =>
+  selectFormByType(state, formType)[UI_KEYS.MANAGE_POPUP];
 
-export const selectIsManageOpen = (state) => selectManagePopup(state)[TYPING_FORM_KEYS.IS_OPEN];
+export const selectDeletePopup = (state, formType) =>
+  selectFormByType(state, formType)[UI_KEYS.DELETE_POPUP];
 
-export const selectEditId = (state) => selectManagePopup(state)[TYPING_FORM_KEYS.EDIT_ID];
+/**
+ * 3. The Meta Selectors (Unified for UI)
+ * Use these in your components to get everything in one object.
+ */
 
-export const selectTypingFormData = (state) => selectManagePopup(state)[TYPING_FORM_KEYS.FORM_DATA];
+// Meta Selector for TYPING RESULTS (Practice/Results)
+export const selectTypingResultMeta = createSelector(
+  [
+    (state) => selectManagePopup(state, "typings"),
+    selectFilterMode,
+    selectAllDurations,
+    selectAllLessons,
+  ],
+  (manage, route, allDurations, lessons) => {
+    const { isOpen, formData, editId } = manage;
+    const isEditMode = !!editId;
 
-// Boolean to check if we are in "Edit Mode" or "Add Mode"
-export const selectIsEditMode = createSelector(
-   [selectEditId],
-   (editId) => !!editId
+    return {
+      isOpen,
+      editId,
+      formData,
+      route,
+      lessons,
+      isEditMode,
+      durations: allDurations,
+      title: isEditMode ? "Update Typing Result" : "Log New Typing Practice",
+    };
+  },
 );
 
-// --- Delete Popup Selectors ---
-export const selectDeletePopup = (state) => selectTypingFormState(state)[TYPING_FORM_KEYS.DELETE_POPUP];
+// Meta Selector for EXERCISES (Admin/Management)
+export const selectExerciseFormMeta = createSelector(
+  [
+    (state) => selectManagePopup(state, "exercises"),
+    selectFilterMode,
+    selectAllLessons,
+    selectAllDurations,
+    selectAllExerciseTypes,
+  ],
+  (manage, route, allLessons, durations, allTypes) => {
+    const { isOpen, formData, editId } = manage;
+    const isEditMode = !!editId;
 
-export const selectIsDeleteOpen = (state) => selectDeletePopup(state)[TYPING_FORM_KEYS.IS_OPEN];
+    // Logic: Filter lessons based on current route (Course vs Test)
+    const filteredLessons = allLessons.filter((item) => {
+      if (route === "test") return item.lesson === "TEST";
+      if (route === "course") return item.lesson !== "TEST";
+      return true;
+    });
 
-export const selectDeleteItem = (state) => selectDeletePopup(state).item;
-
-
-// 3. The "Self-Feeding" Meta Selector
-// export const selectManagePopupMeta = createSelector(
-//    [
-//       selectManagePopup,
-//       selectFilterMode,  // <--- Automatically pulls from state.typing.filterMode
-//       selectAllLessons,
-//       selectAllDurations
-//    ],
-//    (manage, route, allLessons, allDurations) => {
-//       const { isOpen, formData, editId } = manage;
-//       const isEditMode = !!editId;
-
-//       // 4. Filter the lessons for the dropdown right here!
-//       const filteredLessons = allLessons.filter((item) => {
-//          if (route === "test") return item.lesson === "TEST";
-//          if (route === "course") return item.lesson !== "TEST";
-//          return true;
-//       });
-
-//       return {
-//          isOpen,
-//          isEditMode,
-//          formData,
-//          route, // Pass it through so the UI can use it for labels
-//          lessons: filteredLessons,
-//          durations: allDurations,
-//          title: isEditMode ? "Update Record" : "Add New Record"
-//       };
-//    }
-// );
-
-// store/selectors/typingFormSelectors.js
-export const selectManagePopupMeta = createSelector(
-   [selectManagePopup, selectFilterMode, selectAllLessons, selectAllDurations],
-   (manage, route, allLessons, allDurations) => {
-      // Accessing state via dynamic constants
-      // const isOpen = manage[TYPING_FORM_KEYS.IS_OPEN];
-      // const editId = manage[TYPING_FORM_KEYS.EDIT_ID]; // This is the value from the slice
-      // const formData = manage[TYPING_FORM_KEYS.FORM_DATA];
-      const { isOpen, formData, editId } = manage;
-      const isEditMode = !!editId;
-      // 4. Filter the lessons for the dropdown right here!
-      const filteredLessons = allLessons.filter((item) => {
-         if (route === "test") return item.lesson === "TEST";
-         if (route === "course") return item.lesson !== "TEST";
-         return true;
-      });
-
-
-      return {
-         isOpen,
-         editId, // This will now be available as a simple variable in the component
-         formData,
-         isEditMode,
-         route, // Pass it through so the UI can use it for labels
-         lessons: filteredLessons,
-         durations: allDurations,
-         title: isEditMode ? "Update Record" : "Add New Record"
-      };
-   }
+    return {
+      isOpen,
+      editId,
+      formData,
+      isEditMode,
+      route,
+      lessons: filteredLessons,
+      exerciseTypes: allTypes,
+      durations,
+      title: isEditMode ? "Edit Exercise" : "Create New Exercise",
+    };
+  },
 );
+
+// 4. Delete Popup Meta
+export const selectDeletePopupMeta = (state, formType) => {
+  const deletePopup = selectDeletePopup(state, formType);
+  return {
+    isOpen: deletePopup[UI_KEYS.IS_OPEN], // Use UI_KEYS
+    item: deletePopup.item,
+    formType,
+  };
+};

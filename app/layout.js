@@ -3,6 +3,7 @@ import "./globals.css";
 import ReduxProvider from "@/store/providers/ReduxProvider";
 import { Toaster } from "react-hot-toast";
 import AuthCheck from "@/components/layouts/AuthCheck";
+import { GlobalToastProvider } from "@/components/providers/GlobalToastProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,7 +27,8 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ReduxProvider>
-           <Toaster
+          <GlobalToastProvider />
+          <Toaster
             position="top-right"
             toastOptions={{
               duration: 5000,
@@ -46,11 +48,9 @@ export default function RootLayout({ children }) {
             }}
           />
           <AuthCheck>
-          <main>
-            {children}
-            </main>
+            <main>{children}</main>
           </AuthCheck>
-          </ReduxProvider>
+        </ReduxProvider>
       </body>
     </html>
   );

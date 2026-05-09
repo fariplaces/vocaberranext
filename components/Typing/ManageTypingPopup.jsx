@@ -2,11 +2,14 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createTyping, updateTyping } from "@/store/actions/typingActions";
-import { closeManagePopup, updateFormField } from "@/store/slices/typingSlices/typingFormSlice";
+import { updateFormField } from "@/store/slices/typingSlices/typingFormSlice";
 import { selectUser } from "@/store/selectors/authSelectors";
-import { selectManagePopupMeta } from "@/store/selectors/typingFormSelectors";
+import { selectExerciseFormMeta, selectTypingResultMeta } from "@/store/selectors/typingFormSelectors";
+import { closeManagePopup } from "@/store/slices/typingSlices/typingFormSlice";
+import { FORM_DOMAINS } from "@/store/constants/typingConstants";
 
-const ManageTypingPopup = () => {
+
+const ManageTypingPopup = ({domain}) => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
 
@@ -20,15 +23,13 @@ const ManageTypingPopup = () => {
     title,
     route,
     editId
-  } = useSelector(selectManagePopupMeta);
+  } = useSelector(selectTypingResultMeta);
 
   if (!isOpen) return null;
 
-  console.log(editId);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-    dispatch(updateFormField({ name, value }));
+    dispatch(updateFormField({ domain, name, value }));
   };
 
   const handleSave = async () => {
@@ -40,6 +41,7 @@ const ManageTypingPopup = () => {
 
     const payload = {
       ...formData,
+      formType: 'typings',
       userId: user.id,
       gross: Number(formData.gross) || 0,
       net: Number(formData.net) || 0,
@@ -49,7 +51,7 @@ const ManageTypingPopup = () => {
     try {
       const action = editId ? updateTyping({ id: editId, ...payload }) : createTyping(payload);
       await dispatch(action).unwrap();
-      dispatch(closeManagePopup());
+      dispatch(closeManagePopup({domain}));
     } catch (error) {
       console.error("Submission failed:", error);
     }
@@ -128,7 +130,7 @@ const ManageTypingPopup = () => {
 
         <div className="flex justify-end gap-3 mt-6">
           <button
-            onClick={() => dispatch(closeManagePopup())}
+            onClick={() => dispatch(closeManagePopup({domain:  FORM_DOMAINS.TYPINGS} ))}
             className="px-4 py-2 text-gray-400 hover:text-white transition-colors"
           >
             Cancel

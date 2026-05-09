@@ -1,27 +1,27 @@
 'use client'
+import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
 import { fetchExercises } from "@/store/actions/typingActions";
+import { selectExercisePagination, selectFetchingMoreExercise, selectFilteredExercises, selectTypingLoading } from "@/store/selectors/typingSelectors";
 import {
   Edit2,
   Trash2,
 } from "lucide-react";
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-function RenderExercises({ route, handleEditClick, handleDelClick }) {
-  const { exercises } = useSelector((state) => state.typing);
+function RenderExercises({route}) {
   const dispatch = useDispatch();
 
-  const routedExercises = exercises.filter((item) =>
-    route === "exercises"
-      ? item.lesson.lesson !== "TEST"
-      : route === "tests"
-        ? item.lesson.lesson === "TEST"
-        : true
-  );
+  const filteredExercises = useSelector(selectFilteredExercises);
+  const isInitialLoading = useSelector(selectTypingLoading);
+  const isFetchingMore = useSelector(selectFetchingMoreExercise)
+  const pagination = useSelector(selectExercisePagination)
 
-  useEffect(() => {
-    dispatch(fetchExercises());
-  }, []);
+
+  const lastElementRef = useInfiniteScroll(
+    isInitialLoading || isFetchingMore, pagination?.hasMore, ()=> dispatch(fetchExercises({page: (pagination?.currentPage || 1) + 1, route}))
+  )
+
 
   return (
     <div className="space-y-6">
@@ -48,7 +48,7 @@ function RenderExercises({ route, handleEditClick, handleDelClick }) {
           </thead>
           <tbody>
             {/* Idioms Row */}
-            {routedExercises.map((item, i) => (
+            {filteredExercises.map((item, i) => (
               <tr key={item.id}>
                 <td className="border border-gray-700 px-4 py-2 text-sm text-white">
                   {i + 1}
@@ -73,6 +73,22 @@ function RenderExercises({ route, handleEditClick, handleDelClick }) {
             ))}
           </tbody>
         </table>
+      </div>
+      
+      {/* Infinite Scroll Trigger Zone */}
+      <div ref={lastElementRef} className="h-16 w-full flex justify-center items-center">
+        {isInitialLoading ? (
+          <div className="flex items-center space-x-3 text-gray-400 bg-gray-800/50 px-4 py-2 rounded-full border border-gray-700">
+            <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+            <span className="text-xs font-medium uppercase tracking-widest">Syncing Records...</span>
+          </div>
+        ) : !pagination?.hasMore && filteredExercises.length > 0 ? (
+          <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-gray-700 to-transparent relative">
+            <span className="absolute left-1/2 -translate-x-1/2 -top-3 bg-black px-4 text-gray-500 text-xs italic">
+              End of History
+            </span>
+          </div>
+        ) : null}
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import { SLICE_NAMES } from "@/store/constants/sliceConstants";
 // Import all your slice reducers
 import authReducer from "@/store/slices/authSlice";
 import globalReducer from "@/store/slices/globalSlice";
+import uiReducer from "@/store/slices/uiSlice";
 
 // Typing Reducers
 import typingReducer from "@/store/slices/typingSlices/typingSlice";
@@ -24,17 +25,19 @@ import taskReducer from "@/store/slices/taskSlice";
 import notesReducer from "@/store/slices/notesSlice";
 
 const rootReducer = combineReducers({
-   [SLICE_NAMES.AUTH]: authReducer,
-   [SLICE_NAMES.GLOBAL]: globalReducer,
-   [SLICE_NAMES.WORDS]: wordReducer,
-   [SLICE_NAMES.WORD_MEANINGS]: wordMeaningReducer,
+  [SLICE_NAMES.AUTH]: authReducer,
+  [SLICE_NAMES.GLOBAL]: globalReducer,
+  [SLICE_NAMES.UI]: uiReducer,
 
-   // Typing Reducers
-   [SLICE_NAMES.TYPING]: typingReducer,
-   [SLICE_NAMES.TYPING_FORM]: typingFormReducer,
+  [SLICE_NAMES.WORDS]: wordReducer,
+  [SLICE_NAMES.WORD_MEANINGS]: wordMeaningReducer,
 
-   [SLICE_NAMES.SKILL]: skillReducer,
-   [SLICE_NAMES.TASKS]: taskReducer,
-   [SLICE_NAMES.NOTES]: notesReducer,
+  // Typing Reducers
+  [SLICE_NAMES.TYPING]: typingReducer,
+  [SLICE_NAMES.TYPING_FORM]: typingFormReducer,
+
+  [SLICE_NAMES.SKILL]: skillReducer,
+  [SLICE_NAMES.TASKS]: taskReducer,
+  [SLICE_NAMES.NOTES]: notesReducer,
 });
-export default rootReducer
+export default rootReducer;

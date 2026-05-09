@@ -12,12 +12,12 @@ export async function GET() {
 
     // 3. Return the user data
     // If safeUser is null, your Redux 'checkAuth' thunk will handle the logout flow
-    return NextResponse.json({ data: safeUser });
+    return NextResponse.json({ data: safeUser, message: "Authenticated!" });
   } catch (error) {
     console.error("Session Check Error:", error);
     return NextResponse.json(
       { message: "Internal Server Error", user: null },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

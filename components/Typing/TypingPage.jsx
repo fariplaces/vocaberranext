@@ -9,9 +9,11 @@ import DeleteTypingPopup from "@/components/Typing/DeleteTypingPopup";
 import { fetchDurations, fetchLessons, fetchTypings } from "@/store/actions/typingActions";
 import { openManagePopup } from "@/store/slices/typingSlices/typingFormSlice";
 import { resetTypingState, setFilterMode } from "@/store/slices/typingSlices/typingSlice";
+import { FORM_DOMAINS } from "@/store/constants/typingConstants";
 
 const TypingPage = ({ route }) => {
   const dispatch = useDispatch();
+  const domain = FORM_DOMAINS.TYPINGS;
 
   useEffect(() => {
     dispatch(fetchLessons());
@@ -26,8 +28,8 @@ const TypingPage = ({ route }) => {
 
   const handleAddClick = () => {
     dispatch(openManagePopup({
-      route,
-      defaultDurationId: "ed238f81-d08b-4315-912b-a7df01aa7f46"
+      domain,
+      defaults :route === "course" ?{durationId: "ed238f81-d08b-4315-912b-a7df01aa7f46"} : "", 
     }));
   };
 
@@ -39,8 +41,8 @@ const TypingPage = ({ route }) => {
         Icon={Plus}
         handleMethod={handleAddClick}
       />
-      <RenderTyping route={route} />
-      <ManageTypingPopup />
+      <RenderTyping route={route} domain={domain} />
+      <ManageTypingPopup domain={domain} />
       <DeleteTypingPopup />
     </>
   );

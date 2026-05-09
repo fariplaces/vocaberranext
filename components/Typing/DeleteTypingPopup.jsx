@@ -3,15 +3,15 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DeletePopup from "@/components/DeletePopup"; // Your UI component
 import { deleteTyping } from "@/store/actions/typingActions";
-import { selectDeletePopup, selectIsDeleteOpen, selectDeleteItem } from "@/store/selectors/typingFormSelectors";
+import { selectDeletePopupMeta } from "@/store/selectors/typingFormSelectors";
 import { closeDeletePopup } from "@/store/slices/typingSlices/typingFormSlice";
 
 const DeleteTypingPopup = () => {
   const dispatch = useDispatch();
 
   // Use the selectors we built earlier
-  const isOpen = useSelector(selectIsDeleteOpen);
-  const item = useSelector(selectDeleteItem);
+// You pass the type as a prop to the modal or detect it from route
+const { isOpen, item } = useSelector((state) => selectDeletePopupMeta(state, "exercises"));
 
   // You might want to add a loading state in your typingSlice to track deletion progress
   const isDeleting = useSelector((state) => state.typing.loading);

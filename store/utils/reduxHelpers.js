@@ -33,7 +33,7 @@ export const handleResourceFulfilled = (state, action) => {
 
   // Optional: Save the message globally
   if (payloadData?.message) {
-    state.lastServerMessage = action.payload.message;
+    state.lastServerMessage = payloadData?.message;
   }
 
   if (!resourceMeta) {
@@ -53,7 +53,7 @@ export const handleResourceFulfilled = (state, action) => {
 
     // Filter to prevent duplicate IDs if the API sends a cached item
     const newData = data.filter(
-      (newItem) => !existingData.find((oldItem) => oldItem.id === newItem.id)
+      (newItem) => !existingData.find((oldItem) => oldItem.id === newItem.id),
     );
 
     state[dataKey] = current_page === 1 ? data : [...existingData, ...newData];
@@ -70,6 +70,7 @@ export const handleResourceFulfilled = (state, action) => {
   switch (operation) {
     case "FETCH":
       state[dataKey] = resourceData;
+      console.log("resource data: ", resourceData);
       if (dataKey === AUTH_KEYS.USER) {
         // 1. Check if resourceData exists (not null/undefined)
         // 2. If it's an array, check if it has at least one item
@@ -77,6 +78,7 @@ export const handleResourceFulfilled = (state, action) => {
         const hasContent = Array.isArray(resourceData)
           ? resourceData.length > 0
           : !!resourceData && Object.keys(resourceData).length > 0;
+        console.log("content render: ", hasContent);
 
         state[AUTH_KEYS.IS_AUTHENTICATED] = hasContent;
       }
@@ -91,7 +93,7 @@ export const handleResourceFulfilled = (state, action) => {
     case "UPDATE":
       if (resourceData) {
         const index = (state[dataKey] || []).findIndex(
-          (item) => item.id === resourceData.id
+          (item) => item.id === resourceData.id,
         );
         if (index !== -1) state[dataKey][index] = resourceData;
       }
@@ -122,4 +124,32 @@ export const handleResourceRejected = (state, action) => {
   if (paginationKey && state[paginationKey]) {
     state[paginationKey].isFetchingMore = false;
   }
+};
+
+//* ****************************************************
+// HEADING: - Global Message Collectors (Queue System)
+//* ****************************************************
+
+export const handleMessageFulfilled = (state, action) => {
+  const payloadData = action.payload?.payloadData;
+
+  if (payloadData?.message) {
+    // Push a unique notification object into the notifications array
+    state.notifications.push({
+      id: Date.now() + Math.random(), // Unique ID for tracking
+      message: payloadData.message,
+      type: "success",
+    });
+  }
+};
+
+export const handleMessageRejected = (state, action) => {
+  const errorMessage =
+    action.payload?.message || action.payload || "Operation failed";
+
+  state.notifications.push({
+    id: Date.now() + Math.random(),
+    message: errorMessage,
+    type: "error",
+  });
 };

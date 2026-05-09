@@ -1,85 +1,107 @@
 import { SLICE_NAMES } from "@/store/constants/sliceConstants";
-import { TYPING_FORM_KEYS } from "@/store/constants/typingConstants"; // Ensure this path is correct
+import { FORM_DOMAINS, UI_KEYS } from "@/store/constants/typingConstants"; // Ensure this path is correct
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-   // Add/Edit Popup
-   [TYPING_FORM_KEYS.MANAGE_POPUP]: {
-      [TYPING_FORM_KEYS.IS_OPEN]: false,
-      [TYPING_FORM_KEYS.EDIT_ID]: null,
-      [TYPING_FORM_KEYS.FORM_DATA]: {
-         exerciseId: "",
-         durationId: "",
-         accuracy: "",
-         gross: "",
-         net: "",
+  [FORM_DOMAINS.TYPINGS]: {
+    [UI_KEYS.MANAGE_POPUP]: {
+      [UI_KEYS.IS_OPEN]: false,
+      [UI_KEYS.EDIT_ID]: null,
+      [UI_KEYS.FORM_DATA]: {
+        exerciseId: "",
+        durationId: "",
+        accuracy: "",
+        gross: "",
+        net: "",
       },
-   },
-   // Delete Popup
-   [TYPING_FORM_KEYS.DELETE_POPUP]: {
-      [TYPING_FORM_KEYS.IS_OPEN]: false,
-      item: null, // Stores the whole object {id, title, etc.}
-   },
+    },
+    [UI_KEYS.DELETE_POPUP]: { [UI_KEYS.IS_OPEN]: false, item: null },
+  },
+  [FORM_DOMAINS.EXERCISES]: {
+    [UI_KEYS.MANAGE_POPUP]: {
+      [UI_KEYS.IS_OPEN]: false,
+      [UI_KEYS.EDIT_ID]: null,
+      [UI_KEYS.FORM_DATA]: {
+        title: "",
+        exerciseNo: "",
+        typeId: "",
+        lessonId: "",
+      },
+    },
+    [UI_KEYS.DELETE_POPUP]: { [UI_KEYS.IS_OPEN]: false, item: null },
+  },
 };
 
 const typingFormSlice = createSlice({
-   name: SLICE_NAMES.TYPING_FORM,
-   initialState,
-   reducers: {
-      // --- Manage Popup Actions ---
-      openManagePopup: (state, action) => {
-         const { editData, route, defaultDurationId } = action.payload;
-         const manage = state[TYPING_FORM_KEYS.MANAGE_POPUP];
+  name: SLICE_NAMES.TYPING_FORM,
+  initialState,
+  reducers: {
+    openManagePopup: (state, action) => {
+      const { domain, editData, defaults } = action.payload;
+      const target = state[domain][UI_KEYS.MANAGE_POPUP];
 
-         manage[TYPING_FORM_KEYS.IS_OPEN] = true;
-         manage[TYPING_FORM_KEYS.EDIT_ID] = editData?.id || null;
+      target[UI_KEYS.IS_OPEN] = true;
+      target[UI_KEYS.EDIT_ID] = editData?.id || null;
 
-         if (editData) {
-            // ✅ Explicit Mapping
-            manage[TYPING_FORM_KEYS.FORM_DATA] = {
-               exerciseId: editData.exerciseId || editData.exercise?.id || "",
-               durationId: editData.durationId || editData.duration?.id || "",
-               accuracy: editData.accuracy || "",
-               gross: editData.gross || "",
-               net: editData.net || "",
-            };
-         } else {
-            manage[TYPING_FORM_KEYS.FORM_DATA] = {
-               ...initialState[TYPING_FORM_KEYS.MANAGE_POPUP][TYPING_FORM_KEYS.FORM_DATA],
-               durationId: route === "course" ? defaultDurationId : "",
-            };
-         }
-      },
+      if (editData) {
+        // ENTERPRISE PATTERN: Map incoming data to form structure
+        // This handles cases where API object structure differs from Form structure
+        target[UI_KEYS.FORM_DATA] = Object.keys(
+          target[UI_KEYS.FORM_DATA],
+        ).reduce((acc, key) => {
+          acc[key] = editData[key] ?? editData.exercise?.[key] ?? "";
+          return acc;
+        }, {});
+      } else {
+        // RESET & APPLY DEFAULTS (e.g. your locked durationId)
+        target[UI_KEYS.FORM_DATA] = {
+          ...initialState[domain][UI_KEYS.MANAGE_POPUP][UI_KEYS.FORM_DATA],
+          ...defaults,
+        };
+      }
+    },
 
-      closeManagePopup: (state) => {
-         state[TYPING_FORM_KEYS.MANAGE_POPUP] = initialState[TYPING_FORM_KEYS.MANAGE_POPUP];
-      },
+    updateFormField: (state, action) => {
+      const { domain, name, value } = action.payload;
+      state[domain][UI_KEYS.MANAGE_POPUP][UI_KEYS.FORM_DATA][name] = value;
+    },
 
-      updateFormField: (state, action) => {
-         const { name, value } = action.payload;
-         // Access: managePopup -> formData -> [fieldName]
-         state[TYPING_FORM_KEYS.MANAGE_POPUP][TYPING_FORM_KEYS.FORM_DATA][name] = value;
-      },
+    closeManagePopup: (state, action) => {
+      const { domain } = action.payload;
+      state[domain] = initialState[domain];
+    },
+    // --- Delete Popup Actions ---
+    /**
+     * @param {Object} action.payload - { domain: 'exercises' | 'typings', item: {id, title...} }
+     */
+    openDeletePopup: (state, action) => {
+      const { domain, item } = action.payload;
 
-      // --- Delete Popup Actions ---
-      openDeletePopup: (state, action) => {
-         const del = state[TYPING_FORM_KEYS.DELETE_POPUP];
-         del[TYPING_FORM_KEYS.IS_OPEN] = true;
-         del.item = action.payload;
-      },
+      // Safety check to prevent crashing if domain is wrong
+      if (!state[domain]) return;
 
-      closeDeletePopup: (state) => {
-         state[TYPING_FORM_KEYS.DELETE_POPUP] = initialState[TYPING_FORM_KEYS.DELETE_POPUP];
-      },
-   },
+      const target = state[domain][UI_KEYS.DELETE_POPUP];
+      target[UI_KEYS.IS_OPEN] = true;
+      target.item = item; // Stores the whole object so the modal can show "Delete Lesson 1?"
+    },
+
+    closeDeletePopup: (state, action) => {
+      const { domain } = action.payload;
+      if (!state[domain]) return;
+
+      // Reset only the delete popup part of that domain
+      state[domain][UI_KEYS.DELETE_POPUP] =
+        initialState[domain][UI_KEYS.DELETE_POPUP];
+    },
+  },
 });
 
 export const {
-   openManagePopup,
-   closeManagePopup,
-   updateFormField,
-   openDeletePopup,
-   closeDeletePopup,
+  openManagePopup,
+  closeManagePopup,
+  updateFormField,
+  openDeletePopup,
+  closeDeletePopup,
 } = typingFormSlice.actions;
 
 export default typingFormSlice.reducer;

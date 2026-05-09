@@ -17,12 +17,15 @@ export async function PATCH(req, { params }) {
     // 2. Update the record
     const updatedTyping = await typingDbServices.updateTyping(id, body);
 
-    return NextResponse.json(updatedTyping, { status: 200 });
+    return NextResponse.json(
+      { data: updatedTyping, message: "Recored Updated Successfully!" },
+      { status: 200 },
+    );
   } catch (error) {
     console.error("Typing Update Error:", error);
     return NextResponse.json(
       { error: "Failed to update typing record" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

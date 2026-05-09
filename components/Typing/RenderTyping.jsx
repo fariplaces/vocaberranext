@@ -3,17 +3,18 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Edit2, Trash2 } from "lucide-react";
 import { fetchTypings } from "@/store/actions/typingActions";
-import { selectFetchingMoreTyping, selectFilteredTypings, selectTypingLoading, selectTypingPagination } from "@/store/selectors/typingSelectors";
+import { selectIsFetchingMoreTyping, selectFilteredTypings, selectTypingLoading, selectTypingPagination } from "@/store/selectors/typingSelectors";
 import { openManagePopup, openDeletePopup } from "@/store/slices/typingSlices/typingFormSlice";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
+import { FORM_DOMAINS } from "@/store/constants/typingConstants";
 
 
-function RenderTyping({ route }) {
+function RenderTyping({ route, domain }) {
   const dispatch = useDispatch();
 
   const filteredTypings = useSelector(selectFilteredTypings);
   const isInitialLoading = useSelector(selectTypingLoading);
-  const isFetchingMore = useSelector(selectFetchingMoreTyping);
+  const isFetchingMore = useSelector(selectIsFetchingMoreTyping);
   const pagination = useSelector(selectTypingPagination);
 
 
@@ -60,7 +61,7 @@ function RenderTyping({ route }) {
                   <div className="flex justify-center space-x-4">
                     {/* ✅ Dispatches directly to Form Slice now */}
                     <button
-                      onClick={() => dispatch(openManagePopup({ editData: item, route }))}
+                      onClick={() => dispatch(openManagePopup({  domain, editData: item }))}
                       className="p-1 text-gray-400 hover:text-blue-500 transition-colors"
                       title="Edit Entry"
                     >
