@@ -167,7 +167,6 @@ const handleSave = async () =>{}
                   Type
                 </label>
                 <select
-                  disabled
                   name="typeId"
                   value={formData.typeId}
                   onChange={handleChange}
