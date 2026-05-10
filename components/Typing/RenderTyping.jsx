@@ -6,7 +6,6 @@ import { fetchTypings } from "@/store/actions/typingActions";
 import { selectIsFetchingMoreTyping, selectFilteredTypings, selectTypingLoading, selectTypingPagination } from "@/store/selectors/typingSelectors";
 import { openManagePopup, openDeletePopup } from "@/store/slices/typingSlices/typingFormSlice";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
-import { FORM_DOMAINS } from "@/store/constants/typingConstants";
 
 
 function RenderTyping({ route, domain }) {
@@ -68,7 +67,7 @@ function RenderTyping({ route, domain }) {
                       <Edit2 size={16} />
                     </button>
                     <button
-                      onClick={() => dispatch(openDeletePopup(item))}
+                      onClick={() => dispatch(openDeletePopup({domain, item}))}
                       className="p-1 text-gray-400 hover:text-red-500 transition-colors"
                       title="Delete Entry"
                     >

@@ -13,6 +13,8 @@ import {
   fetchLessons,
 } from "@/store/actions/typingActions";
 import { setFilterMode } from "@/store/slices/typingSlices/typingSlice";
+import { FORM_DOMAINS } from "@/store/constants/typingConstants";
+import { openManagePopup } from "@/store/slices/typingSlices/typingFormSlice";
 
 // const [selectedItem, setSelectedItem] = useState(null);
 // const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -25,10 +27,6 @@ import { setFilterMode } from "@/store/slices/typingSlices/typingSlice";
 //   setIsPopupOpen(true);
 // };
 
-// const handleAddClick = () => {
-//   setSelectedItem(null);
-//   setIsPopupOpen(true);
-// };
 
 // const handleDelClick = (item) => {
 //   setItemToDelete(item);
@@ -43,9 +41,15 @@ import { setFilterMode } from "@/store/slices/typingSlices/typingSlice";
 //   }
 // };
 const ExercisePage = ({ route }) => {
-  console.log(route);
-
   const dispatch = useDispatch();
+  const domain = FORM_DOMAINS.EXERCISES;
+
+  const handleAddClick = () => {
+  dispatch(openManagePopup({
+    domain
+  }))
+};
+
 
   useEffect(() => {
       dispatch(setFilterMode(route));
@@ -60,20 +64,15 @@ const ExercisePage = ({ route }) => {
         title={route === "exercises" ? "Manage Exercises" : "Manage Tests"}
         btnTitle={route === "exercises" ? "Add Exercise" : "Add Test"}
         Icon={Plus}
-        // handleMethod={handleAddClick}
+        handleMethod={handleAddClick}
       />
       <RenderExercises
         // handleEditClick={handleEditClick}
         // handleDelClick={handleDelClick}
         route={route}
       />
-      {/* <ManageExercisePopup
-        // route={route}
-        // isOpen={isPopupOpen}
-        // setIsOpen={setIsPopupOpen}
-        // editData={selectedItem}
-        // setEditData={setSelectedItem}
-      />
+      <ManageExercisePopup domain={domain} />
+      {/* 
       <DeleteExercisePopup
         // isDelPopupOpen={isDelPopupOpen}
         // setIsDelPopupOpen={setIsDelPopupOpen}

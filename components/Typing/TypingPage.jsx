@@ -21,8 +21,8 @@ const TypingPage = ({ route }) => {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(resetTypingState());
     dispatch(setFilterMode(route));
+    dispatch(resetTypingState());
     dispatch(fetchTypings({ page: 1, route }));
   }, [route, dispatch]);
 
@@ -43,7 +43,7 @@ const TypingPage = ({ route }) => {
       />
       <RenderTyping route={route} domain={domain} />
       <ManageTypingPopup domain={domain} />
-      <DeleteTypingPopup />
+      <DeleteTypingPopup domain={domain} />
     </>
   );
 };

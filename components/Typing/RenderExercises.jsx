@@ -1,7 +1,7 @@
 'use client'
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
 import { fetchExercises } from "@/store/actions/typingActions";
-import { selectExercisePagination, selectFetchingMoreExercise, selectFilteredExercises, selectTypingLoading } from "@/store/selectors/typingSelectors";
+import { selectExercisePagination, selectIsFetchingMoreExercise, selectFilteredExercises, selectTypingLoading } from "@/store/selectors/typingSelectors";
 import {
   Edit2,
   Trash2,
@@ -14,7 +14,7 @@ function RenderExercises({route}) {
 
   const filteredExercises = useSelector(selectFilteredExercises);
   const isInitialLoading = useSelector(selectTypingLoading);
-  const isFetchingMore = useSelector(selectFetchingMoreExercise)
+  const isFetchingMore = useSelector(selectIsFetchingMoreExercise);
   const pagination = useSelector(selectExercisePagination)
 
 

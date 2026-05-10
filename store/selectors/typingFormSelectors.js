@@ -6,6 +6,7 @@ import {
   selectAllLessons,
   selectAllDurations,
   selectAllExerciseTypes,
+  selectAllExercises,
   selectFilterMode,
 } from "./typingSelectors";
 import { UI_KEYS } from "../constants/typingConstants";
@@ -64,8 +65,9 @@ export const selectExerciseFormMeta = createSelector(
     selectAllLessons,
     selectAllDurations,
     selectAllExerciseTypes,
+    selectAllExercises,
   ],
-  (manage, route, allLessons, durations, allTypes) => {
+  (manage, route, allLessons, durations, allTypes, exercises) => {
     const { isOpen, formData, editId } = manage;
     const isEditMode = !!editId;
 
@@ -85,6 +87,7 @@ export const selectExerciseFormMeta = createSelector(
       lessons: filteredLessons,
       exerciseTypes: allTypes,
       durations,
+      exercises,
       title: isEditMode ? "Edit Exercise" : "Create New Exercise",
     };
   },

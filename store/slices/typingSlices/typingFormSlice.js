@@ -15,7 +15,10 @@ const initialState = {
         net: "",
       },
     },
-    [UI_KEYS.DELETE_POPUP]: { [UI_KEYS.IS_OPEN]: false, item: null },
+    [UI_KEYS.DELETE_POPUP]: {
+      [UI_KEYS.IS_OPEN]: false,
+      item: null,
+    },
   },
   [FORM_DOMAINS.EXERCISES]: {
     [UI_KEYS.MANAGE_POPUP]: {
