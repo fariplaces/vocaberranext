@@ -44,7 +44,9 @@ export const handleResourceFulfilled = (state, action) => {
   const { dataKey, paginationKey, operation } = resourceMeta;
 
   // 3. Extract the actual resource (User, Array, etc.)
-  const resourceData = payloadData?.data;
+  // const resourceData = payloadData?.data;
+  const resourceData =
+    (payloadData.data !== undefined ? payloadData.data : payloadData) || null;
 
   // 4. Handle Paginated Fetch
   if (paginationKey && payloadData?.current_page !== undefined) {
@@ -53,7 +55,7 @@ export const handleResourceFulfilled = (state, action) => {
 
     // Filter to prevent duplicate IDs if the API sends a cached item
     const newData = data.filter(
-      (newItem) => !existingData.find((oldItem) => oldItem.id === newItem.id),
+      (newItem) => !existingData.find((oldItem) => oldItem.id === newItem.id)
     );
 
     state[dataKey] = current_page === 1 ? data : [...existingData, ...newData];
@@ -93,7 +95,7 @@ export const handleResourceFulfilled = (state, action) => {
     case "UPDATE":
       if (resourceData) {
         const index = (state[dataKey] || []).findIndex(
-          (item) => item.id === resourceData.id,
+          (item) => item.id === resourceData.id
         );
         if (index !== -1) state[dataKey][index] = resourceData;
       }

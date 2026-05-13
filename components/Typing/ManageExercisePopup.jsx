@@ -1,5 +1,10 @@
 "use client";
-import { createExercise, createTyping, updateExercise, updateTyping } from "@/store/actions/typingActions";
+import {
+  createExercise,
+  createTyping,
+  updateExercise,
+  updateTyping,
+} from "@/store/actions/typingActions";
 import { selectUser } from "@/store/selectors/authSelectors";
 import { selectExerciseFormMeta } from "@/store/selectors/typingFormSelectors";
 import { updateFormField } from "@/store/slices/typingSlices/typingFormSlice";
@@ -23,65 +28,74 @@ import { useDispatch, useSelector } from "react-redux";
 //   return state;
 // };
 
-  // const user = useSelector(selectUser);
-  // const { lessons, exerciseTypes, exercises } = useSelector((state) => state.typing);
-  // const [formData, setFormData] = useState(() => getInitialState());
+// const user = useSelector(selectUser);
+// const { lessons, exerciseTypes, exercises } = useSelector((state) => state.typing);
+// const [formData, setFormData] = useState(() => getInitialState());
 
-  // const routedLessons = lessons.filter((item) =>
-  //   route === "exercises"
-  //     ? item.lesson !== "TEST"
-  //     : route === "tests"
-  //       ? item.lesson === "TEST"
-  //       : true
-  // );
+// const routedLessons = lessons.filter((item) =>
+//   route === "exercises"
+//     ? item.lesson !== "TEST"
+//     : route === "tests"
+//       ? item.lesson === "TEST"
+//       : true
+// );
 
-  // const resetPopup = () => {
-  //   setFormData(getInitialState());
-  //   if (setEditData) setEditData(null);
-  //   setIsOpen(false);
-  // };
+// const resetPopup = () => {
+//   setFormData(getInitialState());
+//   if (setEditData) setEditData(null);
+//   setIsOpen(false);
+// };
 
-  // useEffect(() => {
-  //   if (isOpen) {
-  //     setFormData(editData ? { ...editData } : getInitialState());
-  //   }
-  // }, [isOpen, route, editData, exerciseTypes]);
+// useEffect(() => {
+//   if (isOpen) {
+//     setFormData(editData ? { ...editData } : getInitialState());
+//   }
+// }, [isOpen, route, editData, exerciseTypes]);
 
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
+// const handleChange = (e) => {
+//   const { name, value } = e.target;
 
-  //   setFormData((prev) => {
-  //     const newState = { ...prev, [name]: value };
+//   setFormData((prev) => {
+//     const newState = { ...prev, [name]: value };
 
-  //     // Check duplicate exerciseNo
-  //     if (name === "exerciseNo") {
-  //       const exists = exercises.some(
-  //         (item) => item.exerciseNo === value
-  //       );
+//     // Check duplicate exerciseNo
+//     if (name === "exerciseNo") {
+//       const exists = exercises.some(
+//         (item) => item.exerciseNo === value
+//       );
 
-  //       if (exists) {
-  //         console.warn("Exercise Already Exists!");
-  //       }
-  //     }
+//       if (exists) {
+//         console.warn("Exercise Already Exists!");
+//       }
+//     }
 
-  //     return newState;
-  //   });
-  // };
+//     return newState;
+//   });
+// };
 
-const ManageExercisePopup = ({domain}) => {
+const ManageExercisePopup = ({ domain }) => {
   const dispatch = useDispatch();
 
+  const {
+    isOpen,
+    editId,
+    formData,
+    isEditMode,
+    route,
+    exercises,
+    lessons,
+    exerciseTypes,
+    title,
+  } = useSelector(selectExerciseFormMeta);
 
-const {isOpen, editId, formData, isEditMode, route, exercises, lessons, exerciseTypes, title } = useSelector(selectExerciseFormMeta)
+  if (!isOpen) return null;
 
-if (!isOpen) return null;
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    dispatch(updateFormField({ domain, name, value }));
+  };
 
-const handleChange = (e) =>{
-  const { name, value } = e.target;
-  dispatch(updateFormField({domain, name, value}))
-}
-
-const handleSave = async () =>{}
+  const handleSave = async () => {};
 
   // const handleSave = async () => {
   //   const isFormIncomplete = Object.values(formData).some(
@@ -125,16 +139,10 @@ const handleSave = async () =>{}
       {/* Popup / Modal */}
       {isOpen && (
         <>
-          <div
-            className="fixed flex items-center justify-center inset-0 bg-white/10 backdrop-blur-sm transition-all duration-300"
-          >
+          <div className="fixed flex items-center justify-center inset-0 bg-white/10 backdrop-blur-sm transition-all duration-300">
             {/* <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"> */}
-            <div
-              className="bg-black text-white p-6 rounded-xl shadow-lg w-96 border border-gray-700"
-            >
-              <h2 className="text-xl font-semibold mb-4">
-               {title}
-              </h2>
+            <div className="bg-black text-white p-6 rounded-xl shadow-lg w-96 border border-gray-700">
+              <h2 className="text-xl font-semibold mb-4">{title}</h2>
 
               {/* Type Input */}
               <div className="mb-4">
@@ -161,26 +169,18 @@ const handleSave = async () =>{}
               </div>
               {/* Type Input */}
               <div className="mb-4">
-                <label
-                  className="block text-gray-600 text-sm mb-1"
-                >
-                  Type
-                </label>
+                <label className="blockj text-sm mb-1">Type</label>
                 <select
                   name="typeId"
                   value={formData.typeId}
                   onChange={handleChange}
-                  className="w-full text-gray-600 px-3 py-2 bg-transparent border border-gray-600 rounded-md focus:outline-none focus:border-blue-500"
+                  className="w-full px-3 py-2 bg-transparent border border-gray-600 rounded-md focus:outline-none focus:border-blue-500"
                 >
                   <option className="bg-black" value="">
                     Select Exercise Type
                   </option>
                   {exerciseTypes.map((type) => (
-                    <option
-                      className="bg-black"
-                      key={type.id}
-                      value={type.id}
-                    >
+                    <option className="bg-black" key={type.id} value={type.id}>
                       {type.type}
                     </option>
                   ))}
@@ -208,14 +208,14 @@ const handleSave = async () =>{}
                   value={formData.exerciseNo}
                   onChange={handleChange}
                   className={`w-full px-3 py-2 bg-transparent border rounded-md focus:outline-none 
-      ${exercises.some(
-                    (item) =>
-                      item.exerciseNo === formData.exerciseNo &&
-                      item.id !== formData.id // ignore self in edit
-                  )
-                      ? "border-red-500"
-                      : "border-gray-600 focus:border-blue-500"
-                    }`}
+      ${
+        exercises.some(
+          (item) =>
+            item.exerciseNo === formData.exerciseNo && item.id !== formData.id // ignore self in edit
+        )
+          ? "border-red-500"
+          : "border-gray-600 focus:border-blue-500"
+      }`}
                   placeholder="Enter Exercise No"
                 />
 
@@ -224,10 +224,10 @@ const handleSave = async () =>{}
                     item.exerciseNo === formData.exerciseNo &&
                     item.id !== formData.id
                 ) && (
-                    <p className="text-red-500 text-xs mt-1">
-                      Exercise number already exists
-                    </p>
-                  )}
+                  <p className="text-red-500 text-xs mt-1">
+                    Exercise number already exists
+                  </p>
+                )}
               </div>
               {/* Buttons */}
               <div className="flex justify-end space-x-2">

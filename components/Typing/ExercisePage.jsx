@@ -27,7 +27,6 @@ import { openManagePopup } from "@/store/slices/typingSlices/typingFormSlice";
 //   setIsPopupOpen(true);
 // };
 
-
 // const handleDelClick = (item) => {
 //   setItemToDelete(item);
 //   setIsDelPopupOpen(true);
@@ -45,17 +44,18 @@ const ExercisePage = ({ route }) => {
   const domain = FORM_DOMAINS.EXERCISES;
 
   const handleAddClick = () => {
-  dispatch(openManagePopup({
-    domain
-  }))
-};
-
+    dispatch(
+      openManagePopup({
+        domain,
+      })
+    );
+  };
 
   useEffect(() => {
-      dispatch(setFilterMode(route));
+    dispatch(setFilterMode(route));
     dispatch(fetchLessons());
     dispatch(fetchExerciseTypes());
-    dispatch(fetchExercises({page:1, route}));
+    dispatch(fetchExercises({ page: 1, route }));
   }, []);
 
   return (
@@ -66,11 +66,7 @@ const ExercisePage = ({ route }) => {
         Icon={Plus}
         handleMethod={handleAddClick}
       />
-      <RenderExercises
-        // handleEditClick={handleEditClick}
-        // handleDelClick={handleDelClick}
-        route={route}
-      />
+      <RenderExercises route={route} />
       <ManageExercisePopup domain={domain} />
       {/* 
       <DeleteExercisePopup

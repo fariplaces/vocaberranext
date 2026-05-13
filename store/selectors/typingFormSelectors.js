@@ -1,7 +1,6 @@
 // store/selectors/typingFormSelectors.js
 import { createSelector } from "@reduxjs/toolkit";
 import { SLICE_NAMES } from "../constants/sliceConstants";
-// import { TYPING_FORM_KEYS } from "../constants/typingConstants";
 import {
   selectAllLessons,
   selectAllDurations,
@@ -9,7 +8,11 @@ import {
   selectAllExercises,
   selectFilterMode,
 } from "./typingSelectors";
-import { UI_KEYS } from "../constants/typingConstants";
+import {
+  FORM_DOMAINS,
+  TYPING_KEYS,
+  UI_KEYS,
+} from "../constants/typingConstants";
 
 // 1. Base Selector for the whole slice
 export const selectTypingFormState = (state) => state[SLICE_NAMES.TYPING_FORM];
@@ -54,13 +57,13 @@ export const selectTypingResultMeta = createSelector(
       durations: allDurations,
       title: isEditMode ? "Update Typing Result" : "Log New Typing Practice",
     };
-  },
+  }
 );
 
 // Meta Selector for EXERCISES (Admin/Management)
 export const selectExerciseFormMeta = createSelector(
   [
-    (state) => selectManagePopup(state, "exercises"),
+    (state) => selectManagePopup(state, FORM_DOMAINS.EXERCISES),
     selectFilterMode,
     selectAllLessons,
     selectAllDurations,
@@ -78,6 +81,16 @@ export const selectExerciseFormMeta = createSelector(
       return true;
     });
 
+    if (route === "test") {
+      // For tests, we only want exercise types that are relevant to tests
+      allTypes = allTypes.filter((type) => type.type === "Test");
+    }
+
+    if (route === "course") {
+      // For course, we only want exercise types that are relevant to course
+      allTypes = allTypes.filter((type) => type.type !== "Test");
+    }
+
     return {
       isOpen,
       editId,
@@ -90,7 +103,7 @@ export const selectExerciseFormMeta = createSelector(
       exercises,
       title: isEditMode ? "Edit Exercise" : "Create New Exercise",
     };
-  },
+  }
 );
 
 // 4. Delete Popup Meta
