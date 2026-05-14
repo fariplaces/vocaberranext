@@ -2,8 +2,7 @@ import ExercisePage from "@/components/Typing/ExercisePage";
 import React from "react";
 
 const Exercise = async () => {
-  const route = "course";
-  return <ExercisePage route={route} />;
+  return <ExercisePage route={"course"} />;
 };
 
 export default Exercise;

@@ -51,6 +51,7 @@ export const selectAllExerciseTypes = createSelector(
 
 // Primitives (strings/bools/null) are safe for direct selection
 export const selectFilterMode = (state) => selectTypingState(state).filterMode;
+console.log("Filter Mode:", selectFilterMode);
 export const selectTypingLoading = (state) => selectTypingState(state).loading;
 export const selectTypingError = (state) => selectTypingState(state).error;
 
@@ -88,8 +89,7 @@ export const selectFilteredTypings = createSelector(
   (typings, mode) => {
     if (!mode) return typings;
     return typings.filter((item) => {
-      const lessonName = item.exercise?.lesson?.lesson || "";
-      const isTest = lessonName.toUpperCase() === "TEST";
+      const isTest = item.exercise?.type?.type?.toUpperCase() === "TEST";
       return mode === "course" ? !isTest : isTest;
     });
   },

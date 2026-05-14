@@ -21,8 +21,8 @@ const TypingPage = ({ route }) => {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(setFilterMode(route));
     dispatch(resetTypingState());
+    dispatch(setFilterMode(route));
     dispatch(fetchTypings({ page: 1, route }));
   }, [route, dispatch]);
 

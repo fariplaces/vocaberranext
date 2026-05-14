@@ -12,7 +12,7 @@ import {
   fetchExerciseTypes,
   fetchLessons,
 } from "@/store/actions/typingActions";
-import { setFilterMode } from "@/store/slices/typingSlices/typingSlice";
+import { resetTypingState, setFilterMode } from "@/store/slices/typingSlices/typingSlice";
 import { FORM_DOMAINS } from "@/store/constants/typingConstants";
 import { openManagePopup } from "@/store/slices/typingSlices/typingFormSlice";
 
@@ -52,6 +52,7 @@ const ExercisePage = ({ route }) => {
   };
 
   useEffect(() => {
+    dispatch(resetTypingState());
     dispatch(setFilterMode(route));
     dispatch(fetchLessons());
     dispatch(fetchExerciseTypes());

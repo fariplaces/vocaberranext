@@ -121,7 +121,7 @@ export const typingDbServices = {
         take: limit,
         include: {
           exercise: {
-            select: { title: true, exerciseNo: true, lesson: true },
+            select: { title: true, exerciseNo: true, type: true, lesson: true },
           },
           duration: {
             select: { duration: true },

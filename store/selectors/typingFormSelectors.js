@@ -47,17 +47,23 @@ export const selectTypingResultMeta = createSelector(
     const { isOpen, formData, editId } = manage;
     const isEditMode = !!editId;
 
+    // Logic: Filter lessons based on current route (Course vs Test)
+    const filteredLessons = lessons.filter((item) => {
+      const isTest = item.lesson?.toUpperCase() === "TEST";
+      return route === "test" ? isTest : !isTest;
+    });
+
     return {
       isOpen,
       editId,
       formData,
       route,
-      lessons,
+      lessons: filteredLessons,
       isEditMode,
       durations: allDurations,
       title: isEditMode ? "Update Typing Result" : "Log New Typing Practice",
     };
-  }
+  },
 );
 
 // Meta Selector for EXERCISES (Admin/Management)
@@ -103,7 +109,7 @@ export const selectExerciseFormMeta = createSelector(
       exercises,
       title: isEditMode ? "Edit Exercise" : "Create New Exercise",
     };
-  }
+  },
 );
 
 // 4. Delete Popup Meta

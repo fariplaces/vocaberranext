@@ -33,15 +33,15 @@ const ManageTypingPopup = ({domain}) => {
   };
 
   const handleSave = async () => {
-    if (!formData.exerciseId || !formData.durationId) return alert("Required fields missing");
+    if (!formData.exerciseId || !formData.durationId) return toast.error("Required fields missing");
 
     if (Number(formData.net) > Number(formData.gross)) {
-      return alert("Net speed cannot exceed Gross speed.");
+      return toast.error("Net speed cannot exceed Gross speed.");
     }
 
     const payload = {
       ...formData,
-      formType: 'typings',
+      formType: domain,
       userId: user.id,
       gross: Number(formData.gross) || 0,
       net: Number(formData.net) || 0,
@@ -53,7 +53,7 @@ const ManageTypingPopup = ({domain}) => {
       await dispatch(action).unwrap();
       dispatch(closeManagePopup({domain}));
     } catch (error) {
-      console.error("Submission failed:", error);
+      toast.error("Submission failed:", error);
     }
   };
 
