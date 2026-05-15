@@ -1,9 +1,9 @@
-'use client'
+"use client";
 import React, { useState } from "react";
 import { usePathname } from "next/navigation";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import Link from "next/link";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { toggleSidebar } from "@/store/slices/globalSlice";
 import StaticNavigations from "./StaticMenu";
 
@@ -29,14 +29,13 @@ const StaticNavigation = ({ sidebarOpen }) => {
     }
   };
 
-
   return (
     <nav className="flex-1 overflow-y-auto overflow-x-hidden py-4">
       {StaticNavigations.map((item) => {
         const isDirectActive = item.link && pathName === item.link;
-        const isSubActive = item.subItems?.some(sub => pathName === sub.href);
+        const isSubActive = item.subItems?.some((sub) => pathName === sub.href);
         const isParentActive = isDirectActive || isSubActive;
-        const ParentWrapper = item.link ? Link : 'div';
+        const ParentWrapper = item.link ? Link : "div";
 
         return (
           <div key={item.name}>
@@ -52,13 +51,21 @@ const StaticNavigation = ({ sidebarOpen }) => {
               }}
             >
               <div className="flex items-center space-x-3">
-                <item.icon className={`w-5 h-5 ${isParentActive ? "text-blue-400" : ""}`} />
-                {sidebarOpen && <span className="text-sm font-medium">{item.name}</span>}
+                <item.icon
+                  className={`w-5 h-5 ${isParentActive ? "text-blue-400" : ""}`}
+                />
+                {sidebarOpen && (
+                  <span className="text-sm font-medium">{item.name}</span>
+                )}
               </div>
 
               {sidebarOpen && item.hasSubmenu && (
                 <div className="hover:bg-gray-600 p-1 rounded-md transition-colors">
-                  {expandedMenus[item.name] ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
+                  {expandedMenus[item.name] ? (
+                    <ChevronDown className="w-4 h-4" />
+                  ) : (
+                    <ChevronRight className="w-4 h-4" />
+                  )}
                 </div>
               )}
             </ParentWrapper>
@@ -73,10 +80,11 @@ const StaticNavigation = ({ sidebarOpen }) => {
                       href={subItem.href}
                       key={i}
                       className={`flex py-1.5 px-4 text-sm transition-all
-                  ${isChildActive
-                          ? "text-white font-bold translate-x-1"
-                          : "text-gray-400 hover:text-gray-100"
-                        }
+                  ${
+                    isChildActive
+                      ? "text-white font-bold translate-x-1"
+                      : "text-gray-400 hover:text-gray-100"
+                  }
                 `}
                     >
                       {subItem.item}

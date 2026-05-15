@@ -4,9 +4,9 @@ import TopBar from "@/components/layout/TopBar";
 import RightSideBar from "@/components/layout/skills/RightSideBar";
 import { useSelector } from "react-redux";
 import Footer from "../Footer";
-import TypingSideBar from "../typing/Navigation/TypingSideBar";
+import TypingSideBar from "./Navigation/TypingSideBar";
 
-const AdminLayout = ({ children }) => {
+const TypingLayout = ({ children }) => {
   const [notificationOpen, setNotificationOpen] = useState(false);
   const { sidebarOpen } = useSelector((state) => state.global);
 
@@ -40,4 +40,4 @@ const AdminLayout = ({ children }) => {
   );
 };
 
-export default AdminLayout;
+export default TypingLayout;

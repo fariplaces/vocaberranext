@@ -1,8 +1,8 @@
 import React from "react";
-import RootLayout from "@/components/layout/RootLayout";
+import AppLayout from "@/components/layout/root/RootLayout";
 
 const PageLayout = ({ children }) => {
-  return <RootLayout>{children}</RootLayout>;
+  return <AppLayout>{children}</AppLayout>;
 };
 
 export default PageLayout;

@@ -1,8 +1,8 @@
 import React from "react";
-import AdminLayout from "@/components/layout/admin/AdminLayout";
+import TypingLayout from "@/components/layout/typing/TypingLayout";
 
 const layout = ({ children }) => {
-  return <AdminLayout>{children}</AdminLayout>;
+  return <TypingLayout>{children}</TypingLayout>;
 };
 
 export default layout;

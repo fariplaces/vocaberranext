@@ -1,4 +1,4 @@
-import TypingPage from "@/components/Typing/TypingPage";
+import TypingPage from "@/features/typing/exercise/TypingPage";
 import React from "react";
 
 const Typing = () => {

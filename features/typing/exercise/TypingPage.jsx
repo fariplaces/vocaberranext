@@ -3,13 +3,20 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import ContentTitle from "@/components/ContentTitle";
 import { Plus } from "lucide-react";
-import RenderTyping from "@/components/Typing/RenderTyping";
-import ManageTypingPopup from "@/components/Typing/ManageTypingPopup";
-import DeleteTypingPopup from "@/components/Typing/DeleteTypingPopup";
-import { fetchDurations, fetchLessons, fetchTypings } from "@/store/actions/typingActions";
+import {
+  fetchDurations,
+  fetchLessons,
+  fetchTypings,
+} from "@/store/actions/typingActions";
 import { openManagePopup } from "@/store/slices/typingSlices/typingFormSlice";
-import { resetTypingState, setFilterMode } from "@/store/slices/typingSlices/typingSlice";
+import {
+  resetTypingState,
+  setFilterMode,
+} from "@/store/slices/typingSlices/typingSlice";
 import { FORM_DOMAINS } from "@/store/constants/typingConstants";
+import RenderTyping from "./RenderTyping";
+import ManageTypingPopup from "./ManageTypingPopup";
+import DeleteTypingPopup from "./DeleteTypingPopup";
 
 const TypingPage = ({ route }) => {
   const dispatch = useDispatch();
@@ -27,10 +34,15 @@ const TypingPage = ({ route }) => {
   }, [route, dispatch]);
 
   const handleAddClick = () => {
-    dispatch(openManagePopup({
-      domain,
-      defaults :route === "course" ?{durationId: "ed238f81-d08b-4315-912b-a7df01aa7f46"} : "", 
-    }));
+    dispatch(
+      openManagePopup({
+        domain,
+        defaults:
+          route === "course"
+            ? { durationId: "ed238f81-d08b-4315-912b-a7df01aa7f46" }
+            : "",
+      }),
+    );
   };
 
   return (

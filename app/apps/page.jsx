@@ -1,4 +1,6 @@
 "use client";
+
+import ContentTitle from "@/components/ContentTitle";
 import { Keyboard, BookOpen, LayoutDashboard, GitBranch, MessageSquare, FileText } from "lucide-react";
 import Link from "next/link";
 
@@ -55,10 +57,15 @@ const HomePage = () => {
   ];
 
   return (
-    <>
-      <div className="container mx-auto px-12 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900">
+      <ContentTitle
+        title="VocabErra"
+        btnTitle="Back"
+      />
+      
+      <div className="container mx-auto px-4 py-12">
         <div className="mb-8">
-          <h2 className="text-3xl font-bold text-slate-200 dark:text-white mb-2">
+          <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
             Welcome to VocabErra
           </h2>
           <p className="text-slate-600 dark:text-slate-300">
@@ -108,7 +115,7 @@ const HomePage = () => {
           })}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -1,38 +1,17 @@
 'use client'
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { usePathname } from "next/navigation";
-
-import {
-  ChevronDown,
-  ChevronRight,
-  ChartNoAxesColumn,
-} from "lucide-react";
+import { ChevronDown, ChevronRight } from "lucide-react";
 import Link from "next/link";
-import { FaLaravel, FaReact, FaWordpressSimple } from "react-icons/fa";
-import { PiFileHtml, PiGithubLogoBold, PiMicrosoftExcelLogoFill, PiTerminalBold, PiWindowsLogo } from "react-icons/pi";
-import { MdCss } from "react-icons/md";
-import { RiPhpFill, RiTailwindCssFill } from "react-icons/ri";
-import { IoLogoJavascript } from "react-icons/io";
-import { TbFileTypePhp } from "react-icons/tb";
-import { SiAntdesign, SiDocker, SiMui, SiOnlyoffice, SiShadcnui } from "react-icons/si";
-import { LuFigma } from "react-icons/lu";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleSidebar } from "@/store/slices/globalSlice";
+import StaticNavigations from "./StaticMenu";
 
-const DynamicNavigation = ({ sidebarOpen, sideMenu, baseRoute }) => {
+const StaticNavigation = ({ sidebarOpen }) => {
+  const pathName = usePathname();
+  // const baseRoute = pathName.split("/")[1];
   const [expandedMenus, setExpandedMenus] = useState({});
   const dispatch = useDispatch();
-  const pathName = usePathname();
-
-  // Effect to auto-expand the parent menu if a child is active
-  useEffect(() => {
-    const allItems = [...staticItems, ...dynamicItems];
-    allItems.forEach(item => {
-      if (item.subItems?.some(sub => pathName === sub.href)) {
-        setExpandedMenus(prev => ({ ...prev, [item.name]: true }));
-      }
-    });
-  }, [pathName]);
 
   const toggleMenu = (menu) => {
     setExpandedMenus((prev) => ({
@@ -40,42 +19,6 @@ const DynamicNavigation = ({ sidebarOpen, sideMenu, baseRoute }) => {
       [menu]: !prev[menu],
     }));
   };
-
-  // The Map
-  const SKILL_ICONS = {
-    "React": FaReact,
-    "Operating System": PiWindowsLogo,
-    "HTML": PiFileHtml,
-    "JavaScript": IoLogoJavascript,
-    "CSS": MdCss,
-    "TailwindCSS": RiTailwindCssFill,
-    "PHP Procedural": TbFileTypePhp,
-    "PHP OOP": RiPhpFill,
-    "Terminal": PiTerminalBold,
-    "WordPress": FaWordpressSimple,
-    "Git": PiGithubLogoBold,
-    "Docker": SiDocker,
-    "Figma": LuFigma,
-    "Office": PiMicrosoftExcelLogoFill,
-    "Laravel": FaLaravel,
-    "React": FaReact,
-    "ShadCN": SiShadcnui,
-    "MaterialUI": SiMui,
-    "AntDesign": SiAntdesign,
-    "Tanstack": SiOnlyoffice,
-  };
-
-  const DEFAULT_ICON = FaReact;
-
-  const staticItems = [
-    {
-      name: "Home",
-      icon: ChartNoAxesColumn,
-      hasSubmenu: false,
-      link: "/dashboard",
-    },
-  ];
-
 
   const handleItemClick = (item) => {
     if (item.hasSubmenu) {
@@ -87,33 +30,12 @@ const DynamicNavigation = ({ sidebarOpen, sideMenu, baseRoute }) => {
   };
 
 
-  const dynamicItems = sideMenu.map((skill) => {
-
-    const IconComponent = SKILL_ICONS[skill.title] || DEFAULT_ICON;
-
-    return {
-      name: skill.title,
-      icon: IconComponent,
-      link: `/${baseRoute}/${skill.id}`,
-      hasSubmenu: skill.categories.length > 0,
-      subItems: skill.categories.map((cat) => ({
-        item: cat.title,
-        href: `/${baseRoute}/${cat.id}`,
-      })),
-    };
-  });
-
-  // 3. Combine them
-  const sidebarItems = [...staticItems, ...dynamicItems];
-
   return (
-    <nav className="flex-1 overflow-y-auto overflow-x-hidden overflow-y-auto py-4">
-
-      {sidebarItems.map((item) => {
+    <nav className="flex-1 overflow-y-auto overflow-x-hidden py-4">
+      {StaticNavigations.map((item) => {
         const isDirectActive = item.link && pathName === item.link;
         const isSubActive = item.subItems?.some(sub => pathName === sub.href);
         const isParentActive = isDirectActive || isSubActive;
-
         const ParentWrapper = item.link ? Link : 'div';
 
         return (
@@ -170,4 +92,4 @@ const DynamicNavigation = ({ sidebarOpen, sideMenu, baseRoute }) => {
   );
 };
 
-export default DynamicNavigation;
+export default StaticNavigation;

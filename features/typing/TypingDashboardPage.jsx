@@ -1,5 +1,5 @@
 "use client";
-import TypingBarChart from "@/components/Typing/TypingBarChart";
+import TypingBarChart from "./TypingBarChart";
 import { fetchTypings } from "@/store/actions/typingActions";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,60 +11,54 @@ const TypingDashboardPage = ({ route }) => {
   const isExercises = route === "exercises";
   const isTests = route === "tests";
 
-
   useEffect(() => {
     dispatch(fetchTypings());
   }, []);
 
   const groupedLessons = isExercises
     ? typings.reduce((acc, item) => {
-      const lessonName = item.exercise.lesson.lesson;
+        const lessonName = item.exercise.lesson.lesson;
 
-      if (lessonName.toUpperCase() === "TEST") return acc;
+        if (lessonName.toUpperCase() === "TEST") return acc;
 
-      if (!acc[lessonName]) acc[lessonName] = [];
+        if (!acc[lessonName]) acc[lessonName] = [];
 
-      acc[lessonName].push({
-        name: item.exercise.exerciseNo,
-        gross: item.gross,
-        net: item.net,
-        fullTitle: item.exercise.title,
-      });
+        acc[lessonName].push({
+          name: item.exercise.exerciseNo,
+          gross: item.gross,
+          net: item.net,
+          fullTitle: item.exercise.title,
+        });
 
-      return acc;
-    }, {})
+        return acc;
+      }, {})
     : {};
-
 
   const groupedTestsByDuration = isTests
     ? typings.reduce((acc, item) => {
-      if (item.exercise.lesson.lesson.toUpperCase() !== "TEST")
+        if (item.exercise.lesson.lesson.toUpperCase() !== "TEST") return acc;
+
+        const durationLabel = item.duration.duration;
+
+        if (!acc[durationLabel]) acc[durationLabel] = [];
+
+        acc[durationLabel].push({
+          name: item.exercise.title,
+          gross: item.gross,
+          net: item.net,
+        });
+
         return acc;
-
-      const durationLabel = item.duration.duration;
-
-      if (!acc[durationLabel]) acc[durationLabel] = [];
-
-      acc[durationLabel].push({
-        name: item.exercise.title,
-        gross: item.gross,
-        net: item.net,
-      });
-
-      return acc;
-    }, {})
+      }, {})
     : {};
 
-
   const sortedLessonNames = Object.keys(groupedLessons).sort((a, b) =>
-    a.localeCompare(b, undefined, { numeric: true })
+    a.localeCompare(b, undefined, { numeric: true }),
   );
 
   const sortedDurations = Object.keys(groupedTestsByDuration).sort(
-    (a, b) => parseInt(a) - parseInt(b)
+    (a, b) => parseInt(a) - parseInt(b),
   );
-
-
 
   return (
     <>
@@ -72,7 +66,13 @@ const TypingDashboardPage = ({ route }) => {
         {isExercises ? "Typing Course Stats" : "Typing Test Stats"}
       </div>
 
-      <div className={isTests ? `grid grid-cols-1 gap-8` : `grid grid-cols-1 lg:grid-cols-2 gap-8`}>
+      <div
+        className={
+          isTests
+            ? `grid grid-cols-1 gap-8`
+            : `grid grid-cols-1 lg:grid-cols-2 gap-8`
+        }
+      >
         {isExercises &&
           sortedLessonNames.map((lessonName) => (
             <TypingBarChart

@@ -1,0 +1,51 @@
+import { ChartNoAxesColumn, TrendingUp } from "lucide-react";
+
+const StaticNavitaionMenu = [
+  {
+    name: "DASHBOARD",
+    icon: ChartNoAxesColumn,
+    hasSubmenu: true,
+    link: "/dashboard",
+    subItems: [
+      {
+        item: "Skills",
+        href: "/skills/dashboard/progress/skills",
+      },
+    ],
+  },
+  {
+    name: "Manage Skills",
+    icon: TrendingUp,
+    type: "Admin",
+    hasSubmenu: true,
+    subItems: [
+      {
+        item: "Skills",
+        href: "/skills/manage/skills",
+      },
+      {
+        item: "Parent-Categories",
+        href: "/skills/manage/parent-categories",
+      },
+      {
+        item: "Sub-Categories",
+        href: "/skills/manage/sub-categories",
+      },
+      {
+        item: "Categories",
+        href: "/skills/manage/categories",
+      },
+      {
+        item: "Topics List",
+        href: "/skills/manage/topics",
+      },
+    ],
+  },
+  {
+    name: "Logout",
+    icon: TrendingUp,
+    hasSubmenu: false,
+    link: "/",
+  },
+];
+export default StaticNavitaionMenu;
