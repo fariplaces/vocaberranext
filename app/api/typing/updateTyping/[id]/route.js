@@ -1,4 +1,3 @@
-import { prisma } from "@/lib/prisma";
 import { typingDbServices } from "@/services/server/typingDbServices";
 import { NextResponse } from "next/server";
 

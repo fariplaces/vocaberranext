@@ -35,6 +35,7 @@ const ManageExercisePopup = ({ domain }) => {
 
 
   const handleSave = async () => {
+    console.log("Form Data on Save:", formData);
     if (!formData.lessonId || !formData.typeId || !formData.title || !formData.exerciseNo) return toast.error("Required fields missing");
 
   
@@ -48,7 +49,7 @@ const ManageExercisePopup = ({ domain }) => {
       await dispatch(action).unwrap();
       dispatch(closeManagePopup({domain}));
     } catch (error) {
-      toast.error("Submission failed:", error);
+      toast.error(`Submission failed: ${error}`);
     }
   };
 
@@ -67,12 +68,12 @@ const ManageExercisePopup = ({ domain }) => {
                 <label className="block text-sm mb-1">Lesson</label>
                 <select
                   name="lessonId"
-                  // value={formData.lessonId}
-                  value={
-                  route === "test"
-                    ? lessons.find((l) => l.lesson.toUpperCase() === "TEST")?.id || ""
-                    : formData.lessonId
-                  }
+                  value={formData.lessonId}
+                  // value={
+                  // route === "test"
+                  //   ? lessons.find((l) => l.lesson.toUpperCase() === "TEST")?.id || ""
+                  //   : formData.lessonId
+                  // }
                   onChange={handleChange}
                   className="w-full  px-3 py-2 bg-transparent border border-gray-600 rounded-md focus:outline-none focus:border-blue-500"
                  >
@@ -95,12 +96,12 @@ const ManageExercisePopup = ({ domain }) => {
                 <label className="blockj text-sm mb-1">Type</label>
                 <select
                   name="typeId"
-                  // value={formData.typeId}
-                  value={
-                  route === "test"
-                    ? exerciseTypes.find((l) => l.type.toUpperCase() === "TEST")?.id || ""
-                    : exerciseTypes.find((l) => l.type.toUpperCase() === "EXERCISE")?.id || ""
-                }
+                  value={formData.typeId}
+                //   value={
+                //   route === "test"
+                //     ? exerciseTypes.find((l) => l.type.toUpperCase() === "TEST")?.id || ""
+                //     : exerciseTypes.find((l) => l.type.toUpperCase() === "EXERCISE")?.id || ""
+                // }
                   onChange={handleChange}
                   className="w-full px-3 py-2 bg-transparent border border-gray-600 rounded-md focus:outline-none focus:border-blue-500"
                 >

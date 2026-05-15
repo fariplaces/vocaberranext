@@ -2,6 +2,7 @@
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
 import { fetchExercises } from "@/store/actions/typingActions";
 import { selectExercisePagination, selectIsFetchingMoreExercise, selectFilteredExercises, selectTypingLoading } from "@/store/selectors/typingSelectors";
+import { openDeletePopup, openManagePopup } from "@/store/slices/typingSlices/typingFormSlice";
 import {
   Edit2,
   Trash2,
@@ -9,7 +10,7 @@ import {
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-function RenderExercises({route}) {
+function RenderExercises({route, domain}) {
   const dispatch = useDispatch();
 
   const filteredExercises = useSelector(selectFilteredExercises);
@@ -63,10 +64,10 @@ function RenderExercises({route}) {
                   {item.lesson.lesson}
                 </td>
                 <td className=" flex justify-evenly border border-gray-700 px-4 py-2 text-sm text-white">
-                  <Edit2 onClick={() => handleEditClick(item)} />
+                  <Edit2 onClick={() => dispatch(openManagePopup({domain, editData: item}))} />
                   <Trash2
                     className="text-red-600"
-                    onClick={() => handleDelClick(item)}
+                    onClick={() => dispatch(openDeletePopup({domain, item}))}
                   />
                 </td>
               </tr>

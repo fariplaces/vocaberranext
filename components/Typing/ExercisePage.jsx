@@ -67,10 +67,10 @@ const ExercisePage = ({ route }) => {
         Icon={Plus}
         handleMethod={handleAddClick}
       />
-      <RenderExercises route={route} />
+      <RenderExercises route={route} domain={domain} />
       <ManageExercisePopup domain={domain} />
+      <DeleteExercisePopup domain={domain} />
       {/* 
-      <DeleteExercisePopup
         // isDelPopupOpen={isDelPopupOpen}
         // setIsDelPopupOpen={setIsDelPopupOpen}
         // itemName={`${itemToDelete?.exerciseNo} - ${itemToDelete?.title}`}

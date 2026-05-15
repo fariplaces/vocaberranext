@@ -5,7 +5,6 @@ import DeletePopup from "@/components/DeletePopup"; // Your UI component
 import { deleteTyping } from "@/store/actions/typingActions";
 import { selectDeletePopupMeta } from "@/store/selectors/typingFormSelectors";
 import { closeDeletePopup } from "@/store/slices/typingSlices/typingFormSlice";
-import { SLICE_NAMES } from "@/store/constants/sliceConstants";
 
 const DeleteTypingPopup = ({ domain }) => {
   const dispatch = useDispatch();
@@ -33,7 +32,7 @@ const { isOpen, item } = useSelector((state) => selectDeletePopupMeta(state, dom
   return (
     <DeletePopup
       isDelPopupOpen={isOpen}
-      setIsDelPopupOpen={() => dispatch(closeDeletePopup())}
+      setIsDelPopupOpen={() => dispatch(closeDeletePopup({domain}))}
       onDelete={handleConfirmDelete}
       itemName={`${item?.exercise?.exerciseNo} - ${item?.exercise?.title}`}
       isLoading={isDeleting}

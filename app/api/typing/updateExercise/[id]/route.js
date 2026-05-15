@@ -1,11 +1,11 @@
-import { prisma } from "@/lib/prisma";
 import { typingDbServices } from "@/services/server/typingDbServices";
 import { NextResponse } from "next/server";
 
-export async function PATCH(req) {
+export async function PATCH(req, { params }) {
   try {
+    // const body = await req.json();
+    const { id } = await params;
     const body = await req.json();
-    const { id, ...updateData } = body;
 
     // 1. Basic Validation
     if (!id) {
@@ -16,10 +16,7 @@ export async function PATCH(req) {
     }
 
     // 2. Update Exercise
-    const updatedExercise = await typingDbServices.updateExercise(
-      id,
-      updateData,
-    );
+    const updatedExercise = await typingDbServices.updateExercise(id, body);
 
     return NextResponse.json(updatedExercise, { status: 200 });
   } catch (error) {

@@ -53,7 +53,7 @@ const ManageTypingPopup = ({domain}) => {
       await dispatch(action).unwrap();
       dispatch(closeManagePopup({domain}));
     } catch (error) {
-      toast.error("Submission failed:", error);
+      toast.error(`Submission failed: ${error}`);
     }
   };
 

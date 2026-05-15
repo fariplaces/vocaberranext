@@ -21,7 +21,10 @@ export async function POST(req) {
     // Handle unique constraint error (exerciseNo)
     if (error.code === "P2002") {
       return NextResponse.json(
-        { error: "Exercise number must be unique" },
+        {
+          error: "Exercise number must be unique",
+          message: "An exercise with this number already exists.",
+        },
         { status: 400 },
       );
     }
