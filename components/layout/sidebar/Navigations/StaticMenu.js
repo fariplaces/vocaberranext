@@ -135,11 +135,11 @@ const StaticNavitaionMenu = [
     subItems: [
       {
         item: "Exercises List",
-        href: "/typing/manage/course",
+        href: "/admin/typing/manage/course",
       },
       {
         item: "Tests List",
-        href: "/typing/manage/test",
+        href: "/admin/typing/manage/test",
       },
     ],
   },
@@ -182,6 +182,12 @@ const StaticNavitaionMenu = [
     icon: TrendingUp,
     hasSubmenu: false,
     link: "/revisions",
+  },
+  {
+    name: "Admin Pannel",
+    icon: TrendingUp,
+    hasSubmenu: false,
+    link: "/admin",
   },
 ];
 export default StaticNavitaionMenu;

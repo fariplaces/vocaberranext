@@ -1,8 +1,8 @@
 'use client'
 import React, { useState } from 'react'
-import SideBar from "@/components/sidebar/SideBar";
-import TopBar from "@/components/layouts/TopBar";
-import RightSideBar from "@/components/sidebar/RightSideBar";
+import SideBar from "@/components/layout/sidebar/SideBar";
+import TopBar from "@/components/layout/TopBar";
+import RightSideBar from "@/components/layout/sidebar/RightSideBar";
 import { useSelector } from 'react-redux';
 import Footer from './Footer';
 

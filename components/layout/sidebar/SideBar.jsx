@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect } from "react";
-import UserProfile from "../UserProfile";
-import { ScrollArea } from "../ui/scroll-area";
+import UserProfile from "../../UserProfile";
+import { ScrollArea } from "../../ui/scroll-area";
 import StaticNavigation from "./Navigations/StaticNavigations";
 import { usePathname } from "next/navigation";
 import DynamicNavigation from "./Navigations/DynamicNavigation";

@@ -1,8 +1,8 @@
-import AuthCheck from "@/components/AuthCheck";
 import React from "react";
+import AdminLayout from "@/components/layout/admin/AdminLayout";
 
-const AdminLayout = ({ children }) => {
-  return <AuthCheck>{children}</AuthCheck>;
+const layout = ({ children }) => {
+  return <AdminLayout>{children}</AdminLayout>;
 };
 
-export default AdminLayout;
+export default layout;
