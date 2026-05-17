@@ -1,5 +1,12 @@
-'use client'
-import { Bell, PanelLeft, PanelRight, Search, Settings, Star } from "lucide-react";
+"use client";
+import {
+  Bell,
+  PanelLeft,
+  PanelRight,
+  Search,
+  Settings,
+  Star,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,21 +23,21 @@ const TopBar = ({ handleNotifictionToggle }) => {
   const STATIC_BREADCRUMBS = {
     "/typing/typingDashboard": [
       { label: "Dashboard", id: "typing" },
-      { label: "Typing", id: "dash" }
+      { label: "Typing", id: "dash" },
     ],
     "/typing/exercise/course": [
       { label: "Typing", id: "typing" },
       { label: "Exercises", id: "exercise" },
-      { label: "Course", id: "course" }
+      { label: "Course", id: "course" },
     ],
     "/typing/exercise/test": [
       { label: "Typing", id: "typing" },
       { label: "Exercises", id: "exercise" },
-      { label: "Test", id: "test" }
+      { label: "Test", id: "test" },
     ],
     "/word": [
       { label: "Communication", id: "comm" },
-      { label: "Word List", id: "words" }
+      { label: "Word List", id: "words" },
     ],
     // Add more as needed...
   };
@@ -48,7 +55,8 @@ const TopBar = ({ handleNotifictionToggle }) => {
         const label = item.title || item.name || item.item;
         const newPath = [...currentPath, { label, id: item.id || item.href }];
 
-        if (item.id === targetId || item.href?.includes(targetId)) return newPath;
+        if (item.id === targetId || item.href?.includes(targetId))
+          return newPath;
 
         if (item.categories) {
           const found = findPath(item.categories, targetId, newPath);
@@ -66,7 +74,7 @@ const TopBar = ({ handleNotifictionToggle }) => {
       return null;
     };
 
-    breadcrumbs = findPath([...sideMenu], currentId) || [];
+    breadcrumbs = ["Abc"];
   }
 
   return (
@@ -77,18 +85,26 @@ const TopBar = ({ handleNotifictionToggle }) => {
             onClick={() => dispatch(toggleSidebar())}
             className="p-2 hover:bg-gray-700 rounded-lg"
           >
-            {sidebarOpen ? <PanelLeft className="w-5 h-5" /> : <PanelRight className="w-5 h-5" />}
+            {sidebarOpen ? (
+              <PanelLeft className="w-5 h-5" />
+            ) : (
+              <PanelRight className="w-5 h-5" />
+            )}
           </button>
 
           {/* Breadcrumb Display */}
           <div className="flex items-center space-x-2 text-sm">
             <Star className="w-4 h-4 text-yellow-500" />
-            <Link href="/" className="text-gray-400 hover:text-white">Home</Link>
+            <Link href="/" className="text-gray-400 hover:text-white">
+              Home
+            </Link>
 
             {breadcrumbs.map((crumb, index) => (
               <React.Fragment key={index}>
                 <span className="text-gray-200">/</span>
-                <span className={`${index === breadcrumbs.length - 1 ? "text-white font-medium" : "text-gray-400"}`}>
+                <span
+                  className={`${index === breadcrumbs.length - 1 ? "text-white font-medium" : "text-gray-400"}`}
+                >
                   {crumb.label}
                 </span>
               </React.Fragment>
@@ -129,5 +145,4 @@ const TopBar = ({ handleNotifictionToggle }) => {
     </header>
   );
 };
-export default TopBar
-
+export default TopBar;

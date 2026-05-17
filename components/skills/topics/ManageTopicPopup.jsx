@@ -1,5 +1,6 @@
 "use client";
 import { createTopic, updateTopic } from "@/store/actions/skillActions";
+import { selectUser } from "@/store/selectors/authSelectors";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -20,7 +21,6 @@ const ManageTopicPopup = ({
   const [formData, setFormData] = useState(initialFormState);
   const dispatch = useDispatch();
 
-
   const resetPopup = () => {
     setFormData(initialFormState);
     if (setEditData) setEditData(null);
@@ -39,7 +39,6 @@ const ManageTopicPopup = ({
     setFormData((prev) => {
       const newState = { ...prev, [name]: value };
 
-
       return newState;
     });
   };
@@ -56,19 +55,18 @@ const ManageTopicPopup = ({
 
     const filteredData = Object.fromEntries(
       Object.entries(payloadData).filter(
-        ([key]) => !ignoreFields.includes(key)
-      )
+        ([key]) => !ignoreFields.includes(key),
+      ),
     );
 
     const isFormIncomplete = Object.values(filteredData).some(
-      (val) => String(val ?? "").trim() === ""
+      (val) => String(val ?? "").trim() === "",
     );
 
     if (isFormIncomplete) {
       alert("Please fill all required fields!");
       return;
     }
-
 
     const payload = {
       title: payloadData.title,
@@ -102,10 +100,7 @@ const ManageTopicPopup = ({
               onClick={(e) => e.stopPropagation()}
             >
               <h2 className="text-xl font-semibold mb-4">
-                {editData
-                  ? "Edit Topic"
-                  : "Add a New Topic"
-                }
+                {editData ? "Edit Topic" : "Add a New Topic"}
               </h2>
               {/* Word Input */}
               <div className="mb-4">
@@ -128,11 +123,8 @@ const ManageTopicPopup = ({
                   value={formData.order}
                   onChange={handleChange}
                   className={`w-full px-3 py-2 bg-transparent border rounded-md focus:outline-none`}
-
                   placeholder="Enter Skill Order No. i.e 1,2,3..."
                 />
-
-
               </div>
               <div className="mb-4">
                 <label className="block text-sm mb-1">Category</label>
@@ -151,7 +143,8 @@ const ManageTopicPopup = ({
                       value={cat.id}
                       className="bg-black text-white"
                     >
-                      ({cat.skill.title}):{cat.title} {cat.parent && "-" + cat.parent.title}
+                      ({cat.skill.title}):{cat.title}{" "}
+                      {cat.parent && "-" + cat.parent.title}
                     </option>
                   ))}
                 </select>

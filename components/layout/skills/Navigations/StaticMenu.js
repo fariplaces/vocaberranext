@@ -5,7 +5,6 @@ const StaticNavitaionMenu = [
     name: "DASHBOARD",
     icon: ChartNoAxesColumn,
     hasSubmenu: true,
-    link: "/dashboard",
     subItems: [
       {
         item: "Skills",

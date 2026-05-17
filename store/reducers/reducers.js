@@ -16,7 +16,7 @@ import wordReducer from "@/store/slices/wordSlice";
 import wordMeaningReducer from "@/store/slices/wordMeaningSlice";
 
 // Skill Reducers
-import skillReducer from "@/store/slices/skillSlice";
+import skillReducer from "@/store/slices/skillSlices/skillSlice";
 
 // Tasks Reducers
 import taskReducer from "@/store/slices/taskSlice";
