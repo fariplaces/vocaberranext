@@ -1,5 +1,4 @@
-import { prisma } from "@/lib/prisma";
-import { skillServices } from "@/services/client/skillServices";
+import { skillDbServices } from "@/services/server/skillDbServices";
 import { NextResponse } from "next/server";
 
 export async function GET(request) {
@@ -8,7 +7,7 @@ export async function GET(request) {
     const page = searchParams.get("page") || 1;
     const limit = searchParams.get("limit") || 10;
 
-    const result = await skillServices.getPaginatedCategories({
+    const result = await skillDbServices.getPaginatedCategories({
       page,
       limit,
     });

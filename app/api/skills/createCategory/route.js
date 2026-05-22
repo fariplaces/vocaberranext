@@ -1,57 +1,27 @@
-import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import { skillDbServices } from "@/services/server/skillDbServices";
 
-export async function POST(req) {
-   try {
-      const body = await req.json();
-      const { title, order, skillId, parentId } = body;
+export async function POST(request) {
+  try {
+    const body = await request.json();
 
-      // 1. Basic Validation
-      if (!title) {
-         return NextResponse.json(
-            { error: "Category title is required" },
-            { status: 400 }
-         );
-      }
+    // Fire the creation block through the service layer
+    const newCategory = await skillDbServices.createCategory(body);
 
-      // 2. Logic Check
-      if (!skillId && !parentId) {
-         return NextResponse.json(
-            { error: "Category must be linked to a Skill or a Parent Category" },
-            { status: 400 }
-         );
-      }
-
-      // 3. Create the Category with extended includes
-      const newCategory = await prisma.category.create({
-         data: {
-            title,
-            order: order || 0,
-            skillId: skillId || null,
-            parentId: parentId || null,
-         },
-         include: {
-            // Include the parent skill details if they exist
-            skill: true,
-            // Include the parent category details if they exist
-            parent: {
-               include: {
-                  skill: true
-               }
-            },
-            // Keep your existing structures for the UI
-            children: true,
-            topics: true,
-         },
-      });
-
-      return NextResponse.json(newCategory);
-   } catch (error) {
-      console.error("Create Category Error:", error);
-
+    return NextResponse.json(newCategory, { status: 21 }); // 201 Created
+  } catch (error) {
+    // If it's a validation error we threw manually from our service layer
+    if (error.status) {
       return NextResponse.json(
-         { error: "Failed to create category" },
-         { status: 500 }
+        { error: error.message },
+        { status: error.status },
       );
-   }
+    }
+
+    console.error("Create Category Route Error:", error);
+    return NextResponse.json(
+      { error: "Failed to create category" },
+      { status: 500 },
+    );
+  }
 }

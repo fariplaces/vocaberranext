@@ -1,39 +1,20 @@
-import { prisma } from "@/lib/prisma";
+import { skillDbServices } from "@/services/server/skillDbServices";
 import { NextResponse } from "next/server";
 
-export async function GET() {
-   try {
-      const data = await prisma.topic.findMany({
-         include: {
-            category: {
-               include: {
-                  skill: true,
-                  parent: {
-                     include: { skill: true }
-                  }
-               }
-            }
-         }
-      });
+export async function GET(request) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const page = searchParams.get("page") || 1;
+    const limit = searchParams.get("limit") || 10;
 
-      const results = data.map(topic => {
-         // 1. Identify the category
-         const cat = topic.category;
+    const result = await skillDbServices.getPaginatedTopics({ page, limit });
 
-         // 2. Conditional Logic: 
-         // If cat.parent exists, take its skill. Otherwise, take cat.skill.
-         const associatedSkill = cat.parent ? cat.parent.skill : cat.skill;
-
-         return {
-            ...topic,
-            displayCategory: cat.title,
-            displayParent: cat.parent?.title || "Root",
-            displaySkill: associatedSkill?.title || "No Skill Assigned"
-         };
-      });
-
-      return NextResponse.json(results);
-   } catch (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
-   }
+    return NextResponse.json(result);
+  } catch (error) {
+    console.error("Fetch Topics Error:", error);
+    return NextResponse.json(
+      { error: error.message || "Failed to fetch topics with hierarchy" },
+      { status: 500 },
+    );
+  }
 }
