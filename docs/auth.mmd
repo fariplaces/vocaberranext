@@ -1,0 +1,120 @@
+flowchart TB
+    %% =============================================================
+    %% INFRASTRUCTURE LAYER: DATABASE ENGINE SCHEMA (PRISMA NODE)
+    %% =============================================================
+    subgraph Data_Layer [1. Enterprise Database Schema Space]
+        direction LR
+        
+        Tenant_Table["📁 Tenants Table<br>• id: string PK<br>• name: string<br>• slug: string UK<br>• status: active | trial"]
+        
+        Tenant_Config["⚙️ Tenant_Config Table<br>• id: string PK<br>• tenantId: string FK<br>• customDomain: string<br>• settings: JSONB"]
+        
+        Users_Table["👥 Users Table<br>• id: string PK<br>• tenantId: string FK<br>• email: string UK<br>• passwordHash: string"]
+        
+        Roles_Table["🛡️ Roles Table<br>• id: string PK<br>• name: admin | user<br>• permissions: text[]"]
+        
+        Resources_Table["📦 Resources Table<br>• id: string PK<br>• tenantId: string FK<br>• name: string<br>• payload: JSONB"]
+
+        %% DB Core Internal Relations
+        Tenant_Table -->|1 : 1| Tenant_Config
+        Tenant_Table -->|1 : N| Users_Table
+        Tenant_Table -->|1 : N| Resources_Table
+        Users_Table -->|N : N| Roles_Table
+    end
+
+    %% =============================================================
+    %% GATEWAY LAYER: NEXT.JS APP ROUTER API CONTROLLERS
+    %% =============================================================
+    subgraph API_Gateway [2. Server API Route Controllers]
+        direction TB
+        Middleware[Next.js Edge Middleware Router<br>• Extracts Tenant Subdomain Domain<br>• Validates JWT Auth Cookies]
+        
+        subgraph Route_Handlers [HTTP REST Routing Ports]
+            direction LR
+            TenantController["GET /api/v1/tenant<br>• Resolves company metadata"]
+            AuthController["POST /api/v1/auth/login<br>• Sets secure session token"]
+            ResourceController["GET|POST /api/v1/resources<br>• Validates tenant isolated boundaries"]
+        end
+
+        Middleware -->|Pass Safe Request HeaderContext| Route_Handlers
+    end
+
+    %% =============================================================
+    %% DATA STORE LAYER: CLIENT REDUX STATE ARCHITECTURE
+    %% =============================================================
+    subgraph Client_State [3. Global Redux State Architecture]
+        direction TB
+        
+        subgraph Slice_Entities [Normalized State Tree Entities Pool]
+            direction LR
+            TenantSlice["Tenant Slice<br>• activeTenant: object<br>• domainConfig: object"]
+            AuthSlice["Auth Slice<br>• user: CurrentUser<br>• isAuthenticated: boolean"]
+            ResourceSlice["Resource Entity Slice<br>• ids: string[]<br>• entities: Record&lt;id, Item&gt;<br>• loadingStatus: idle | loading"]
+        end
+
+        subgraph Selector_Array [Memoized Query Selectors Optimization Engine]
+            direction LR
+            selectTenantDomain["selectTenantDomain<br>• Plucks domain records"]
+            selectIsAdmin["selectIsAdmin<br>• Verifies authorization arrays"]
+            selectAllResources["selectAllResources<br>• Returns array from map"]
+        end
+
+        Slice_Entities -->|Feeds Data Stores| Selector_Array
+    end
+
+    %% =============================================================
+    %% PRESENTATION LAYER: UI COMPONENT TREE
+    %% =============================================================
+    subgraph Presentation_Layer [4. React Functional Presentation Interface]
+        direction TB
+        
+        subgraph Layout_Wrapper [SaaS Root Layout Frame Wrapper Component]
+            direction LR
+            SidebarNav[Tenant Brand Navigation Sidebar]
+            TopBarPanel[User Session Profile Utility Panel]
+        end
+
+        subgraph Data_Views [Active Content Presentation Modules]
+            direction LR
+            ConfigForm[Tenant Operations Control Settings Form]
+            VirtualizedGrid[High-Performance Infinite Virtual Scroll Data Grid]
+        end
+
+        Layout_Wrapper --> Viewport_Slot[Injected Children Viewport] --> Data_Views
+    end
+
+    %% =============================================================
+    %% CROSS-SYSTEM STRUCTURAL LIFECYCLE CONNECTIONS
+    %% =============================================================
+    
+    %% DB Schema Tables Pipe Data Into API Controllers
+    Tenant_Table & Tenant_Config -.->|Supplies Realtime SQL Output| TenantController
+    Users_Table & Roles_Table -.->|Supplies Authentication Lookups| AuthController
+    Resources_Table -.->|Queries Row Level Filtered Records| ResourceController
+
+    %% API Endpoints Dispatched via Client Async Actions Thunks
+    ResourceController ==>|Secure Transfer REST Stream JSON| ResourceSlice
+    AuthController ==>|Populates Verified Credentials Payload| AuthSlice
+    TenantController ==>|Sets Current Account Domain Config Context| TenantSlice
+
+    %% Memoized Selectors Read Directly by Specific UI Views
+    selectTenantDomain -->|Binds Client Branding Layout| SidebarNav
+    selectIsAdmin -->|Renders Restricted Operational Buttons| ConfigForm
+    selectAllResources -->|Feeds Rows Clean Memory Array Reference| VirtualizedGrid
+
+    %% Form Inputs Trigger UI Mutation Dispatch Actions
+    ConfigForm ==>|Dispatches updateConfigThunk| API_Gateway
+    VirtualizedGrid ==>|Dispatches mutateResourceThunk| ResourceController
+
+    %% =============================================================
+    %% GRAPHIC COMPONENT THEME DESIGN DEFINITIONS
+    %% =============================================================
+    classDef dbStyle fill:#eefeef,stroke:#1b5e20,stroke-width:2px,color:#1b5e20;
+    classDef apiStyle fill:#fff3e0,stroke:#e65100,stroke-width:2px,color:#e65100;
+    classDef reduxStyle fill:#f3e5f5,stroke:#4a148c,stroke-width:2px,color:#4a148c;
+    classDef uiStyle fill:#e8eaf6,stroke:#1a237e,stroke-width:2px,color:#1a237e;
+
+    class Tenant_Table,Tenant_Config,Users_Table,Roles_Table,Resources_Table dbStyle;
+    class Middleware,TenantController,AuthController,ResourceController apiStyle;
+    class TenantSlice,AuthSlice,ResourceSlice,selectTenantDomain,selectIsAdmin,selectAllResources reduxStyle;
+    class SidebarNav,TopBarPanel,ConfigForm,VirtualizedGrid uiStyle;
