@@ -3,7 +3,7 @@ erDiagram
     %% =============================================================
     %% CORE RELATIONSHIPS
     %% =============================================================
-    USER ||--o{ SESSION : "mantains"
+    USER ||--o{ SESSION : "maintains"
     USER ||--o{ TYPING : "performs"
     USER ||--o{ REVISION : "owns"
     USER ||--o{ TASK : "manages"
@@ -145,9 +145,9 @@ erDiagram
         string id PK
         string title
         string content "BlockNote JSON String"
-        NoteVisibility visibility "PERSONAL | GLOBAL"
+        string visibility "PERSONAL or GLOBAL enum"
         string targetId "Polymorphic matching targetType"
-        NoteTargetType targetType "TOPIC | SKILL | CATEGORY | TASK"
+        string targetType "TOPIC or SKILL or CATEGORY or TASK"
         string shareCode UK
         string userId FK "Nullable if GLOBAL"
         DateTime createdAt
@@ -163,4 +163,3 @@ erDiagram
         DateTime createdAt
         DateTime updatedAt
     }
-    ```
