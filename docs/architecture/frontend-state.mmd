@@ -1,0 +1,97 @@
+flowchart TD
+    %% =============================================================
+    %% PRODUCTION STYLE MATRIX Definitions
+    %% =============================================================
+    classDef uiLayer fill:#F8FAFC,stroke:#334155,stroke-width:2px,color:#0F172A;
+    classDef coreAction fill:#FFF7ED,stroke:#EA580C,stroke-width:2px,color:#7C2D12;
+    classDef network fill:#F0FDF4,stroke:#16A34A,stroke-width:2px,color:#14532D;
+    classDef globalReducer fill:#F5F3FF,stroke:#7C3AED,stroke-width:2px,color:#4C1D95;
+    classDef centralStore fill:#EFF6FF,stroke:#2563EB,stroke-width:2px,color:#1E3A8A;
+    classDef stateSelector fill:#FFF1F2,stroke:#E11D48,stroke-width:2px,color:#881337;
+
+    %% =============================================================
+    %% ARCHITECTURAL TIERS
+    %% =============================================================
+
+    %% LAYER 1: UI PRESENTATION
+    subgraph View_Tier [Layer 1: View Presentation Engine]
+        UI["💻 React View Component<br/><i>(STRICT: Zero Data Filtering / Formatting Logic. Purely for UI Rendering)</i>"]
+    end
+    class View_Tier uiLayer;
+
+    %% LAYER 2: ACTION MANAGEMENT
+    subgraph Action_Tier [Layer 2: Action Factory & Constants Middleware]
+        Constants["📋 /constants/sliceNames.ts<br/><b>Strict Domain Enum Mapping</b><br/>• SLICE_KEYS (typing | revision | task | form)<br/>• ResourceOperation (fetch | create | update | delete)"]
+        
+        TF["⚙️ Custom Thunk Factory Engine<br/><i>Generates Async Operations dynamically</i>"]
+        
+        Meta[["📋 Meta Payload Envelope Generated<br/>• sliceKey (From Constants)<br/>• operation<br/>• resourceId<br/>• isList: boolean"]]
+        
+        TF --- Constants
+        TF -->|Constructs| Meta
+    end
+    class Action_Tier coreAction;
+
+    %% LAYER 3: COMMUNICATIONS
+    subgraph Network_Tier [Layer 3: Network Layer / Isolation Core]
+        Client["🔌 services/client.ts (Http Client Module)<br/>• Extracts Endpoint URL via sliceKey map<br/>• Intercepts auth tokens<br/>• Maps HTTP Methods (GET|POST|PATCH|DELETE) automatically from operation flags"]
+        API[("⚡ Next.js API Routes / Backend Wire")]
+        
+        Client <==>|Wire Stream| API
+    end
+    class Network_Tier network;
+
+    %% LAYER 4: ORCHESTRATION & NORMALIZATION
+    subgraph Reducer_Tier [Layer 4: Central Matcher Matrix]
+        Matcher{{"⚡ handleResourceFulfilledState<br/><i>(Global Matchers Matrix Interception Loop)</i>"}}
+        
+        Op_Fetch{"operation == 'fetch'"}
+        Op_Create{"operation == 'create'"}
+        Op_Update{"operation == 'update'"}
+        Op_Delete{"operation == 'delete'"}
+
+        Matcher --> Op_Fetch
+        Matcher --> Op_Create
+        Matcher --> Op_Update
+        Matcher --> Op_Delete
+    end
+    class Reducer_Tier globalReducer;
+
+    %% LAYER 5: STORAGE VAULT
+    subgraph Storage_Tier [Layer 5: Normalized App State Vault]
+        subgraph Target_Slice ["📦 Normalized Target Domain Slice<br/><i>(Selected dynamically by sliceKey from constants)</i>"]
+            loading["⌛ loading: boolean"]
+            error["❌ error: string | null"]
+            ids["🔢 ids: string[] (Entity Insertion Array Index)"]
+            entities["📂 entities: Record&lt;string, Entity&gt; (O(1) Hash Map Location)"]
+        end
+    end
+    class Storage_Tier centralStore;
+
+    %% LAYER 6: DATA-SHAPING LAYER
+    subgraph Selector_Tier [Layer 6: Memoized Business Logic Layer]
+        Selectors["🧠 Enterprise Reselect Array Engine<br/><b>All Data Computations Happen Here:</b><br/>• filterDataByCriterion()<br/>• selectGroupedCollections()<br/>• searchEntitiesByKeyword()"]
+    end
+    class Selector_Tier stateSelector;
+
+    %% =============================================================
+    %% GRAPH RUNTIME CONNECTIONS
+    %% =============================================================
+    UI -->|1. Dispatches Factory Request| TF
+    Meta -->|2. Injects Context Contract| Client
+    Client -->|3. Resolves Network Payload Stream| Matcher
+
+    %% Normalization Actions Mapping
+    Op_Fetch -->|isList: true -> Bulk normalization mapping<br/>isList: false -> Direct upsert mapping| Target_Slice
+    Op_Create -->|Appends single instance and appends ID record| Target_Slice
+    Op_Update -->|Performs safe shallow patch merge over specific target key| Target_Slice
+    Op_Delete -->|Evicts structural ID keys and deletes entity item| Target_Slice
+
+    %% Reactive Read Cycle Flow (The Industry-Standard Boundary Loop)
+    Target_Slice ===>|4. Feeds Unmodified Normalized Data Store| Selectors
+    Selectors ===>|5. Feeds Ready-to-Render Computed View Model| UI
+
+    %% Edge Labels Accent Style
+    linkStyle 0,1,2 stroke:#ea580c,stroke-width:2px;
+    linkStyle 7,8,9,10 stroke:#7c3aed,stroke-width:2px;
+    linkStyle 11,12 stroke:#e11d48,stroke-width:2px;
