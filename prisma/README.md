@@ -1,3 +1,4 @@
+```mermaid
 erDiagram
     %% =============================================================
     %% CORE RELATIONSHIPS
@@ -162,3 +163,4 @@ erDiagram
         DateTime createdAt
         DateTime updatedAt
     }
+    ```
