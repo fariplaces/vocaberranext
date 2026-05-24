@@ -1,0 +1,50 @@
+📋 1. Architecture OverviewThe Typing feature utilizes an Enterprise Metadata-Driven Pattern. State management is split cleanly into two structural slices:typingSlice: Manages entity records data streams, infinite scroll pagination state, and active view filter routes (course vs test).typingFormSlice: A reusable utility slice that tracks active UI popups (manage and delete) using standard string index properties (domain) to switch context automatically.🧩 2. Component Specifications🟦 Component A: TypingPageThe main orchestrator component responsible for syncing lookups, resetting state on contextual pivots, and presenting the context control headers.Main Functions & HooksContext Setup: Evaluates domain = FORM_DOMAINS.TYPINGS to configure state targeting down the tree.Static Sync: Synchronizes initial metadata options (fetchLessons and fetchDurations) globally exactly once when mounted.Route Pivot Sync: Detects changes in the Next.js route property, invalidating stale arrays via resetTypingState, flipping target modes via setFilterMode, and triggering an initial page fetch.Popup Dispatcher: Passes dynamic fallback fields (defaults) to pre-select a default typing session duration if the active route is a course exercise.🟩 Component B: RenderTypingA heavy list presentation layer optimized for large record streams. It handles inline action event routing and hosts infinite list scroll intersection nodes.Main Functions & HooksDynamic Data Query: Resolves structural lists (selectFilteredTypings) and active chunk meta fields from the store.useInfiniteScroll: Monitors intersection visibility fields against global loader criteria (isInitialLoading || isFetchingMore) and page termination limits (pagination?.hasMore). Increments next page requests automatically.Action Routing: Dispatches openManagePopup containing active rows inside an editData property block to bypass entity instantiation pipelines completely when executing modifications.🟨 Component C: ManageTypingPopupA unified data capture modal operating on shared form objects. It supports layout swapping, programmatic lock downs, and input calculations.Main Functions & HooksDynamic Title/Data Mapping: Resolves lessons, dynamic validation logic, and text titles instantly from a specialized selectTypingResultMeta selector.Form Control: Forwards form target values straight into a slice key map through single updateFormField structural dispatches.Property Constraints & Interventions:Locks drop-down controls (disabled={route === "course"}) if editing or adding standard typing practices.Prevents submission requests via explicit validation boundaries if an application user sets a net speed integer higher than a gross speed integer.Formats text payloads and sanitizes types using native JS conversion utilities (Number(), parseFloat()) prior to launching async thunk dispatches.🟥 Component D: DeleteTypingPopupA smart state wrapper container encapsulating destructive entity deletion streams. It handles background state tracking and connects straight to standard presentational elements.Main Functions & HooksContext Isolation: Uses selectDeletePopupMeta(state, domain) to track whether it is open without mixing up context with other delete modals in the app.Safe Destruction: Extracts deep reference variables through short-circuit chains (item?.exercise?.title) to shield presentation containers from UI lifecycle initialization runtime crashes.⚙️ 3. Functionality & Lifecycle MatricesState Mapping MatrixThe active functional data dependencies utilize specific keys across layers:Target ContextTarget Domain String ValueTarget Redux Store PathActive UI Action HandlersTyping ResultsFORM_DOMAINS.TYPINGS ("typings")state.typingForm.typingscreateTyping / updateTyping / deleteTypingField Schema Validation SpecificationsSanitation rules enforce specific boundaries inside ManageTypingPopup:gross: Coerced via Number(val) || 0net: Coerced via Number(val) || 0 (Cannot exceed gross)accuracy: Coerced via parseFloat(val) || 0📊 4. Core Component FlowchartThis architecture design chart maps component initialization pathways, state lookup triggers, and async operational cycles inside the module.
+
+```mermaid
+graph TD
+    %% Custom Styling
+    classDef pageStyle fill:#1e3a8a,stroke:#3b82f6,stroke-width:2px,color:#fff;
+    classDef compStyle fill:#0f766e,stroke:#14b8a6,stroke-width:2px,color:#fff;
+    classDef formStyle fill:#b45309,stroke:#f59e0b,stroke-width:2px,color:#fff;
+    classDef storeStyle fill:#6b21a8,stroke:#a855f7,stroke-width:2px,color:#fff;
+    classDef hookStyle fill:#4d7c0f,stroke:#84cc16,stroke-width:2px,color:#fff;
+
+    %% Components & Routing Nodes
+    SubRoute[/"Next.js Page Entry<br/>(Typing Route Layout)"/]:::pageStyle
+    Page[TypingPage Component]:::pageStyle
+    Render[RenderTyping Component]:::compStyle
+    ManagePop[ManageTypingPopup Component]:::formStyle
+    DelPop[DeleteTypingPopup Component]:::formStyle
+    
+    %% Hooks & Store Nodes
+    InfScroll[useInfiniteScroll Hook]:::hookStyle
+    ReduxStore[(Redux Store Lifecycle)]:::storeStyle
+
+    %% Lifecycle Bootstrap Flow
+    SubRoute -->|Passes route: 'course' OR 'test'| Page
+    Page -->|1. Mount: Sync Lookups| ReduxStore
+    Page -->|2. Route Change: Reset & Fetch Page 1| ReduxStore
+    
+    %% UI Composition Connections
+    Page -->|Mounts with domain: 'typings'| Render
+    Page -->|Mounts with domain: 'typings'| ManagePop
+    Page -->|Mounts with domain: 'typings'| DelPop
+
+    %% Render Component Sub-flows
+    Render -->|Selects Data & Pagination| ReduxStore
+    Render -->|Attaches Node Ref| InfScroll
+    InfScroll -->|Triggers Fetch Next Page| ReduxStore
+    Render -->|Click Edit: openManagePopup| ReduxStore
+    Render -->|Click Delete: openDeletePopup| ReduxStore
+
+    %% Popup Visibility Routing via Selectors
+    ReduxStore -.->|isOpen === true| ManagePop
+    ReduxStore -.->|isOpen === true| DelPop
+
+    %% Action Execution Workflows
+    ManagePop -->|Validates Inputs & Dispatches Save| ReduxStore
+    DelPop -->|Dispatches Deletion Thunk| ReduxStore
+
+    %% State Modification Refresh Loop
+    ReduxStore -.->|Triggers Reducer Helpers| ReduxStore
+    ReduxStore -.->|Pushes Clean State Updates| Render
