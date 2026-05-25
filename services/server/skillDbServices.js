@@ -29,8 +29,9 @@ export const skillDbServices = {
               children: {
                 orderBy: { order: "asc" },
                 include: {
-                  orderBy: { order: "asc" },
-                  include: { topics: { orderBy: { order: "asc" } } },
+                  topics: {
+                    orderBy: { order: "asc" },
+                  },
                 },
               },
               topics: {
@@ -143,6 +144,39 @@ export const skillDbServices = {
         throw { status: 404, message: "Skill not found" };
       }
 
+      throw prismaError;
+    }
+  },
+
+  //* Check Order Uniqueness
+  checkOrderUniqueness: async ({ order, excludeId }) => {
+    // 1. Sanitize & Parse the input value safely to an integer
+    const targetOrder = Number(order);
+
+    if (isNaN(targetOrder)) {
+      throw {
+        status: 400,
+        message: "Skill Order must be a valid numeric index sequence",
+      };
+    }
+
+    try {
+      // 2. Build a dynamic clause checking for duplicates while ignoring active edit records
+      const duplicateCount = await prisma.skill.count({
+        where: {
+          order: targetOrder,
+          // 🛡️ Dynamic Exclusion: Only add "not equal" constraint if an active edit ID is present
+          ...(excludeId ? { id: { not: excludeId } } : {}),
+        },
+      });
+
+      // If count is greater than 0, a duplicate exists elsewhere in your table
+      return duplicateCount > 0;
+    } catch (prismaError) {
+      console.error(
+        "Prisma Count Unique Database Operation Exception:",
+        prismaError,
+      );
       throw prismaError;
     }
   },

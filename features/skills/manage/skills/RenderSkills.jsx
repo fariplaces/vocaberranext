@@ -1,34 +1,36 @@
 "use client";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
-import { fetchExercises } from "@/store/actions/typingActions";
+import { fetchSkills } from "@/store/actions/skillActions";
 import {
-  selectExercisePagination,
-  selectIsFetchingMoreExercise,
-  selectFilteredExercises,
-  selectTypingLoading,
-} from "@/store/selectors/typingSelectors/typingSelectors";
+  EMPTY_ARRAY,
+  FETCH_MORE_PARAMS,
+  PAGINATION_KEYS,
+} from "@/store/constants/sliceConstants";
 import {
-  openDeletePopup,
-  openManagePopup,
-} from "@/store/slices/typingSlices/typingFormSlice";
+  selectAllSkills,
+  selectRenderSkills,
+} from "@/store/selectors/skillSelectors/skillSelectors";
+import { openSkillManagePopup } from "@/store/slices/skillSlices/skillFormSlice";
 import { Edit2, Trash2 } from "lucide-react";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-function RenderExercises({ route, domain }) {
+function RenderSkills({ domain }) {
   const dispatch = useDispatch();
-
-  const filteredExercises = useSelector(selectFilteredExercises);
-  const isInitialLoading = useSelector(selectTypingLoading);
-  const isFetchingMore = useSelector(selectIsFetchingMoreExercise);
-  const pagination = useSelector(selectExercisePagination);
+  const { skills, isInitialLoading, isFetchingMore, hasMore, pagination } =
+    useSelector(selectRenderSkills) || {};
 
   const lastElementRef = useInfiniteScroll(
     isInitialLoading || isFetchingMore,
-    pagination?.hasMore,
+    hasMore,
     () =>
       dispatch(
-        fetchExercises({ page: (pagination?.currentPage || 1) + 1, route }),
+        fetchSkills(
+          FETCH_MORE_PARAMS(
+            pagination?.[PAGINATION_KEYS.CURRENT_PAGE],
+            pagination?.[PAGINATION_KEYS.PER_PAGE],
+          ),
+        ),
       ),
   );
 
@@ -42,14 +44,12 @@ function RenderExercises({ route, domain }) {
                 S No
               </th>
               <th className="border border-gray-700 px-4 py-2 text-left text-sm font-medium text-white">
-                Exercise Title
+                Skill Title
               </th>
               <th className="border border-gray-700 px-4 py-2 text-left text-sm font-medium text-white">
-                Type
+                Order
               </th>
-              <th className="border border-gray-700 px-4 py-2 text-left text-sm font-medium text-white">
-                Lesson
-              </th>
+
               <th className="border border-gray-700 px-4 py-2 text-left text-sm font-medium text-white">
                 Action
               </th>
@@ -57,29 +57,35 @@ function RenderExercises({ route, domain }) {
           </thead>
           <tbody>
             {/* Idioms Row */}
-            {filteredExercises.map((item, i) => (
+            {skills.map((item, i) => (
               <tr key={item.id}>
                 <td className="border border-gray-700 px-4 py-2 text-sm text-white">
                   {i + 1}
                 </td>
                 <td className="border border-gray-700 px-4 py-2 text-sm text-white">
-                  {item.exerciseNo} - {item.title}
+                  {item.title}
                 </td>
                 <td className="border border-gray-700 px-4 py-2 text-sm text-white">
-                  {item.type.type}
+                  {item.order}
                 </td>
-                <td className="border border-gray-700 px-4 py-2 text-sm text-white">
-                  {item.lesson.lesson}
-                </td>
+
                 <td className=" flex justify-evenly border border-gray-700 px-4 py-2 text-sm text-white">
                   <Edit2
                     onClick={() =>
-                      dispatch(openManagePopup({ domain, editData: item }))
+                      dispatch(
+                        openSkillManagePopup({
+                          domain,
+                          editData: item,
+                          defaults: {},
+                        }),
+                      )
                     }
                   />
                   <Trash2
                     className="text-red-600"
-                    onClick={() => dispatch(openDeletePopup({ domain, item }))}
+                    onClick={() =>
+                      dispatch(openSkillDeletePopup({ domain, item }))
+                    }
                   />
                 </td>
               </tr>
@@ -88,7 +94,6 @@ function RenderExercises({ route, domain }) {
         </table>
       </div>
 
-      {/* Infinite Scroll Trigger Zone */}
       <div
         ref={lastElementRef}
         className="h-16 w-full flex justify-center items-center"
@@ -100,7 +105,7 @@ function RenderExercises({ route, domain }) {
               Syncing Records...
             </span>
           </div>
-        ) : !pagination?.hasMore && filteredExercises.length > 0 ? (
+        ) : !hasMore && skills.length > 0 ? (
           <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-gray-700 to-transparent relative">
             <span className="absolute left-1/2 -translate-x-1/2 -top-3 bg-black px-4 text-gray-500 text-xs italic">
               End of History
@@ -111,4 +116,4 @@ function RenderExercises({ route, domain }) {
     </div>
   );
 }
-export default RenderExercises;
+export default RenderSkills;

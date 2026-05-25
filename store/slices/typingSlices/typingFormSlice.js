@@ -39,6 +39,9 @@ const typingFormSlice = createSlice({
   name: SLICE_NAMES.TYPING_FORM,
   initialState,
   reducers: {
+    // --- Reset Typing Form State ---
+    resetTypingFormState: () => initialState,
+    // --- Manage Typing Popup Actions ---
     openManagePopup: (state, action) => {
       const { domain, editData, defaults } = action.payload;
       const target = state[domain][UI_KEYS.MANAGE_POPUP];
@@ -63,7 +66,7 @@ const typingFormSlice = createSlice({
         };
       }
     },
-
+    // --- Update Typing Form Field ---
     updateFormField: (state, action) => {
       const { domain, name, value } = action.payload;
       state[domain][UI_KEYS.MANAGE_POPUP][UI_KEYS.FORM_DATA][name] = value;
@@ -87,7 +90,7 @@ const typingFormSlice = createSlice({
       target[UI_KEYS.IS_OPEN] = true;
       target.item = item; // Stores the whole object so the modal can show "Delete Lesson 1?"
     },
-
+    // --- Close Delete Popup & Reset State ---
     closeDeletePopup: (state, action) => {
       const { domain } = action.payload;
       if (!state[domain]) return;

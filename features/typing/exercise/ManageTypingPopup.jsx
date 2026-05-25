@@ -4,12 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { createTyping, updateTyping } from "@/store/actions/typingActions";
 import { updateFormField } from "@/store/slices/typingSlices/typingFormSlice";
 import { selectUser } from "@/store/selectors/authSelectors";
-import { selectExerciseFormMeta, selectTypingResultMeta } from "@/store/selectors/typingFormSelectors";
+import {
+  selectExerciseFormMeta,
+  selectTypingResultMeta,
+} from "@/store/selectors/typingSelectors/typingFormSelectors";
 import { closeManagePopup } from "@/store/slices/typingSlices/typingFormSlice";
 import { FORM_DOMAINS } from "@/store/constants/typingConstants";
 
-
-const ManageTypingPopup = ({domain}) => {
+const ManageTypingPopup = ({ domain }) => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
 
@@ -22,7 +24,7 @@ const ManageTypingPopup = ({domain}) => {
     durations,
     title,
     route,
-    editId
+    editId,
   } = useSelector(selectTypingResultMeta);
 
   if (!isOpen) return null;
@@ -33,7 +35,8 @@ const ManageTypingPopup = ({domain}) => {
   };
 
   const handleSave = async () => {
-    if (!formData.exerciseId || !formData.durationId) return toast.error("Required fields missing");
+    if (!formData.exerciseId || !formData.durationId)
+      return toast.error("Required fields missing");
 
     if (Number(formData.net) > Number(formData.gross)) {
       return toast.error("Net speed cannot exceed Gross speed.");
@@ -49,9 +52,11 @@ const ManageTypingPopup = ({domain}) => {
     };
 
     try {
-      const action = editId ? updateTyping({ id: editId, ...payload }) : createTyping(payload);
+      const action = editId
+        ? updateTyping({ id: editId, ...payload })
+        : createTyping(payload);
       await dispatch(action).unwrap();
-      dispatch(closeManagePopup({domain}));
+      dispatch(closeManagePopup({ domain }));
     } catch (error) {
       toast.error(`Submission failed: ${error}`);
     }
@@ -73,9 +78,13 @@ const ManageTypingPopup = ({domain}) => {
             className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md outline-none focus:border-blue-500 text-white"
           >
             <option value="">Select Exercise</option>
-            {lessons.map(lesson => (
-              <optgroup key={lesson.id} label={lesson.lesson} className="bg-gray-900 text-blue-400">
-                {lesson.exercises.map(ex => (
+            {lessons.map((lesson) => (
+              <optgroup
+                key={lesson.id}
+                label={lesson.lesson}
+                className="bg-gray-900 text-blue-400"
+              >
+                {lesson.exercises.map((ex) => (
                   <option key={ex.id} value={ex.id} className="text-white">
                     {ex.exerciseNo} - {ex.title}
                   </option>
@@ -87,7 +96,9 @@ const ManageTypingPopup = ({domain}) => {
 
         {/* Duration Selection */}
         <div className="mb-4">
-          <label className={`block text-sm mb-1 ${route === "course" ? "text-gray-600" : "text-gray-400"}`}>
+          <label
+            className={`block text-sm mb-1 ${route === "course" ? "text-gray-600" : "text-gray-400"}`}
+          >
             Duration
           </label>
           <select
@@ -99,7 +110,9 @@ const ManageTypingPopup = ({domain}) => {
           >
             <option value="">Select Duration</option>
             {durations.map((d) => (
-              <option key={d.id} value={d.id}>{d.duration}</option>
+              <option key={d.id} value={d.id}>
+                {d.duration}
+              </option>
             ))}
           </select>
         </div>
@@ -107,30 +120,51 @@ const ManageTypingPopup = ({domain}) => {
         {/* Speed Inputs */}
         <div className="grid grid-cols-2 gap-4">
           <div className="mb-4">
-            <label className="block text-sm mb-1 text-gray-400">Gross (WPM)</label>
-            <input type="number" name="gross" value={formData.gross} onChange={handleChange} className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md outline-none focus:border-blue-500 text-white" />
+            <label className="block text-sm mb-1 text-gray-400">
+              Gross (WPM)
+            </label>
+            <input
+              type="number"
+              name="gross"
+              value={formData.gross}
+              onChange={handleChange}
+              className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md outline-none focus:border-blue-500 text-white"
+            />
           </div>
           <div className="mb-4">
-            <label className="block text-sm mb-1 text-gray-400">Net (WPM)</label>
+            <label className="block text-sm mb-1 text-gray-400">
+              Net (WPM)
+            </label>
             <input
               type="number"
               name="net"
               value={formData.net}
               onChange={handleChange}
-              className={`w-full px-3 py-2 bg-gray-800 border rounded-md outline-none ${Number(formData.net) > Number(formData.gross) ? 'border-red-500' : 'border-gray-700 focus:border-blue-500'} text-white`}
+              className={`w-full px-3 py-2 bg-gray-800 border rounded-md outline-none ${Number(formData.net) > Number(formData.gross) ? "border-red-500" : "border-gray-700 focus:border-blue-500"} text-white`}
             />
           </div>
         </div>
 
         {/* Accuracy Input */}
         <div className="mb-4">
-          <label className="block text-sm mb-1 text-gray-400">Accuracy (%)</label>
-          <input type="text" name="accuracy" value={formData.accuracy} onChange={handleChange} className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md outline-none focus:border-blue-500 text-white" placeholder="e.g. 98.5" />
+          <label className="block text-sm mb-1 text-gray-400">
+            Accuracy (%)
+          </label>
+          <input
+            type="text"
+            name="accuracy"
+            value={formData.accuracy}
+            onChange={handleChange}
+            className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md outline-none focus:border-blue-500 text-white"
+            placeholder="e.g. 98.5"
+          />
         </div>
 
         <div className="flex justify-end gap-3 mt-6">
           <button
-            onClick={() => dispatch(closeManagePopup({domain:  FORM_DOMAINS.TYPINGS} ))}
+            onClick={() =>
+              dispatch(closeManagePopup({ domain: FORM_DOMAINS.TYPINGS }))
+            }
             className="px-4 py-2 text-gray-400 hover:text-white transition-colors"
           >
             Cancel

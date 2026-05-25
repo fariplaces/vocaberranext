@@ -1,5 +1,5 @@
 "use client";
-import { selectDeletePopupMeta } from "@/store/selectors/typingFormSelectors";
+import { selectDeletePopupMeta } from "@/store/selectors/typingSelectors/typingFormSelectors";
 import { closeDeletePopup } from "@/store/slices/typingSlices/typingFormSlice";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";

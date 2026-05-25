@@ -1,4 +1,4 @@
-// @/store/constants/sliceConstants.js
+export const EMPTY_ARRAY = Object.freeze([]);
 
 export const SLICE_NAMES = {
   AUTH: "auth",
@@ -11,12 +11,15 @@ export const SLICE_NAMES = {
   TYPING: "typing",
   TYPING_FORM: "typingForm",
 
+  // Skill Slices
   SKILL: "skill",
+  SKILL_FORM: "skillForm",
+
   TASKS: "tasks",
   NOTES: "notes",
 };
 
-const PAGINATION_KEYS = {
+export const PAGINATION_KEYS = {
   CURRENT_PAGE: "currentPage",
   LAST_PAGE: "lastPage",
   PER_PAGE: "perPage",
@@ -24,10 +27,28 @@ const PAGINATION_KEYS = {
   IS_FETCHING: "isFetching",
 };
 
-export const INITIAL_PAGINATION_STATE = {
+export const INITIAL_PAGINATION_STATE = Object.freeze({
   [PAGINATION_KEYS.CURRENT_PAGE]: 1,
   [PAGINATION_KEYS.LAST_PAGE]: 1,
   [PAGINATION_KEYS.PER_PAGE]: 10,
   [PAGINATION_KEYS.HAS_NEXT_PAGE]: false,
   [PAGINATION_KEYS.IS_FETCHING]: false,
-};
+});
+
+export const DEFAULT_PAGINATION = Object.freeze({
+  currentPage: 1,
+  lastPage: 1,
+  hasMore: false,
+  isFetchingMore: false,
+});
+
+export const INITIAL_FETCH_PARAMS = Object.freeze({
+  page: 1,
+  limit: 10,
+});
+
+// c: current page, l: limit
+export const FETCH_MORE_PARAMS = (c, l) => ({
+  page: (c || 1) + 1,
+  limit: l,
+});

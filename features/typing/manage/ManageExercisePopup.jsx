@@ -1,19 +1,19 @@
 "use client";
-import {
-  createExercise,
-  updateExercise,
-} from "@/store/actions/typingActions";
+import { createExercise, updateExercise } from "@/store/actions/typingActions";
 import { FORM_DOMAINS } from "@/store/constants/typingConstants";
 import { selectUser } from "@/store/selectors/authSelectors";
-import { selectExerciseFormMeta } from "@/store/selectors/typingFormSelectors";
-import { closeManagePopup, updateFormField } from "@/store/slices/typingSlices/typingFormSlice";
+import { selectExerciseFormMeta } from "@/store/selectors/typingSelectors/typingFormSelectors";
+import {
+  closeManagePopup,
+  updateFormField,
+} from "@/store/slices/typingSlices/typingFormSlice";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 
 const ManageExercisePopup = ({ domain }) => {
   const dispatch = useDispatch();
-    const user = useSelector(selectUser);
-  
+  const user = useSelector(selectUser);
+
   const {
     isOpen,
     editId,
@@ -33,26 +33,31 @@ const ManageExercisePopup = ({ domain }) => {
     dispatch(updateFormField({ domain, name, value }));
   };
 
-
   const handleSave = async () => {
     console.log("Form Data on Save:", formData);
-    if (!formData.lessonId || !formData.typeId || !formData.title || !formData.exerciseNo) return toast.error("Required fields missing");
+    if (
+      !formData.lessonId ||
+      !formData.typeId ||
+      !formData.title ||
+      !formData.exerciseNo
+    )
+      return toast.error("Required fields missing");
 
-  
     const payload = {
       ...formData,
       userId: user.id,
     };
 
     try {
-      const action = editId ? updateExercise({ id: editId, ...payload }) : createExercise(payload);
+      const action = editId
+        ? updateExercise({ id: editId, ...payload })
+        : createExercise(payload);
       await dispatch(action).unwrap();
-      dispatch(closeManagePopup({domain}));
+      dispatch(closeManagePopup({ domain }));
     } catch (error) {
       toast.error(`Submission failed: ${error}`);
     }
   };
-
 
   return (
     <>
@@ -76,7 +81,7 @@ const ManageExercisePopup = ({ domain }) => {
                   // }
                   onChange={handleChange}
                   className="w-full  px-3 py-2 bg-transparent border border-gray-600 rounded-md focus:outline-none focus:border-blue-500"
-                 >
+                >
                   <option className="bg-black" value="">
                     Select a Lesson
                   </option>
@@ -97,11 +102,11 @@ const ManageExercisePopup = ({ domain }) => {
                 <select
                   name="typeId"
                   value={formData.typeId}
-                //   value={
-                //   route === "test"
-                //     ? exerciseTypes.find((l) => l.type.toUpperCase() === "TEST")?.id || ""
-                //     : exerciseTypes.find((l) => l.type.toUpperCase() === "EXERCISE")?.id || ""
-                // }
+                  //   value={
+                  //   route === "test"
+                  //     ? exerciseTypes.find((l) => l.type.toUpperCase() === "TEST")?.id || ""
+                  //     : exerciseTypes.find((l) => l.type.toUpperCase() === "EXERCISE")?.id || ""
+                  // }
                   onChange={handleChange}
                   className="w-full px-3 py-2 bg-transparent border border-gray-600 rounded-md focus:outline-none focus:border-blue-500"
                 >
@@ -140,7 +145,8 @@ const ManageExercisePopup = ({ domain }) => {
                   ${
                     exercises.some(
                       (item) =>
-                        item.exerciseNo === formData.exerciseNo && item.id !== formData.id // ignore self in edit
+                        item.exerciseNo === formData.exerciseNo &&
+                        item.id !== formData.id, // ignore self in edit
                     )
                       ? "border-red-500"
                       : "border-gray-600 focus:border-blue-500"
@@ -151,7 +157,7 @@ const ManageExercisePopup = ({ domain }) => {
                 {exercises.some(
                   (item) =>
                     item.exerciseNo === formData.exerciseNo &&
-                    item.id !== formData.id
+                    item.id !== formData.id,
                 ) && (
                   <p className="text-red-500 text-xs mt-1">
                     Exercise number already exists
@@ -161,7 +167,11 @@ const ManageExercisePopup = ({ domain }) => {
               {/* Buttons */}
               <div className="flex justify-end space-x-2">
                 <button
-                      onClick={() => dispatch(closeManagePopup({domain:  FORM_DOMAINS.EXERCISES} ))}
+                  onClick={() =>
+                    dispatch(
+                      closeManagePopup({ domain: FORM_DOMAINS.EXERCISES }),
+                    )
+                  }
                   // onClick={() => setIsOpen(false)}
                   className="px-4 py-2 border border-gray-600 rounded-lg hover:bg-gray-700"
                 >

@@ -1,12 +1,19 @@
-'use client'
+"use client";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Edit2, Trash2 } from "lucide-react";
 import { fetchTypings } from "@/store/actions/typingActions";
-import { selectIsFetchingMoreTyping, selectFilteredTypings, selectTypingLoading, selectTypingPagination } from "@/store/selectors/typingSelectors";
-import { openManagePopup, openDeletePopup } from "@/store/slices/typingSlices/typingFormSlice";
+import {
+  selectIsFetchingMoreTyping,
+  selectFilteredTypings,
+  selectTypingLoading,
+  selectTypingPagination,
+} from "@/store/selectors/typingSelectors/typingSelectors";
+import {
+  openManagePopup,
+  openDeletePopup,
+} from "@/store/slices/typingSlices/typingFormSlice";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
-
 
 function RenderTyping({ route, domain }) {
   const dispatch = useDispatch();
@@ -16,11 +23,14 @@ function RenderTyping({ route, domain }) {
   const isFetchingMore = useSelector(selectIsFetchingMoreTyping);
   const pagination = useSelector(selectTypingPagination);
 
-
   const lastElementRef = useInfiniteScroll(
-    isInitialLoading || isFetchingMore, pagination?.hasMore,
-    () => dispatch(fetchTypings({ page: (pagination?.currentPage || 1) + 1, route }))
-  )
+    isInitialLoading || isFetchingMore,
+    pagination?.hasMore,
+    () =>
+      dispatch(
+        fetchTypings({ page: (pagination?.currentPage || 1) + 1, route }),
+      ),
+  );
 
   return (
     <div className="space-y-6">
@@ -28,28 +38,47 @@ function RenderTyping({ route, domain }) {
         <table className="min-w-full border-collapse text-white">
           <thead className="bg-gray-800 text-gray-400">
             <tr>
-              <th className="border border-gray-700 px-4 py-3 text-left text-xs uppercase tracking-wider font-semibold">S No</th>
-              <th className="border border-gray-700 px-4 py-3 text-left text-xs uppercase tracking-wider font-semibold">Exercise Title</th>
-              <th className="border border-gray-700 px-4 py-3 text-left text-xs uppercase tracking-wider font-semibold">Duration</th>
-              <th className="border border-gray-700 px-4 py-3 text-left text-xs uppercase tracking-wider font-semibold">Accuracy</th>
+              <th className="border border-gray-700 px-4 py-3 text-left text-xs uppercase tracking-wider font-semibold">
+                S No
+              </th>
+              <th className="border border-gray-700 px-4 py-3 text-left text-xs uppercase tracking-wider font-semibold">
+                Exercise Title
+              </th>
+              <th className="border border-gray-700 px-4 py-3 text-left text-xs uppercase tracking-wider font-semibold">
+                Duration
+              </th>
+              <th className="border border-gray-700 px-4 py-3 text-left text-xs uppercase tracking-wider font-semibold">
+                Accuracy
+              </th>
               <th className="border border-gray-700 px-4 py-2 text-left text-sm font-medium text-white">
                 Gross (WPM)
               </th>
               <th className="border border-gray-700 px-4 py-2 text-left text-sm font-medium text-white">
                 Net (WPM)
               </th>
-              <th className="border border-gray-700 px-4 py-3 text-left text-xs uppercase tracking-wider font-semibold text-center">Action</th>
+              <th className="border border-gray-700 px-4 py-3 text-left text-xs uppercase tracking-wider font-semibold text-center">
+                Action
+              </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-700">
             {filteredTypings.map((item, i) => (
-              <tr key={item.id} className="hover:bg-gray-800/40 transition-colors group">
-                <td className="border border-gray-700 px-4 py-12 text-sm text-gray-400">{i + 1}</td>
+              <tr
+                key={item.id}
+                className="hover:bg-gray-800/40 transition-colors group"
+              >
+                <td className="border border-gray-700 px-4 py-12 text-sm text-gray-400">
+                  {i + 1}
+                </td>
                 <td className="border border-gray-700 px-4 py-2 text-sm font-medium">
                   {item.exercise?.exerciseNo} - {item.exercise?.title}
                 </td>
-                <td className="border border-gray-700 px-4 py-2 text-sm">{item.duration?.duration}</td>
-                <td className="border border-gray-700 px-4 py-2 text-sm text-blue-400 font-semibold">{item.accuracy}%</td>
+                <td className="border border-gray-700 px-4 py-2 text-sm">
+                  {item.duration?.duration}
+                </td>
+                <td className="border border-gray-700 px-4 py-2 text-sm text-blue-400 font-semibold">
+                  {item.accuracy}%
+                </td>
                 <td className="border border-gray-700 px-4 py-2 text-sm text-white">
                   {item.gross}
                 </td>
@@ -60,14 +89,18 @@ function RenderTyping({ route, domain }) {
                   <div className="flex justify-center space-x-4">
                     {/* ✅ Dispatches directly to Form Slice now */}
                     <button
-                      onClick={() => dispatch(openManagePopup({  domain, editData: item }))}
+                      onClick={() =>
+                        dispatch(openManagePopup({ domain, editData: item }))
+                      }
                       className="p-1 text-gray-400 hover:text-blue-500 transition-colors"
                       title="Edit Entry"
                     >
                       <Edit2 size={16} />
                     </button>
                     <button
-                      onClick={() => dispatch(openDeletePopup({domain, item}))}
+                      onClick={() =>
+                        dispatch(openDeletePopup({ domain, item }))
+                      }
                       className="p-1 text-gray-400 hover:text-red-500 transition-colors"
                       title="Delete Entry"
                     >
@@ -82,11 +115,16 @@ function RenderTyping({ route, domain }) {
       </div>
 
       {/* Infinite Scroll Trigger Zone */}
-      <div ref={lastElementRef} className="h-16 w-full flex justify-center items-center">
+      <div
+        ref={lastElementRef}
+        className="h-16 w-full flex justify-center items-center"
+      >
         {isInitialLoading ? (
           <div className="flex items-center space-x-3 text-gray-400 bg-gray-800/50 px-4 py-2 rounded-full border border-gray-700">
             <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-            <span className="text-xs font-medium uppercase tracking-widest">Syncing Records...</span>
+            <span className="text-xs font-medium uppercase tracking-widest">
+              Syncing Records...
+            </span>
           </div>
         ) : !pagination?.hasMore && filteredTypings.length > 0 ? (
           <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-gray-700 to-transparent relative">

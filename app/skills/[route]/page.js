@@ -1,11 +1,9 @@
-import React from 'react'
-import TopicsPage from '@/components/skills/topic2/TopicsPage';
+import React from "react";
+import TopicsPage from "@/features/skills/manage/topic2/TopicsPage";
 
 const Topics = async ({ params }) => {
-   const { route } = await params;
-   return (
-      <TopicsPage route={route} />
-   )
-}
+  const { route } = await params;
+  return <TopicsPage route={route} />;
+};
 
-export default Topics
+export default Topics;

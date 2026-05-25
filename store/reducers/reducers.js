@@ -17,6 +17,7 @@ import wordMeaningReducer from "@/store/slices/wordMeaningSlice";
 
 // Skill Reducers
 import skillReducer from "@/store/slices/skillSlices/skillSlice";
+import skillFormReducer from "@/store/slices/skillSlices/skillFormSlice";
 
 // Tasks Reducers
 import taskReducer from "@/store/slices/taskSlice";
@@ -37,6 +38,7 @@ const rootReducer = combineReducers({
   [SLICE_NAMES.TYPING_FORM]: typingFormReducer,
 
   [SLICE_NAMES.SKILL]: skillReducer,
+  [SLICE_NAMES.SKILL_FORM]: skillFormReducer,
   [SLICE_NAMES.TASKS]: taskReducer,
   [SLICE_NAMES.NOTES]: notesReducer,
 });

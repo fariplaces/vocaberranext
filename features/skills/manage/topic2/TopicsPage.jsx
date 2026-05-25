@@ -6,10 +6,14 @@ import { useDispatch, useSelector } from "react-redux";
 import RenderTopics from "./RenderTopics";
 import ManageTopicPopup from "./ManageTopicPopup";
 import DeleteTopicPopup from "./DeleteTopicPopup";
-import ManageRevisionPopup from "../revisions/ManageRevisionPopup";
-import { deleteTopic, fetchCategories, fetchTopics } from "@/store/actions/skillActions";
+import ManageRevisionPopup from "../../../../components/skills/revisions/ManageRevisionPopup";
+import {
+  deleteTopic,
+  fetchCategories,
+  fetchTopics,
+} from "@/store/actions/skillActions";
 
-const TopicsPage = () => {
+const TopicsPage = ({ route }) => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isRevisionPopupOpen, setIsRevisionPopupOpen] = useState(false);
@@ -23,7 +27,6 @@ const TopicsPage = () => {
   };
 
   const handleRevisionClick = (item) => {
-    // console.log(item);
     setSelectedItem({ topicId: item.id });
     setIsRevisionPopupOpen(true);
   };
@@ -61,6 +64,7 @@ const TopicsPage = () => {
         handleMethod={handleAddClick}
       />
       <RenderTopics
+        route={route}
         handleEditClick={handleEditClick}
         handleDelClick={handleDelClick}
         handleRevisionClick={handleRevisionClick}
@@ -83,7 +87,7 @@ const TopicsPage = () => {
         itemName={`${itemToDelete?.title} — ${[
           itemToDelete?.category?.title,
           itemToDelete?.category?.parent?.title,
-          itemToDelete?.category?.skill?.title
+          itemToDelete?.category?.skill?.title,
         ]
           .filter(Boolean)
           .join(" > ")}`}
@@ -95,9 +99,3 @@ const TopicsPage = () => {
 };
 
 export default TopicsPage;
-
-
-
-
-
-

@@ -1,18 +1,18 @@
 // store/selectors/typingFormSelectors.js
 import { createSelector } from "@reduxjs/toolkit";
-import { SLICE_NAMES } from "../constants/sliceConstants";
+import { SLICE_NAMES } from "../../constants/sliceConstants";
 import {
   selectAllLessons,
   selectAllDurations,
   selectAllExerciseTypes,
   selectAllExercises,
   selectFilterMode,
-} from "./typingSelectors";
+} from "../typingSelectors";
 import {
   FORM_DOMAINS,
   TYPING_KEYS,
   UI_KEYS,
-} from "../constants/typingConstants";
+} from "../../constants/typingConstants";
 
 // 1. Base Selector for the whole slice
 export const selectTypingFormState = (state) => state[SLICE_NAMES.TYPING_FORM];

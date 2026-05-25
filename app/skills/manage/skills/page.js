@@ -1,10 +1,8 @@
-import SkillsPage from '@/components/skills/skills/SkillsPage'
-import React from 'react'
+import SkillsPage from "@/features/skills/manage/skills/SkillsPage";
+import React from "react";
 
 const Skills = () => {
-   return (
-      <SkillsPage />
-   )
-}
+  return <SkillsPage />;
+};
 
-export default Skills
+export default Skills;

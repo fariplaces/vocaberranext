@@ -1,19 +1,16 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { SLICE_NAMES } from "../constants/sliceConstants";
-import { TYPING_KEYS } from "../constants/typingConstants";
+import {
+  DEFAULT_PAGINATION,
+  EMPTY_ARRAY,
+  SLICE_NAMES,
+} from "../../constants/sliceConstants";
+import { TYPING_KEYS } from "../../constants/typingConstants";
 
 /**
  * ENTERPRISE PATTERN: Constant Defaults
  * Using Object.freeze ensures that no developer can accidentally
  * push to or modify these default values, which would corrupt the state globally.
  */
-const EMPTY_ARRAY = Object.freeze([]);
-const DEFAULT_PAGINATION = Object.freeze({
-  currentPage: 1,
-  lastPage: 1,
-  hasMore: false,
-  isFetchingMore: false,
-});
 
 // --- Base Selectors ---
 
@@ -51,7 +48,6 @@ export const selectAllExerciseTypes = createSelector(
 
 // Primitives (strings/bools/null) are safe for direct selection
 export const selectFilterMode = (state) => selectTypingState(state).filterMode;
-console.log("Filter Mode:", selectFilterMode);
 export const selectTypingLoading = (state) => selectTypingState(state).loading;
 export const selectTypingError = (state) => selectTypingState(state).error;
 

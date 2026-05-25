@@ -1,10 +1,8 @@
-import TopicsPage from '@/components/skills/topics/TopicsPage'
-import React from 'react'
+import TopicsPage from "@/features/skills/manage/topics/TopicsPage";
+import React from "react";
 
 const Topics = () => {
-   return (
-      <TopicsPage />
-   )
-}
+  return <TopicsPage />;
+};
 
-export default Topics
+export default Topics;
