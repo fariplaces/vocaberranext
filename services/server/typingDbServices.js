@@ -37,11 +37,15 @@ export const typingDbServices = {
       prisma.exercise.count({ where }),
     ]);
 
+    const lastPage = Math.ceil(totalCount / limit);
+
     // 3. Return structured pagination object
     return {
       data: exercises,
       current_page: page,
       last_page: Math.ceil(totalCount / limit),
+      per_page: limit,
+      has_next_page: page < lastPage,
       total: totalCount,
     };
   },
@@ -137,10 +141,14 @@ export const typingDbServices = {
       prisma.typing.count({ where }),
     ]);
 
+    const lastPage = Math.ceil(totalCount / limit);
+
     return {
       data: typings,
       current_page: page,
       last_page: Math.ceil(totalCount / limit),
+      per_page: limit,
+      has_next_page: page < lastPage,
       total: totalCount,
     };
   },

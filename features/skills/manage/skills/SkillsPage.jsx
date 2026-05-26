@@ -35,7 +35,7 @@ const SkillsPage = () => {
       />
       <RenderSkills domain={domain} />
       <ManageSkillPopup domain={domain} />
-      {/* <DeleteSkillPopup domain={domain} /> */}
+      <DeleteSkillPopup domain={domain} />
     </>
   );
 };

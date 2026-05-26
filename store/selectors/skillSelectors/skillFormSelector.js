@@ -3,6 +3,7 @@ import {
   SKILLS_UI_KEYS,
 } from "@/store/constants/skillsConstants";
 import { SLICE_NAMES } from "@/store/constants/sliceConstants";
+import { initialState } from "@/store/slices/skillSlices/skillFormSlice";
 import { createSelector } from "@reduxjs/toolkit";
 
 //* ****************************************************
@@ -78,16 +79,46 @@ export const selectSkillFormDeletePopupItem = (domain) => (state) => {
 
 // --- Helper Meta Selector function ---
 
+// const createFormMetaEngine = (domain) =>
+//   createSelector([selectSkillFormState], (skillFormState) => {
+//     const domainState = skillFormState[domain] || {};
+//     const manage = domainState[SKILLS_UI_KEYS.MANAGE_POPUP] || {};
+//     const remove = domainState[SKILLS_UI_KEYS.DELETE_POPUP] || {};
+
+//     return {
+//       isOpen: manage[SKILLS_UI_KEYS.IS_OPEN] || false,
+//       editId: manage[SKILLS_UI_KEYS.EDIT_ID] || null,
+//       formData: manage[SKILLS_UI_KEYS.FORM_DATA] || {},
+//       isDeleteOpen: remove[SKILLS_UI_KEYS.IS_OPEN] || false,
+//       deleteItem: remove.item || null,
+//     };
+//   });
+
+// --- Helper Meta Selector function ---
 const createFormMetaEngine = (domain) =>
   createSelector([selectSkillFormState], (skillFormState) => {
+    // 1. Grab the active runtime state
     const domainState = skillFormState[domain] || {};
     const manage = domainState[SKILLS_UI_KEYS.MANAGE_POPUP] || {};
     const remove = domainState[SKILLS_UI_KEYS.DELETE_POPUP] || {};
 
+    // 2. 🌟 FIX THE LEAK: Fall back directly to your slice's structural blueprint
+    // instead of an empty anonymous object {} if the domain data isn't loaded yet!
+    const defaultFormData =
+      initialState[domain]?.[SKILLS_UI_KEYS.MANAGE_POPUP]?.[
+        SKILLS_UI_KEYS.FORM_DATA
+      ] || {};
+
     return {
       isOpen: manage[SKILLS_UI_KEYS.IS_OPEN] || false,
       editId: manage[SKILLS_UI_KEYS.EDIT_ID] || null,
-      formData: manage[SKILLS_UI_KEYS.FORM_DATA] || {},
+
+      // 🌟 Combines whatever exists in state with your default schema keys safely
+      formData: {
+        ...defaultFormData,
+        ...manage[SKILLS_UI_KEYS.FORM_DATA],
+      },
+
       isDeleteOpen: remove[SKILLS_UI_KEYS.IS_OPEN] || false,
       deleteItem: remove.item || null,
     };

@@ -25,6 +25,7 @@ export const PAGINATION_KEYS = {
   PER_PAGE: "perPage",
   HAS_NEXT_PAGE: "hasNextPage",
   IS_FETCHING: "isFetching",
+  TOTAL_COUNT: "totalCount",
 };
 
 export const INITIAL_PAGINATION_STATE = Object.freeze({
@@ -33,13 +34,7 @@ export const INITIAL_PAGINATION_STATE = Object.freeze({
   [PAGINATION_KEYS.PER_PAGE]: 10,
   [PAGINATION_KEYS.HAS_NEXT_PAGE]: false,
   [PAGINATION_KEYS.IS_FETCHING]: false,
-});
-
-export const DEFAULT_PAGINATION = Object.freeze({
-  currentPage: 1,
-  lastPage: 1,
-  hasMore: false,
-  isFetchingMore: false,
+  [PAGINATION_KEYS.TOTAL_COUNT]: "",
 });
 
 export const INITIAL_FETCH_PARAMS = Object.freeze({

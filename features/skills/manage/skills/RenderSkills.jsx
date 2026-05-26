@@ -10,7 +10,10 @@ import {
   selectAllSkills,
   selectRenderSkills,
 } from "@/store/selectors/skillSelectors/skillSelectors";
-import { openSkillManagePopup } from "@/store/slices/skillSlices/skillFormSlice";
+import {
+  openSkillDeletePopup,
+  openSkillManagePopup,
+} from "@/store/slices/skillSlices/skillFormSlice";
 import { Edit2, Trash2 } from "lucide-react";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";

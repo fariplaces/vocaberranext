@@ -1,7 +1,7 @@
 import { createSelector } from "@reduxjs/toolkit";
 import {
-  DEFAULT_PAGINATION,
   EMPTY_ARRAY,
+  INITIAL_PAGINATION_STATE,
   SLICE_NAMES,
 } from "../../constants/sliceConstants";
 import { TYPING_KEYS } from "../../constants/typingConstants";
@@ -55,12 +55,13 @@ export const selectTypingError = (state) => selectTypingState(state).error;
 
 export const selectTypingPagination = createSelector(
   [selectTypingState],
-  (typing) => typing[TYPING_KEYS.TYPING_PAGINATION] || DEFAULT_PAGINATION,
+  (typing) => typing[TYPING_KEYS.TYPING_PAGINATION] || INITIAL_PAGINATION_STATE,
 );
 
 export const selectExercisePagination = createSelector(
   [selectTypingState],
-  (typing) => typing[TYPING_KEYS.EXERCISE_PAGINATION] || DEFAULT_PAGINATION,
+  (typing) =>
+    typing[TYPING_KEYS.EXERCISE_PAGINATION] || INITIAL_PAGINATION_STATE,
 );
 
 // Memoizing these prevents unnecessary re-renders in components using these flags

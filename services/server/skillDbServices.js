@@ -88,7 +88,8 @@ export const skillDbServices = {
   },
 
   //* Update Skill
-  updateSkill: async ({ id, title, order }) => {
+  updateSkill: async (id, data) => {
+    const { title, order } = data;
     // 1. Basic Validation
     if (!id) {
       throw {

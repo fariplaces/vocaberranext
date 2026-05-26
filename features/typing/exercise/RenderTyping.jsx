@@ -25,7 +25,7 @@ function RenderTyping({ route, domain }) {
 
   const lastElementRef = useInfiniteScroll(
     isInitialLoading || isFetchingMore,
-    pagination?.hasMore,
+    pagination?.hasNextPage,
     () =>
       dispatch(
         fetchTypings({ page: (pagination?.currentPage || 1) + 1, route }),
@@ -126,7 +126,7 @@ function RenderTyping({ route, domain }) {
               Syncing Records...
             </span>
           </div>
-        ) : !pagination?.hasMore && filteredTypings.length > 0 ? (
+        ) : !pagination?.hasNextPage && filteredTypings.length > 0 ? (
           <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-gray-700 to-transparent relative">
             <span className="absolute left-1/2 -translate-x-1/2 -top-3 bg-black px-4 text-gray-500 text-xs italic">
               End of History

@@ -50,7 +50,7 @@ export const handleResourceFulfilled = (state, action) => {
 
   // 4. Handle Paginated Fetch
   if (paginationKey && payloadData?.current_page !== undefined) {
-    const { data, current_page, last_page, per_page } = payloadData;
+    const { data, current_page, last_page, per_page, total } = payloadData;
     const existingData = state[dataKey] || [];
 
     // Filter to prevent duplicate IDs if the API sends a cached item
@@ -65,6 +65,7 @@ export const handleResourceFulfilled = (state, action) => {
       hasNextPage: current_page < last_page,
       perPage: per_page,
       isFetchingMore: false,
+      totalCount: total,
     };
     return;
   }

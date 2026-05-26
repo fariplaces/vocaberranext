@@ -7,7 +7,7 @@ import {
   selectAllExerciseTypes,
   selectAllExercises,
   selectFilterMode,
-} from "../typingSelectors";
+} from "./typingSelectors";
 import {
   FORM_DOMAINS,
   TYPING_KEYS,

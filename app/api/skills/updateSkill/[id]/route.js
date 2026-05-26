@@ -1,11 +1,12 @@
 import { skillDbServices } from "@/services/server/skillDbServices";
 import { NextResponse } from "next/server";
 
-export async function PATCH(req) {
+export async function PATCH(req, { params }) {
   try {
+    const { id } = await params;
     const body = await req.json();
 
-    const updatedSkill = await skillDbServices.updateSkill(body);
+    const updatedSkill = await skillDbServices.updateSkill(id, body);
 
     return NextResponse.json(updatedSkill);
   } catch (error) {

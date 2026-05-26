@@ -5,55 +5,98 @@ import {
 import { SLICE_NAMES } from "@/store/constants/sliceConstants";
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-  [SKILL_FORM_DOMAINS.SKILLS]: {
-    [SKILLS_UI_KEYS.MANAGE_POPUP]: {
-      [SKILLS_UI_KEYS.IS_OPEN]: false,
-      [SKILLS_UI_KEYS.EDIT_ID]: null,
-      [SKILLS_UI_KEYS.FORM_DATA]: {
-        title: "",
-        order: "",
-      },
-    },
-    [SKILLS_UI_KEYS.DELETE_POPUP]: {
-      [SKILLS_UI_KEYS.IS_OPEN]: false,
-      item: null,
+// store/slices/skillFormSlice.js
+
+// 1. Updated Blueprint: Now accepts unique form shapes dynamically
+const createBlankPopupBlueprint = (initialFields = {}) => ({
+  [SKILLS_UI_KEYS.MANAGE_POPUP]: {
+    [SKILLS_UI_KEYS.IS_OPEN]: false,
+    [SKILLS_UI_KEYS.EDIT_ID]: null,
+    // 🌟 Spreads the precise layout keys needed for this specific module
+    [SKILLS_UI_KEYS.FORM_DATA]: {
+      ...initialFields,
     },
   },
-  [SKILL_FORM_DOMAINS.CATEGORIES]: {
-    [SKILLS_UI_KEYS.MANAGE_POPUP]: {
-      [SKILLS_UI_KEYS.IS_OPEN]: false,
-      [SKILLS_UI_KEYS.EDIT_ID]: null,
-      [SKILLS_UI_KEYS.FORM_DATA]: {},
-    },
-    [SKILLS_UI_KEYS.DELETE_POPUP]: {
-      [SKILLS_UI_KEYS.IS_OPEN]: false,
-      item: null,
-    },
+  [SKILLS_UI_KEYS.DELETE_POPUP]: {
+    [SKILLS_UI_KEYS.IS_OPEN]: false,
+    [SKILLS_UI_KEYS.ITEM]: null,
   },
-  [SKILL_FORM_DOMAINS.TOPICS]: {
-    [SKILLS_UI_KEYS.MANAGE_POPUP]: {
-      [SKILLS_UI_KEYS.IS_OPEN]: false,
-      [SKILLS_UI_KEYS.EDIT_ID]: null,
-      [SKILLS_UI_KEYS.FORM_DATA]: {},
-    },
-    [SKILLS_UI_KEYS.DELETE_POPUP]: {
-      [SKILLS_UI_KEYS.IS_OPEN]: false,
-      item: null,
-    },
-  },
-  [SKILL_FORM_DOMAINS.REVISIONS]: {
-    [SKILLS_UI_KEYS.MANAGE_POPUP]: {
-      [SKILLS_UI_KEYS.IS_OPEN]: false,
-      [SKILLS_UI_KEYS.EDIT_ID]: null,
-      [SKILLS_UI_KEYS.FORM_DATA]: {},
-    },
-    [SKILLS_UI_KEYS.DELETE_POPUP]: {
-      [SKILLS_UI_KEYS.IS_OPEN]: false,
-      item: null,
-    },
-  },
+});
+
+// 2. Initialize EVERY domain with its exact, unique form blueprint!
+export const initialState = {
+  [SKILL_FORM_DOMAINS.SKILLS]: createBlankPopupBlueprint({
+    title: "",
+    order: "",
+  }),
+
+  [SKILL_FORM_DOMAINS.CATEGORY]: createBlankPopupBlueprint({
+    title: "",
+    imageUrl: "",
+    isActive: true,
+  }),
+
+  [SKILL_FORM_DOMAINS.TOPICS]: createBlankPopupBlueprint({
+    title: "",
+    description: "",
+    skillId: "",
+  }),
+
+  [SKILL_FORM_DOMAINS.REVISIONS]: createBlankPopupBlueprint({
+    notes: "",
+    intervalDays: "",
+  }),
 };
+
+// const initialState = {
+//   [SKILL_FORM_DOMAINS.SKILLS]: {
+//     [SKILLS_UI_KEYS.MANAGE_POPUP]: {
+//       [SKILLS_UI_KEYS.IS_OPEN]: false,
+//       [SKILLS_UI_KEYS.EDIT_ID]: null,
+//       [SKILLS_UI_KEYS.FORM_DATA]: {
+//         title: "",
+//         order: "",
+//       },
+//     },
+//     [SKILLS_UI_KEYS.DELETE_POPUP]: {
+//       [SKILLS_UI_KEYS.IS_OPEN]: false,
+//       item: null,
+//     },
+//   },
+//   [SKILL_FORM_DOMAINS.CATEGORIES]: {
+//     [SKILLS_UI_KEYS.MANAGE_POPUP]: {
+//       [SKILLS_UI_KEYS.IS_OPEN]: false,
+//       [SKILLS_UI_KEYS.EDIT_ID]: null,
+//       [SKILLS_UI_KEYS.FORM_DATA]: {},
+//     },
+//     [SKILLS_UI_KEYS.DELETE_POPUP]: {
+//       [SKILLS_UI_KEYS.IS_OPEN]: false,
+//       item: null,
+//     },
+//   },
+//   [SKILL_FORM_DOMAINS.TOPICS]: {
+//     [SKILLS_UI_KEYS.MANAGE_POPUP]: {
+//       [SKILLS_UI_KEYS.IS_OPEN]: false,
+//       [SKILLS_UI_KEYS.EDIT_ID]: null,
+//       [SKILLS_UI_KEYS.FORM_DATA]: {},
+//     },
+//     [SKILLS_UI_KEYS.DELETE_POPUP]: {
+//       [SKILLS_UI_KEYS.IS_OPEN]: false,
+//       item: null,
+//     },
+//   },
+//   [SKILL_FORM_DOMAINS.REVISIONS]: {
+//     [SKILLS_UI_KEYS.MANAGE_POPUP]: {
+//       [SKILLS_UI_KEYS.IS_OPEN]: false,
+//       [SKILLS_UI_KEYS.EDIT_ID]: null,
+//       [SKILLS_UI_KEYS.FORM_DATA]: {},
+//     },
+//     [SKILLS_UI_KEYS.DELETE_POPUP]: {
+//       [SKILLS_UI_KEYS.IS_OPEN]: false,
+//       item: null,
+//     },
+//   },
+// };
 
 const skillFormSlice = createSlice({
   name: SLICE_NAMES.SKILL_FORM,

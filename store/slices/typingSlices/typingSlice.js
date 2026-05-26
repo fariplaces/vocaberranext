@@ -1,6 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { TYPING_KEYS } from "../../constants/typingConstants";
-import { SLICE_NAMES } from "../../constants/sliceConstants";
+import {
+  INITIAL_PAGINATION_STATE,
+  SLICE_NAMES,
+} from "../../constants/sliceConstants";
 import {
   handleResourceFulfilled,
   handleResourcePending,
@@ -17,16 +20,10 @@ const initialState = {
   [TYPING_KEYS.DURATIONS]: [],
   [TYPING_KEYS.TYPINGS]: [],
   [TYPING_KEYS.TYPING_PAGINATION]: {
-    currentPage: 1,
-    lastPage: 1,
-    hasMore: true,
-    isFetchingMore: false,
+    ...INITIAL_PAGINATION_STATE,
   },
   [TYPING_KEYS.EXERCISE_PAGINATION]: {
-    currentPage: 1,
-    lastPage: 1,
-    hasMore: true,
-    isFetchingMore: false,
+    ...INITIAL_PAGINATION_STATE,
   },
   loading: false,
   filterMode: "course",
