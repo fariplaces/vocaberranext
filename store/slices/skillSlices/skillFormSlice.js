@@ -48,56 +48,6 @@ export const initialState = {
   }),
 };
 
-// const initialState = {
-//   [SKILL_FORM_DOMAINS.SKILLS]: {
-//     [SKILLS_UI_KEYS.MANAGE_POPUP]: {
-//       [SKILLS_UI_KEYS.IS_OPEN]: false,
-//       [SKILLS_UI_KEYS.EDIT_ID]: null,
-//       [SKILLS_UI_KEYS.FORM_DATA]: {
-//         title: "",
-//         order: "",
-//       },
-//     },
-//     [SKILLS_UI_KEYS.DELETE_POPUP]: {
-//       [SKILLS_UI_KEYS.IS_OPEN]: false,
-//       item: null,
-//     },
-//   },
-//   [SKILL_FORM_DOMAINS.CATEGORIES]: {
-//     [SKILLS_UI_KEYS.MANAGE_POPUP]: {
-//       [SKILLS_UI_KEYS.IS_OPEN]: false,
-//       [SKILLS_UI_KEYS.EDIT_ID]: null,
-//       [SKILLS_UI_KEYS.FORM_DATA]: {},
-//     },
-//     [SKILLS_UI_KEYS.DELETE_POPUP]: {
-//       [SKILLS_UI_KEYS.IS_OPEN]: false,
-//       item: null,
-//     },
-//   },
-//   [SKILL_FORM_DOMAINS.TOPICS]: {
-//     [SKILLS_UI_KEYS.MANAGE_POPUP]: {
-//       [SKILLS_UI_KEYS.IS_OPEN]: false,
-//       [SKILLS_UI_KEYS.EDIT_ID]: null,
-//       [SKILLS_UI_KEYS.FORM_DATA]: {},
-//     },
-//     [SKILLS_UI_KEYS.DELETE_POPUP]: {
-//       [SKILLS_UI_KEYS.IS_OPEN]: false,
-//       item: null,
-//     },
-//   },
-//   [SKILL_FORM_DOMAINS.REVISIONS]: {
-//     [SKILLS_UI_KEYS.MANAGE_POPUP]: {
-//       [SKILLS_UI_KEYS.IS_OPEN]: false,
-//       [SKILLS_UI_KEYS.EDIT_ID]: null,
-//       [SKILLS_UI_KEYS.FORM_DATA]: {},
-//     },
-//     [SKILLS_UI_KEYS.DELETE_POPUP]: {
-//       [SKILLS_UI_KEYS.IS_OPEN]: false,
-//       item: null,
-//     },
-//   },
-// };
-
 const skillFormSlice = createSlice({
   name: SLICE_NAMES.SKILL_FORM,
   initialState,

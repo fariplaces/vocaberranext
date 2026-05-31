@@ -78,23 +78,6 @@ export const selectSkillFormDeletePopupItem = (domain) => (state) => {
 //* ****************************************************
 
 // --- Helper Meta Selector function ---
-
-// const createFormMetaEngine = (domain) =>
-//   createSelector([selectSkillFormState], (skillFormState) => {
-//     const domainState = skillFormState[domain] || {};
-//     const manage = domainState[SKILLS_UI_KEYS.MANAGE_POPUP] || {};
-//     const remove = domainState[SKILLS_UI_KEYS.DELETE_POPUP] || {};
-
-//     return {
-//       isOpen: manage[SKILLS_UI_KEYS.IS_OPEN] || false,
-//       editId: manage[SKILLS_UI_KEYS.EDIT_ID] || null,
-//       formData: manage[SKILLS_UI_KEYS.FORM_DATA] || {},
-//       isDeleteOpen: remove[SKILLS_UI_KEYS.IS_OPEN] || false,
-//       deleteItem: remove.item || null,
-//     };
-//   });
-
-// --- Helper Meta Selector function ---
 const createFormMetaEngine = (domain) =>
   createSelector([selectSkillFormState], (skillFormState) => {
     // 1. Grab the active runtime state

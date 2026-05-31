@@ -22,7 +22,7 @@ const SkillsPage = () => {
 
   useEffect(() => {
     dispatch(resetSkillState());
-    dispatch(fetchSkills(INITIAL_FETCH_PARAMS));
+    dispatch(fetchSkills());
   }, []);
 
   return (

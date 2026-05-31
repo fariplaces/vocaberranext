@@ -3,44 +3,35 @@ import React, { useEffect, useState } from "react";
 import ContentTitle from "@/components/ContentTitle";
 import { Plus } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCategory, fetchCategories, fetchSkills } from "@/store/actions/skillActions";
+import {
+  deleteCategory,
+  fetchCategories,
+  fetchSkills,
+  fetchTopics,
+} from "@/store/actions/skillActions";
 import ManageCategoryPopup from "./ManageCategoryPopup";
 import DeleteCategoryPopup from "./DeleteCategoryPopup";
 import RenderCategories from "./RenderCategories";
+import { SKILL_FORM_DOMAINS } from "@/store/constants/skillsConstants";
+import {
+  openSkillManagePopup,
+  resetSkillFormState,
+} from "@/store/slices/skillSlices/skillFormSlice";
+import SkillGraphicalDashboard from "./GraficCategories";
 
 const CategoriesPage = ({ route }) => {
-  const [selectedItem, setSelectedItem] = useState(null);
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [isDelPopupOpen, setIsDelPopupOpen] = useState(false);
-  const [itemToDelete, setItemToDelete] = useState(null);
-  const { loading } = useSelector((state) => state.skill);
-
-  const handleEditClick = (item) => {
-    setSelectedItem(item);
-    setIsPopupOpen(true);
-  };
+  const dispatch = useDispatch();
+  const domain = SKILL_FORM_DOMAINS.CATEGORIES;
 
   const handleAddClick = () => {
-    setSelectedItem(null);
-    setIsPopupOpen(true);
-  };
-  const handleDelClick = (item) => {
-    setItemToDelete(item);
-    setIsDelPopupOpen(true);
+    dispatch(openSkillManagePopup({ domain }));
   };
 
-  const handleDelete = async () => {
-    if (itemToDelete?.id) {
-      dispatch(deleteCategory(itemToDelete.id));
-      setIsDelPopupOpen(false);
-      setItemToDelete(null);
-    }
-  };
-
-  const dispatch = useDispatch();
   useEffect(() => {
+    // dispatch(resetSkillFormState());
     dispatch(fetchCategories());
     dispatch(fetchSkills());
+    dispatch(fetchTopics());
   }, []);
 
   return (
@@ -51,25 +42,10 @@ const CategoriesPage = ({ route }) => {
         Icon={Plus}
         handleMethod={handleAddClick}
       />
-      <RenderCategories
-        route={route}
-        handleEditClick={handleEditClick}
-        handleDelClick={handleDelClick}
-      />
-      <ManageCategoryPopup
-        route={route}
-        isOpen={isPopupOpen}
-        setIsOpen={setIsPopupOpen}
-        editData={selectedItem}
-        setEditData={setSelectedItem}
-      />
-      <DeleteCategoryPopup
-        isDelPopupOpen={isDelPopupOpen}
-        setIsDelPopupOpen={setIsDelPopupOpen}
-        itemName={`${itemToDelete?.title} - ${itemToDelete?.skill.title}`}
-        onDelete={handleDelete}
-        isLoading={loading}
-      />
+      <SkillGraphicalDashboard />
+      {/* <RenderCategories route={route} domain={domain} /> */}
+      <ManageCategoryPopup route={route} domain={domain} />
+      <DeleteCategoryPopup route={route} domain={domain} />
     </>
   );
 };

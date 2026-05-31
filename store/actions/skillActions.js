@@ -12,7 +12,7 @@ export const fetchSkills = createServiceThunk(
   (params) => skillServices.fetchSkills(params),
   {
     dataKey: SKILL_KEYS.SKILLS,
-    paginationKey: SKILL_KEYS.SKILLS_PAGINATION,
+    // paginationKey: SKILL_KEYS.SKILLS_PAGINATION,
     operation: "FETCH",
   },
 );
@@ -38,7 +38,7 @@ export const fetchCategories = createServiceThunk(
   (params) => skillServices.fetchCategories(params),
   {
     dataKey: SKILL_KEYS.CATEGORIES,
-    paginationKey: SKILL_KEYS.CATEGORIES_PAGINATION,
+    // paginationKey: SKILL_KEYS.CATEGORIES_PAGINATION,
     operation: "FETCH",
   },
 );
@@ -65,7 +65,7 @@ export const fetchTopics = createServiceThunk(
   (params) => skillServices.fetchTopics(params),
   {
     dataKey: SKILL_KEYS.TOPICS,
-    paginationKey: SKILL_KEYS.TOPICS_PAGINATION,
+    // paginationKey: SKILL_KEYS.TOPICS_PAGINATION,
     operation: "FETCH",
   },
 );
@@ -90,7 +90,7 @@ export const fetchRevisions = createServiceThunk(
   (params) => skillServices.fetchRevisions(params),
   {
     dataKey: SKILL_KEYS.REVISIONS,
-    paginationKey: SKILL_KEYS.REVISIONS_PAGINATION,
+    // paginationKey: SKILL_KEYS.REVISIONS_PAGINATION,
     operation: "FETCH",
   },
 );

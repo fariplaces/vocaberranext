@@ -3,17 +3,10 @@ import { NextResponse } from "next/server";
 
 export async function GET(request) {
   try {
-    const { searchParams } = new URL(request.url);
-    const page = searchParams.get("page") || 1;
-    const limit = searchParams.get("limit") || 10;
-
-    const result = await skillDbServices.getPaginatedCategories({
-      page,
-      limit,
-    });
+    const result = await skillDbServices.getCategories();
 
     return NextResponse.json({
-      data: result,
+      ...result,
       message: "Categories fetched successfully!",
       status: 200,
     });

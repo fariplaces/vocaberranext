@@ -6,20 +6,14 @@ export const skillDbServices = {
   //* ==========================================
 
   //* Fetch Paginated Skills
-  getPaginatedSkills: async ({ page = 1, limit = 10 }) => {
-    const sanitizedPage = Math.max(1, Number(page) || 1);
-    const sanitizedLimit = Math.max(1, Number(limit) || 10);
-    const skip = (sanitizedPage - 1) * sanitizedLimit;
-
+  getSkills: async () => {
     // 1. Optional: Add filtering logic here if needed (e.g., by name, category, etc.)
     const where = {};
 
     // 2. Parallel execution for database optimization
-    const [skills, totalCount] = await Promise.all([
+    const [skills] = await Promise.all([
       prisma.skill.findMany({
         where,
-        skip,
-        take: sanitizedLimit,
         orderBy: { order: "asc" },
         include: {
           categories: {
@@ -41,19 +35,11 @@ export const skillDbServices = {
           },
         },
       }),
-      prisma.skill.count({ where }),
     ]);
-
-    const lastPage = Math.ceil(totalCount / sanitizedLimit);
 
     // 3. Return structured pagination response
     return {
       data: skills,
-      current_page: sanitizedPage,
-      last_page: lastPage,
-      per_page: sanitizedLimit,
-      has_next_page: sanitizedPage < lastPage,
-      total: totalCount,
     };
   },
 
@@ -187,20 +173,14 @@ export const skillDbServices = {
   //* ==========================================
 
   //* Fetch Paginated Categories
-  getPaginatedCategories: async ({ page = 1, limit = 10 }) => {
-    const sanitizedPage = Math.max(1, Number(page) || 1);
-    const sanitizedLimit = Math.max(1, Number(limit) || 10);
-    const skip = (sanitizedPage - 1) * sanitizedLimit;
-
+  getCategories: async () => {
     // 1. Optional: Add filtering logic here if needed (e.g., by name, skillId, etc.)
     const where = {};
 
     // 2. Parallel execution for database optimization
-    const [categories, totalCount] = await Promise.all([
+    const [categories] = await Promise.all([
       prisma.category.findMany({
         where,
-        skip,
-        take: sanitizedLimit,
         orderBy: [{ skillId: "asc" }],
         include: {
           skill: true,
@@ -217,18 +197,10 @@ export const skillDbServices = {
           },
         },
       }),
-      prisma.category.count({ where }),
     ]);
-
-    const lastPage = Math.ceil(totalCount / sanitizedLimit);
 
     return {
       data: categories,
-      current_page: sanitizedPage,
-      last_page: lastPage,
-      per_page: sanitizedLimit,
-      has_next_page: sanitizedPage < lastPage,
-      total: totalCount,
     };
   },
 
@@ -343,20 +315,13 @@ export const skillDbServices = {
   //* ==========================================
 
   //* Fetch Paginated Topics
-  getPaginatedTopics: async ({ page = 1, limit = 10 }) => {
-    // Prevent zero or negative numbers from breaking database query bounds
-    const sanitizedPage = Math.max(1, Number(page));
-    const sanitizedLimit = Math.max(1, Number(limit));
-    const skip = (sanitizedPage - 1) * sanitizedLimit;
-
+  getTopics: async () => {
     const where = {}; // Add global search/filters here if needed later
 
     // 1. Parallel execution: Fetch database records and count total simultaneously
-    const [topics, totalCount] = await Promise.all([
+    const [topics] = await Promise.all([
       prisma.topic.findMany({
         where,
-        skip,
-        take: sanitizedLimit,
         include: {
           category: {
             include: {
@@ -368,7 +333,6 @@ export const skillDbServices = {
           },
         },
       }),
-      prisma.topic.count({ where }),
     ]);
 
     // 2. Transform the data to map structural context attributes
@@ -386,16 +350,9 @@ export const skillDbServices = {
       };
     });
 
-    const lastPage = Math.ceil(totalCount / sanitizedLimit);
-
     // 3. Return structured data object matching your Redux pagination setup
     return {
       data: formattedData,
-      current_page: sanitizedPage,
-      last_page: lastPage,
-      per_page: sanitizedLimit,
-      has_next_page: sanitizedPage < lastPage,
-      total: totalCount,
     };
   },
 
@@ -529,20 +486,13 @@ export const skillDbServices = {
   //* ==========================================
 
   //* Fetch Paginated Revisions
-  getPaginatedRevisions: async ({ page = 1, limit = 10 }) => {
-    // Prevent zero or negative numbers from breaking database query bounds
-    const sanitizedPage = Math.max(1, Number(page));
-    const sanitizedLimit = Math.max(1, Number(limit));
-    const skip = (sanitizedPage - 1) * sanitizedLimit;
-
+  getRevisions: async () => {
     const where = {}; // Add global search/filters here if needed later
 
     // 1. Parallel execution: Fetch database records and count total simultaneously
-    const [revisions, totalCount] = await Promise.all([
+    const [revisions] = await Promise.all([
       prisma.revision.findMany({
         where,
-        skip,
-        take: sanitizedLimit,
         orderBy: {
           scheduled: "asc", // Show soonest revisions first
         },
@@ -568,7 +518,6 @@ export const skillDbServices = {
           },
         },
       }),
-      prisma.revision.count({ where }),
     ]);
 
     // 2. Transform the fetched batch so the frontend has a flat "breadcrumb" string
@@ -591,16 +540,9 @@ export const skillDbServices = {
       };
     });
 
-    const lastPage = Math.ceil(totalCount / sanitizedLimit);
-
     // 3. Return structured data object matching your Redux pagination setup
     return {
       data: formattedData,
-      current_page: sanitizedPage,
-      last_page: lastPage,
-      per_page: sanitizedLimit,
-      has_next_page: sanitizedPage < lastPage,
-      total: totalCount,
     };
   },
 

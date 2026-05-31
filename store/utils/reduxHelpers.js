@@ -150,10 +150,14 @@ export const handleMessageFulfilled = (state, action) => {
 export const handleMessageRejected = (state, action) => {
   const errorMessage =
     action.payload?.message || action.payload || "Operation failed";
+  const msg =
+    typeof errorMessage === "string"
+      ? errorMessage
+      : "An Unexpacted error occurs!";
 
   state.notifications.push({
     id: Date.now() + Math.random(),
-    message: errorMessage,
+    message: msg || "An Unexpacted Error Occurs!",
     type: "error",
   });
 };

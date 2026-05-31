@@ -41,86 +41,199 @@ export const selectSkillLoading = (state) =>
 export const selectSkillErrors = (state) =>
   selectSkillState(state)[SKILL_KEYS.ERROR] || EMPTY_ARRAY;
 
-// 4. Pagination Selectors
+// export const selectRenderFilteredCategories = (route) =>
+//   createSelector(
+//     [
+//       selectAllCategories,
+//       selectSkillLoading,
+//       selectCategoriesPagination,
+//       selectIsFetchingMoreCategories,
+//       selectHasMoreCategories,
+//     ],
+//     (categories, isInitialLoading, pagination, isFetchingMore, hasMore) => {
+//       const filterCategories = categories.filter((item) => {
+//         if (route === "parent-categories") return item?.parentId === null;
+//         if (route === "sub-categories")
+//           return (
+//             item?.parentId !== null && item.children && item.children.length > 0
+//           );
+//         if (route === "categories")
+//           return (
+//             item?.parentId !== null &&
+//             item?.children &&
+//             item?.children.length === 0
+//           );
+//       });
 
-export const selectSkillsPagination = createSelector(
-  [selectSkillState],
-  (skill) => skill[SKILL_KEYS.SKILLS_PAGINATION] || INITIAL_PAGINATION_STATE,
-);
+//       return {
+//         categories: filterCategories,
+//         isInitialLoading,
+//         pagination,
+//         isFetchingMore,
+//         hasMore,
+//       };
+//     },
+//   );
 
-export const selectCategoriesPagination = createSelector(
-  [selectSkillState],
-  (skill) =>
-    skill[SKILL_KEYS.CATEGORIES_PAGINATION] || INITIAL_PAGINATION_STATE,
-);
+// export const selectSkillPagination = (state) => state.skill.pagination || {};
 
-export const selectTopicsPagination = createSelector(
-  [selectSkillState],
-  (skill) => skill[SKILL_KEYS.TOPICS_PAGINATION] || INITIAL_PAGINATION_STATE,
-);
+// --- Combined Filtering + Grouping Engine ---
+export const selectRenderFilteredCategories = (route) =>
+  createSelector(
+    [selectAllCategories, selectSkillLoading],
+    (categories, isInitialLoading) => {
+      // 1. Execute Tab Filtering First
+      const filteredList = categories.filter((item) => {
+        if (route === "parent-categories") return item?.parentId === null;
+        if (route === "sub-categories") {
+          return (
+            item?.parentId !== null &&
+            item?.children &&
+            item?.children.length > 0
+          );
+        }
+        if (route === "categories") {
+          return (
+            item?.parentId !== null &&
+            item?.children &&
+            item?.children.length === 0
+          );
+        }
+        return true;
+      });
 
-export const selectRevisionsPagination = createSelector(
-  [selectSkillState],
-  (skill) => skill[SKILL_KEYS.REVISIONS_PAGINATION] || INITIAL_PAGINATION_STATE,
-);
+      // 2. Execute Hierarchical Grouping on the Filtered Subset Only
+      const groupedData = filteredList.reduce((acc, item) => {
+        const skillObj = item.parent ? item.parent.skill : item.skill;
+        const skillName = skillObj?.title || "Unassigned Skill";
+        const skillOrder = skillObj?.order ?? 999;
 
-// 5. select is Fetching
+        const parentTitle = item.parent ? item.parent.title : "Root Categories";
+        const parentOrder = item.parent ? (item.parent.order ?? 999) : -1;
 
-export const selectIsFetchingMoreSkills = createSelector(
-  [selectSkillsPagination],
-  (pagination) => pagination[PAGINATION_KEYS.IS_FETCHING] || false,
-);
+        if (!acc[skillName]) {
+          acc[skillName] = { order: skillOrder, parents: {} };
+        }
 
-export const selectIsFetchingMoreCategories = createSelector(
-  [selectCategoriesPagination],
-  (pagination) => pagination[PAGINATION_KEYS.IS_FETCHING] || false,
-);
+        if (!acc[skillName].parents[parentTitle]) {
+          acc[skillName].parents[parentTitle] = {
+            order: parentOrder,
+            items: [],
+          };
+        }
 
-export const selectIsFetchingMoreTopics = createSelector(
-  [selectTopicsPagination],
-  (pagination) => pagination[PAGINATION_KEYS.IS_FETCHING] || false,
-);
+        acc[skillName].parents[parentTitle].items.push(item);
+        return acc;
+      }, {});
 
-export const selectIsFetchingMoreRevisions = createSelector(
-  [selectRevisionsPagination],
-  (pagination) => pagination[PAGINATION_KEYS.IS_FETCHING] || false,
-);
+      // 3. Sort Root Level Skills Matrix Array
+      const sortedSkills = Object.entries(groupedData).sort(
+        (a, b) => a[1].order - b[1].order,
+      );
 
-// 6. select has More
+      return {
+        sortedSkills, // 🌟 Pre-filtered, grouped, and sorted layout
+        isInitialLoading,
+      };
+    },
+  );
 
-export const selectHasMoreSkills = createSelector(
-  [selectSkillsPagination],
-  (pagination) => pagination[PAGINATION_KEYS.HAS_NEXT_PAGE] || false,
-);
+// export const selectGraphicalSkillTree = createSelector(
+//   [selectAllCategories, selectAllTopics],
+//   (categories, topics) => {
+//     // 1. Map topics to their respective category targets for instant 0ms access
+//     const topicsMap = topics.reduce((acc, topic) => {
+//       if (!acc[topic.categoryId]) acc[topic.categoryId] = [];
+//       acc[topic.categoryId].push(topic);
+//       return acc;
+//     }, {});
 
-export const selectHasMoreCategories = createSelector(
-  [selectCategoriesPagination],
-  (pagination) => pagination[PAGINATION_KEYS.HAS_NEXT_PAGE] || false,
-);
+//     // 2. Build a comprehensive dictionary map of categories with embedded items
+//     const categoryMap = {};
+//     categories.forEach((cat) => {
+//       categoryMap[cat.id] = {
+//         ...cat,
+//         topics: (topicsMap[cat.id] || []).sort(
+//           (a, b) => (a.order ?? 0) - (b.order ?? 0),
+//         ),
+//         subCategories: [],
+//       };
+//     });
 
-export const selectHasMoreTopics = createSelector(
-  [selectTopicsPagination],
-  (pagination) => pagination[PAGINATION_KEYS.HAS_NEXT_PAGE] || false,
-);
+//     const tier1Parents = [];
 
-export const selectHasMoreRevisions = createSelector(
-  [selectRevisionsPagination],
-  (pagination) => pagination[PAGINATION_KEYS.HAS_NEXT_PAGE] || false,
-);
+//     // 3. Thread the parent-child relationships together instantly
+//     Object.values(categoryMap).forEach((category) => {
+//       if (category.parentId) {
+//         const parentNode = categoryMap[category.parentId];
+//         if (parentNode) {
+//           parentNode.subCategories.push(category);
+//         }
+//       } else {
+//         // No parentId means it's an absolute Tier 1 Parent Category
+//         tier1Parents.push(category);
+//       }
+//     });
 
-export const selectRenderSkills = createSelector(
-  [
-    selectAllSkills,
-    selectSkillLoading,
-    selectSkillsPagination,
-    selectIsFetchingMoreSkills,
-    selectHasMoreSkills,
-  ],
-  (skills, isInitialLoading, pagination, isFetchingMore, hasMore) => ({
-    skills,
-    isInitialLoading,
-    isFetchingMore,
-    hasMore,
-    pagination,
-  }),
+//     // 4. Sort everything globally by order rank
+//     const sortArr = (arr) =>
+//       arr.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+
+//     // Recursively sort deeper sub-tiers
+//     tier1Parents.forEach((parent) => {
+//       sortArr(parent.subCategories);
+//       parent.subCategories.forEach((sub) => sortArr(sub.subCategories));
+//     });
+
+//     return sortArr(tier1Parents);
+//   },
+// );
+
+export const selectGraphicalSkillTreeMeta = createSelector(
+  [selectAllCategories, selectAllTopics, selectSkillLoading],
+  (categories, topics, isInitialLoading) => {
+    // 1. Map topics to categories
+    const topicsMap = topics.reduce((acc, topic) => {
+      if (!acc[topic.categoryId]) acc[topic.categoryId] = [];
+      acc[topic.categoryId].push(topic);
+      return acc;
+    }, {});
+
+    // 2. Build our category map configuration
+    const categoryMap = {};
+    categories.forEach((cat) => {
+      categoryMap[cat.id] = {
+        ...cat,
+        topics: (topicsMap[cat.id] || []).sort(
+          (a, b) => (a.order ?? 0) - (b.order ?? 0),
+        ),
+        subCategories: [],
+      };
+    });
+
+    const tier1Parents = [];
+
+    // 3. Thread parent-child category relations
+    Object.values(categoryMap).forEach((category) => {
+      if (category.parentId) {
+        const parentNode = categoryMap[category.parentId];
+        if (parentNode) parentNode.subCategories.push(category);
+      } else {
+        tier1Parents.push(category);
+      }
+    });
+
+    // 4. Sort everything cleanly by order parameters
+    const sortArr = (arr) =>
+      arr.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+    tier1Parents.forEach((parent) => {
+      sortArr(parent.subCategories);
+      parent.subCategories.forEach((sub) => sortArr(sub.subCategories));
+    });
+
+    return {
+      sortedSkillsTree: sortArr(tier1Parents),
+      isInitialLoading,
+    };
+  },
 );
