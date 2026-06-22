@@ -1,5 +1,12 @@
 "use client";
-import { Keyboard, BookOpen, LayoutDashboard, GitBranch, MessageSquare, FileText } from "lucide-react";
+import {
+  Keyboard,
+  BookOpen,
+  LayoutDashboard,
+  GitBranch,
+  MessageSquare,
+  FileText,
+} from "lucide-react";
 import Link from "next/link";
 
 const HomePage = () => {
@@ -59,7 +66,7 @@ const HomePage = () => {
       <div className="container mx-auto px-12 py-12">
         <div className="mb-8">
           <h2 className="text-3xl font-bold text-slate-200 dark:text-white mb-2">
-            Welcome to VocabErra
+            Welcome to MindOS
           </h2>
           <p className="text-slate-600 dark:text-slate-300">
             Choose an app to get started
@@ -78,7 +85,7 @@ const HomePage = () => {
                 <div className={`bg-gradient-to-br ${app.color} p-8 h-full`}>
                   {/* Background blur effect */}
                   <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-all duration-300" />
-                  
+
                   {/* Content */}
                   <div className="relative z-10 flex flex-col h-full">
                     <div className="flex items-center justify-between mb-4">
@@ -89,7 +96,7 @@ const HomePage = () => {
                         →
                       </div>
                     </div>
-                    
+
                     <div className="flex-1">
                       <h3 className="text-2xl font-bold text-white mb-2">
                         {app.name}

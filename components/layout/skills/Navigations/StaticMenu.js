@@ -23,14 +23,6 @@ const StaticNavitaionMenu = [
         href: "/skills/manage/skills",
       },
       {
-        item: "Parent-Categories",
-        href: "/skills/manage/parent-categories",
-      },
-      {
-        item: "Sub-Categories",
-        href: "/skills/manage/sub-categories",
-      },
-      {
         item: "Categories",
         href: "/skills/manage/categories",
       },

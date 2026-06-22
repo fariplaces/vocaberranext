@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import ContentTitle from "@/components/ContentTitle";
 import { Plus } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -18,15 +17,76 @@ import {
   resetSkillFormState,
 } from "@/store/slices/skillSlices/skillFormSlice";
 import SkillGraphicalDashboard from "./GraficCategories";
+import ContentTitleArrayButtons from "@/components/ContentTitleArrayButtons";
+import ManageSkillPopup from "../skills/ManageSkillPopup";
 
-const CategoriesPage = ({ route }) => {
+const CategoriesPage = () => {
   const dispatch = useDispatch();
-  const domain = SKILL_FORM_DOMAINS.CATEGORIES;
+  const categoryDomain = SKILL_FORM_DOMAINS.CATEGORIES;
+  const skillDomain = SKILL_FORM_DOMAINS.SKILLS;
 
-  const handleAddClick = () => {
-    dispatch(openSkillManagePopup({ domain }));
+  const handleAddSkill = () => {
+    dispatch(
+      openSkillManagePopup({ skillDomain, editData: null, defaults: {} })
+    );
   };
 
+  // Clicking this sets the popup to explicitly handle root/parent categories
+  const handleAddParentCategory = () => {
+    dispatch(
+      openSkillManagePopup({
+        categoryDomain,
+        defaults: {
+          title: "",
+          order: "",
+          parentId: "",
+          skillId: "",
+          formMode: "parent", // 🌟 Dynamic Mode Flag
+        },
+      })
+    );
+  };
+
+  // Clicking this sets the popup to explicitly handle subcategories
+  const handleAddChildCategory = () => {
+    dispatch(
+      openSkillManagePopup({
+        categoryDomain,
+        defaults: {
+          title: "",
+          order: "",
+          parentId: "",
+          skillId: "",
+          formMode: "sub", // 🌟 Dynamic Mode Flag
+        },
+      })
+    );
+  };
+
+  const btns = [
+    {
+      title: "Add Skill",
+      icon: Plus,
+      handleMethod: handleAddSkill,
+    },
+    {
+      title: "Add Parent-Category",
+      icon: Plus,
+      handleMethod: handleAddParentCategory,
+    },
+    {
+      title: "Add Category",
+      icon: Plus,
+      handleMethod: handleAddChildCategory,
+    },
+    {
+      title: "Add Topic",
+      icon: Plus,
+      handleMethod: () => {
+        console.log("Add Topic Clicked");
+      },
+    },
+  ];
   useEffect(() => {
     // dispatch(resetSkillFormState());
     dispatch(fetchCategories());
@@ -36,16 +96,12 @@ const CategoriesPage = ({ route }) => {
 
   return (
     <>
-      <ContentTitle
-        title={"Manage Categories"}
-        btnTitle={"Add Category"}
-        Icon={Plus}
-        handleMethod={handleAddClick}
-      />
+      <ContentTitleArrayButtons title={"Manage Categories"} btns={btns} />
       <SkillGraphicalDashboard />
       {/* <RenderCategories route={route} domain={domain} /> */}
-      <ManageCategoryPopup route={route} domain={domain} />
-      <DeleteCategoryPopup route={route} domain={domain} />
+      <ManageCategoryPopup domain={categoryDomain} />
+      <ManageSkillPopup domain={skillDomain} />
+      <DeleteCategoryPopup domain={categoryDomain} />
     </>
   );
 };

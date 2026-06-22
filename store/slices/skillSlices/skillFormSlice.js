@@ -30,10 +30,12 @@ export const initialState = {
     order: "",
   }),
 
-  [SKILL_FORM_DOMAINS.CATEGORY]: createBlankPopupBlueprint({
+  [SKILL_FORM_DOMAINS.CATEGORIES]: createBlankPopupBlueprint({
     title: "",
-    imageUrl: "",
-    isActive: true,
+    order: "",
+    parentId: "",
+    skillId: "",
+    formMode: "sub",
   }),
 
   [SKILL_FORM_DOMAINS.TOPICS]: createBlankPopupBlueprint({
@@ -64,7 +66,7 @@ const skillFormSlice = createSlice({
 
       if (editData) {
         target[SKILLS_UI_KEYS.FORM_DATA] = Object.keys(
-          target[SKILLS_UI_KEYS.FORM_DATA],
+          target[SKILLS_UI_KEYS.FORM_DATA]
         ).reduce((acc, key) => {
           acc[key] = editData[key] ?? "";
           return acc;

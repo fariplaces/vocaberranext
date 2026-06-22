@@ -55,7 +55,7 @@ export const handleResourceFulfilled = (state, action) => {
 
     // Filter to prevent duplicate IDs if the API sends a cached item
     const newData = data.filter(
-      (newItem) => !existingData.find((oldItem) => oldItem.id === newItem.id),
+      (newItem) => !existingData.find((oldItem) => oldItem.id === newItem.id)
     );
 
     state[dataKey] = current_page === 1 ? data : [...existingData, ...newData];
@@ -74,7 +74,6 @@ export const handleResourceFulfilled = (state, action) => {
   switch (operation) {
     case "FETCH":
       state[dataKey] = resourceData;
-      console.log("resource data: ", resourceData);
       if (dataKey === AUTH_KEYS.USER) {
         // 1. Check if resourceData exists (not null/undefined)
         // 2. If it's an array, check if it has at least one item
@@ -97,7 +96,7 @@ export const handleResourceFulfilled = (state, action) => {
     case "UPDATE":
       if (resourceData) {
         const index = (state[dataKey] || []).findIndex(
-          (item) => item.id === resourceData.id,
+          (item) => item.id === resourceData.id
         );
         if (index !== -1) state[dataKey][index] = resourceData;
       }

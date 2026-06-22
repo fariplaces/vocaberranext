@@ -110,14 +110,14 @@ const createFormMetaEngine = (domain) =>
 // --- Skill Form Meta Selector (Memorized) ---
 
 export const selectSkillFormMeta = createFormMetaEngine(
-  SKILL_FORM_DOMAINS.SKILLS,
+  SKILL_FORM_DOMAINS.SKILLS
 );
 export const selectCategorySkillFormMeta = createFormMetaEngine(
-  SKILL_FORM_DOMAINS.CATEGORY,
+  SKILL_FORM_DOMAINS.CATEGORIES
 );
 export const selectTopicSkillFormMeta = createFormMetaEngine(
-  SKILL_FORM_DOMAINS.TOPICS,
+  SKILL_FORM_DOMAINS.TOPICS
 );
 export const selectRevisionSkillFormMeta = createFormMetaEngine(
-  SKILL_FORM_DOMAINS.REVISIONS,
+  SKILL_FORM_DOMAINS.REVISIONS
 );
