@@ -6,40 +6,39 @@
 //* Dashboard
 
 //* -- Route -- Exercise/course
-//* course page
-//* render course
-//* manage course
-//* delete course
+
+//* course page == completed
+//* render course == completed
+//* manage course == completed
+//* delete course == completed
 
 //* -- Route -- Exercise/test
-//* test page
-//* render test
-//* manage test
-//* delete test
+
+//* test page == completed
+//* render test == completed
+//* manage test == completed
+//* delete test == completed
 
 //* -- Route -- Manage/course
-//* course page
-//* render course
-//* manage course
-//* delete course
+
+//* course page == completed
+//* render course == completed
+//* manage course == completed
+//* delete course == completed
 
 //* -- Route -- Manage/test
-//* test page
-//* render test
-//* manage test
-//* delete test
+
+//* test page == completed
+//* render test == completed
+//* manage test == completed
+//* delete test == completed
 
 //! Backend
-//* Constants
-//* Slice
-//* Form Slice
-//* Actions
-//* Services Client
-//* Services Server
-//* Add Reducers
 
-Skills;
-Revisions;
-ToDos;
-Notion;
-Communication;
+//* Constants == completed
+//* Slice == completed
+//* Form Slice == completed
+//* Actions == completed
+//* Services Client == completed
+//* Services Server == completed
+//* Add Reducers == completed
