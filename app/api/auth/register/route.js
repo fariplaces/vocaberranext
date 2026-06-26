@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { authDbService } from "@/services/server/authDbService";
 
 export async function POST(req) {
   try {
@@ -10,7 +9,7 @@ export async function POST(req) {
     if (existingUser) {
       return NextResponse.json(
         { message: "User with this email already exists" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -26,7 +25,7 @@ export async function POST(req) {
     console.error("Registration Error:", error);
     return NextResponse.json(
       { message: "Registration failed. Please try again later." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

@@ -6,9 +6,12 @@ import { useDispatch, useSelector } from "react-redux";
 import RenderTasks from "./RenderTasks";
 import ManageTaskPopup from "./ManageTaskPopup";
 import DeleteTaskPopup from "./DeleteTaskPopup";
-import { formatDate } from "@/lib/utils";
-import { deleteTask, fetchTasks, updateTask } from "@/store/actions/taskActions";
-
+import {
+  deleteTask,
+  fetchTasks,
+  updateTask,
+} from "@/store/actions/taskActions";
+import { formatDate } from "@/utils/date";
 
 const TaskingPage = ({ route }) => {
   const [selectedItem, setSelectedItem] = useState(null);
@@ -32,7 +35,7 @@ const TaskingPage = ({ route }) => {
         updateTask({
           id: task.id,
           status: updatedStatus,
-        })
+        }),
       ).unwrap();
 
       console.log("Task status updated:", resultAction);
@@ -96,9 +99,3 @@ const TaskingPage = ({ route }) => {
 };
 
 export default TaskingPage;
-
-
-
-
-
-

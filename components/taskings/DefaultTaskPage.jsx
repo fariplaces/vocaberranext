@@ -4,12 +4,15 @@ import ContentTitle from "@/components/ContentTitle";
 import { Plus } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import DeleteTaskPopup from "./DeleteTaskPopup";
-import { formatDate } from "@/lib/utils";
 import RenderDefaultTasks from "./RenderDefaultTask";
 import ManageDefaultTaskPopup from "./ManageDefaultTaskPopup";
-import { bulkImportTask, deleteDefaultTask, fetchDefaultTasks } from "@/store/actions/taskActions";
+import {
+  bulkImportTask,
+  deleteDefaultTask,
+  fetchDefaultTasks,
+} from "@/store/actions/taskActions";
 import { selectUser } from "@/store/selectors/authSelectors";
-
+import { formatDate } from "@/utils/date";
 
 const DefaultTaskPage = () => {
   const [selectedItem, setSelectedItem] = useState(null);
@@ -34,8 +37,8 @@ const DefaultTaskPage = () => {
       bulkImportTask({
         date: date.toISOString(),
         ids: selectedIds,
-        userId: user.id
-      })
+        userId: user.id,
+      }),
     );
     alert("Tasks imported!");
     setSelectedIds([]); // Clear the checkboxes
@@ -82,7 +85,7 @@ const DefaultTaskPage = () => {
         handleBulkImport={handleBulkImport}
         selectedIds={selectedIds} // Ensure this is passed
         setSelectedIds={setSelectedIds}
-      // defaultTasks={defaultTasks}
+        // defaultTasks={defaultTasks}
       />
       <ManageDefaultTaskPopup
         isOpen={isPopupOpen}
@@ -102,9 +105,3 @@ const DefaultTaskPage = () => {
 };
 
 export default DefaultTaskPage;
-
-
-
-
-
-
