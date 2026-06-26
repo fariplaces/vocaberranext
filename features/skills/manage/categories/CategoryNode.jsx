@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { Folder, ChevronRight, ChevronDown } from "lucide-react";
-import ActionMenu from "./ActiionMenu";
+import ActionMenu from "./ActionMenu";
 import TopicNode from "./TopicNode";
 import EditableTitle from "./EditableTitle";
 

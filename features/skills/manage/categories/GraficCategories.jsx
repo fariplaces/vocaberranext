@@ -1,4 +1,5 @@
 "use client";
+import { HiOutlineViewGridAdd } from "react-icons/hi";
 import { AiOutlineAppstoreAdd } from "react-icons/ai";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,8 +11,13 @@ import {
 } from "@/store/slices/skillSlices/skillFormSlice";
 import CategoryNode from "./CategoryNode";
 import EditableTitle from "./EditableTitle";
+import { updateCategory, updateSkill } from "@/store/actions/skillActions";
 
-export default function SkillGraphicalDashboard({ route }) {
+export default function SkillGraphicalDashboard({
+  route,
+  skillDomain,
+  categoryDomain,
+}) {
   const dispatch = useDispatch();
 
   const { sortedSkillsTree, isInitialLoading } =
@@ -21,9 +27,58 @@ export default function SkillGraphicalDashboard({ route }) {
           selectGraphicalSkillTreeMetaByFilter(state, route),
         );
 
-  console.log("skill Tree", sortedSkillsTree);
-
   const rawCategories = useSelector((state) => state.skill.categories || []);
+
+  const handleAddSkill = () => {
+    dispatch(
+      openSkillManagePopup({
+        domain: skillDomain,
+        editData: null,
+        defaults: {},
+      }),
+    );
+  };
+
+  // Clicking this sets the popup to explicitly handle root/parent categories
+  const handleAddParentCategory = () => {
+    dispatch(
+      openSkillManagePopup({
+        domain: categoryDomain,
+        defaults: {
+          title: "",
+          order: "",
+          parentId: "",
+          skillId: "",
+          formMode: "parent", // 🌟 Dynamic Mode Flag
+        },
+      }),
+    );
+  };
+
+  // Delete Skill
+  const handleDelSkill = (item) => {
+    dispatch(openSkillDeletePopup({ domain: skillDomain, item }));
+  };
+
+  const handleEditSkill = (domain, item) => {
+    dispatch(openSkillManagePopup({ domain, editData: item }));
+  };
+
+  // Clicking this sets the popup to explicitly handle subcategories
+  const handleAddChildCategory = () => {
+    dispatch(
+      openSkillManagePopup({
+        domain: categoryDomain,
+        defaults: {
+          title: "",
+          order: "",
+          parentId: "",
+          skillId: "",
+          formMode: "sub", // 🌟 Dynamic Mode Flag
+        },
+      }),
+    );
+  };
 
   // Shift Logic
   const handleShiftItem = (id, targetParentId, type) => {
@@ -46,6 +101,15 @@ export default function SkillGraphicalDashboard({ route }) {
   const handleRenameItem = (id, newTitle, type) => {
     console.log(`API Action: Rename ${type} (ID: ${id}) to "${newTitle}"`);
     // dispatch(renameAssetAction({ id, title: newTitle, type }));
+    if (type === "skill") {
+      dispatch(updateSkill({ id: id, title: newTitle }));
+    }
+    if (type === "category") {
+      dispatch(updateCategory({ id: id, title: newTitle }));
+    }
+    if (type === "topic") {
+      console.log(`API Action: Delete Topic ${id}`);
+    }
   };
 
   // Edit Logic
@@ -114,30 +178,58 @@ export default function SkillGraphicalDashboard({ route }) {
                     }
                   />
                   <div className="flex items-center gap-1">
-                    <button
-                      // onClick={(e) => {
-                      //   e.stopPropagation();
-                      //   setIsEditing(true);
-                      // }}
-                      className="opacity-0 group-hover/skill:opacity-100 p-1 text-gray-500 hover:text-gray-300 transition-opacity"
-                    >
-                      <AiOutlineAppstoreAdd size={12} />
-                    </button>
-                    <button
-                      // onClick={(e) => {
-                      //   e.stopPropagation();
-                      //   setIsEditing(true);
-                      // }}
-                      className="opacity-0 group-hover/skill:opacity-100 p-1 text-gray-500 hover:text-gray-300 transition-opacity"
-                    >
-                      <Edit2 size={12} />
-                    </button>
-                    <button
-                      // onClick={() => onDelete(item, currentType)}
-                      className="opacity-0 group-hover/skill:opacity-100 p-1 text-gray-500  transition-opacity hover:text-red-400"
-                    >
-                      <Trash size={14} />
-                    </button>
+                    {/* Add Skill */}
+                    <div className="relative group/flag inline-block">
+                      <button
+                        className="opacity-0 group-hover/skill:opacity-100 p-1 text-gray-500 hover:text-gray-300 transition-opacity"
+                        onClick={handleAddSkill}
+                      >
+                        <HiOutlineViewGridAdd />
+                      </button>
+
+                      <span className="absolute left-1/2 -translate-x-1/2 -top-5 whitespace-nowrap rounded-md bg-gray-900 px-2 py-1 text-[8px] text-white opacity-0 transition-opacity duration-200 group-hover/flag:opacity-100 font-arial">
+                        Add Skill
+                      </span>
+                    </div>
+                    {/* Add Category */}
+                    <div className="relative group/flag inline-block">
+                      <button
+                        className="opacity-0 group-hover/skill:opacity-100 p-1 text-gray-500 hover:text-gray-300 transition-opacity"
+                        onClick={handleAddParentCategory}
+                      >
+                        <AiOutlineAppstoreAdd />
+                      </button>
+
+                      <span className="absolute left-1/2 -translate-x-1/2 -top-5 whitespace-nowrap rounded-md bg-gray-900 px-2 py-1 text-[8px] text-white opacity-0 transition-opacity duration-200 group-hover/flag:opacity-100 font-arial">
+                        Add Parent-Category
+                      </span>
+                    </div>
+                    {/* Edit Skill */}
+                    <div className="relative group/flag inline-block">
+                      <button
+                        className="opacity-0 group-hover/skill:opacity-100 p-1 text-gray-500 hover:text-blue-500 transition-opacity"
+                        onClick={() => handleEditSkill(skillDomain, skill)}
+                      >
+                        <Edit2 size={12} />
+                      </button>
+
+                      <span className="absolute left-1/2 -translate-x-1/2 -top-5 whitespace-nowrap rounded-md bg-gray-900 px-2 py-1 text-[8px] text-white opacity-0 transition-opacity duration-200 group-hover/flag:opacity-100 font-arial">
+                        Edit Skill
+                      </span>
+                    </div>
+                    {/* Delete Skill */}
+                    <div className="relative group/flag inline-block">
+                      <button
+                        className="opacity-0 group-hover/skill:opacity-100 p-1 text-gray-500 hover:text-red-500 transition-opacity"
+                        onClick={() => handleDelSkill(skill)}
+                      >
+                        <Trash size={14} />
+                      </button>
+
+                      <span className="absolute left-1/2 -translate-x-1/2 -top-5 whitespace-nowrap rounded-md bg-gray-900 px-2 py-1 text-[8px] text-white opacity-0 transition-opacity duration-200 group-hover/flag:opacity-100 font-arial">
+                        Delete Skill
+                      </span>
+                    </div>
                   </div>
                 </h2>
               </div>

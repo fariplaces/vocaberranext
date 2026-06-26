@@ -3,6 +3,7 @@ import { useAsyncValidation } from "@/hooks/useAsyncValidation";
 import { createSkill, updateSkill } from "@/store/actions/skillActions";
 import { selectUser } from "@/store/selectors/authSelectors";
 import { selectSkillFormMeta } from "@/store/selectors/skillSelectors/skillFormSelector";
+import { selectSkillLoading } from "@/store/selectors/skillSelectors/skillSelectors";
 import {
   closeSkillManagePopup,
   updateSkillFormFields,
@@ -15,6 +16,7 @@ const ManageSkillPopup = ({ domain }) => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const { isOpen, editId, formData } = useSelector(selectSkillFormMeta);
+  const isLoading = useSelector(selectSkillLoading);
 
   // Validating the order
   const { errorMsg, isChecking, isButtonDisabled } = useAsyncValidation({
@@ -136,7 +138,7 @@ const ManageSkillPopup = ({ domain }) => {
                 >
                   <span>{editId ? "Update" : "Save"}</span>
                 </button> */}
-                <button
+                {/* <button
                   onClick={handleSave}
                   disabled={isButtonDisabled}
                   className={`px-6 py-2 rounded-md font-bold text-white transition-all ${
@@ -146,6 +148,47 @@ const ManageSkillPopup = ({ domain }) => {
                   }`}
                 >
                   {isChecking ? "Verifying Data..." : "Save Record"}
+                </button> */}
+                <button
+                  onClick={handleSave}
+                  disabled={isButtonDisabled || isLoading}
+                  className={`flex items-center justify-center gap-2 px-6 py-2 rounded-md font-bold text-white transition-all ${
+                    isButtonDisabled || isLoading
+                      ? "bg-gray-700 opacity-60 cursor-not-allowed text-gray-400"
+                      : "bg-blue-600 hover:bg-blue-500 shadow-md"
+                  }`}
+                >
+                  {isLoading ? (
+                    <>
+                      <svg
+                        className="w-5 h-5 animate-spin"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        />
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                        />
+                      </svg>
+                      <span>Saving...</span>
+                    </>
+                  ) : isChecking ? (
+                    "Verifying Data..."
+                  ) : editId ? (
+                    "Update Record"
+                  ) : (
+                    "Save Record"
+                  )}
                 </button>
               </div>
             </div>

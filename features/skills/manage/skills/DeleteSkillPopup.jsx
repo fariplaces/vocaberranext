@@ -28,7 +28,7 @@ const DeleteSkillPopup = ({ domain }) => {
   return (
     <DeletePopup
       isDelPopupOpen={isOpen}
-      setIsDelPopupOpen={() => dispatch(closeSkillDeletePopup({ domain }))}
+      onClose={() => dispatch(closeSkillDeletePopup({ domain }))}
       onDelete={handleConfirmDelete}
       itemName={item?.title}
       isLoading={loading}

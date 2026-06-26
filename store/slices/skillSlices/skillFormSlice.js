@@ -59,7 +59,6 @@ const skillFormSlice = createSlice({
     // -- Open Skill Manage Popup ---
     openSkillManagePopup: (state, action) => {
       const { domain, editData, defaults } = action.payload;
-      console.log(editData);
       if (!state[domain]) return;
       const target = state[domain][SKILLS_UI_KEYS.MANAGE_POPUP];
       target[SKILLS_UI_KEYS.IS_OPEN] = true;

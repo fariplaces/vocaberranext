@@ -92,21 +92,24 @@
 //~ Skills categories CRUD Page
 // skills categories page //? completed
 // render categories //? completed
-// Add Skill //! pending
-// Edit Skill //! pending
-// Delete Skill //! pending
-// Update Skill //! pending
+// Add Skill //? completed
+// Edit Skill //? completed
+// Delete Skill //? Completed
+// Flash Edit Skill //? completed
 
 // Add Parent Category //? completed
 // Add Child Category //? completed
 // Edit Category //? completed
 // Delete Category //? completed
-// Flash Update Category //! pending
+// Flash Update Category //? completed
+
+// Add Parent-Category To Skill Directly //! pending
+// Add Sub-Category to Category Directly (default skill) //! pending
 
 // Add Topic //! pending
 // Edit Topic //! pending
 // Delete Topic //! pending
-// Update Topic //! pending
+// Flash Update Topic //! pending
 
 // Shift Category Skill //! pending
 // Shift Category to Parent Category //! pending

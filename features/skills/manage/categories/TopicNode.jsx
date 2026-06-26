@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { FileText } from "lucide-react";
-import ActionMenu from "./ActiionMenu";
+import ActionMenu from "./ActionMenu";
 import EditableTitle from "./EditableTitle";
 
 const TopicNode = ({

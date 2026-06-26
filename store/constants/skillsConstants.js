@@ -30,4 +30,5 @@ export const SKILLS_UI_KEYS = {
   FORM_DATA: "formData",
   IS_OPEN: "isOpen",
   EDIT_ID: "editId",
+  ITEM: "item",
 };
