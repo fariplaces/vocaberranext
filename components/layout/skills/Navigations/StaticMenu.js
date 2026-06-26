@@ -1,6 +1,6 @@
 import { ChartNoAxesColumn, TrendingUp } from "lucide-react";
 
-const StaticNavitaionMenu = [
+const StaticSkillNavitaionMenu = [
   {
     name: "DASHBOARD",
     icon: ChartNoAxesColumn,
@@ -39,4 +39,4 @@ const StaticNavitaionMenu = [
     link: "/",
   },
 ];
-export default StaticNavitaionMenu;
+export default StaticSkillNavitaionMenu;

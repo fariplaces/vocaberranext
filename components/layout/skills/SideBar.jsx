@@ -1,12 +1,21 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import UserProfile from "@/components/UserProfile";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import StaticNavigation from "./Navigations/StaticNavigations";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import DynamicSkillNavigation from "./Navigations/DynamicSkillNavigation";
+import { usePathname } from "next/navigation";
+import { fetchSideMenu } from "@/store/actions/globalActions";
 
 const SideBar = () => {
-  const { sidebarOpen } = useSelector((state) => state.global);
+  const pathName = usePathname();
+  const baseRoute = pathName?.split("/")[1] || "";
+  const dispatch = useDispatch();
+  const { sideMenu, sidebarOpen } = useSelector((state) => state.global);
+
+  useEffect(() => {
+    dispatch(fetchSideMenu());
+  }, []);
 
   return (
     <ScrollArea
@@ -15,7 +24,11 @@ const SideBar = () => {
       } sticky bg-black border-r border-white/30 h-screen transition-all overflow-x-hidden overflow-y-auto duration-300 flex flex-col`}
     >
       <UserProfile sidebarOpen={sidebarOpen} />
-      <StaticNavigation sidebarOpen={sidebarOpen} />
+      <DynamicSkillNavigation
+        sidebarOpen={sidebarOpen}
+        sideMenu={sideMenu}
+        baseRoute={baseRoute}
+      />
     </ScrollArea>
   );
 };

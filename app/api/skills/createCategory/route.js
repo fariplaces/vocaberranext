@@ -5,10 +5,12 @@ export async function POST(request) {
   try {
     const body = await request.json();
 
+    console.log("Received request body for category creation:", body);
+
     // Fire the creation block through the service layer
     const newCategory = await skillDbServices.createCategory(body);
 
-    return NextResponse.json(newCategory, { status: 21 }); // 201 Created
+    return NextResponse.json(newCategory); // 201 Created
   } catch (error) {
     // If it's a validation error we threw manually from our service layer
     if (error.status) {

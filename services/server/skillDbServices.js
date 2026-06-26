@@ -238,7 +238,7 @@ export const skillDbServices = {
   },
 
   //* Update Category
-  updateCategory: async ({ id, title, order, parentId, skillId }) => {
+  updateCategory: async (id, { title, order, parentId, skillId }) => {
     // 1. Basic Validation
     if (!id) {
       throw {

@@ -3,19 +3,17 @@ import React from "react";
 
 const DeletePopup = ({
   isDelPopupOpen,
-  setIsDelPopupOpen,
+  onClose,
   onDelete,
   itemName,
   isLoading,
 }) => {
-
-
   if (!isDelPopupOpen) return null;
 
   return (
     <div
       className="fixed flex items-center justify-center inset-0 bg-white/10 backdrop-blur-sm transition-all duration-300 z-50"
-      onClick={() => !isLoading && setIsDelPopupOpen(false)} // Prevent closing while deleting
+      onClick={() => !isLoading && onClose} // Prevent closing while deleting
     >
       <div
         className="bg-black text-white p-6 rounded-xl shadow-lg w-80 border border-gray-700"
@@ -32,7 +30,7 @@ const DeletePopup = ({
         <div className="flex justify-end space-x-3">
           <button
             disabled={isLoading}
-            onClick={() => setIsDelPopupOpen(false)}
+            onClick={onClose}
             className="px-4 py-2 border border-gray-600 rounded-lg hover:bg-gray-800 text-sm disabled:opacity-50"
           >
             Cancel

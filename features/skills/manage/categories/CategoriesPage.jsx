@@ -13,21 +13,32 @@ import DeleteCategoryPopup from "./DeleteCategoryPopup";
 import RenderCategories from "./RenderCategories";
 import { SKILL_FORM_DOMAINS } from "@/store/constants/skillsConstants";
 import {
+  openSkillDeletePopup,
   openSkillManagePopup,
   resetSkillFormState,
 } from "@/store/slices/skillSlices/skillFormSlice";
 import SkillGraphicalDashboard from "./GraficCategories";
 import ContentTitleArrayButtons from "@/components/ContentTitleArrayButtons";
 import ManageSkillPopup from "../skills/ManageSkillPopup";
+import { selectAllNotes } from "@/store/selectors/notesSelectors";
+import { fetchNotes } from "@/store/actions/notesActions";
 
-const CategoriesPage = () => {
+const CategoriesPage = ({ route }) => {
   const dispatch = useDispatch();
   const categoryDomain = SKILL_FORM_DOMAINS.CATEGORIES;
   const skillDomain = SKILL_FORM_DOMAINS.SKILLS;
 
+  const allNotes = useSelector(selectAllNotes);
+
+  console.log("all Notes", allNotes);
+
   const handleAddSkill = () => {
     dispatch(
-      openSkillManagePopup({ skillDomain, editData: null, defaults: {} })
+      openSkillManagePopup({
+        domain: skillDomain,
+        editData: null,
+        defaults: {},
+      }),
     );
   };
 
@@ -35,7 +46,7 @@ const CategoriesPage = () => {
   const handleAddParentCategory = () => {
     dispatch(
       openSkillManagePopup({
-        categoryDomain,
+        domain: categoryDomain,
         defaults: {
           title: "",
           order: "",
@@ -43,7 +54,7 @@ const CategoriesPage = () => {
           skillId: "",
           formMode: "parent", // 🌟 Dynamic Mode Flag
         },
-      })
+      }),
     );
   };
 
@@ -51,7 +62,7 @@ const CategoriesPage = () => {
   const handleAddChildCategory = () => {
     dispatch(
       openSkillManagePopup({
-        categoryDomain,
+        domain: categoryDomain,
         defaults: {
           title: "",
           order: "",
@@ -59,7 +70,7 @@ const CategoriesPage = () => {
           skillId: "",
           formMode: "sub", // 🌟 Dynamic Mode Flag
         },
-      })
+      }),
     );
   };
 
@@ -92,12 +103,13 @@ const CategoriesPage = () => {
     dispatch(fetchCategories());
     dispatch(fetchSkills());
     dispatch(fetchTopics());
+    dispatch(fetchNotes());
   }, []);
 
   return (
     <>
       <ContentTitleArrayButtons title={"Manage Categories"} btns={btns} />
-      <SkillGraphicalDashboard />
+      <SkillGraphicalDashboard route={route} />
       {/* <RenderCategories route={route} domain={domain} /> */}
       <ManageCategoryPopup domain={categoryDomain} />
       <ManageSkillPopup domain={skillDomain} />

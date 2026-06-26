@@ -1,9 +1,9 @@
+import CategoriesPage from "@/features/skills/manage/categories/CategoriesPage";
 import React from "react";
-import TopicsPage from "@/features/skills/manage/topic2/TopicsPage";
 
-const Topics = async ({ params }) => {
+const Categories = async ({ params }) => {
   const { route } = await params;
-  return <TopicsPage route={route} />;
+  return <CategoriesPage route={route} />;
 };
 
-export default Topics;
+export default Categories;

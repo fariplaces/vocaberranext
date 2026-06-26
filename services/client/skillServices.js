@@ -12,7 +12,7 @@ export const skillServices = {
   createCategory: (payload) => API.post("/skills/createCategory", payload),
   updateCategory: (id, payload) =>
     API.patch(`/skills/updateCategory/${id}`, payload),
-  deleteCategory: (id) => API.delete(`/skills/deleteCategory/${is}`),
+  deleteCategory: (id) => API.delete(`/skills/deleteCategory/${id}`),
 
   // --- Topics ---
   fetchTopics: (params) => API.get("/skills/fetchTopics", { params }),
