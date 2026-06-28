@@ -103,8 +103,8 @@
 // Delete Category //? completed
 // Flash Update Category //? completed
 
-// Add Parent-Category To Skill Directly //! pending
-// Add Sub-Category to Category Directly (default skill) //! pending
+// Add Parent-Category To Skill Directly //? Completed
+// Add Sub-Category to Category Directly (default skill) //? Completed
 
 // Add Topic //! pending
 // Edit Topic //! pending

@@ -29,58 +29,96 @@ export default function SkillGraphicalDashboard({
 
   const rawCategories = useSelector((state) => state.skill.categories || []);
 
-  const handleAddSkill = () => {
-    dispatch(
-      openSkillManagePopup({
-        domain: skillDomain,
-        editData: null,
-        defaults: {},
-      }),
-    );
+  //- Add Logic
+  // Skill
+  const handleAddItem = (type, data) => {
+    // Add Skill
+    if (type === "skill") {
+      dispatch(
+        openSkillManagePopup({
+          domain: skillDomain,
+          editData: null,
+          defaults: {},
+        }),
+      );
+    }
+    // Add Parent Category
+    if (type === "parent" && data) {
+      dispatch(
+        openSkillManagePopup({
+          domain: categoryDomain,
+          defaults: {
+            title: "",
+            order: "",
+            parentId: "",
+            skillId: data.skillId ? data.skillId : "",
+            formMode: "parent", // 🌟 Dynamic Mode Flag
+          },
+        }),
+      );
+    }
+    // Add Sub Category
+    if (type === "sub" && data) {
+      dispatch(
+        openSkillManagePopup({
+          domain: categoryDomain,
+          defaults: {
+            title: "",
+            order: "",
+            parentId: data.parentId ? data.parentId : "",
+            skillId: data.skillId ? data.skillId : "",
+            formMode: "sub", // 🌟 Dynamic Mode Flag
+          },
+        }),
+      );
+    }
+    // Add Topic
   };
+  // const handleAddSkill = () => {
+  //   dispatch(
+  //     openSkillManagePopup({
+  //       domain: skillDomain,
+  //       editData: null,
+  //       defaults: {},
+  //     }),
+  //   );
+  // };
 
-  // Clicking this sets the popup to explicitly handle root/parent categories
-  const handleAddParentCategory = () => {
-    dispatch(
-      openSkillManagePopup({
-        domain: categoryDomain,
-        defaults: {
-          title: "",
-          order: "",
-          parentId: "",
-          skillId: "",
-          formMode: "parent", // 🌟 Dynamic Mode Flag
-        },
-      }),
-    );
-  };
+  // Parent Category
+  // const handleAddParentCategory = (id) => {
+  //   dispatch(
+  //     openSkillManagePopup({
+  //       domain: categoryDomain,
+  //       defaults: {
+  //         title: "",
+  //         order: "",
+  //         parentId: "",
+  //         skillId: id ? id : "",
+  //         formMode: "parent", // 🌟 Dynamic Mode Flag
+  //       },
+  //     }),
+  //   );
+  // };
 
-  // Delete Skill
-  const handleDelSkill = (item) => {
-    dispatch(openSkillDeletePopup({ domain: skillDomain, item }));
-  };
+  // Sub Category
+  // const handleAddChildCategory = (catId, skillId) => {
+  //   dispatch(
+  //     openSkillManagePopup({
+  //       domain: categoryDomain,
+  //       defaults: {
+  //         title: "",
+  //         order: "",
+  //         parentId: catId ? catId : "",
+  //         skillId: skillId ? skillId : "",
+  //         formMode: "sub", // 🌟 Dynamic Mode Flag
+  //       },
+  //     }),
+  //   );
+  // };
 
-  const handleEditSkill = (domain, item) => {
-    dispatch(openSkillManagePopup({ domain, editData: item }));
-  };
+  // Topic
 
-  // Clicking this sets the popup to explicitly handle subcategories
-  const handleAddChildCategory = () => {
-    dispatch(
-      openSkillManagePopup({
-        domain: categoryDomain,
-        defaults: {
-          title: "",
-          order: "",
-          parentId: "",
-          skillId: "",
-          formMode: "sub", // 🌟 Dynamic Mode Flag
-        },
-      }),
-    );
-  };
-
-  // Shift Logic
+  //- Shift Logic
   const handleShiftItem = (id, targetParentId, type) => {
     if (type === "category") {
       const destinationValue =
@@ -97,10 +135,9 @@ export default function SkillGraphicalDashboard({
     }
   };
 
-  // Rename Logic
+  //- Rename Logic
   const handleRenameItem = (id, newTitle, type) => {
     console.log(`API Action: Rename ${type} (ID: ${id}) to "${newTitle}"`);
-    // dispatch(renameAssetAction({ id, title: newTitle, type }));
     if (type === "skill") {
       dispatch(updateSkill({ id: id, title: newTitle }));
     }
@@ -112,9 +149,10 @@ export default function SkillGraphicalDashboard({
     }
   };
 
-  // Edit Logic
+  //- Edit Logic
   const handleEditItem = (item, type) => {
-    console.log(`API Action: Edit item ${item.id} of type ${type}`);
+    console.log("edit hits", item, " type ", type);
+    // Edit Parent-Category
     if (type === "category" && item.parentId === null) {
       dispatch(
         openSkillManagePopup({
@@ -123,6 +161,7 @@ export default function SkillGraphicalDashboard({
         }),
       );
     }
+    // Edit Sub Category
     if (type === "category" && item.parentId != null) {
       dispatch(
         openSkillManagePopup({
@@ -131,21 +170,33 @@ export default function SkillGraphicalDashboard({
         }),
       );
     }
+    // Edit Topic
     if (type === "topic") {
       console.log(`API Action: Delete Topic ${id}`);
     }
+    // Edit Skill
+    if (type === "skill") {
+      dispatch(openSkillManagePopup({ domain: skillDomain, editData: item }));
+    }
   };
 
-  // Delete Logic
+  //- Delete Logic
   const handleDeleteItem = (item, type) => {
+    // Delete Category (Parent or Sub)
     if (type === "category") {
       dispatch(openSkillDeletePopup({ domain: "categories", item }));
     }
+    // Delete Category
     if (type === "topic") {
       console.log(`API Action: Delete Topic ${id}`);
     }
+    // Delete Skill
+    if (type === "skill") {
+      dispatch(openSkillDeletePopup({ domain: skillDomain, item }));
+    }
   };
 
+  // Loading Logic
   if (isInitialLoading) {
     return (
       <div className="text-center text-gray-500 py-20 bg-black min-h-screen flex items-center justify-center animate-pulse">
@@ -182,7 +233,7 @@ export default function SkillGraphicalDashboard({
                     <div className="relative group/flag inline-block">
                       <button
                         className="opacity-0 group-hover/skill:opacity-100 p-1 text-gray-500 hover:text-gray-300 transition-opacity"
-                        onClick={handleAddSkill}
+                        onClick={() => handleAddItem("skill")}
                       >
                         <HiOutlineViewGridAdd />
                       </button>
@@ -195,7 +246,9 @@ export default function SkillGraphicalDashboard({
                     <div className="relative group/flag inline-block">
                       <button
                         className="opacity-0 group-hover/skill:opacity-100 p-1 text-gray-500 hover:text-gray-300 transition-opacity"
-                        onClick={handleAddParentCategory}
+                        onClick={() =>
+                          handleAddItem("parent", { skillId: skill.id })
+                        }
                       >
                         <AiOutlineAppstoreAdd />
                       </button>
@@ -208,7 +261,7 @@ export default function SkillGraphicalDashboard({
                     <div className="relative group/flag inline-block">
                       <button
                         className="opacity-0 group-hover/skill:opacity-100 p-1 text-gray-500 hover:text-blue-500 transition-opacity"
-                        onClick={() => handleEditSkill(skillDomain, skill)}
+                        onClick={() => handleEditItem(skill, "skill")}
                       >
                         <Edit2 size={12} />
                       </button>
@@ -221,7 +274,7 @@ export default function SkillGraphicalDashboard({
                     <div className="relative group/flag inline-block">
                       <button
                         className="opacity-0 group-hover/skill:opacity-100 p-1 text-gray-500 hover:text-red-500 transition-opacity"
-                        onClick={() => handleDelSkill(skill)}
+                        onClick={() => handleDeleteItem(skill, "skill")}
                       >
                         <Trash size={14} />
                       </button>
@@ -241,6 +294,7 @@ export default function SkillGraphicalDashboard({
                     key={rootCategory.id}
                     category={rootCategory}
                     allCategories={rawCategories}
+                    onAdd={handleAddItem}
                     onShift={handleShiftItem}
                     onEdit={handleEditItem}
                     onRename={handleRenameItem}

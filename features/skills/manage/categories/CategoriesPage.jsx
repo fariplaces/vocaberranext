@@ -20,40 +20,19 @@ import ManageSkillPopup from "../skills/ManageSkillPopup";
 import { selectAllNotes } from "@/store/selectors/notesSelectors";
 import { fetchNotes } from "@/store/actions/notesActions";
 import DeleteSkillPopup from "../skills/DeleteSkillPopup";
+import ManageTopicPopup from "../topics/ManageTopicPopup";
+import DeleteTopicPopup from "../topics/DeleteTopicPopup";
 
 const CategoriesPage = ({ route }) => {
   const dispatch = useDispatch();
   const categoryDomain = SKILL_FORM_DOMAINS.CATEGORIES;
   const skillDomain = SKILL_FORM_DOMAINS.SKILLS;
+  const topicDomain = SKILL_FORM_DOMAINS.TOPICS;
 
   const allNotes = useSelector(selectAllNotes);
 
   console.log("all Notes", allNotes);
 
-  // const btns = [
-  //   {
-  //     title: "Add Skill",
-  //     icon: Plus,
-  //     handleMethod: handleAddSkill,
-  //   },
-  //   {
-  //     title: "Add Parent-Category",
-  //     icon: Plus,
-  //     handleMethod: handleAddParentCategory,
-  //   },
-  //   {
-  //     title: "Add Category",
-  //     icon: Plus,
-  //     handleMethod: handleAddChildCategory,
-  //   },
-  //   {
-  //     title: "Add Topic",
-  //     icon: Plus,
-  //     handleMethod: () => {
-  //       console.log("Add Topic Clicked");
-  //     },
-  //   },
-  // ];
   useEffect(() => {
     // dispatch(resetSkillFormState());
     dispatch(fetchCategories());
@@ -72,8 +51,10 @@ const CategoriesPage = ({ route }) => {
       />
       <ManageCategoryPopup domain={categoryDomain} />
       <ManageSkillPopup domain={skillDomain} />
+      <ManageTopicPopup domain={topicDomain} />
       <DeleteSkillPopup domain={skillDomain} />
       <DeleteCategoryPopup domain={categoryDomain} />
+      <DeleteTopicPopup domain={topicDomain} />
     </>
   );
 };

@@ -8,6 +8,7 @@ const ActionMenu = ({
   item,
   currentType,
   allCategories,
+  onAdd,
   currentParentId,
   onShift,
   onDelete,
@@ -38,34 +39,96 @@ const ActionMenu = ({
           </option>
         ))}
       </select>
-      {currentType === "topic" && (
-        <button
+      {/* <button
           onClick={() => onEdit(item, currentType)}
           className="opacity-0 group-hover/node:opacity-100 p-1 text-gray-500 hover:text-gray-300 transition-opacity"
         >
           <CgPlayListAdd size={12} />
-        </button>
+        </button> */}
+      {currentType === "topic" && (
+        <div className="relative group/flag inline-block">
+          <button
+            className="opacity-0 group-hover/node:opacity-100 p-1 text-gray-500 hover:text-gray-300 transition-opacity"
+            onClick={() => onEdit(item, currentType)}
+          >
+            <CgPlayListAdd size={12} />
+          </button>
+
+          <span className="absolute left-1/2 -translate-x-1/2 -top-5 whitespace-nowrap rounded-md bg-gray-900 px-2 py-1 text-[8px] text-white opacity-0 transition-opacity duration-200 group-hover/flag:opacity-100 font-arial">
+            Add Sub-Category
+          </span>
+        </div>
       )}
-      {currentType === "category" && (
-        <button
-          onClick={() => onEdit(item, currentType)}
+      {/* <button
+          onClick={() =>
+            onAdd("sub", { parentId: item.id, skillId: item.skillId })
+          }
           className="opacity-0 group-hover/node:opacity-100 p-1 text-gray-500 hover:text-gray-300 transition-opacity"
         >
           <AiOutlineAppstoreAdd size={12} />
-        </button>
+        </button> */}
+      {currentType === "category" && (
+        <div className="relative group/flag inline-block">
+          <button
+            className="opacity-0 group-hover/node:opacity-100 p-1 text-gray-500 hover:text-gray-300 transition-opacity"
+            onClick={() =>
+              onAdd("sub", { parentId: item.id, skillId: item.skillId })
+            }
+          >
+            <AiOutlineAppstoreAdd size={12} />
+          </button>
+
+          <span className="absolute left-1/2 -translate-x-1/2 -top-5 whitespace-nowrap rounded-md bg-gray-900 px-2 py-1 text-[8px] text-white opacity-0 transition-opacity duration-200 group-hover/flag:opacity-100 font-arial">
+            Add Sub-Category
+          </span>
+        </div>
       )}
-      <button
+      {/* <button
         onClick={() => onEdit(item, currentType)}
         className="opacity-0 group-hover/node:opacity-100 p-1 text-gray-500 hover:text-gray-300 transition-opacity"
       >
         <Edit2 size={12} />
-      </button>
-      <button
+      </button> */}
+
+      <div className="relative group/flag inline-block">
+        <button
+          className="opacity-0 group-hover/node:opacity-100 p-1 text-gray-500 hover:text-gray-300 transition-opacity"
+          onClick={() => onEdit(item, currentType)}
+        >
+          <Edit2 size={12} />
+        </button>
+
+        <span className="absolute left-1/2 -translate-x-1/2 -top-5 whitespace-nowrap rounded-md bg-gray-900 px-2 py-1 text-[8px] text-white opacity-0 transition-opacity duration-200 group-hover/flag:opacity-100 font-arial">
+          {currentType === "category"
+            ? "Edit Category"
+            : currentType === "topic"
+              ? "Edit Topic"
+              : ""}
+        </span>
+      </div>
+      <div className="relative group/flag inline-block">
+        <button
+          className="opacity-0 group-hover/node:opacity-100 p-1 text-gray-500 hover:text-red-400 transition-opacity"
+          onClick={() => onDelete(item, currentType)}
+        >
+          <Trash size={14} />
+        </button>
+
+        <span className="absolute left-1/2 -translate-x-1/2 -top-5 whitespace-nowrap rounded-md bg-gray-900 px-2 py-1 text-[8px] text-white opacity-0 transition-opacity duration-200 group-hover/flag:opacity-100 font-arial">
+          {currentType === "category"
+            ? "Delete Category"
+            : currentType === "topic"
+              ? "Delete Topic"
+              : ""}
+        </span>
+      </div>
+
+      {/* <button
         onClick={() => onDelete(item, currentType)}
         className="p-1 text-gray-500 hover:text-red-400"
       >
         <Trash size={14} />
-      </button>
+      </button> */}
     </div>
   );
 };

@@ -9,6 +9,7 @@ const CategoryNode = ({
   category,
   allCategories,
   depth = 0,
+  onAdd,
   onShift,
   onEdit,
   onRename,
@@ -39,6 +40,7 @@ const CategoryNode = ({
           currentType="category"
           allCategories={allCategories}
           currentParentId={category.parentId}
+          onAdd={onAdd}
           onEdit={onEdit}
           onShift={onShift}
           onDelete={onDelete}
@@ -64,6 +66,7 @@ const CategoryNode = ({
             <CategoryNode
               key={subCat.id}
               category={subCat}
+              onAdd={onAdd}
               allCategories={allCategories}
               depth={depth + 1}
               onEdit={onEdit}
