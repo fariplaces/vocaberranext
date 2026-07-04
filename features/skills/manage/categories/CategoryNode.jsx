@@ -14,6 +14,7 @@ const CategoryNode = ({
   onEdit,
   onRename,
   onDelete,
+  filterNotesByTopic,
 }) => {
   const [isOpen, setIsOpen] = useState(true);
 
@@ -44,6 +45,7 @@ const CategoryNode = ({
           onEdit={onEdit}
           onShift={onShift}
           onDelete={onDelete}
+          filterNotesByTopic={filterNotesByTopic}
         />
       </div>
 
@@ -59,6 +61,7 @@ const CategoryNode = ({
               onEdit={onEdit}
               onRename={onRename}
               onDelete={onDelete}
+              filterNotesByTopic={filterNotesByTopic}
             />
           ))}
           {/* Recursively Loop nested Subcategories */}
@@ -73,6 +76,7 @@ const CategoryNode = ({
               onShift={onShift}
               onRename={onRename}
               onDelete={onDelete}
+              filterNotesByTopic={filterNotesByTopic}
             />
           ))}
         </div>

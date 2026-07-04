@@ -17,21 +17,39 @@ import {
 import SkillGraphicalDashboard from "./GraficCategories";
 import ContentTitleArrayButtons from "@/components/ContentTitleArrayButtons";
 import ManageSkillPopup from "../skills/ManageSkillPopup";
-import { selectAllNotes } from "@/store/selectors/notesSelectors";
+import {
+  selectAllNotes,
+  selectNotesMetaData,
+} from "@/store/selectors/notesSelectors";
 import { fetchNotes } from "@/store/actions/notesActions";
 import DeleteSkillPopup from "../skills/DeleteSkillPopup";
 import ManageTopicPopup from "../topics/ManageTopicPopup";
 import DeleteTopicPopup from "../topics/DeleteTopicPopup";
+import ManageRevisionPopup from "../revisions/ManageRevisionPopup";
+import ReadNotes from "./ReadNotes";
+import { EMPTY_ARRAY } from "@/store/constants/sliceConstants";
+import { setActiveNote } from "@/store/slices/notesSlice";
 
 const CategoriesPage = ({ route }) => {
   const dispatch = useDispatch();
   const categoryDomain = SKILL_FORM_DOMAINS.CATEGORIES;
   const skillDomain = SKILL_FORM_DOMAINS.SKILLS;
   const topicDomain = SKILL_FORM_DOMAINS.TOPICS;
+  const revisionDomain = SKILL_FORM_DOMAINS.REVISIONS;
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [filterNotes, setFilterNotes] = React.useState(EMPTY_ARRAY);
 
-  const allNotes = useSelector(selectAllNotes);
+  const { notes } = useSelector(selectNotesMetaData) || EMPTY_ARRAY;
 
-  console.log("all Notes", allNotes);
+  const filterNotesByTopic = (targetId) => {
+    setIsOpen(true);
+    dispatch(setActiveNote(null));
+    if (targetId) {
+      setFilterNotes(notes.filter((note) => note.targetId === targetId));
+    } else {
+      setFilterNotes(notes);
+    }
+  };
 
   useEffect(() => {
     // dispatch(resetSkillFormState());
@@ -48,13 +66,17 @@ const CategoriesPage = ({ route }) => {
         route={route}
         skillDomain={skillDomain}
         categoryDomain={categoryDomain}
+        topicDomain={topicDomain}
+        filterNotesByTopic={filterNotesByTopic}
       />
       <ManageCategoryPopup domain={categoryDomain} />
       <ManageSkillPopup domain={skillDomain} />
       <ManageTopicPopup domain={topicDomain} />
+      <ManageRevisionPopup domain={revisionDomain} />
       <DeleteSkillPopup domain={skillDomain} />
       <DeleteCategoryPopup domain={categoryDomain} />
       <DeleteTopicPopup domain={topicDomain} />
+      {isOpen && <ReadNotes notes={filterNotes} setIsOpen={setIsOpen} />}
     </>
   );
 };

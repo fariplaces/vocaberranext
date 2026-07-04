@@ -1,11 +1,9 @@
 import React from "react";
-import RevisionPage from "@/components/skills/revisions/RevisionPage";
+import RevisionPage from "@/features/skills/manage/revisions/RevisionPage";
 
 const Revision = async ({ params }) => {
-   const { route } = await params;
-   return (
-      <RevisionPage route={route} />
-   );
+  const { route } = await params;
+  return <RevisionPage route={route} />;
 };
 
 export default Revision;

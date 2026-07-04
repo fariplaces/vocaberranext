@@ -1,12 +1,11 @@
 import { skillDbServices } from "@/services/server/skillDbServices";
 import { NextResponse } from "next/server";
 
-export async function POST(req, { params }) {
+export async function POST(req) {
   try {
-    const resolveParams = await params;
-    const { id } = resolveParams;
+    const body = await req.json();
 
-    const newTopic = await skillDbServices.createTopic(id);
+    const newTopic = await skillDbServices.createTopic(body);
 
     return NextResponse.json(newTopic, { status: 201 });
   } catch (error) {

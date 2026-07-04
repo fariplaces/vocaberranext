@@ -12,26 +12,26 @@ const StaticSkillNavitaionMenu = [
       },
     ],
   },
-  {
-    name: "Manage Skills",
-    icon: TrendingUp,
-    type: "Admin",
-    hasSubmenu: true,
-    subItems: [
-      {
-        item: "Skills",
-        href: "/skills/manage/skills",
-      },
-      {
-        item: "Categories",
-        href: "/skills/manage/categories",
-      },
-      {
-        item: "Topics List",
-        href: "/skills/manage/topics",
-      },
-    ],
-  },
+  // {
+  //   name: "Manage Skills",
+  //   icon: TrendingUp,
+  //   type: "Admin",
+  //   hasSubmenu: true,
+  //   subItems: [
+  //     {
+  //       item: "Skills",
+  //       href: "/skills/manage/skills",
+  //     },
+  //     {
+  //       item: "Categories",
+  //       href: "/skills/manage/categories",
+  //     },
+  //     {
+  //       item: "Topics List",
+  //       href: "/skills/manage/topics",
+  //     },
+  //   ],
+  // },
   {
     name: "Logout",
     icon: TrendingUp,

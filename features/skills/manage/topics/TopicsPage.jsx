@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import RenderTopics from "./RenderTopics";
 import ManageTopicPopup from "./ManageTopicPopup";
 import DeleteTopicPopup from "./DeleteTopicPopup";
-import ManageRevisionPopup from "../../../../components/skills/revisions/ManageRevisionPopup";
+import ManageRevisionPopup from "../revisions/ManageRevisionPopup";
 import {
   deleteTopic,
   fetchCategories,

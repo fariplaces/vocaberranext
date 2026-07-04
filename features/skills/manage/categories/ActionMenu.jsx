@@ -3,6 +3,8 @@ import { AiOutlineAppstoreAdd } from "react-icons/ai";
 import React from "react";
 import { Edit2, Trash } from "lucide-react";
 import { CgPlayListAdd } from "react-icons/cg";
+import { MdOutlinePostAdd } from "react-icons/md";
+import { IoMdEye } from "react-icons/io";
 
 const ActionMenu = ({
   item,
@@ -13,9 +15,12 @@ const ActionMenu = ({
   onShift,
   onDelete,
   onEdit,
+  filterNotesByTopic,
 }) => {
   // Prevent moving a category into its own lineage subset
   const validDestinations = allCategories.filter((cat) => cat.id !== item.id);
+
+  console.log("Notes getting", item.title, item.notes);
 
   return (
     <div
@@ -46,18 +51,20 @@ const ActionMenu = ({
           <CgPlayListAdd size={12} />
         </button> */}
       {currentType === "topic" && (
-        <div className="relative group/flag inline-block">
-          <button
-            className="opacity-0 group-hover/node:opacity-100 p-1 text-gray-500 hover:text-gray-300 transition-opacity"
-            onClick={() => onEdit(item, currentType)}
-          >
-            <CgPlayListAdd size={12} />
-          </button>
+        <>
+          <div className="relative group/flag inline-block">
+            <button
+              className="opacity-0 group-hover/node:opacity-100 p-1 text-gray-500 hover:text-gray-300 transition-opacity"
+              onClick={() => onEdit(item, currentType)}
+            >
+              <CgPlayListAdd size={12} />
+            </button>
 
-          <span className="absolute left-1/2 -translate-x-1/2 -top-5 whitespace-nowrap rounded-md bg-gray-900 px-2 py-1 text-[8px] text-white opacity-0 transition-opacity duration-200 group-hover/flag:opacity-100 font-arial">
-            Add Sub-Category
-          </span>
-        </div>
+            <span className="absolute left-1/2 -translate-x-1/2 -top-5 whitespace-nowrap rounded-md bg-gray-900 px-2 py-1 text-[8px] text-white opacity-0 transition-opacity duration-200 group-hover/flag:opacity-100 font-arial">
+              Add Revision
+            </span>
+          </div>
+        </>
       )}
       {/* <button
           onClick={() =>
@@ -68,20 +75,35 @@ const ActionMenu = ({
           <AiOutlineAppstoreAdd size={12} />
         </button> */}
       {currentType === "category" && (
-        <div className="relative group/flag inline-block">
-          <button
-            className="opacity-0 group-hover/node:opacity-100 p-1 text-gray-500 hover:text-gray-300 transition-opacity"
-            onClick={() =>
-              onAdd("sub", { parentId: item.id, skillId: item.skillId })
-            }
-          >
-            <AiOutlineAppstoreAdd size={12} />
-          </button>
+        <>
+          <div className="relative group/flag inline-block">
+            <button
+              className="opacity-0 group-hover/node:opacity-100 p-1 text-gray-500 hover:text-gray-300 transition-opacity"
+              onClick={() => onAdd("topic", { categoryId: item.id })}
+            >
+              <MdOutlinePostAdd size={12} />
+            </button>
 
-          <span className="absolute left-1/2 -translate-x-1/2 -top-5 whitespace-nowrap rounded-md bg-gray-900 px-2 py-1 text-[8px] text-white opacity-0 transition-opacity duration-200 group-hover/flag:opacity-100 font-arial">
-            Add Sub-Category
-          </span>
-        </div>
+            <span className="absolute left-1/2 -translate-x-1/2 -top-5 whitespace-nowrap rounded-md bg-gray-900 px-2 py-1 text-[8px] text-white opacity-0 transition-opacity duration-200 group-hover/flag:opacity-100 font-arial">
+              Add Topic
+            </span>
+          </div>
+
+          <div className="relative group/flag inline-block">
+            <button
+              className="opacity-0 group-hover/node:opacity-100 p-1 text-gray-500 hover:text-gray-300 transition-opacity"
+              onClick={() =>
+                onAdd("sub", { parentId: item.id, skillId: item.skillId })
+              }
+            >
+              <AiOutlineAppstoreAdd size={12} />
+            </button>
+
+            <span className="absolute left-1/2 -translate-x-1/2 -top-5 whitespace-nowrap rounded-md bg-gray-900 px-2 py-1 text-[8px] text-white opacity-0 transition-opacity duration-200 group-hover/flag:opacity-100 font-arial">
+              Add Sub-Category
+            </span>
+          </div>
+        </>
       )}
       {/* <button
         onClick={() => onEdit(item, currentType)}
@@ -90,6 +112,18 @@ const ActionMenu = ({
         <Edit2 size={12} />
       </button> */}
 
+      <div className="relative group/flag inline-block">
+        <button
+          className="opacity-0 group-hover/node:opacity-100 p-1 text-gray-500 hover:text-gray-300 transition-opacity"
+          onClick={() => filterNotesByTopic(item.id)}
+        >
+          <IoMdEye size={12} />
+        </button>
+
+        <span className="absolute left-1/2 -translate-x-1/2 -top-5 whitespace-nowrap rounded-md bg-gray-900 px-2 py-1 text-[8px] text-white opacity-0 transition-opacity duration-200 group-hover/flag:opacity-100 font-arial">
+          Show Notes
+        </span>
+      </div>
       <div className="relative group/flag inline-block">
         <button
           className="opacity-0 group-hover/node:opacity-100 p-1 text-gray-500 hover:text-gray-300 transition-opacity"
@@ -102,8 +136,8 @@ const ActionMenu = ({
           {currentType === "category"
             ? "Edit Category"
             : currentType === "topic"
-              ? "Edit Topic"
-              : ""}
+            ? "Edit Topic"
+            : ""}
         </span>
       </div>
       <div className="relative group/flag inline-block">
@@ -118,8 +152,8 @@ const ActionMenu = ({
           {currentType === "category"
             ? "Delete Category"
             : currentType === "topic"
-              ? "Delete Topic"
-              : ""}
+            ? "Delete Topic"
+            : ""}
         </span>
       </div>
 

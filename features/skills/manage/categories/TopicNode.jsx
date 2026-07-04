@@ -11,6 +11,7 @@ const TopicNode = ({
   onRename,
   onEdit,
   onDelete,
+  filterNotesByTopic,
 }) => (
   <div className="group/node flex items-center justify-between ml-6 p-2 my-1 bg-gray-900/30 border border-gray-800/40 rounded-md">
     <div className="flex items-center gap-2 text-sm text-gray-400">
@@ -28,6 +29,7 @@ const TopicNode = ({
       onShift={onShift}
       onEdit={onEdit}
       onDelete={onDelete}
+      filterNotesByTopic={filterNotesByTopic}
     />
   </div>
 );

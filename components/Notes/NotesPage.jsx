@@ -6,98 +6,110 @@ import NotesEditor from "@/components/Notes/NotesEditor";
 import TemplatesPanel from "@/components/Notes/TemplatesPanel";
 import GlobalNotesPanel from "@/components/Notes/GlobalNotesPanel";
 import { setActiveNote } from "@/store/slices/notesSlice";
-import { createNote, deleteNote, fetchGlobalNotes, fetchNotes, fetchTemplates } from "@/store/actions/notesActions";
+import {
+  createNote,
+  deleteNote,
+  fetchGlobalNotes,
+  fetchNotes,
+  fetchTemplates,
+} from "@/store/actions/notesActions";
 import { selectNotesMetaData } from "@/store/selectors/notesSelectors";
 
 export default function NotesPage() {
-   const dispatch = useDispatch();
-   const { notes, activeNote, loading } = useSelector(selectNotesMetaData);
-   const [view, setView] = useState("notes"); // "notes" | "templates" | "global"
+  const dispatch = useDispatch();
+  const { notes, activeNote, loading } = useSelector(selectNotesMetaData);
+  const [view, setView] = useState("notes"); // "notes" | "templates" | "global"
 
-   useEffect(() => {
-      dispatch(fetchNotes());
-      dispatch(fetchTemplates());
-      dispatch(fetchGlobalNotes());
-   }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchNotes());
+    dispatch(fetchTemplates());
+    dispatch(fetchGlobalNotes());
+  }, [dispatch]);
 
-   const handleNewNote = () => {
-      dispatch(createNote({ title: "Untitled" }));
-   };
+  const handleNewNote = () => {
+    dispatch(createNote({ title: "Untitled" }));
+  };
 
-   return (
-      <div className="notes-page">
-         {/* Top nav */}
-         <div className="notes-topbar">
-            <div className="notes-topbar-left">
-               <span className="notes-logo">{view == "notes" ? "Notes" : view == "templates" ? "Templates" : "Global"}</span>
-            </div>
-            <div className="notes-topbar-tabs">
-               <button
-                  className={`tab-btn ${view === "notes" ? "active" : ""}`}
-                  onClick={() => setView("notes")}
-               >
-                  My Notes
-               </button>
-               <button
-                  className={`tab-btn ${view === "global" ? "active" : ""}`}
-                  onClick={() => setView("global")}
-               >
-                  Global
-               </button>
-               <button
-                  className={`tab-btn ${view === "templates" ? "active" : ""}`}
-                  onClick={() => setView("templates")}
-               >
-                  Templates
-               </button>
-            </div>
-            <div className="notes-topbar-right">
-               {view === "notes" && (
+  return (
+    <div className="notes-page">
+      {/* Top nav */}
+      <div className="notes-topbar">
+        <div className="notes-topbar-left">
+          <span className="notes-logo">
+            {view == "notes"
+              ? "Notes"
+              : view == "templates"
+              ? "Templates"
+              : "Global"}
+          </span>
+        </div>
+        <div className="notes-topbar-tabs">
+          <button
+            className={`tab-btn ${view === "notes" ? "active" : ""}`}
+            onClick={() => setView("notes")}
+          >
+            My Notes
+          </button>
+          <button
+            className={`tab-btn ${view === "global" ? "active" : ""}`}
+            onClick={() => setView("global")}
+          >
+            Global
+          </button>
+          <button
+            className={`tab-btn ${view === "templates" ? "active" : ""}`}
+            onClick={() => setView("templates")}
+          >
+            Templates
+          </button>
+        </div>
+        <div className="notes-topbar-right">
+          {view === "notes" && (
+            <button className="new-note-btn" onClick={handleNewNote}>
+              + New Note
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Body */}
+      <div className="notes-body">
+        {view === "notes" && (
+          <>
+            <NotesSidebar
+              notes={notes}
+              activeNote={activeNote}
+              loading={loading}
+              onSelect={(note) => dispatch(setActiveNote(note))}
+              onDelete={(id) => dispatch(deleteNote(id))}
+            />
+            <div className="notes-editor-area">
+              {activeNote ? (
+                <NotesEditor note={activeNote} />
+              ) : (
+                <div className="notes-empty">
+                  <p>Select a note or create a new one</p>
                   <button className="new-note-btn" onClick={handleNewNote}>
-                     + New Note
+                    + New Note
                   </button>
-               )}
+                </div>
+              )}
             </div>
-         </div>
+          </>
+        )}
 
-         {/* Body */}
-         <div className="notes-body">
-            {view === "notes" && (
-               <>
-                  <NotesSidebar
-                     notes={notes}
-                     activeNote={activeNote}
-                     loading={loading}
-                     onSelect={(note) => dispatch(setActiveNote(note))}
-                     onDelete={(id) => dispatch(deleteNote(id))}
-                  />
-                  <div className="notes-editor-area">
-                     {activeNote ? (
-                        <NotesEditor note={activeNote} />
-                     ) : (
-                        <div className="notes-empty">
-                           <p>Select a note or create a new one</p>
-                           <button className="new-note-btn" onClick={handleNewNote}>
-                              + New Note
-                           </button>
-                        </div>
-                     )}
-                  </div>
-               </>
-            )}
+        {view === "global" && <GlobalNotesPanel />}
+        {view === "templates" && <TemplatesPanel />}
+      </div>
 
-            {view === "global" && <GlobalNotesPanel />}
-            {view === "templates" && <TemplatesPanel />}
-         </div>
-
-         <style jsx>{`
+      <style jsx>{`
         .notes-page {
           display: flex;
           flex-direction: column;
           height: 100vh;
           background: #0d0d0d;
           color: #e8e6e0;
-          font-family: 'Georgia', serif;
+          font-family: "Georgia", serif;
         }
         .notes-topbar {
           display: flex;
@@ -114,7 +126,7 @@ export default function NotesPage() {
           font-weight: 600;
           letter-spacing: 0.05em;
           color: #e8e6e0;
-          font-family: 'Georgia', serif;
+          font-family: "Georgia", serif;
         }
         .notes-topbar-tabs {
           display: flex;
@@ -131,8 +143,14 @@ export default function NotesPage() {
           transition: all 0.15s;
           font-family: inherit;
         }
-        .tab-btn:hover { color: #e8e6e0; background: #1a1a1a; }
-        .tab-btn.active { color: #e8e6e0; background: #1e1e1e; }
+        .tab-btn:hover {
+          color: #e8e6e0;
+          background: #1a1a1a;
+        }
+        .tab-btn.active {
+          color: #e8e6e0;
+          background: #1e1e1e;
+        }
         .new-note-btn {
           padding: 7px 16px;
           background: #e8e6e0;
@@ -145,7 +163,9 @@ export default function NotesPage() {
           transition: opacity 0.15s;
           font-family: inherit;
         }
-        .new-note-btn:hover { opacity: 0.85; }
+        .new-note-btn:hover {
+          opacity: 0.85;
+        }
         .notes-body {
           display: flex;
           flex: 1;
@@ -166,8 +186,10 @@ export default function NotesPage() {
           gap: 16px;
           color: #444;
         }
-        .notes-empty p { font-size: 15px; }
+        .notes-empty p {
+          font-size: 15px;
+        }
       `}</style>
-      </div>
-   );
+    </div>
+  );
 }

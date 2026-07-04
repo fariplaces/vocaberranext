@@ -11,12 +11,18 @@ import {
 } from "@/store/slices/skillSlices/skillFormSlice";
 import CategoryNode from "./CategoryNode";
 import EditableTitle from "./EditableTitle";
-import { updateCategory, updateSkill } from "@/store/actions/skillActions";
+import {
+  updateCategory,
+  updateSkill,
+  updateTopic,
+} from "@/store/actions/skillActions";
 
 export default function SkillGraphicalDashboard({
   route,
   skillDomain,
   categoryDomain,
+  topicDomain,
+  filterNotesByTopic,
 }) {
   const dispatch = useDispatch();
 
@@ -24,10 +30,12 @@ export default function SkillGraphicalDashboard({
     route === "all"
       ? useSelector((state) => selectGraphicalSkillTreeMetaByFilter(state))
       : useSelector((state) =>
-          selectGraphicalSkillTreeMetaByFilter(state, route),
+          selectGraphicalSkillTreeMetaByFilter(state, route)
         );
 
+  console.log(sortedSkillsTree, "sortedSkillsTree 1234", route);
   const rawCategories = useSelector((state) => state.skill.categories || []);
+  console.log(rawCategories, "rawCategories");
 
   //- Add Logic
   // Skill
@@ -39,7 +47,7 @@ export default function SkillGraphicalDashboard({
           domain: skillDomain,
           editData: null,
           defaults: {},
-        }),
+        })
       );
     }
     // Add Parent Category
@@ -54,7 +62,7 @@ export default function SkillGraphicalDashboard({
             skillId: data.skillId ? data.skillId : "",
             formMode: "parent", // 🌟 Dynamic Mode Flag
           },
-        }),
+        })
       );
     }
     // Add Sub Category
@@ -69,10 +77,22 @@ export default function SkillGraphicalDashboard({
             skillId: data.skillId ? data.skillId : "",
             formMode: "sub", // 🌟 Dynamic Mode Flag
           },
-        }),
+        })
       );
     }
     // Add Topic
+    if (type === "topic" && data) {
+      dispatch(
+        openSkillManagePopup({
+          domain: topicDomain,
+          defaults: {
+            title: "",
+            order: "",
+            categoryId: data.categoryId ? data.categoryId : "",
+          },
+        })
+      );
+    }
   };
   // const handleAddSkill = () => {
   //   dispatch(
@@ -124,12 +144,12 @@ export default function SkillGraphicalDashboard({
       const destinationValue =
         targetParentId === "root" ? null : targetParentId;
       console.log(
-        `API Action: Move Category ${id} under parentId: ${destinationValue}`,
+        `API Action: Move Category ${id} under parentId: ${destinationValue}`
       );
       // dispatch(updateCategoryParentAction({ id, parentId: destinationValue }));
     } else if (type === "topic") {
       console.log(
-        `API Action: Move Topic ${id} under categoryId: ${targetParentId}`,
+        `API Action: Move Topic ${id} under categoryId: ${targetParentId}`
       );
       // dispatch(updateTopicCategoryAction({ id, categoryId: targetParentId }));
     }
@@ -145,7 +165,7 @@ export default function SkillGraphicalDashboard({
       dispatch(updateCategory({ id: id, title: newTitle }));
     }
     if (type === "topic") {
-      console.log(`API Action: Delete Topic ${id}`);
+      dispatch(updateTopic({ id: id, title: newTitle }));
     }
   };
 
@@ -156,27 +176,35 @@ export default function SkillGraphicalDashboard({
     if (type === "category" && item.parentId === null) {
       dispatch(
         openSkillManagePopup({
-          domain: "categories",
+          domain: categoryDomain,
           editData: { ...item, formMode: "parent" },
-        }),
+        })
       );
     }
     // Edit Sub Category
     if (type === "category" && item.parentId != null) {
       dispatch(
         openSkillManagePopup({
-          domain: "categories",
+          domain: categoryDomain,
           editData: { ...item, formMode: "sub" },
-        }),
+        })
       );
-    }
-    // Edit Topic
-    if (type === "topic") {
-      console.log(`API Action: Delete Topic ${id}`);
     }
     // Edit Skill
     if (type === "skill") {
       dispatch(openSkillManagePopup({ domain: skillDomain, editData: item }));
+    }
+    // Edit Topic
+    if (type === "topic") {
+      console.log(`API Action: Edit Topic ${item}`);
+
+      dispatch(
+        openSkillManagePopup({
+          domain: topicDomain,
+          editData: item,
+          defaults: {},
+        })
+      );
     }
   };
 
@@ -184,15 +212,21 @@ export default function SkillGraphicalDashboard({
   const handleDeleteItem = (item, type) => {
     // Delete Category (Parent or Sub)
     if (type === "category") {
-      dispatch(openSkillDeletePopup({ domain: "categories", item }));
-    }
-    // Delete Category
-    if (type === "topic") {
-      console.log(`API Action: Delete Topic ${id}`);
+      dispatch(openSkillDeletePopup({ domain: categoryDomain, item }));
     }
     // Delete Skill
     if (type === "skill") {
       dispatch(openSkillDeletePopup({ domain: skillDomain, item }));
+    }
+    // Delete Category
+    if (type === "topic") {
+      console.log(`API Action: Delete Topic ${item}`);
+      dispatch(
+        openSkillDeletePopup({
+          domain: topicDomain,
+          item,
+        })
+      );
     }
   };
 
@@ -299,6 +333,7 @@ export default function SkillGraphicalDashboard({
                     onEdit={handleEditItem}
                     onRename={handleRenameItem}
                     onDelete={handleDeleteItem}
+                    filterNotesByTopic={filterNotesByTopic}
                   />
                 ))}
                 {skill.categories.length === 0 && (
