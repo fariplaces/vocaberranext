@@ -12,49 +12,55 @@ import {
   fetchCategories,
   fetchTopics,
 } from "@/store/actions/skillActions";
+import { SKILL_FORM_DOMAINS } from "@/store/constants/skillsConstants";
+import { openSkillManagePopup } from "@/store/slices/skillSlices/skillFormSlice";
 
 const TopicsPage = () => {
-  const [selectedItem, setSelectedItem] = useState(null);
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [isRevisionPopupOpen, setIsRevisionPopupOpen] = useState(false);
-  const [isDelPopupOpen, setIsDelPopupOpen] = useState(false);
-  const [itemToDelete, setItemToDelete] = useState(null);
-  const { loading } = useSelector((state) => state.skill);
-
-  const handleEditClick = (item) => {
-    setSelectedItem(item);
-    setIsPopupOpen(true);
-  };
-
-  const handleRevisionClick = (item) => {
-    // console.log(item);
-    setSelectedItem({ topicId: item.id });
-    setIsRevisionPopupOpen(true);
-  };
+  const dispatch = useDispatch();
+  const domain = SKILL_FORM_DOMAINS.TOPICS;
 
   const handleAddClick = () => {
-    setSelectedItem(null);
-    setIsPopupOpen(true);
-  };
-  const handleDelClick = (item) => {
-    setItemToDelete(item);
-    setIsDelPopupOpen(true);
+    dispatch(openSkillManagePopup({ domain, editData: null, defaults: {} }));
+    // setSelectedItem(null);
+    // setIsPopupOpen(true);
   };
 
-  const handleDelete = async () => {
-    console.log(itemToDelete);
-    if (itemToDelete?.id) {
-      dispatch(deleteTopic(itemToDelete.id));
-      setIsDelPopupOpen(false);
-      setItemToDelete(null);
-    }
-  };
-
-  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchTopics());
     dispatch(fetchCategories());
   }, []);
+
+  // const [selectedItem, setSelectedItem] = useState(null);
+  // const [isPopupOpen, setIsPopupOpen] = useState(false);
+  // const [isRevisionPopupOpen, setIsRevisionPopupOpen] = useState(false);
+  // const [isDelPopupOpen, setIsDelPopupOpen] = useState(false);
+  // const [itemToDelete, setItemToDelete] = useState(null);
+  // const { loading } = useSelector((state) => state.skill);
+
+  // const handleEditClick = (item) => {
+  //   setSelectedItem(item);
+  //   setIsPopupOpen(true);
+  // };
+
+  // const handleRevisionClick = (item) => {
+  //   // console.log(item);
+  //   setSelectedItem({ topicId: item.id });
+  //   setIsRevisionPopupOpen(true);
+  // };
+
+  // const handleDelClick = (item) => {
+  //   setItemToDelete(item);
+  //   setIsDelPopupOpen(true);
+  // };
+
+  // const handleDelete = async () => {
+  //   console.log(itemToDelete);
+  //   if (itemToDelete?.id) {
+  //     dispatch(deleteTopic(itemToDelete.id));
+  //     setIsDelPopupOpen(false);
+  //     setItemToDelete(null);
+  //   }
+  // };
 
   return (
     <>
@@ -65,35 +71,43 @@ const TopicsPage = () => {
         handleMethod={handleAddClick}
       />
       <RenderTopics
-        handleEditClick={handleEditClick}
-        handleDelClick={handleDelClick}
-        handleRevisionClick={handleRevisionClick}
+        domain={domain}
+        // handleEditClick={handleEditClick}
+        // handleDelClick={handleDelClick}
+        // handleRevisionClick={handleRevisionClick}
       />
-      <ManageTopicPopup
-        isOpen={isPopupOpen}
-        setIsOpen={setIsPopupOpen}
-        editData={selectedItem}
-        setEditData={setSelectedItem}
+      <ManageTopicPopup domain={domain} />
+      <DeleteTopicPopup domain={domain} />
+      <ManageRevisionPopup domain={domain} />
+      {/* 
+        <RenderTopics
+      // isOpen={isPopupOpen}
+      // setIsOpen={setIsPopupOpen}
+      // editData={selectedItem}
+      // setEditData={setSelectedItem}
       />
+
       <ManageRevisionPopup
-        isOpen={isRevisionPopupOpen}
-        setIsOpen={setIsRevisionPopupOpen}
-        editData={selectedItem}
-        setEditData={setSelectedItem}
+        domain={domain}
+        // isOpen={isRevisionPopupOpen}
+        // setIsOpen={setIsRevisionPopupOpen}
+        // editData={selectedItem}
+        // setEditData={setSelectedItem}
       />
       <DeleteTopicPopup
-        isDelPopupOpen={isDelPopupOpen}
-        setIsDelPopupOpen={setIsDelPopupOpen}
-        itemName={`${itemToDelete?.title} — ${[
-          itemToDelete?.category?.title,
-          itemToDelete?.category?.parent?.title,
-          itemToDelete?.category?.skill?.title,
-        ]
-          .filter(Boolean)
-          .join(" > ")}`}
-        onDelete={handleDelete}
-        isLoading={loading}
-      />
+        domain={domain}
+        // isDelPopupOpen={isDelPopupOpen}
+        // setIsDelPopupOpen={setIsDelPopupOpen}
+        // itemName={`${itemToDelete?.title} — ${[
+        //   itemToDelete?.category?.title,
+        //   itemToDelete?.category?.parent?.title,
+        //   itemToDelete?.category?.skill?.title,
+        // ]
+        //   .filter(Boolean)
+        //   .join(" > ")}`}
+        // onDelete={handleDelete}
+        // isLoading={loading}
+      /> */}
     </>
   );
 };

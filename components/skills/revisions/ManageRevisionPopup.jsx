@@ -1,73 +1,48 @@
 "use client";
 import { createRevision, updateRevision } from "@/store/actions/skillActions";
+import { SKILL_FORM_DOMAINS } from "@/store/constants/skillsConstants";
 import { selectUser } from "@/store/selectors/authSelectors";
+import { selectRevisionSkillFormMeta } from "@/store/selectors/skillSelectors/skillFormSelector";
+import {
+  selectAllTopics,
+  selectSkillLoading,
+} from "@/store/selectors/skillSelectors/skillSelectors";
+import {
+  closeSkillManagePopup,
+  updateSkillFormFields,
+} from "@/store/slices/skillSlices/skillFormSlice";
 import { incrementDate } from "@/utils/date";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-const initialFormState = {
-  topicId: "",
-  scheduled: "",
-  practiced: "",
-  revision1: "",
-  revision1date: "",
-  revision2: "",
-  revision2date: "",
-  revision3: "",
-  revision3date: "",
-  revision4: "",
-  revision4date: "",
-  revision5: "",
-  revision5date: "",
-};
-
-const ManageRevisionPopup = ({
-  route,
-  isOpen,
-  setIsOpen,
-  editData = null,
-  setEditData,
-}) => {
-  const user = useSelector(selectUser);
-  const { topics } = useSelector((state) => state.skill);
-  const [formData, setFormData] = useState(initialFormState);
+const ManageRevisionPopup = ({ domain }) => {
   const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+  const topics = useSelector(selectAllTopics);
 
-  const filteredTopics = topics?.filter((topic) => {
-    const cat = topic.category;
-
-    return (
-      topic.categoryId === route ||
-      cat?.parentId === route ||
-      cat?.parent?.parentId === route ||
-      cat?.skillId === route ||
-      cat?.parent?.skillId === route ||
-      cat?.parent?.parent?.skillId === route
-    );
-  });
-
-  const resetPopup = () => {
-    setFormData(initialFormState);
-    if (setEditData) setEditData(null);
-    setIsOpen(false);
-  };
-
-  useEffect(() => {
-    if (isOpen) {
-      setFormData(editData ? { ...editData } : initialFormState);
-    }
-  }, [isOpen, editData]);
+  const { isOpen, editId, formData } = useSelector(selectRevisionSkillFormMeta);
+  const isLoading = useSelector(selectSkillLoading);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => {
-      const newState = { ...prev, [name]: value };
-      return newState;
-    });
+    dispatch(
+      updateSkillFormFields({
+        domain: SKILL_FORM_DOMAINS.REVISIONS,
+        name,
+        value,
+      })
+    );
   };
 
+  const filteredTopics = topics.filter(
+    (topic) => topic.id === formData.topicId
+  );
+
   const handleSave = async () => {
-    console.log(formData);
+    if (!formData.topicId || !formData.scheduled) {
+      alert("Please fill all required fields!");
+      return;
+    }
 
     const payloadData = {
       topicId: formData.topicId,
@@ -90,48 +65,48 @@ const ManageRevisionPopup = ({
         incrementDate(formData.practiced || formData.scheduled, 72) || null,
     };
 
-    console.log(payloadData);
-    const ignoreFields = ["practiced"];
+    try {
+      const ignoreFields = ["practiced"];
 
-    const filteredData = Object.fromEntries(
-      Object.entries(payloadData).filter(([key]) => !ignoreFields.includes(key))
-    );
+      const filteredData = Object.fromEntries(
+        Object.entries(payloadData).filter(
+          ([key]) => !ignoreFields.includes(key)
+        )
+      );
 
-    const isFormIncomplete = Object.values(filteredData).some(
-      (val) => String(val ?? "").trim() === ""
-    );
+      const isFormIncomplete = Object.values(filteredData).some(
+        (val) => String(val ?? "").trim() === ""
+      );
 
-    if (isFormIncomplete) {
-      alert("Please fill all required fields!");
-      return;
+      if (isFormIncomplete) {
+        alert("Please fill all required fields!");
+        return;
+      }
+
+      const payload = {
+        topicId: payloadData.topicId,
+        scheduled: payloadData.scheduled,
+        practiced: payloadData.practiced,
+        revision1: payloadData.revision1,
+        revision1date: payloadData.revision1date,
+        revision2: payloadData.revision2,
+        revision2date: payloadData.revision2date,
+        revision3: payloadData.revision3,
+        revision3date: payloadData.revision3date,
+        revision4: payloadData.revision4,
+        revision4date: payloadData.revision4date,
+        revision5: payloadData.revision5,
+        revision5date: payloadData.revision5date,
+        userId: user.id,
+      };
+
+      const action = editId?.id
+        ? updateRevision({ id: editId.id, ...payload })
+        : createRevision(payload);
+      await dispatch(action).unwrap();
+    } catch (err) {
+      toast.error(`Submission failed: ${err}`);
     }
-
-    const payload = {
-      topicId: payloadData.topicId,
-      scheduled: payloadData.scheduled,
-      practiced: payloadData.practiced,
-      revision1: payloadData.revision1,
-      revision1date: payloadData.revision1date,
-      revision2: payloadData.revision2,
-      revision2date: payloadData.revision2date,
-      revision3: payloadData.revision3,
-      revision3date: payloadData.revision3date,
-      revision4: payloadData.revision4,
-      revision4date: payloadData.revision4date,
-      revision5: payloadData.revision5,
-      revision5date: payloadData.revision5date,
-      userId: user.id,
-    };
-    console.log(payload);
-
-    if (editData?.id) {
-      dispatch(updateRevision({ id: editData.id, ...payload }));
-    } else {
-      dispatch(createRevision(payload));
-    }
-
-    setIsOpen(false);
-    resetPopup();
   };
 
   return (
@@ -139,17 +114,10 @@ const ManageRevisionPopup = ({
       {/* Popup / Modal */}
       {isOpen && (
         <>
-          <div
-            className="fixed flex items-center justify-center inset-0 bg-white/10 backdrop-blur-sm transition-all duration-300"
-            onClick={() => setIsOpen(false)}
-          >
-            {/* <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"> */}
-            <div
-              className="bg-black text-white p-6 rounded-xl shadow-lg w-96 border border-gray-700"
-              onClick={(e) => e.stopPropagation()}
-            >
+          <div className="fixed flex items-center justify-center inset-0 bg-white/10 backdrop-blur-sm transition-all duration-300">
+            <div className="bg-black text-white p-6 rounded-xl shadow-lg w-96 border border-gray-700">
               <h2 className="text-xl font-semibold mb-4">
-                {editData ? "Edit Revision Details" : "Add a New Revision"}
+                {editId ? "Edit Revision Details" : "Add a New Revision"}
               </h2>
               {/* Word Input */}
 
@@ -202,11 +170,19 @@ const ManageRevisionPopup = ({
                 />
                 <div className="flex justify-end space-x-2 p-1">
                   <button
-                    onClick={() =>
-                      setFormData((prev) => ({
-                        ...prev,
-                        scheduled: new Date().toISOString().split("T")[0],
-                      }))
+                    onClick={
+                      () =>
+                        dispatch(
+                          updateSkillFormFields({
+                            domain: SKILL_FORM_DOMAINS.REVISIONS,
+                            name: "scheduled",
+                            value: new Date().toISOString().split("T")[0],
+                          })
+                        )
+                      // setFormData((prev) => ({
+                      //   ...prev,
+                      //   scheduled: new Date().toISOString().split("T")[0],
+                      // }))
                     }
                     className="px-4 py-0.5 border border-gray-600 rounded-lg hover:bg-gray-700"
                   >
@@ -217,13 +193,21 @@ const ManageRevisionPopup = ({
                     onClick={() => {
                       const tomorrow = new Date();
                       tomorrow.setDate(tomorrow.getDate() + 1);
-
-                      setFormData((prev) => ({
+                      dispatch(
+                        updateSkillFormFields({
+                          domain: SKILL_FORM_DOMAINS.REVISIONS,
+                          name: "scheduled",
+                          value: tomorrow.toISOString().split("T")[0],
+                        })
+                      );
+                    }}
+                  >
+                    {/* // setFormData((prev) => ({
                         ...prev,
                         scheduled: tomorrow.toISOString().split("T")[0],
                       }));
                     }}
-                  >
+                  > */}
                     <span>Tomorrow</span>
                   </button>
                 </div>
@@ -242,7 +226,13 @@ const ManageRevisionPopup = ({
               {/* Buttons */}
               <div className="flex justify-end space-x-2">
                 <button
-                  onClick={() => setIsOpen(false)}
+                  onClick={() =>
+                    dispatch(
+                      closeSkillManagePopup({
+                        domain: SKILL_FORM_DOMAINS.REVISIONS,
+                      })
+                    )
+                  }
                   className="px-4 py-2 border border-gray-600 rounded-lg hover:bg-gray-700"
                 >
                   Cancel
@@ -251,7 +241,7 @@ const ManageRevisionPopup = ({
                   className="flex items-center space-x-2 border border-gray-400 bg-transparent hover:bg-gray-600 px-4 py-1 rounded-lg"
                   onClick={handleSave}
                 >
-                  <span>{editData ? "Update" : "Save"}</span>
+                  <span>{editId ? "Update" : "Save"}</span>
                 </button>
               </div>
             </div>

@@ -1,11 +1,7 @@
 // --- Base Selectors ---
 
 import { SKILL_KEYS } from "@/store/constants/skillsConstants";
-import {
-  EMPTY_ARRAY,
-  INITIAL_PAGINATION_STATE,
-  PAGINATION_KEYS,
-} from "@/store/constants/sliceConstants";
+import { EMPTY_ARRAY } from "@/store/constants/sliceConstants";
 import { createSelector } from "@reduxjs/toolkit";
 import { selectAllNotes } from "../notesSelectors";
 
@@ -16,22 +12,22 @@ export const selectSkillState = (state) => state.skill;
 
 export const selectAllSkills = createSelector(
   [selectSkillState],
-  (skill) => skill[SKILL_KEYS.SKILLS] || EMPTY_ARRAY,
+  (skill) => skill[SKILL_KEYS.SKILLS] || EMPTY_ARRAY
 );
 
 export const selectAllCategories = createSelector(
   [selectSkillState],
-  (skill) => skill[SKILL_KEYS.CATEGORIES] || EMPTY_ARRAY,
+  (skill) => skill[SKILL_KEYS.CATEGORIES] || EMPTY_ARRAY
 );
 
 export const selectAllTopics = createSelector(
   [selectSkillState],
-  (skill) => skill[SKILL_KEYS.TOPICS] || EMPTY_ARRAY,
+  (skill) => skill[SKILL_KEYS.TOPICS] || EMPTY_ARRAY
 );
 
 export const selectAllRevisions = createSelector(
   [selectSkillState],
-  (skill) => skill[SKILL_KEYS.REVISIONS] || EMPTY_ARRAY,
+  (skill) => skill[SKILL_KEYS.REVISIONS] || EMPTY_ARRAY
 );
 
 // 3. Static Value Selectors
@@ -74,7 +70,7 @@ export const selectRenderFilteredCategories = (route) =>
         const skillOrder = skillObj?.order ?? 999;
 
         const parentTitle = item.parent ? item.parent.title : "Root Categories";
-        const parentOrder = item.parent ? (item.parent.order ?? 999) : -1;
+        const parentOrder = item.parent ? item.parent.order ?? 999 : -1;
 
         if (!acc[skillName]) {
           acc[skillName] = { order: skillOrder, parents: {} };
@@ -93,14 +89,14 @@ export const selectRenderFilteredCategories = (route) =>
 
       // 3. Sort Root Level Skills Matrix Array
       const sortedSkills = Object.entries(groupedData).sort(
-        (a, b) => a[1].order - b[1].order,
+        (a, b) => a[1].order - b[1].order
       );
 
       return {
         sortedSkills, // 🌟 Pre-filtered, grouped, and sorted layout
         isInitialLoading,
       };
-    },
+    }
   );
 
 export const selectGraphicalSkillTreeMeta = createSelector(
@@ -120,7 +116,7 @@ export const selectGraphicalSkillTreeMeta = createSelector(
         ...cat,
         type: "category",
         topics: (topicsMap[cat.id] || []).sort(
-          (a, b) => (a.order ?? 0) - (b.order ?? 0),
+          (a, b) => (a.order ?? 0) - (b.order ?? 0)
         ),
         subCategories: [],
       };
@@ -170,10 +166,9 @@ export const selectGraphicalSkillTreeMeta = createSelector(
       sortedSkillsTree: structuredTree,
       isInitialLoading,
     };
-  },
+  }
 );
 
-// // Helper input selector to extract the skillId from the arguments
 // const selectSkillIdArg = (_, skillId) => skillId;
 
 // export const selectGraphicalSkillTreeMetaByFilter = createSelector(
@@ -312,7 +307,7 @@ export const selectGraphicalSkillTreeMetaByFilter = createSelector(
         ...cat,
         type: "category",
         topics: (topicsMap[cat.id] || []).sort(
-          (a, b) => (a.order ?? 0) - (b.order ?? 0),
+          (a, b) => (a.order ?? 0) - (b.order ?? 0)
         ),
         subCategories: [],
         notes: notesMap[cat.id] || [], // 👈 Attaching Category specific notes
@@ -364,5 +359,43 @@ export const selectGraphicalSkillTreeMetaByFilter = createSelector(
       sortedSkillsTree: structuredTree,
       isInitialLoading,
     };
-  },
+  }
+);
+
+export const selectGroupedTopicsTree = createSelector(
+  [selectAllTopics, selectSkillLoading],
+  (topics, isInitialLoading) => {
+    const groupedData = topics.reduce((acc, item) => {
+      const cat = item.category;
+      if (!cat) return acc; // Safety guard for missing categories
+
+      const parent = cat.parent;
+
+      // Skill Logic: Parent's skill if parent exists, else Category's skill
+      const skillTitle = parent ? parent.skill?.title : cat.skill?.title;
+      const skillKey = skillTitle || "Unassigned Skill";
+
+      const parentTitle = parent ? parent.title : "Direct Categories";
+      const categoryTitle = cat.title || "Untitled Category";
+
+      // Safely build out the nested layout tree object
+      if (!acc[skillKey]) {
+        acc[skillKey] = {};
+      }
+      if (!acc[skillKey][parentTitle]) {
+        acc[skillKey][parentTitle] = {};
+      }
+      if (!acc[skillKey][parentTitle][categoryTitle]) {
+        acc[skillKey][parentTitle][categoryTitle] = [];
+      }
+
+      acc[skillKey][parentTitle][categoryTitle].push(item);
+      return acc;
+    }, {});
+
+    return {
+      groupedTopics: groupedData,
+      isInitialLoading,
+    };
+  }
 );

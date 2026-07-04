@@ -40,13 +40,24 @@ export const initialState = {
 
   [SKILL_FORM_DOMAINS.TOPICS]: createBlankPopupBlueprint({
     title: "",
-    description: "",
-    skillId: "",
+    order: "",
+    categoryId: "",
   }),
 
   [SKILL_FORM_DOMAINS.REVISIONS]: createBlankPopupBlueprint({
-    notes: "",
-    intervalDays: "",
+    topicId: "",
+    scheduled: "",
+    practiced: "",
+    revision1: "",
+    revision1date: "",
+    revision2: "",
+    revision2date: "",
+    revision3: "",
+    revision3date: "",
+    revision4: "",
+    revision4date: "",
+    revision5: "",
+    revision5date: "",
   }),
 };
 
@@ -66,7 +77,7 @@ const skillFormSlice = createSlice({
 
       if (editData) {
         target[SKILLS_UI_KEYS.FORM_DATA] = Object.keys(
-          target[SKILLS_UI_KEYS.FORM_DATA],
+          target[SKILLS_UI_KEYS.FORM_DATA]
         ).reduce((acc, key) => {
           acc[key] = editData[key] ?? "";
           return acc;

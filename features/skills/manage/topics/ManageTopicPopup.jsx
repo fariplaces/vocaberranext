@@ -1,88 +1,54 @@
 "use client";
 import { createTopic, updateTopic } from "@/store/actions/skillActions";
+import { EMPTY_ARRAY } from "@/store/constants/sliceConstants";
 import { selectUser } from "@/store/selectors/authSelectors";
+import { selectTopicSkillFormMeta } from "@/store/selectors/skillSelectors/skillFormSelector";
+import {
+  selectAllCategories,
+  selectSkillLoading,
+} from "@/store/selectors/skillSelectors/skillSelectors";
+import {
+  closeSkillManagePopup,
+  updateSkillFormFields,
+} from "@/store/slices/skillSlices/skillFormSlice";
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 
-const initialFormState = {
-  title: "",
-  order: "",
-  categoryId: "",
-};
-
-const ManageTopicPopup = ({
-  isOpen,
-  setIsOpen,
-  editData = null,
-  setEditData,
-}) => {
-  const user = useSelector(selectUser);
-  const { categories } = useSelector((state) => state.skill);
-  const [formData, setFormData] = useState(initialFormState);
+const ManageTopicPopup = ({ domain }) => {
   const dispatch = useDispatch();
-
-  const resetPopup = () => {
-    setFormData(initialFormState);
-    if (setEditData) setEditData(null);
-    setIsOpen(false);
-  };
-
-  useEffect(() => {
-    if (isOpen) {
-      setFormData(editData ? { ...editData } : initialFormState);
-    }
-  }, [isOpen, editData]);
+  // const { categories } = useSelector((state) => state.skill);
+  const categories = useSelector(selectAllCategories) || EMPTY_ARRAY;
+  // const [formData, setFormData] = useState(initialFormState);
+  const { isOpen, editId, formData } = useSelector(selectTopicSkillFormMeta);
+  const isLoading = useSelector(selectSkillLoading);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    setFormData((prev) => {
-      const newState = { ...prev, [name]: value };
-
-      return newState;
-    });
+    dispatch(updateSkillFormFields({ domain, name, value }));
   };
 
   const handleSave = async () => {
-    console.log(formData);
-
-    const payloadData = {
-      title: formData.title,
-      order: parseInt(formData.order),
-      categoryId: formData.categoryId,
-    };
-    const ignoreFields = ["categories, revisions"];
-
-    const filteredData = Object.fromEntries(
-      Object.entries(payloadData).filter(
-        ([key]) => !ignoreFields.includes(key),
-      ),
-    );
-
-    const isFormIncomplete = Object.values(filteredData).some(
-      (val) => String(val ?? "").trim() === "",
-    );
-
-    if (isFormIncomplete) {
+    if (!formData.title || !formData.order || !formData.categoryId) {
       alert("Please fill all required fields!");
       return;
     }
 
     const payload = {
-      title: payloadData.title,
-      order: parseInt(payloadData.order),
-      categoryId: payloadData.categoryId,
+      title: formData.title,
+      order: parseInt(formData.order),
+      categoryId: formData.categoryId,
     };
-    console.log(payload);
 
-    if (editData?.id) {
-      dispatch(updateTopic({ id: editData.id, ...payload }));
-    } else {
-      dispatch(createTopic(payload));
+    try {
+      const action = editId
+        ? updateTopic({ id: editId, ...payload })
+        : createTopic(payload);
+      await dispatch(action).unwrap();
+      dispatch(closeSkillManagePopup({ domain }));
+    } catch (err) {
+      toast.error(`Submission failed: ${err}`);
     }
-
-    setIsOpen(false);
-    resetPopup();
   };
 
   return (
@@ -90,17 +56,11 @@ const ManageTopicPopup = ({
       {/* Popup / Modal */}
       {isOpen && (
         <>
-          <div
-            className="fixed flex items-center justify-center inset-0 bg-white/10 backdrop-blur-sm transition-all duration-300"
-            onClick={() => setIsOpen(false)}
-          >
+          <div className="fixed flex items-center justify-center inset-0 bg-white/10 backdrop-blur-sm transition-all duration-300">
             {/* <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"> */}
-            <div
-              className="bg-black text-white p-6 rounded-xl shadow-lg w-96 border border-gray-700"
-              onClick={(e) => e.stopPropagation()}
-            >
+            <div className="bg-black text-white p-6 rounded-xl shadow-lg w-96 border border-gray-700">
               <h2 className="text-xl font-semibold mb-4">
-                {editData ? "Edit Topic" : "Add a New Topic"}
+                {editId ? "Edit Topic" : "Add a New Topic"}
               </h2>
               {/* Word Input */}
               <div className="mb-4">
@@ -153,7 +113,7 @@ const ManageTopicPopup = ({
               {/* Buttons */}
               <div className="flex justify-end space-x-2">
                 <button
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => dispatch(closeSkillManagePopup({ domain }))}
                   className="px-4 py-2 border border-gray-600 rounded-lg hover:bg-gray-700"
                 >
                   Cancel
@@ -162,7 +122,7 @@ const ManageTopicPopup = ({
                   className="flex items-center space-x-2 border border-gray-400 bg-transparent hover:bg-gray-600 px-4 py-1 rounded-lg"
                   onClick={handleSave}
                 >
-                  <span>{editData ? "Update" : "Save"}</span>
+                  <span>{editId ? "Update" : "Save"}</span>
                 </button>
               </div>
             </div>

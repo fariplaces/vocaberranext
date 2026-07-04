@@ -1,11 +1,12 @@
 import { skillDbServices } from "@/services/server/skillDbServices";
 import { NextResponse } from "next/server";
 
-export async function POST(req) {
+export async function POST(req, { params }) {
   try {
-    const body = await req.json();
+    const resolveParams = await params;
+    const { id } = resolveParams;
 
-    const newTopic = await skillDbServices.createTopic(body);
+    const newTopic = await skillDbServices.createTopic(id);
 
     return NextResponse.json(newTopic, { status: 201 });
   } catch (error) {
@@ -13,14 +14,14 @@ export async function POST(req) {
     if (error.status) {
       return NextResponse.json(
         { error: error.message },
-        { status: error.status },
+        { status: error.status }
       );
     }
 
     console.error("Create Topic Route Error:", error);
     return NextResponse.json(
       { error: "Failed to create topic" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }

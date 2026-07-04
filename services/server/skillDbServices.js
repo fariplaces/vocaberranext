@@ -162,7 +162,7 @@ export const skillDbServices = {
     } catch (prismaError) {
       console.error(
         "Prisma Count Unique Database Operation Exception:",
-        prismaError,
+        prismaError
       );
       throw prismaError;
     }
@@ -402,7 +402,7 @@ export const skillDbServices = {
   },
 
   //* Update Topic
-  updateTopic: async ({ id, title, order, categoryId }) => {
+  updateTopic: async (id, { title, order, categoryId }) => {
     // 1. Basic Validation
     if (!id) {
       throw {
