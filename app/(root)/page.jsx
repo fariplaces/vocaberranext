@@ -59,6 +59,14 @@ const HomePage = () => {
       route: "/notion",
       color: "from-gray-500 to-gray-600",
     },
+    {
+      id: "uilib",
+      name: "UI Library",
+      description: "UI Library",
+      icon: FileText,
+      route: "/uilib",
+      color: "from-blue-500 to-blue-600",
+    },
   ];
 
   return (
