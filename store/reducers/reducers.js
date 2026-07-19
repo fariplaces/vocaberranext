@@ -25,6 +25,10 @@ import taskReducer from "@/store/slices/taskSlice";
 // Notes Reducers
 import notesReducer from "@/store/slices/notesSlice";
 
+// UI Lib Reducers
+import uilibReducer from "@/store/slices/uilibSlice";
+import uilibFormReducer from "@/store/slices/uilibFormSlice";
+
 const rootReducer = combineReducers({
   [SLICE_NAMES.AUTH]: authReducer,
   [SLICE_NAMES.GLOBAL]: globalReducer,
@@ -41,5 +45,7 @@ const rootReducer = combineReducers({
   [SLICE_NAMES.SKILL_FORM]: skillFormReducer,
   [SLICE_NAMES.TASKS]: taskReducer,
   [SLICE_NAMES.NOTES]: notesReducer,
+  [SLICE_NAMES.UILIB]: uilibReducer,
+  [SLICE_NAMES.UILIB_FORM]: uilibFormReducer,
 });
 export default rootReducer;

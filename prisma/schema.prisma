@@ -251,6 +251,38 @@ model Note {
 // NOTE TEMPLATES
 // ============================================================
 
+// ============================================================
+// UI LIB (Atelier UI component catalog)
+// ============================================================
+
+model UILibComponent {
+  id              String   @id @default(uuid())
+  category        String   @default("Uncategorized")
+  name            String
+  description     String?
+  component       String // registry key, e.g. "DemoButton", "MotionRevealCard"
+  engine          String   @default("css") // "css" | "gsap" | "motion" | "three"
+  layout          String   @default("boxed") // "boxed" | "full" — preview sizing in the playground
+  importStatement String?
+  props           String   @default("{}") // JSON string
+  label           String?
+  children        String   @default("[]") // JSON string of [{component, props}]
+  implementation  String?
+  detailDocs      String?
+  order           Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([category])
+}
+
+model UILibDoc {
+  id        String   @id @default(uuid())
+  key       String   @unique @default("main")
+  content   String
+  updatedAt DateTime @updatedAt
+}
+
 model NoteTemplate {
   id      String @id @default(uuid())
   name    String // Display name e.g. "Daily Reflection"

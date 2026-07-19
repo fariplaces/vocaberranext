@@ -1,9 +1,9 @@
 import React from "react";
-import TopicsPage from "@/features/skills/manage/topic2/TopicsPage";
+// import TopicsPage from "@/features/skills/manage/topic2/TopicsPage";
 
 const Topics = async ({ params }) => {
   const { route } = await params;
-  return <TopicsPage route={route} />;
+  // return <TopicsPage route={route} />;
 };
 
 export default Topics;

@@ -17,6 +17,8 @@ export const SLICE_NAMES = {
 
   TASKS: "tasks",
   NOTES: "notes",
+  UILIB: "uilib",
+  UILIB_FORM: "uilibForm",
 };
 
 export const PAGINATION_KEYS = {

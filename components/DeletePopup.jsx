@@ -13,7 +13,7 @@ const DeletePopup = ({
   return (
     <div
       className="fixed flex items-center justify-center inset-0 bg-white/10 backdrop-blur-sm transition-all duration-300 z-50"
-      onClick={() => !isLoading && onClose} // Prevent closing while deleting
+      onClick={() => !isLoading && onClose()} // Prevent closing while deleting
     >
       <div
         className="bg-black text-white p-6 rounded-xl shadow-lg w-80 border border-gray-700"
